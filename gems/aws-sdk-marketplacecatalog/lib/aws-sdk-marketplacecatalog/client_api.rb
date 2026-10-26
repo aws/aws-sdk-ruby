@@ -342,6 +342,39 @@ module Aws::MarketplaceCatalog
     SortOrder = Shapes::StringShape.new(name: 'SortOrder')
     StartChangeSetRequest = Shapes::StructureShape.new(name: 'StartChangeSetRequest')
     StartChangeSetResponse = Shapes::StructureShape.new(name: 'StartChangeSetResponse')
+    SubsidiaryAuthorizationCreatedDateFilter = Shapes::StructureShape.new(name: 'SubsidiaryAuthorizationCreatedDateFilter')
+    SubsidiaryAuthorizationCreatedDateFilterDateRange = Shapes::StructureShape.new(name: 'SubsidiaryAuthorizationCreatedDateFilterDateRange')
+    SubsidiaryAuthorizationEntityIdFilter = Shapes::StructureShape.new(name: 'SubsidiaryAuthorizationEntityIdFilter')
+    SubsidiaryAuthorizationEntityIdFilterValueList = Shapes::ListShape.new(name: 'SubsidiaryAuthorizationEntityIdFilterValueList')
+    SubsidiaryAuthorizationEntityIdString = Shapes::StringShape.new(name: 'SubsidiaryAuthorizationEntityIdString')
+    SubsidiaryAuthorizationFilters = Shapes::StructureShape.new(name: 'SubsidiaryAuthorizationFilters')
+    SubsidiaryAuthorizationLastModifiedDateFilter = Shapes::StructureShape.new(name: 'SubsidiaryAuthorizationLastModifiedDateFilter')
+    SubsidiaryAuthorizationLastModifiedDateFilterDateRange = Shapes::StructureShape.new(name: 'SubsidiaryAuthorizationLastModifiedDateFilterDateRange')
+    SubsidiaryAuthorizationNameFilter = Shapes::StructureShape.new(name: 'SubsidiaryAuthorizationNameFilter')
+    SubsidiaryAuthorizationNameFilterValueList = Shapes::ListShape.new(name: 'SubsidiaryAuthorizationNameFilterValueList')
+    SubsidiaryAuthorizationNameFilterWildcard = Shapes::StringShape.new(name: 'SubsidiaryAuthorizationNameFilterWildcard')
+    SubsidiaryAuthorizationNameString = Shapes::StringShape.new(name: 'SubsidiaryAuthorizationNameString')
+    SubsidiaryAuthorizationResourceIdFilter = Shapes::StructureShape.new(name: 'SubsidiaryAuthorizationResourceIdFilter')
+    SubsidiaryAuthorizationResourceIdFilterValueList = Shapes::ListShape.new(name: 'SubsidiaryAuthorizationResourceIdFilterValueList')
+    SubsidiaryAuthorizationResourceIdString = Shapes::StringShape.new(name: 'SubsidiaryAuthorizationResourceIdString')
+    SubsidiaryAuthorizationResourceNameFilter = Shapes::StructureShape.new(name: 'SubsidiaryAuthorizationResourceNameFilter')
+    SubsidiaryAuthorizationResourceNameFilterValueList = Shapes::ListShape.new(name: 'SubsidiaryAuthorizationResourceNameFilterValueList')
+    SubsidiaryAuthorizationResourceNameFilterWildcard = Shapes::StringShape.new(name: 'SubsidiaryAuthorizationResourceNameFilterWildcard')
+    SubsidiaryAuthorizationResourceNameString = Shapes::StringShape.new(name: 'SubsidiaryAuthorizationResourceNameString')
+    SubsidiaryAuthorizationSort = Shapes::StructureShape.new(name: 'SubsidiaryAuthorizationSort')
+    SubsidiaryAuthorizationSortBy = Shapes::StringShape.new(name: 'SubsidiaryAuthorizationSortBy')
+    SubsidiaryAuthorizationStatusFilter = Shapes::StructureShape.new(name: 'SubsidiaryAuthorizationStatusFilter')
+    SubsidiaryAuthorizationStatusFilterValueList = Shapes::ListShape.new(name: 'SubsidiaryAuthorizationStatusFilterValueList')
+    SubsidiaryAuthorizationStatusString = Shapes::StringShape.new(name: 'SubsidiaryAuthorizationStatusString')
+    SubsidiaryAuthorizationSubsidiaryAccountIdFilter = Shapes::StructureShape.new(name: 'SubsidiaryAuthorizationSubsidiaryAccountIdFilter')
+    SubsidiaryAuthorizationSubsidiaryAccountIdFilterValueList = Shapes::ListShape.new(name: 'SubsidiaryAuthorizationSubsidiaryAccountIdFilterValueList')
+    SubsidiaryAuthorizationSubsidiaryAccountIdString = Shapes::StringShape.new(name: 'SubsidiaryAuthorizationSubsidiaryAccountIdString')
+    SubsidiaryAuthorizationSummary = Shapes::StructureShape.new(name: 'SubsidiaryAuthorizationSummary')
+    SubsidiaryAuthorizationSummaryNameString = Shapes::StringShape.new(name: 'SubsidiaryAuthorizationSummaryNameString')
+    SubsidiaryAuthorizationSummaryResourceIdString = Shapes::StringShape.new(name: 'SubsidiaryAuthorizationSummaryResourceIdString')
+    SubsidiaryAuthorizationSummaryResourceNameString = Shapes::StringShape.new(name: 'SubsidiaryAuthorizationSummaryResourceNameString')
+    SubsidiaryAuthorizationSummaryStatusString = Shapes::StringShape.new(name: 'SubsidiaryAuthorizationSummaryStatusString')
+    SubsidiaryAuthorizationSummarySubsidiaryAccountIdString = Shapes::StringShape.new(name: 'SubsidiaryAuthorizationSummarySubsidiaryAccountIdString')
     Tag = Shapes::StructureShape.new(name: 'Tag')
     TagKey = Shapes::StringShape.new(name: 'TagKey')
     TagKeyList = Shapes::ListShape.new(name: 'TagKeyList')
@@ -655,6 +688,7 @@ module Aws::MarketplaceCatalog
     EntitySummary.add_member(:machine_learning_product_summary, Shapes::ShapeRef.new(shape: MachineLearningProductSummary, location_name: "MachineLearningProductSummary"))
     EntitySummary.add_member(:offer_set_summary, Shapes::ShapeRef.new(shape: OfferSetSummary, location_name: "OfferSetSummary"))
     EntitySummary.add_member(:express_private_offer_configuration_summary, Shapes::ShapeRef.new(shape: ExpressPrivateOfferConfigurationSummary, location_name: "ExpressPrivateOfferConfigurationSummary"))
+    EntitySummary.add_member(:subsidiary_authorization_summary, Shapes::ShapeRef.new(shape: SubsidiaryAuthorizationSummary, location_name: "SubsidiaryAuthorizationSummary"))
     EntitySummary.struct_class = Types::EntitySummary
 
     EntitySummaryList.member = Shapes::ShapeRef.new(shape: EntitySummary)
@@ -668,6 +702,7 @@ module Aws::MarketplaceCatalog
     EntityTypeFilters.add_member(:machine_learning_product_filters, Shapes::ShapeRef.new(shape: MachineLearningProductFilters, location_name: "MachineLearningProductFilters"))
     EntityTypeFilters.add_member(:offer_set_filters, Shapes::ShapeRef.new(shape: OfferSetFilters, location_name: "OfferSetFilters"))
     EntityTypeFilters.add_member(:express_private_offer_configuration_filters, Shapes::ShapeRef.new(shape: ExpressPrivateOfferConfigurationFilters, location_name: "ExpressPrivateOfferConfigurationFilters"))
+    EntityTypeFilters.add_member(:subsidiary_authorization_filters, Shapes::ShapeRef.new(shape: SubsidiaryAuthorizationFilters, location_name: "SubsidiaryAuthorizationFilters"))
     EntityTypeFilters.add_member(:unknown, Shapes::ShapeRef.new(shape: nil, location_name: 'unknown'))
     EntityTypeFilters.add_member_subclass(:data_product_filters, Types::EntityTypeFilters::DataProductFilters)
     EntityTypeFilters.add_member_subclass(:saa_s_product_filters, Types::EntityTypeFilters::SaaSProductFilters)
@@ -678,6 +713,7 @@ module Aws::MarketplaceCatalog
     EntityTypeFilters.add_member_subclass(:machine_learning_product_filters, Types::EntityTypeFilters::MachineLearningProductFilters)
     EntityTypeFilters.add_member_subclass(:offer_set_filters, Types::EntityTypeFilters::OfferSetFilters)
     EntityTypeFilters.add_member_subclass(:express_private_offer_configuration_filters, Types::EntityTypeFilters::ExpressPrivateOfferConfigurationFilters)
+    EntityTypeFilters.add_member_subclass(:subsidiary_authorization_filters, Types::EntityTypeFilters::SubsidiaryAuthorizationFilters)
     EntityTypeFilters.add_member_subclass(:unknown, Types::EntityTypeFilters::Unknown)
     EntityTypeFilters.struct_class = Types::EntityTypeFilters
 
@@ -690,6 +726,7 @@ module Aws::MarketplaceCatalog
     EntityTypeSort.add_member(:machine_learning_product_sort, Shapes::ShapeRef.new(shape: MachineLearningProductSort, location_name: "MachineLearningProductSort"))
     EntityTypeSort.add_member(:offer_set_sort, Shapes::ShapeRef.new(shape: OfferSetSort, location_name: "OfferSetSort"))
     EntityTypeSort.add_member(:express_private_offer_configuration_sort, Shapes::ShapeRef.new(shape: ExpressPrivateOfferConfigurationSort, location_name: "ExpressPrivateOfferConfigurationSort"))
+    EntityTypeSort.add_member(:subsidiary_authorization_sort, Shapes::ShapeRef.new(shape: SubsidiaryAuthorizationSort, location_name: "SubsidiaryAuthorizationSort"))
     EntityTypeSort.add_member(:unknown, Shapes::ShapeRef.new(shape: nil, location_name: 'unknown'))
     EntityTypeSort.add_member_subclass(:data_product_sort, Types::EntityTypeSort::DataProductSort)
     EntityTypeSort.add_member_subclass(:saa_s_product_sort, Types::EntityTypeSort::SaaSProductSort)
@@ -700,6 +737,7 @@ module Aws::MarketplaceCatalog
     EntityTypeSort.add_member_subclass(:machine_learning_product_sort, Types::EntityTypeSort::MachineLearningProductSort)
     EntityTypeSort.add_member_subclass(:offer_set_sort, Types::EntityTypeSort::OfferSetSort)
     EntityTypeSort.add_member_subclass(:express_private_offer_configuration_sort, Types::EntityTypeSort::ExpressPrivateOfferConfigurationSort)
+    EntityTypeSort.add_member_subclass(:subsidiary_authorization_sort, Types::EntityTypeSort::SubsidiaryAuthorizationSort)
     EntityTypeSort.add_member_subclass(:unknown, Types::EntityTypeSort::Unknown)
     EntityTypeSort.struct_class = Types::EntityTypeSort
 
@@ -1244,6 +1282,74 @@ module Aws::MarketplaceCatalog
     StartChangeSetResponse.add_member(:change_set_id, Shapes::ShapeRef.new(shape: ResourceId, location_name: "ChangeSetId"))
     StartChangeSetResponse.add_member(:change_set_arn, Shapes::ShapeRef.new(shape: ARN, location_name: "ChangeSetArn"))
     StartChangeSetResponse.struct_class = Types::StartChangeSetResponse
+
+    SubsidiaryAuthorizationCreatedDateFilter.add_member(:date_range, Shapes::ShapeRef.new(shape: SubsidiaryAuthorizationCreatedDateFilterDateRange, location_name: "DateRange"))
+    SubsidiaryAuthorizationCreatedDateFilter.struct_class = Types::SubsidiaryAuthorizationCreatedDateFilter
+
+    SubsidiaryAuthorizationCreatedDateFilterDateRange.add_member(:after_value, Shapes::ShapeRef.new(shape: DateTimeISO8601, location_name: "AfterValue"))
+    SubsidiaryAuthorizationCreatedDateFilterDateRange.add_member(:before_value, Shapes::ShapeRef.new(shape: DateTimeISO8601, location_name: "BeforeValue"))
+    SubsidiaryAuthorizationCreatedDateFilterDateRange.struct_class = Types::SubsidiaryAuthorizationCreatedDateFilterDateRange
+
+    SubsidiaryAuthorizationEntityIdFilter.add_member(:value_list, Shapes::ShapeRef.new(shape: SubsidiaryAuthorizationEntityIdFilterValueList, location_name: "ValueList"))
+    SubsidiaryAuthorizationEntityIdFilter.struct_class = Types::SubsidiaryAuthorizationEntityIdFilter
+
+    SubsidiaryAuthorizationEntityIdFilterValueList.member = Shapes::ShapeRef.new(shape: SubsidiaryAuthorizationEntityIdString)
+
+    SubsidiaryAuthorizationFilters.add_member(:entity_id, Shapes::ShapeRef.new(shape: SubsidiaryAuthorizationEntityIdFilter, location_name: "EntityId"))
+    SubsidiaryAuthorizationFilters.add_member(:status, Shapes::ShapeRef.new(shape: SubsidiaryAuthorizationStatusFilter, location_name: "Status"))
+    SubsidiaryAuthorizationFilters.add_member(:resource_id, Shapes::ShapeRef.new(shape: SubsidiaryAuthorizationResourceIdFilter, location_name: "ResourceId"))
+    SubsidiaryAuthorizationFilters.add_member(:resource_name, Shapes::ShapeRef.new(shape: SubsidiaryAuthorizationResourceNameFilter, location_name: "ResourceName"))
+    SubsidiaryAuthorizationFilters.add_member(:name, Shapes::ShapeRef.new(shape: SubsidiaryAuthorizationNameFilter, location_name: "Name"))
+    SubsidiaryAuthorizationFilters.add_member(:subsidiary_account_id, Shapes::ShapeRef.new(shape: SubsidiaryAuthorizationSubsidiaryAccountIdFilter, location_name: "SubsidiaryAccountId"))
+    SubsidiaryAuthorizationFilters.add_member(:created_date, Shapes::ShapeRef.new(shape: SubsidiaryAuthorizationCreatedDateFilter, location_name: "CreatedDate"))
+    SubsidiaryAuthorizationFilters.add_member(:last_modified_date, Shapes::ShapeRef.new(shape: SubsidiaryAuthorizationLastModifiedDateFilter, location_name: "LastModifiedDate"))
+    SubsidiaryAuthorizationFilters.struct_class = Types::SubsidiaryAuthorizationFilters
+
+    SubsidiaryAuthorizationLastModifiedDateFilter.add_member(:date_range, Shapes::ShapeRef.new(shape: SubsidiaryAuthorizationLastModifiedDateFilterDateRange, location_name: "DateRange"))
+    SubsidiaryAuthorizationLastModifiedDateFilter.struct_class = Types::SubsidiaryAuthorizationLastModifiedDateFilter
+
+    SubsidiaryAuthorizationLastModifiedDateFilterDateRange.add_member(:after_value, Shapes::ShapeRef.new(shape: DateTimeISO8601, location_name: "AfterValue"))
+    SubsidiaryAuthorizationLastModifiedDateFilterDateRange.add_member(:before_value, Shapes::ShapeRef.new(shape: DateTimeISO8601, location_name: "BeforeValue"))
+    SubsidiaryAuthorizationLastModifiedDateFilterDateRange.struct_class = Types::SubsidiaryAuthorizationLastModifiedDateFilterDateRange
+
+    SubsidiaryAuthorizationNameFilter.add_member(:value_list, Shapes::ShapeRef.new(shape: SubsidiaryAuthorizationNameFilterValueList, location_name: "ValueList"))
+    SubsidiaryAuthorizationNameFilter.add_member(:wild_card_value, Shapes::ShapeRef.new(shape: SubsidiaryAuthorizationNameFilterWildcard, location_name: "WildCardValue"))
+    SubsidiaryAuthorizationNameFilter.struct_class = Types::SubsidiaryAuthorizationNameFilter
+
+    SubsidiaryAuthorizationNameFilterValueList.member = Shapes::ShapeRef.new(shape: SubsidiaryAuthorizationNameString)
+
+    SubsidiaryAuthorizationResourceIdFilter.add_member(:value_list, Shapes::ShapeRef.new(shape: SubsidiaryAuthorizationResourceIdFilterValueList, location_name: "ValueList"))
+    SubsidiaryAuthorizationResourceIdFilter.struct_class = Types::SubsidiaryAuthorizationResourceIdFilter
+
+    SubsidiaryAuthorizationResourceIdFilterValueList.member = Shapes::ShapeRef.new(shape: SubsidiaryAuthorizationResourceIdString)
+
+    SubsidiaryAuthorizationResourceNameFilter.add_member(:value_list, Shapes::ShapeRef.new(shape: SubsidiaryAuthorizationResourceNameFilterValueList, location_name: "ValueList"))
+    SubsidiaryAuthorizationResourceNameFilter.add_member(:wild_card_value, Shapes::ShapeRef.new(shape: SubsidiaryAuthorizationResourceNameFilterWildcard, location_name: "WildCardValue"))
+    SubsidiaryAuthorizationResourceNameFilter.struct_class = Types::SubsidiaryAuthorizationResourceNameFilter
+
+    SubsidiaryAuthorizationResourceNameFilterValueList.member = Shapes::ShapeRef.new(shape: SubsidiaryAuthorizationResourceNameString)
+
+    SubsidiaryAuthorizationSort.add_member(:sort_by, Shapes::ShapeRef.new(shape: SubsidiaryAuthorizationSortBy, location_name: "SortBy"))
+    SubsidiaryAuthorizationSort.add_member(:sort_order, Shapes::ShapeRef.new(shape: SortOrder, location_name: "SortOrder"))
+    SubsidiaryAuthorizationSort.struct_class = Types::SubsidiaryAuthorizationSort
+
+    SubsidiaryAuthorizationStatusFilter.add_member(:value_list, Shapes::ShapeRef.new(shape: SubsidiaryAuthorizationStatusFilterValueList, location_name: "ValueList"))
+    SubsidiaryAuthorizationStatusFilter.struct_class = Types::SubsidiaryAuthorizationStatusFilter
+
+    SubsidiaryAuthorizationStatusFilterValueList.member = Shapes::ShapeRef.new(shape: SubsidiaryAuthorizationStatusString)
+
+    SubsidiaryAuthorizationSubsidiaryAccountIdFilter.add_member(:value_list, Shapes::ShapeRef.new(shape: SubsidiaryAuthorizationSubsidiaryAccountIdFilterValueList, location_name: "ValueList"))
+    SubsidiaryAuthorizationSubsidiaryAccountIdFilter.struct_class = Types::SubsidiaryAuthorizationSubsidiaryAccountIdFilter
+
+    SubsidiaryAuthorizationSubsidiaryAccountIdFilterValueList.member = Shapes::ShapeRef.new(shape: SubsidiaryAuthorizationSubsidiaryAccountIdString)
+
+    SubsidiaryAuthorizationSummary.add_member(:name, Shapes::ShapeRef.new(shape: SubsidiaryAuthorizationSummaryNameString, location_name: "Name"))
+    SubsidiaryAuthorizationSummary.add_member(:status, Shapes::ShapeRef.new(shape: SubsidiaryAuthorizationSummaryStatusString, location_name: "Status"))
+    SubsidiaryAuthorizationSummary.add_member(:resource_id, Shapes::ShapeRef.new(shape: SubsidiaryAuthorizationSummaryResourceIdString, location_name: "ResourceId"))
+    SubsidiaryAuthorizationSummary.add_member(:resource_name, Shapes::ShapeRef.new(shape: SubsidiaryAuthorizationSummaryResourceNameString, location_name: "ResourceName"))
+    SubsidiaryAuthorizationSummary.add_member(:subsidiary_account_id, Shapes::ShapeRef.new(shape: SubsidiaryAuthorizationSummarySubsidiaryAccountIdString, location_name: "SubsidiaryAccountId"))
+    SubsidiaryAuthorizationSummary.add_member(:created_date, Shapes::ShapeRef.new(shape: DateTimeISO8601, location_name: "CreatedDate"))
+    SubsidiaryAuthorizationSummary.struct_class = Types::SubsidiaryAuthorizationSummary
 
     Tag.add_member(:key, Shapes::ShapeRef.new(shape: TagKey, required: true, location_name: "Key"))
     Tag.add_member(:value, Shapes::ShapeRef.new(shape: TagValue, required: true, location_name: "Value"))

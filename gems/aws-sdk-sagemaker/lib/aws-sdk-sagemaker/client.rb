@@ -2904,7 +2904,7 @@ module Aws::SageMaker
     #             },
     #           },
     #         ],
-    #         on_start_deep_health_checks: ["InstanceStress"], # accepts InstanceStress, InstanceConnectivity
+    #         on_start_deep_health_checks: ["InstanceStress"], # accepts InstanceStress, InstanceConnectivity, MultiNodeTrainingValidation
     #         training_plan_arn: "TrainingPlanArn",
     #         override_vpc_config: {
     #           security_group_ids: ["SecurityGroupId"], # required
@@ -3009,7 +3009,7 @@ module Aws::SageMaker
     #             },
     #           },
     #         ],
-    #         on_start_deep_health_checks: ["InstanceStress"], # accepts InstanceStress, InstanceConnectivity
+    #         on_start_deep_health_checks: ["InstanceStress"], # accepts InstanceStress, InstanceConnectivity, MultiNodeTrainingValidation
     #         training_plan_arn: "TrainingPlanArn",
     #         override_vpc_config: {
     #           security_group_ids: ["SecurityGroupId"], # required
@@ -15313,7 +15313,7 @@ module Aws::SageMaker
     #   resp.instance_groups[0].instance_storage_configs[0].fsx_open_zfs_config.dns_name #=> String
     #   resp.instance_groups[0].instance_storage_configs[0].fsx_open_zfs_config.mount_path #=> String
     #   resp.instance_groups[0].on_start_deep_health_checks #=> Array
-    #   resp.instance_groups[0].on_start_deep_health_checks[0] #=> String, one of "InstanceStress", "InstanceConnectivity"
+    #   resp.instance_groups[0].on_start_deep_health_checks[0] #=> String, one of "InstanceStress", "InstanceConnectivity", "MultiNodeTrainingValidation"
     #   resp.instance_groups[0].status #=> String, one of "InService", "Creating", "Updating", "Failed", "Degraded", "SystemUpdating", "Deleting"
     #   resp.instance_groups[0].training_plan_arn #=> String
     #   resp.instance_groups[0].training_plan_status #=> String
@@ -15388,7 +15388,7 @@ module Aws::SageMaker
     #   resp.restricted_instance_groups[0].instance_storage_configs[0].fsx_open_zfs_config.dns_name #=> String
     #   resp.restricted_instance_groups[0].instance_storage_configs[0].fsx_open_zfs_config.mount_path #=> String
     #   resp.restricted_instance_groups[0].on_start_deep_health_checks #=> Array
-    #   resp.restricted_instance_groups[0].on_start_deep_health_checks[0] #=> String, one of "InstanceStress", "InstanceConnectivity"
+    #   resp.restricted_instance_groups[0].on_start_deep_health_checks[0] #=> String, one of "InstanceStress", "InstanceConnectivity", "MultiNodeTrainingValidation"
     #   resp.restricted_instance_groups[0].status #=> String, one of "InService", "Creating", "Updating", "Failed", "Degraded", "SystemUpdating", "Deleting"
     #   resp.restricted_instance_groups[0].training_plan_arn #=> String
     #   resp.restricted_instance_groups[0].training_plan_status #=> String
@@ -29860,7 +29860,7 @@ module Aws::SageMaker
     #       {
     #         instance_group_name: "ClusterInstanceGroupName", # required
     #         instance_ids: ["ClusterNodeId"],
-    #         deep_health_checks: ["InstanceStress"], # required, accepts InstanceStress, InstanceConnectivity
+    #         deep_health_checks: ["InstanceStress"], # required, accepts InstanceStress, InstanceConnectivity, MultiNodeTrainingValidation
     #       },
     #     ],
     #   })
@@ -31008,7 +31008,7 @@ module Aws::SageMaker
     #             },
     #           },
     #         ],
-    #         on_start_deep_health_checks: ["InstanceStress"], # accepts InstanceStress, InstanceConnectivity
+    #         on_start_deep_health_checks: ["InstanceStress"], # accepts InstanceStress, InstanceConnectivity, MultiNodeTrainingValidation
     #         training_plan_arn: "TrainingPlanArn",
     #         override_vpc_config: {
     #           security_group_ids: ["SecurityGroupId"], # required
@@ -31113,7 +31113,7 @@ module Aws::SageMaker
     #             },
     #           },
     #         ],
-    #         on_start_deep_health_checks: ["InstanceStress"], # accepts InstanceStress, InstanceConnectivity
+    #         on_start_deep_health_checks: ["InstanceStress"], # accepts InstanceStress, InstanceConnectivity, MultiNodeTrainingValidation
     #         training_plan_arn: "TrainingPlanArn",
     #         override_vpc_config: {
     #           security_group_ids: ["SecurityGroupId"], # required
@@ -35120,7 +35120,7 @@ module Aws::SageMaker
         tracer: tracer
       )
       context[:gem_name] = 'aws-sdk-sagemaker'
-      context[:gem_version] = '1.403.0'
+      context[:gem_version] = '1.404.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

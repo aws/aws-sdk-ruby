@@ -503,7 +503,7 @@ module Aws::Connect
     class AttachmentReference
       attr_accessor name: ::String
       attr_accessor value: ::String
-      attr_accessor status: ("AVAILABLE" | "DELETED" | "APPROVED" | "REJECTED" | "PROCESSING" | "FAILED")
+      attr_accessor status: ("AVAILABLE" | "DELETED" | "APPROVED" | "REJECTED" | "PROCESSING" | "FAILED" | "DRAFTING")
       attr_accessor arn: ::String
       SENSITIVE: []
     end
@@ -1006,7 +1006,7 @@ module Aws::Connect
     class ContactAnalysisReference
       attr_accessor name: ::String
       attr_accessor value: ::String
-      attr_accessor status: ("AVAILABLE" | "DELETED" | "APPROVED" | "REJECTED" | "PROCESSING" | "FAILED")
+      attr_accessor status: ("AVAILABLE" | "DELETED" | "APPROVED" | "REJECTED" | "PROCESSING" | "FAILED" | "DRAFTING")
       attr_accessor arn: ::String
       attr_accessor analytics_mode: ("PostContact" | "RealTime" | "ContactLens" | "AutomatedInteraction")
       attr_accessor is_redacted: bool
@@ -6276,6 +6276,11 @@ module Aws::Connect
       SENSITIVE: []
     end
 
+    class NullableAdditionalRecipients
+      attr_accessor cc_email_addresses: ::Array[Types::EmailAddressInfo]
+      SENSITIVE: []
+    end
+
     class NumberCondition
       attr_accessor field_name: ::String
       attr_accessor min_value: ::Integer
@@ -7032,7 +7037,7 @@ module Aws::Connect
     class Reference
       attr_accessor value: ::String
       attr_accessor type: ("URL" | "ATTACHMENT" | "CONTACT_ANALYSIS" | "NUMBER" | "STRING" | "DATE" | "EMAIL" | "EMAIL_MESSAGE" | "EMAIL_MESSAGE_PLAIN_TEXT" | "EMAIL_MESSAGE_PLAIN_TEXT_REDACTED" | "EMAIL_MESSAGE_REDACTED")
-      attr_accessor status: ("AVAILABLE" | "DELETED" | "APPROVED" | "REJECTED" | "PROCESSING" | "FAILED")
+      attr_accessor status: ("AVAILABLE" | "DELETED" | "APPROVED" | "REJECTED" | "PROCESSING" | "FAILED" | "DRAFTING")
       attr_accessor arn: ::String
       attr_accessor status_reason: ::String
       SENSITIVE: []
@@ -8982,6 +8987,7 @@ module Aws::Connect
       attr_accessor user_info: Types::UserInfo
       attr_accessor customer_endpoint: Types::Endpoint
       attr_accessor system_endpoint: Types::Endpoint
+      attr_accessor additional_recipients: Types::NullableAdditionalRecipients
       SENSITIVE: [:name, :description]
     end
 
@@ -9202,6 +9208,30 @@ module Aws::Connect
     end
 
     class UpdateNotificationContentResponse < Aws::EmptyStructure
+    end
+
+    class UpdateOutboundEmailContactMessageRequest
+      attr_accessor instance_id: ::String
+      attr_accessor contact_id: ::String
+      attr_accessor email_message: Types::UpdateOutboundEmailContent
+      SENSITIVE: []
+    end
+
+    class UpdateOutboundEmailContactMessageResponse
+      attr_accessor contact_id: ::String
+      SENSITIVE: []
+    end
+
+    class UpdateOutboundEmailContent
+      attr_accessor message_source_type: ("RAW")
+      attr_accessor raw_message: Types::UpdateOutboundRawMessage
+      SENSITIVE: []
+    end
+
+    class UpdateOutboundRawMessage
+      attr_accessor body: ::String
+      attr_accessor content_type: ::String
+      SENSITIVE: [:body]
     end
 
     class UpdateParticipantAuthenticationRequest

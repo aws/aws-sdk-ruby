@@ -692,6 +692,16 @@ module Aws::Lightsail
     UpdateRelationalDatabaseRequest = Shapes::StructureShape.new(name: 'UpdateRelationalDatabaseRequest')
     UpdateRelationalDatabaseResult = Shapes::StructureShape.new(name: 'UpdateRelationalDatabaseResult')
     ViewerMinimumTlsProtocolVersionEnum = Shapes::StringShape.new(name: 'ViewerMinimumTlsProtocolVersionEnum')
+    WafAcfpConfig = Shapes::StructureShape.new(name: 'WafAcfpConfig')
+    WafAtpConfig = Shapes::StructureShape.new(name: 'WafAtpConfig')
+    WafBotControlConfig = Shapes::StructureShape.new(name: 'WafBotControlConfig')
+    WafConfig = Shapes::StructureShape.new(name: 'WafConfig')
+    WafInspectionLevelEnum = Shapes::StringShape.new(name: 'WafInspectionLevelEnum')
+    WafPayloadTypeEnum = Shapes::StringShape.new(name: 'WafPayloadTypeEnum')
+    WafResponseInspection = Shapes::StructureShape.new(name: 'WafResponseInspection')
+    WafRule = Shapes::StructureShape.new(name: 'WafRule')
+    WafRuleList = Shapes::ListShape.new(name: 'WafRuleList')
+    WafStatusCodeList = Shapes::ListShape.new(name: 'WafStatusCodeList')
     boolean = Shapes::BooleanShape.new(name: 'boolean')
     double = Shapes::FloatShape.new(name: 'double')
     float = Shapes::FloatShape.new(name: 'float')
@@ -1286,6 +1296,8 @@ module Aws::Lightsail
     CreateDistributionRequest.add_member(:enable_private_origin_access, Shapes::ShapeRef.new(shape: boolean, location_name: "enablePrivateOriginAccess"))
     CreateDistributionRequest.add_member(:default_root_object, Shapes::ShapeRef.new(shape: string, location_name: "defaultRootObject"))
     CreateDistributionRequest.add_member(:custom_error_responses, Shapes::ShapeRef.new(shape: DistributionCustomErrorResponseList, location_name: "customErrorResponses"))
+    CreateDistributionRequest.add_member(:enable_waf, Shapes::ShapeRef.new(shape: boolean, location_name: "enableWaf"))
+    CreateDistributionRequest.add_member(:waf_rules, Shapes::ShapeRef.new(shape: WafRuleList, location_name: "wafRules"))
     CreateDistributionRequest.struct_class = Types::CreateDistributionRequest
 
     CreateDistributionResult.add_member(:distribution, Shapes::ShapeRef.new(shape: LightsailDistribution, location_name: "distribution"))
@@ -2485,6 +2497,7 @@ module Aws::Lightsail
     LightsailDistribution.add_member(:viewer_minimum_tls_protocol_version, Shapes::ShapeRef.new(shape: string, location_name: "viewerMinimumTlsProtocolVersion"))
     LightsailDistribution.add_member(:default_root_object, Shapes::ShapeRef.new(shape: string, location_name: "defaultRootObject"))
     LightsailDistribution.add_member(:custom_error_responses, Shapes::ShapeRef.new(shape: DistributionCustomErrorResponseList, location_name: "customErrorResponses"))
+    LightsailDistribution.add_member(:waf, Shapes::ShapeRef.new(shape: WafConfig, location_name: "waf"))
     LightsailDistribution.struct_class = Types::LightsailDistribution
 
     LoadBalancer.add_member(:name, Shapes::ShapeRef.new(shape: ResourceName, location_name: "name"))
@@ -3155,6 +3168,8 @@ module Aws::Lightsail
     UpdateDistributionRequest.add_member(:enable_private_origin_access, Shapes::ShapeRef.new(shape: boolean, location_name: "enablePrivateOriginAccess"))
     UpdateDistributionRequest.add_member(:default_root_object, Shapes::ShapeRef.new(shape: string, location_name: "defaultRootObject"))
     UpdateDistributionRequest.add_member(:custom_error_responses, Shapes::ShapeRef.new(shape: DistributionCustomErrorResponseList, location_name: "customErrorResponses"))
+    UpdateDistributionRequest.add_member(:enable_waf, Shapes::ShapeRef.new(shape: boolean, location_name: "enableWaf"))
+    UpdateDistributionRequest.add_member(:waf_rules, Shapes::ShapeRef.new(shape: WafRuleList, location_name: "wafRules"))
     UpdateDistributionRequest.struct_class = Types::UpdateDistributionRequest
 
     UpdateDistributionResult.add_member(:operation, Shapes::ShapeRef.new(shape: Operation, location_name: "operation"))
@@ -3207,6 +3222,40 @@ module Aws::Lightsail
 
     UpdateRelationalDatabaseResult.add_member(:operations, Shapes::ShapeRef.new(shape: OperationList, location_name: "operations"))
     UpdateRelationalDatabaseResult.struct_class = Types::UpdateRelationalDatabaseResult
+
+    WafAcfpConfig.add_member(:payload_type, Shapes::ShapeRef.new(shape: WafPayloadTypeEnum, location_name: "payloadType"))
+    WafAcfpConfig.add_member(:creation_path, Shapes::ShapeRef.new(shape: string, location_name: "creationPath"))
+    WafAcfpConfig.add_member(:registration_page_path, Shapes::ShapeRef.new(shape: string, location_name: "registrationPagePath"))
+    WafAcfpConfig.add_member(:response_inspection, Shapes::ShapeRef.new(shape: WafResponseInspection, location_name: "responseInspection"))
+    WafAcfpConfig.struct_class = Types::WafAcfpConfig
+
+    WafAtpConfig.add_member(:login_path, Shapes::ShapeRef.new(shape: string, location_name: "loginPath"))
+    WafAtpConfig.add_member(:payload_type, Shapes::ShapeRef.new(shape: WafPayloadTypeEnum, location_name: "payloadType"))
+    WafAtpConfig.add_member(:username_field, Shapes::ShapeRef.new(shape: string, location_name: "usernameField"))
+    WafAtpConfig.add_member(:password_field, Shapes::ShapeRef.new(shape: string, location_name: "passwordField"))
+    WafAtpConfig.add_member(:response_inspection, Shapes::ShapeRef.new(shape: WafResponseInspection, location_name: "responseInspection"))
+    WafAtpConfig.struct_class = Types::WafAtpConfig
+
+    WafBotControlConfig.add_member(:inspection_level, Shapes::ShapeRef.new(shape: WafInspectionLevelEnum, location_name: "inspectionLevel"))
+    WafBotControlConfig.struct_class = Types::WafBotControlConfig
+
+    WafConfig.add_member(:is_waf_enabled, Shapes::ShapeRef.new(shape: boolean, location_name: "isWafEnabled"))
+    WafConfig.add_member(:waf_rules, Shapes::ShapeRef.new(shape: WafRuleList, location_name: "wafRules"))
+    WafConfig.struct_class = Types::WafConfig
+
+    WafResponseInspection.add_member(:success_codes, Shapes::ShapeRef.new(shape: WafStatusCodeList, location_name: "successCodes"))
+    WafResponseInspection.add_member(:failure_codes, Shapes::ShapeRef.new(shape: WafStatusCodeList, location_name: "failureCodes"))
+    WafResponseInspection.struct_class = Types::WafResponseInspection
+
+    WafRule.add_member(:name, Shapes::ShapeRef.new(shape: string, required: true, location_name: "name"))
+    WafRule.add_member(:atp_config, Shapes::ShapeRef.new(shape: WafAtpConfig, location_name: "atpConfig"))
+    WafRule.add_member(:acfp_config, Shapes::ShapeRef.new(shape: WafAcfpConfig, location_name: "acfpConfig"))
+    WafRule.add_member(:bot_control_config, Shapes::ShapeRef.new(shape: WafBotControlConfig, location_name: "botControlConfig"))
+    WafRule.struct_class = Types::WafRule
+
+    WafRuleList.member = Shapes::ShapeRef.new(shape: WafRule)
+
+    WafStatusCodeList.member = Shapes::ShapeRef.new(shape: integer)
 
     setupHistoryList.member = Shapes::ShapeRef.new(shape: SetupHistory)
 

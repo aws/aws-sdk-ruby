@@ -1,6 +1,9 @@
 Unreleased Changes
 ------------------
 
+1.124.1 (2026-10-26)
+------------------
+
 * Issue - Fix `MessageVerifier#authentic?` to return false, rather than raise, for messages that are not JSON objects or have malformed signing fields.
 
 1.124.0 (2026-10-21)

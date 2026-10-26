@@ -26,10 +26,31 @@ module Aws::Billing
       SENSITIVE: []
     end
 
+    class AdditionalRecipient
+      attr_accessor email: ::String
+      SENSITIVE: [:email]
+    end
+
     class Amount
       attr_accessor currency_code: ::String
       attr_accessor currency_amount: ::String
       SENSITIVE: []
+    end
+
+    class ApproverDetails
+      attr_accessor name: ::String
+      attr_accessor title: ::String
+      attr_accessor email: ::String
+      SENSITIVE: [:name, :title, :email]
+    end
+
+    class AssociateContractRequest
+      attr_accessor contract_arn: ::String
+      attr_accessor contract_document_id: ::String
+      SENSITIVE: [:contract_document_id]
+    end
+
+    class AssociateContractResponse < Aws::EmptyStructure
     end
 
     class AssociateSourceViewsRequest
@@ -41,6 +62,32 @@ module Aws::Billing
     class AssociateSourceViewsResponse
       attr_accessor arn: ::String
       SENSITIVE: []
+    end
+
+    class AttestationDetails
+      attr_accessor attestation_value: Types::AttestationValue
+      attr_accessor investment_distributions: ::Array[Types::InvestmentDistribution]
+      SENSITIVE: []
+    end
+
+    class AttestationQuantity
+      attr_accessor attestation_volume: ::String
+      attr_accessor attestation_unit: ::String
+      SENSITIVE: []
+    end
+
+    class AttestationValue
+      attr_accessor attestation_amount: Types::Amount
+      attr_accessor attestation_quantities: ::Array[Types::AttestationQuantity]
+      attr_accessor unknown: untyped
+      SENSITIVE: []
+
+      class AttestationAmount < AttestationValue
+      end
+      class AttestationQuantities < AttestationValue
+      end
+      class Unknown < AttestationValue
+      end
     end
 
     class BillingFeatureFilter
@@ -171,6 +218,16 @@ module Aws::Billing
       SENSITIVE: []
     end
 
+    class CancelContractualInvestmentAttestationRequest
+      attr_accessor attestation_id: ::String
+      attr_accessor contract_arn: ::String
+      attr_accessor reason: ::String
+      SENSITIVE: []
+    end
+
+    class CancelContractualInvestmentAttestationResponse < Aws::EmptyStructure
+    end
+
     class ChargeAccount
       attr_accessor account_id: ::String
       attr_accessor charge_percentage: ::String
@@ -187,6 +244,26 @@ module Aws::Billing
     class ContractAccount
       attr_accessor account_id: ::String
       attr_accessor is_gdn: bool
+      SENSITIVE: []
+    end
+
+    class ContractDetails
+      attr_accessor private_pricing_addendum: Types::PrivatePricingAddendum
+      attr_accessor unknown: untyped
+      SENSITIVE: []
+
+      class PrivatePricingAddendum < ContractDetails
+      end
+      class Unknown < ContractDetails
+      end
+    end
+
+    class ContractSummary
+      attr_accessor contract_arn: ::String
+      attr_accessor contract_term: Types::Interval
+      attr_accessor contract_type: ("Cross-Service" | "Service-Specific" | "Other")
+      attr_accessor association_status: ("ASSOCIATED" | "NOT_ASSOCIATED")
+      attr_accessor last_updated_at: ::Time
       SENSITIVE: []
     end
 
@@ -209,6 +286,24 @@ module Aws::Billing
     class CreateBillingViewResponse
       attr_accessor arn: ::String
       attr_accessor created_at: ::Time
+      SENSITIVE: []
+    end
+
+    class CreateContractualInvestmentAttestationRequest
+      attr_accessor contract_arn: ::String
+      attr_accessor investment_summary_id: ::String
+      attr_accessor investment_id: ::String
+      attr_accessor contract_document_id: ::String
+      attr_accessor approver_details: Types::ApproverDetails
+      attr_accessor investment_disbursed_at: ::Time
+      attr_accessor attestation_details: Types::AttestationDetails
+      attr_accessor additional_recipients: ::Array[Types::AdditionalRecipient]
+      attr_accessor client_token: ::String
+      SENSITIVE: [:contract_document_id]
+    end
+
+    class CreateContractualInvestmentAttestationResponse
+      attr_accessor attestation_id: ::String
       SENSITIVE: []
     end
 
@@ -264,6 +359,14 @@ module Aws::Billing
       SENSITIVE: []
     end
 
+    class DisassociateContractRequest
+      attr_accessor contract_arn: ::String
+      SENSITIVE: []
+    end
+
+    class DisassociateContractResponse < Aws::EmptyStructure
+    end
+
     class DisassociateSourceViewsRequest
       attr_accessor arn: ::String
       attr_accessor source_views: ::Array[::String]
@@ -310,6 +413,16 @@ module Aws::Billing
 
     class GetBillingViewResponse
       attr_accessor billing_view: Types::BillingViewElement
+      SENSITIVE: []
+    end
+
+    class GetContractInformationRequest
+      attr_accessor contract_arn: ::String
+      SENSITIVE: []
+    end
+
+    class GetContractInformationResponse
+      attr_accessor contract: Types::ContractDetails
       SENSITIVE: []
     end
 
@@ -405,6 +518,74 @@ module Aws::Billing
       SENSITIVE: []
     end
 
+    class Interval
+      attr_accessor start_date_inclusive: ::Time
+      attr_accessor end_date_inclusive: ::Time
+      SENSITIVE: []
+    end
+
+    class Investment
+      attr_accessor milestone_based_investment: Types::MilestoneBasedInvestment
+      attr_accessor outcome_based_investment: Types::OutcomeBasedInvestment
+      attr_accessor unknown: untyped
+      SENSITIVE: []
+
+      class MilestoneBasedInvestment < Investment
+      end
+      class OutcomeBasedInvestment < Investment
+      end
+      class Unknown < Investment
+      end
+    end
+
+    class InvestmentAttestation
+      attr_accessor attestation_id: ::String
+      attr_accessor investment_name: ::String
+      attr_accessor outcome_description: ::String
+      attr_accessor investment_summary_id: ::String
+      attr_accessor investment_id: ::String
+      attr_accessor attested_at: ::Time
+      attr_accessor updated_at: ::Time
+      attr_accessor attestation_status: ("PENDING_REVIEW" | "PENDING_C_LEVEL_APPROVAL" | "PENDING_CANCELLATION" | "REJECTED" | "CANCELLED" | "DISBURSED")
+      attr_accessor investment_disbursed_at: ::Time
+      attr_accessor attested_value: Types::Amount
+      attr_accessor investment_distributions: ::Array[Types::InvestmentDistribution]
+      attr_accessor rejection_reasons: ::Array[::String]
+      attr_accessor is_cancellable: bool
+      SENSITIVE: []
+    end
+
+    class InvestmentDistribution
+      attr_accessor account_id: ::String
+      attr_accessor investment_amount: Types::Amount
+      SENSITIVE: []
+    end
+
+    class InvestmentMultiplier
+      attr_accessor value: ::String
+      attr_accessor investment_attestation_input_unit: ::String
+      attr_accessor multiplier_type: ("PERCENTAGE" | "CURRENCY_AMOUNT")
+      SENSITIVE: []
+    end
+
+    class InvestmentRestriction
+      attr_accessor amount: Types::Amount
+      SENSITIVE: []
+    end
+
+    class InvestmentSummary
+      attr_accessor investment_summary_id: ::String
+      attr_accessor investment_name: ::String
+      attr_accessor investment_type: ("MILESTONE_BASED" | "OUTCOME_BASED")
+      attr_accessor max_allowed_investment_disbursement_value: Types::Amount
+      SENSITIVE: []
+    end
+
+    class LegalEntity
+      attr_accessor legal_entity_name: ::String
+      SENSITIVE: [:legal_entity_name]
+    end
+
     class LinkedAccountCharge
       attr_accessor account_id: ::String
       attr_accessor payer_account_id: ::String
@@ -488,6 +669,59 @@ module Aws::Billing
       SENSITIVE: []
     end
 
+    class ListContractsRequest
+      attr_accessor next_token: ::String
+      attr_accessor max_results: ::Integer
+      SENSITIVE: []
+    end
+
+    class ListContractsResponse
+      attr_accessor items: ::Array[Types::ContractSummary]
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class ListContractualInvestmentAttestationsRequest
+      attr_accessor contract_arn: ::String
+      attr_accessor investment_summary_id: ::String
+      attr_accessor next_token: ::String
+      attr_accessor max_results: ::Integer
+      SENSITIVE: []
+    end
+
+    class ListContractualInvestmentAttestationsResponse
+      attr_accessor items: ::Array[Types::InvestmentAttestation]
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class ListContractualInvestmentSummariesRequest
+      attr_accessor contract_arn: ::String
+      attr_accessor next_token: ::String
+      attr_accessor max_results: ::Integer
+      SENSITIVE: []
+    end
+
+    class ListContractualInvestmentSummariesResponse
+      attr_accessor items: ::Array[Types::InvestmentSummary]
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class ListContractualInvestmentsRequest
+      attr_accessor contract_arn: ::String
+      attr_accessor investment_summary_id: ::String
+      attr_accessor next_token: ::String
+      attr_accessor max_results: ::Integer
+      SENSITIVE: []
+    end
+
+    class ListContractualInvestmentsResponse
+      attr_accessor items: ::Array[Types::Investment]
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
     class ListEnterpriseSupportLinkedAccountChargesRequest
       attr_accessor billing_month: ::String
       attr_accessor account_id: ::String
@@ -525,6 +759,23 @@ module Aws::Billing
       SENSITIVE: []
     end
 
+    class MilestoneBasedInvestment
+      attr_accessor investment_id: ::String
+      attr_accessor investment_value: Types::Amount
+      attr_accessor investment_disbursed_at: ::Time
+      SENSITIVE: []
+    end
+
+    class OutcomeBasedInvestment
+      attr_accessor investment_id: ::String
+      attr_accessor outcome_description: ::String
+      attr_accessor attestation_window: Types::Interval
+      attr_accessor investment_restrictions: ::Array[Types::InvestmentRestriction]
+      attr_accessor investment_multipliers: ::Array[Types::InvestmentMultiplier]
+      attr_accessor disbursed_value: Types::Amount
+      SENSITIVE: []
+    end
+
     class PricingPlan
       attr_accessor pricing_plan_id: ::String
       attr_accessor name: ::String
@@ -548,6 +799,16 @@ module Aws::Billing
       attr_accessor incremental: bool
       attr_accessor increment: ::String
       attr_accessor increment_charge: ::String
+      SENSITIVE: []
+    end
+
+    class PrivatePricingAddendum
+      attr_accessor contract_arn: ::String
+      attr_accessor contract_term: Types::Interval
+      attr_accessor eligible_payer_accounts: ::Array[::String]
+      attr_accessor investment_accounts: ::Array[::String]
+      attr_accessor legal_entities: ::Array[Types::LegalEntity]
+      attr_accessor contract_restrictions: ::Array[("ATTESTATION_SELF_SERVICE_BLOCKED")]
       SENSITIVE: []
     end
 

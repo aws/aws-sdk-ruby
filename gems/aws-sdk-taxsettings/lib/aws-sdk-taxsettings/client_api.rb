@@ -78,6 +78,7 @@ module Aws::TaxSettings
     DestinationS3Location = Shapes::StructureShape.new(name: 'DestinationS3Location')
     DisplayName = Shapes::StringShape.new(name: 'DisplayName')
     District = Shapes::StringShape.new(name: 'District')
+    EconomicIdentificationNumber = Shapes::StringShape.new(name: 'EconomicIdentificationNumber')
     EgyptAdditionalInfo = Shapes::StructureShape.new(name: 'EgyptAdditionalInfo')
     ElectronicTransactionCodeNumber = Shapes::StringShape.new(name: 'ElectronicTransactionCodeNumber')
     EnterpriseIdentificationNumber = Shapes::StringShape.new(name: 'EnterpriseIdentificationNumber')
@@ -93,6 +94,7 @@ module Aws::TaxSettings
     FranceAdditionalInfo = Shapes::StructureShape.new(name: 'FranceAdditionalInfo')
     GenericString = Shapes::StringShape.new(name: 'GenericString')
     GeorgiaAdditionalInfo = Shapes::StructureShape.new(name: 'GeorgiaAdditionalInfo')
+    GermanyAdditionalInfo = Shapes::StructureShape.new(name: 'GermanyAdditionalInfo')
     GetTaxExemptionTypesRequest = Shapes::StructureShape.new(name: 'GetTaxExemptionTypesRequest')
     GetTaxExemptionTypesResponse = Shapes::StructureShape.new(name: 'GetTaxExemptionTypesResponse')
     GetTaxInheritanceRequest = Shapes::StructureShape.new(name: 'GetTaxInheritanceRequest')
@@ -131,6 +133,10 @@ module Aws::TaxSettings
     MalaysiaServiceTaxCode = Shapes::StringShape.new(name: 'MalaysiaServiceTaxCode')
     MalaysiaServiceTaxCodesList = Shapes::ListShape.new(name: 'MalaysiaServiceTaxCodesList')
     MaxResults = Shapes::IntegerShape.new(name: 'MaxResults')
+    MexicoAdditionalInfo = Shapes::StructureShape.new(name: 'MexicoAdditionalInfo')
+    MexicoCfdiUsageCode = Shapes::StringShape.new(name: 'MexicoCfdiUsageCode')
+    MexicoTaxRegimeCode = Shapes::StringShape.new(name: 'MexicoTaxRegimeCode')
+    MexicoTaxRegimeFullName = Shapes::StringShape.new(name: 'MexicoTaxRegimeFullName')
     MonacoAdditionalInfo = Shapes::StructureShape.new(name: 'MonacoAdditionalInfo')
     PaginationTokenString = Shapes::StringShape.new(name: 'PaginationTokenString')
     Pan = Shapes::StringShape.new(name: 'Pan')
@@ -170,6 +176,7 @@ module Aws::TaxSettings
     SouthKoreaAdditionalInfo = Shapes::StructureShape.new(name: 'SouthKoreaAdditionalInfo')
     SpainAdditionalInfo = Shapes::StructureShape.new(name: 'SpainAdditionalInfo')
     State = Shapes::StringShape.new(name: 'State')
+    Steuernummer = Shapes::StringShape.new(name: 'Steuernummer')
     String = Shapes::StringShape.new(name: 'String')
     SupplementalTaxRegistration = Shapes::StructureShape.new(name: 'SupplementalTaxRegistration')
     SupplementalTaxRegistrationEntry = Shapes::StructureShape.new(name: 'SupplementalTaxRegistrationEntry')
@@ -258,6 +265,8 @@ module Aws::TaxSettings
     AdditionalInfoRequest.add_member(:chile_additional_info, Shapes::ShapeRef.new(shape: ChileAdditionalInfo, location_name: "chileAdditionalInfo"))
     AdditionalInfoRequest.add_member(:france_additional_info, Shapes::ShapeRef.new(shape: FranceAdditionalInfo, location_name: "franceAdditionalInfo"))
     AdditionalInfoRequest.add_member(:monaco_additional_info, Shapes::ShapeRef.new(shape: MonacoAdditionalInfo, location_name: "monacoAdditionalInfo"))
+    AdditionalInfoRequest.add_member(:germany_additional_info, Shapes::ShapeRef.new(shape: GermanyAdditionalInfo, location_name: "germanyAdditionalInfo"))
+    AdditionalInfoRequest.add_member(:mexico_additional_info, Shapes::ShapeRef.new(shape: MexicoAdditionalInfo, location_name: "mexicoAdditionalInfo"))
     AdditionalInfoRequest.struct_class = Types::AdditionalInfoRequest
 
     AdditionalInfoResponse.add_member(:malaysia_additional_info, Shapes::ShapeRef.new(shape: MalaysiaAdditionalInfo, location_name: "malaysiaAdditionalInfo"))
@@ -286,6 +295,8 @@ module Aws::TaxSettings
     AdditionalInfoResponse.add_member(:chile_additional_info, Shapes::ShapeRef.new(shape: ChileAdditionalInfo, location_name: "chileAdditionalInfo"))
     AdditionalInfoResponse.add_member(:france_additional_info, Shapes::ShapeRef.new(shape: FranceAdditionalInfo, location_name: "franceAdditionalInfo"))
     AdditionalInfoResponse.add_member(:monaco_additional_info, Shapes::ShapeRef.new(shape: MonacoAdditionalInfo, location_name: "monacoAdditionalInfo"))
+    AdditionalInfoResponse.add_member(:germany_additional_info, Shapes::ShapeRef.new(shape: GermanyAdditionalInfo, location_name: "germanyAdditionalInfo"))
+    AdditionalInfoResponse.add_member(:mexico_additional_info, Shapes::ShapeRef.new(shape: MexicoAdditionalInfo, location_name: "mexicoAdditionalInfo"))
     AdditionalInfoResponse.struct_class = Types::AdditionalInfoResponse
 
     Address.add_member(:address_line_1, Shapes::ShapeRef.new(shape: AddressLine1, location_name: "addressLine1"))
@@ -408,6 +419,10 @@ module Aws::TaxSettings
     GeorgiaAdditionalInfo.add_member(:person_type, Shapes::ShapeRef.new(shape: PersonType, required: true, location_name: "personType"))
     GeorgiaAdditionalInfo.struct_class = Types::GeorgiaAdditionalInfo
 
+    GermanyAdditionalInfo.add_member(:economic_identification_number, Shapes::ShapeRef.new(shape: EconomicIdentificationNumber, location_name: "economicIdentificationNumber"))
+    GermanyAdditionalInfo.add_member(:steuernummer, Shapes::ShapeRef.new(shape: Steuernummer, location_name: "steuernummer"))
+    GermanyAdditionalInfo.struct_class = Types::GermanyAdditionalInfo
+
     GetTaxExemptionTypesRequest.struct_class = Types::GetTaxExemptionTypesRequest
 
     GetTaxExemptionTypesResponse.add_member(:tax_exemption_types, Shapes::ShapeRef.new(shape: TaxExemptionTypes, location_name: "taxExemptionTypes"))
@@ -495,6 +510,11 @@ module Aws::TaxSettings
     MalaysiaAdditionalInfo.struct_class = Types::MalaysiaAdditionalInfo
 
     MalaysiaServiceTaxCodesList.member = Shapes::ShapeRef.new(shape: MalaysiaServiceTaxCode)
+
+    MexicoAdditionalInfo.add_member(:tax_regime, Shapes::ShapeRef.new(shape: MexicoTaxRegimeCode, location_name: "taxRegime"))
+    MexicoAdditionalInfo.add_member(:tax_regime_full_name, Shapes::ShapeRef.new(shape: MexicoTaxRegimeFullName, location_name: "taxRegimeFullName"))
+    MexicoAdditionalInfo.add_member(:cfdi_usage_code, Shapes::ShapeRef.new(shape: MexicoCfdiUsageCode, location_name: "cfdiUsageCode"))
+    MexicoAdditionalInfo.struct_class = Types::MexicoAdditionalInfo
 
     MonacoAdditionalInfo.add_member(:business_number, Shapes::ShapeRef.new(shape: BusinessNumber, required: true, location_name: "businessNumber"))
     MonacoAdditionalInfo.struct_class = Types::MonacoAdditionalInfo

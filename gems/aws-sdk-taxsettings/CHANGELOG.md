@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.50.0 (2026-10-26)
+------------------
+
+* Feature - Add Mexico Additional Info changes
+
 1.49.0 (2026-10-21)
 ------------------
 

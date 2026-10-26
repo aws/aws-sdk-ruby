@@ -7265,7 +7265,7 @@ module Aws
                                           {
                                             instance_group_name: ::String,
                                             instance_ids: Array[::String]?,
-                                            deep_health_checks: Array[("InstanceStress" | "InstanceConnectivity")]
+                                            deep_health_checks: Array[("InstanceStress" | "InstanceConnectivity" | "MultiNodeTrainingValidation")]
                                           }
                                         ]
                                       ) -> _StartClusterHealthCheckResponseSuccess

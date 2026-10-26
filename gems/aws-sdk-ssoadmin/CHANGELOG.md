@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.84.0 (2026-10-26)
+------------------
+
+* Feature - Added support for the RegionScope parameter on ListInstances, allowing you to list IAM Identity Center instances in the current Region or across all Regions.
+
 1.83.0 (2026-10-21)
 ------------------
 

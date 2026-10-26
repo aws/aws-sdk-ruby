@@ -507,6 +507,40 @@ module Aws
                                state: {
                                  value_list: Array[("ACTIVE" | "INACTIVE")]?
                                }?
+                             }?,
+                             subsidiary_authorization_filters: {
+                               entity_id: {
+                                 value_list: Array[::String]?
+                               }?,
+                               status: {
+                                 value_list: Array[("Draft" | "Active" | "Restricted")]?
+                               }?,
+                               resource_id: {
+                                 value_list: Array[::String]?
+                               }?,
+                               resource_name: {
+                                 value_list: Array[::String]?,
+                                 wild_card_value: ::String?
+                               }?,
+                               name: {
+                                 value_list: Array[::String]?,
+                                 wild_card_value: ::String?
+                               }?,
+                               subsidiary_account_id: {
+                                 value_list: Array[::String]?
+                               }?,
+                               created_date: {
+                                 date_range: {
+                                   after_value: ::String?,
+                                   before_value: ::String?
+                                 }?
+                               }?,
+                               last_modified_date: {
+                                 date_range: {
+                                   after_value: ::String?,
+                                   before_value: ::String?
+                                 }?
+                               }?
                              }?
                            },
                            ?entity_type_sort: {
@@ -544,6 +578,10 @@ module Aws
                              }?,
                              express_private_offer_configuration_sort: {
                                sort_by: ("EntityId" | "LastModifiedDate" | "ProductId" | "State")?,
+                               sort_order: ("ASCENDING" | "DESCENDING")?
+                             }?,
+                             subsidiary_authorization_sort: {
+                               sort_by: ("EntityId" | "Status" | "ResourceId" | "SubsidiaryAccountId" | "CreatedDate" | "LastModifiedDate")?,
                                sort_order: ("ASCENDING" | "DESCENDING")?
                              }?
                            }

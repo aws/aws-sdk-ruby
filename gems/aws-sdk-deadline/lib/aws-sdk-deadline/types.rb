@@ -119,23 +119,12 @@ module Aws::Deadline
     #
     #   * `grid:r580` - [NVIDIA vGPU software 19][1]
     #
-    #   * `grid:r570` - [NVIDIA vGPU software 18][2]
-    #
-    #   * `grid:r535` - [NVIDIA vGPU software 16][3]
-    #
     #   If you don't specify a runtime, Amazon Web Services Deadline Cloud
     #   uses `latest` as the default. However, if you have multiple
     #   accelerators and specify `latest` for some and leave others blank,
     #   Amazon Web Services Deadline Cloud raises an exception.
     #
-    #   Not all runtimes are compatible with all accelerator types:
-    #
-    #    * `t4` and `a10g`: Support all runtimes (`grid:r580`, `grid:r570`,
-    #     `grid:r535`)
-    #
-    #   * `l4` and `l40s`: Only support `grid:r570` and newer
-    #
-    #   * `rtx-pro-server-6000`: Only supports `grid:r580`
+    #   All accelerator types support `grid:r580`.
     #
     #    All accelerators in a fleet must use the same runtime version. You
     #   cannot mix different runtime versions within a single fleet.
@@ -148,8 +137,6 @@ module Aws::Deadline
     #
     #
     #   [1]: https://docs.nvidia.com/vgpu/19.0/index.html
-    #   [2]: https://docs.nvidia.com/vgpu/18.0/index.html
-    #   [3]: https://docs.nvidia.com/vgpu/16.0/index.html
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/deadline-2023-10-12/AcceleratorSelection AWS API Documentation
@@ -384,10 +371,6 @@ module Aws::Deadline
       include Aws::Structure
     end
 
-    # Shared member fields for Associate inputs and \{Resource}Member
-    # response structures. principalId is excluded because it has @httpLabel
-    # on inputs but not on responses.
-    #
     # @!attribute [rw] farm_id
     #   The ID of the farm to associate with the member.
     #   @return [String]
@@ -430,10 +413,6 @@ module Aws::Deadline
     #
     class AssociateMemberToFarmResponse < Aws::EmptyStructure; end
 
-    # Shared member fields for Associate inputs and \{Resource}Member
-    # response structures. principalId is excluded because it has @httpLabel
-    # on inputs but not on responses.
-    #
     # @!attribute [rw] farm_id
     #   The farm ID of the fleet to associate with the member.
     #   @return [String]
@@ -481,10 +460,6 @@ module Aws::Deadline
     #
     class AssociateMemberToFleetResponse < Aws::EmptyStructure; end
 
-    # Shared member fields for Associate inputs and \{Resource}Member
-    # response structures. principalId is excluded because it has @httpLabel
-    # on inputs but not on responses.
-    #
     # @!attribute [rw] farm_id
     #   The farm ID of the job to associate with the member.
     #   @return [String]
@@ -537,10 +512,6 @@ module Aws::Deadline
     #
     class AssociateMemberToJobResponse < Aws::EmptyStructure; end
 
-    # Shared member fields for Associate inputs and \{Resource}Member
-    # response structures. principalId is excluded because it has @httpLabel
-    # on inputs but not on responses.
-    #
     # @!attribute [rw] farm_id
     #   The farm ID of the queue to associate with the member.
     #   @return [String]
@@ -605,11 +576,6 @@ module Aws::Deadline
       include Aws::Structure
     end
 
-    # Shared response body for AssumeRole operations where credentials are
-    # required. AssumeQueueRoleForWorkerResponse is excluded because
-    # credentials is optional there because Queue.roleArn is optional, so
-    # the mixin's @required trait would be incorrect.
-    #
     # @!attribute [rw] credentials
     #   The credentials for the fleet role.
     #   @return [Types::AwsCredentials]
@@ -644,11 +610,6 @@ module Aws::Deadline
       include Aws::Structure
     end
 
-    # Shared response body for AssumeRole operations where credentials are
-    # required. AssumeQueueRoleForWorkerResponse is excluded because
-    # credentials is optional there because Queue.roleArn is optional, so
-    # the mixin's @required trait would be incorrect.
-    #
     # @!attribute [rw] credentials
     #   The credentials for the worker.
     #   @return [Types::AwsCredentials]
@@ -678,11 +639,6 @@ module Aws::Deadline
       include Aws::Structure
     end
 
-    # Shared response body for AssumeRole operations where credentials are
-    # required. AssumeQueueRoleForWorkerResponse is excluded because
-    # credentials is optional there because Queue.roleArn is optional, so
-    # the mixin's @required trait would be incorrect.
-    #
     # @!attribute [rw] credentials
     #   The credentials for the queue role.
     #   @return [Types::AwsCredentials]
@@ -712,11 +668,6 @@ module Aws::Deadline
       include Aws::Structure
     end
 
-    # Shared response body for AssumeRole operations where credentials are
-    # required. AssumeQueueRoleForWorkerResponse is excluded because
-    # credentials is optional there because Queue.roleArn is optional, so
-    # the mixin's @required trait would be incorrect.
-    #
     # @!attribute [rw] credentials
     #   The credentials for the queue role that a user has access to.
     #   @return [Types::AwsCredentials]
@@ -2508,10 +2459,6 @@ module Aws::Deadline
       include Aws::Structure
     end
 
-    # Shared displayName + description for Create operations where both are
-    # present. displayName is @required here - this mixin is Create-only by
-    # design (Update has optional displayName).
-    #
     # @!attribute [rw] farm_id
     #   The farm ID to include in this budget.
     #   @return [String]
@@ -2577,10 +2524,6 @@ module Aws::Deadline
       include Aws::Structure
     end
 
-    # Mixin that adds an optional ARN field to response structures. Apply to
-    # SummaryMixins (flows into Get, Summary, and BatchGet) and Create
-    # outputs.
-    #
     # @!attribute [rw] budget_id
     #   The budget ID.
     #   @return [String]
@@ -2593,10 +2536,6 @@ module Aws::Deadline
       include Aws::Structure
     end
 
-    # Shared displayName + description for Create operations where both are
-    # present. displayName is @required here - this mixin is Create-only by
-    # design (Update has optional displayName).
-    #
     # @!attribute [rw] client_token
     #   The unique token which the server uses to recognize retries of the
     #   same request.
@@ -2651,10 +2590,6 @@ module Aws::Deadline
       include Aws::Structure
     end
 
-    # Mixin that adds an optional ARN field to response structures. Apply to
-    # SummaryMixins (flows into Get, Summary, and BatchGet) and Create
-    # outputs.
-    #
     # @!attribute [rw] farm_id
     #   The farm ID.
     #   @return [String]
@@ -2667,10 +2602,6 @@ module Aws::Deadline
       include Aws::Structure
     end
 
-    # Shared displayName + description for Create operations where both are
-    # present. displayName is @required here - this mixin is Create-only by
-    # design (Update has optional displayName).
-    #
     # @!attribute [rw] farm_id
     #   The farm ID of the farm to connect to the fleet.
     #   @return [String]
@@ -2753,10 +2684,6 @@ module Aws::Deadline
       include Aws::Structure
     end
 
-    # Mixin that adds an optional ARN field to response structures. Apply to
-    # SummaryMixins (flows into Get, Summary, and BatchGet) and Create
-    # outputs.
-    #
     # @!attribute [rw] fleet_id
     #   The fleet ID.
     #   @return [String]
@@ -2884,10 +2811,6 @@ module Aws::Deadline
       include Aws::Structure
     end
 
-    # Mixin that adds an optional ARN field to response structures. Apply to
-    # SummaryMixins (flows into Get, Summary, and BatchGet) and Create
-    # outputs.
-    #
     # @!attribute [rw] job_id
     #   The job ID.
     #   @return [String]
@@ -2937,10 +2860,6 @@ module Aws::Deadline
       include Aws::Structure
     end
 
-    # Mixin that adds an optional ARN field to response structures. Apply to
-    # SummaryMixins (flows into Get, Summary, and BatchGet) and Create
-    # outputs.
-    #
     # @!attribute [rw] license_endpoint_id
     #   The license endpoint ID.
     #   @return [String]
@@ -3083,10 +3002,6 @@ module Aws::Deadline
       include Aws::Structure
     end
 
-    # Mixin that adds an optional ARN field to response structures. Apply to
-    # SummaryMixins (flows into Get, Summary, and BatchGet) and Create
-    # outputs.
-    #
     # @!attribute [rw] monitor_id
     #   The unique identifier of the monitor.
     #   @return [String]
@@ -3214,10 +3129,6 @@ module Aws::Deadline
     #
     class CreateQueueLimitAssociationResponse < Aws::EmptyStructure; end
 
-    # Shared displayName + description for Create operations where both are
-    # present. displayName is @required here - this mixin is Create-only by
-    # design (Update has optional displayName).
-    #
     # @!attribute [rw] farm_id
     #   The farm ID of the farm to connect to the queue.
     #   @return [String]
@@ -3304,10 +3215,6 @@ module Aws::Deadline
       include Aws::Structure
     end
 
-    # Mixin that adds an optional ARN field to response structures. Apply to
-    # SummaryMixins (flows into Get, Summary, and BatchGet) and Create
-    # outputs.
-    #
     # @!attribute [rw] queue_id
     #   The queue ID.
     #   @return [String]
@@ -3409,10 +3316,6 @@ module Aws::Deadline
       include Aws::Structure
     end
 
-    # Mixin that adds an optional ARN field to response structures. Apply to
-    # SummaryMixins (flows into Get, Summary, and BatchGet) and Create
-    # outputs.
-    #
     # @!attribute [rw] worker_id
     #   The worker ID.
     #   @return [String]
@@ -3736,9 +3639,6 @@ module Aws::Deadline
     #
     class DeleteQueueEnvironmentResponse < Aws::EmptyStructure; end
 
-    # Identifier mixin for queue-fleet association operations. Composes
-    # QueueIdentifierMixin (farmId + queueId) and adds fleetId.
-    #
     # @!attribute [rw] farm_id
     #   The farm ID of the farm that holds the queue-fleet association.
     #   @return [String]
@@ -4585,10 +4485,6 @@ module Aws::Deadline
       include Aws::Structure
     end
 
-    # Mixin that adds an optional ARN field to response structures. Apply to
-    # SummaryMixins (flows into Get, Summary, and BatchGet) and Create
-    # outputs.
-    #
     # @!attribute [rw] budget_id
     #   The budget ID.
     #   @return [String]
@@ -4691,10 +4587,6 @@ module Aws::Deadline
       include Aws::Structure
     end
 
-    # Mixin that adds an optional ARN field to response structures. Apply to
-    # SummaryMixins (flows into Get, Summary, and BatchGet) and Create
-    # outputs.
-    #
     # @!attribute [rw] farm_id
     #   The farm ID of the farm to get.
     #   @return [String]
@@ -4775,10 +4667,6 @@ module Aws::Deadline
       include Aws::Structure
     end
 
-    # Mixin that adds an optional ARN field to response structures. Apply to
-    # SummaryMixins (flows into Get, Summary, and BatchGet) and Create
-    # outputs.
-    #
     # @!attribute [rw] fleet_id
     #   The fleet ID.
     #   @return [String]
@@ -4953,10 +4841,6 @@ module Aws::Deadline
       include Aws::Structure
     end
 
-    # Mixin that adds an optional ARN field to response structures. Apply to
-    # SummaryMixins (flows into Get, Summary, and BatchGet) and Create
-    # outputs.
-    #
     # @!attribute [rw] job_id
     #   The job ID.
     #   @return [String]
@@ -5104,10 +4988,6 @@ module Aws::Deadline
       include Aws::Structure
     end
 
-    # Mixin that adds an optional ARN field to response structures. Apply to
-    # SummaryMixins (flows into Get, Summary, and BatchGet) and Create
-    # outputs.
-    #
     # @!attribute [rw] license_endpoint_id
     #   The license endpoint ID.
     #   @return [String]
@@ -5168,9 +5048,6 @@ module Aws::Deadline
       include Aws::Structure
     end
 
-    # Domain fields for Limit summary/response shapes, ordered before
-    # timestamps.
-    #
     # @!attribute [rw] farm_id
     #   The unique identifier of the farm that contains the limit.
     #   @return [String]
@@ -5266,10 +5143,6 @@ module Aws::Deadline
       include Aws::Structure
     end
 
-    # Mixin that adds an optional ARN field to response structures. Apply to
-    # SummaryMixins (flows into Get, Summary, and BatchGet) and Create
-    # outputs.
-    #
     # @!attribute [rw] monitor_id
     #   The unique identifier for the monitor.
     #   @return [String]
@@ -5448,9 +5321,6 @@ module Aws::Deadline
       include Aws::Structure
     end
 
-    # Identifier mixin for queue-fleet association operations. Composes
-    # QueueIdentifierMixin (farmId + queueId) and adds fleetId.
-    #
     # @!attribute [rw] farm_id
     #   The farm ID of the farm that contains the queue-fleet association.
     #   @return [String]
@@ -5473,9 +5343,6 @@ module Aws::Deadline
       include Aws::Structure
     end
 
-    # Domain fields for QueueFleetAssociation summary/response shapes,
-    # ordered before timestamps.
-    #
     # @!attribute [rw] queue_id
     #   The queue ID for the queue-fleet association.
     #   @return [String]
@@ -5541,9 +5408,6 @@ module Aws::Deadline
       include Aws::Structure
     end
 
-    # Domain fields for QueueLimitAssociation summary/response shapes,
-    # ordered before timestamps.
-    #
     # @!attribute [rw] queue_id
     #   The unique identifier of the queue associated with the limit.
     #   @return [String]
@@ -5605,10 +5469,6 @@ module Aws::Deadline
       include Aws::Structure
     end
 
-    # Mixin that adds an optional ARN field to response structures. Apply to
-    # SummaryMixins (flows into Get, Summary, and BatchGet) and Create
-    # outputs.
-    #
     # @!attribute [rw] farm_id
     #   The farm ID for the queue.
     #   @return [String]
@@ -5842,8 +5702,6 @@ module Aws::Deadline
       include Aws::Structure
     end
 
-    # Session lifecycle/status fields, ordered after IDs in session shapes.
-    #
     # @!attribute [rw] session_id
     #   The session ID.
     #   @return [String]
@@ -5911,9 +5769,6 @@ module Aws::Deadline
       include Aws::Structure
     end
 
-    # Shared pagination fields for List operation inputs (nextToken +
-    # maxResults).
-    #
     # @!attribute [rw] farm_id
     #   The identifier of the farm to include in the statistics. This should
     #   be the same as the farm ID used in the call to the
@@ -5946,8 +5801,6 @@ module Aws::Deadline
       include Aws::Structure
     end
 
-    # Shared pagination field for List operation outputs (nextToken).
-    #
     # @!attribute [rw] statistics
     #   The statistics for the specified fleets or queues.
     #   @return [Array<Types::Statistics>]
@@ -6361,10 +6214,6 @@ module Aws::Deadline
       include Aws::Structure
     end
 
-    # Mixin that adds an optional ARN field to response structures. Apply to
-    # SummaryMixins (flows into Get, Summary, and BatchGet) and Create
-    # outputs.
-    #
     # @!attribute [rw] volume_id
     #   The volume ID.
     #   @return [String]
@@ -6464,10 +6313,6 @@ module Aws::Deadline
       include Aws::Structure
     end
 
-    # Mixin that adds an optional ARN field to response structures. Apply to
-    # SummaryMixins (flows into Get, Summary, and BatchGet) and Create
-    # outputs.
-    #
     # @!attribute [rw] farm_id
     #   The farm ID.
     #   @return [String]
@@ -7476,9 +7321,6 @@ module Aws::Deadline
       include Aws::Structure
     end
 
-    # Shared pagination fields for List operation inputs (nextToken +
-    # maxResults).
-    #
     # @!attribute [rw] next_token
     #   The token for the next set of results, or `null` to start from the
     #   beginning.
@@ -7498,8 +7340,6 @@ module Aws::Deadline
       include Aws::Structure
     end
 
-    # Shared pagination field for List operation outputs (nextToken).
-    #
     # @!attribute [rw] metered_products
     #   The metered products.
     #   @return [Array<Types::MeteredProductSummary>]
@@ -7523,9 +7363,6 @@ module Aws::Deadline
       include Aws::Structure
     end
 
-    # Shared pagination fields for List operation inputs (nextToken +
-    # maxResults).
-    #
     # @!attribute [rw] farm_id
     #   The farm ID associated with the budgets.
     #   @return [String]
@@ -7555,8 +7392,6 @@ module Aws::Deadline
       include Aws::Structure
     end
 
-    # Shared pagination field for List operation outputs (nextToken).
-    #
     # @!attribute [rw] budgets
     #   The budgets to include on the list.
     #   @return [Array<Types::BudgetSummary>]
@@ -7580,9 +7415,6 @@ module Aws::Deadline
       include Aws::Structure
     end
 
-    # Shared pagination fields for List operation inputs (nextToken +
-    # maxResults).
-    #
     # @!attribute [rw] farm_id
     #   The farm ID.
     #   @return [String]
@@ -7607,8 +7439,6 @@ module Aws::Deadline
       include Aws::Structure
     end
 
-    # Shared pagination field for List operation outputs (nextToken).
-    #
     # @!attribute [rw] members
     #   The members on the list.
     #   @return [Array<Types::FarmMember>]
@@ -7632,9 +7462,6 @@ module Aws::Deadline
       include Aws::Structure
     end
 
-    # Shared pagination fields for List operation inputs (nextToken +
-    # maxResults).
-    #
     # @!attribute [rw] next_token
     #   The token for the next set of results, or `null` to start from the
     #   beginning.
@@ -7659,8 +7486,6 @@ module Aws::Deadline
       include Aws::Structure
     end
 
-    # Shared pagination field for List operation outputs (nextToken).
-    #
     # @!attribute [rw] farms
     #   Farms on the list.
     #   @return [Array<Types::FarmSummary>]
@@ -7684,9 +7509,6 @@ module Aws::Deadline
       include Aws::Structure
     end
 
-    # Shared pagination fields for List operation inputs (nextToken +
-    # maxResults).
-    #
     # @!attribute [rw] farm_id
     #   The farm ID of the fleet.
     #   @return [String]
@@ -7716,8 +7538,6 @@ module Aws::Deadline
       include Aws::Structure
     end
 
-    # Shared pagination field for List operation outputs (nextToken).
-    #
     # @!attribute [rw] members
     #   The members on the list.
     #   @return [Array<Types::FleetMember>]
@@ -7741,9 +7561,6 @@ module Aws::Deadline
       include Aws::Structure
     end
 
-    # Shared pagination fields for List operation inputs (nextToken +
-    # maxResults).
-    #
     # @!attribute [rw] farm_id
     #   The farm ID of the fleets.
     #   @return [String]
@@ -7787,8 +7604,6 @@ module Aws::Deadline
       include Aws::Structure
     end
 
-    # Shared pagination field for List operation outputs (nextToken).
-    #
     # @!attribute [rw] fleets
     #   The fleets on the list.
     #   @return [Array<Types::FleetSummary>]
@@ -7812,9 +7627,6 @@ module Aws::Deadline
       include Aws::Structure
     end
 
-    # Shared pagination fields for List operation inputs (nextToken +
-    # maxResults).
-    #
     # @!attribute [rw] farm_id
     #   The farm ID of the job to list.
     #   @return [String]
@@ -7849,8 +7661,6 @@ module Aws::Deadline
       include Aws::Structure
     end
 
-    # Shared pagination field for List operation outputs (nextToken).
-    #
     # @!attribute [rw] members
     #   The members on the list.
     #   @return [Array<Types::JobMember>]
@@ -7874,9 +7684,6 @@ module Aws::Deadline
       include Aws::Structure
     end
 
-    # Shared pagination fields for List operation inputs (nextToken +
-    # maxResults).
-    #
     # @!attribute [rw] farm_id
     #   The farm ID of the job to list.
     #   @return [String]
@@ -7911,8 +7718,6 @@ module Aws::Deadline
       include Aws::Structure
     end
 
-    # Shared pagination field for List operation outputs (nextToken).
-    #
     # @!attribute [rw] job_parameter_definitions
     #   Lists parameter definitions of a job.
     #   @return [Array<Hash,Array,String,Numeric,Boolean>]
@@ -7936,9 +7741,6 @@ module Aws::Deadline
       include Aws::Structure
     end
 
-    # Shared pagination fields for List operation inputs (nextToken +
-    # maxResults).
-    #
     # @!attribute [rw] farm_id
     #   The farm ID for the jobs.
     #   @return [String]
@@ -7973,8 +7775,6 @@ module Aws::Deadline
       include Aws::Structure
     end
 
-    # Shared pagination field for List operation outputs (nextToken).
-    #
     # @!attribute [rw] jobs
     #   The jobs on the list.
     #   @return [Array<Types::JobSummary>]
@@ -7998,9 +7798,6 @@ module Aws::Deadline
       include Aws::Structure
     end
 
-    # Shared pagination fields for List operation inputs (nextToken +
-    # maxResults).
-    #
     # @!attribute [rw] next_token
     #   The token for the next set of results, or `null` to start from the
     #   beginning.
@@ -8020,8 +7817,6 @@ module Aws::Deadline
       include Aws::Structure
     end
 
-    # Shared pagination field for List operation outputs (nextToken).
-    #
     # @!attribute [rw] license_endpoints
     #   The license endpoints.
     #   @return [Array<Types::LicenseEndpointSummary>]
@@ -8045,9 +7840,6 @@ module Aws::Deadline
       include Aws::Structure
     end
 
-    # Shared pagination fields for List operation inputs (nextToken +
-    # maxResults).
-    #
     # @!attribute [rw] farm_id
     #   The unique identifier of the farm that contains the limits.
     #   @return [String]
@@ -8071,8 +7863,6 @@ module Aws::Deadline
       include Aws::Structure
     end
 
-    # Shared pagination field for List operation outputs (nextToken).
-    #
     # @!attribute [rw] limits
     #   A list of limits that the farm contains.
     #   @return [Array<Types::LimitSummary>]
@@ -8096,9 +7886,6 @@ module Aws::Deadline
       include Aws::Structure
     end
 
-    # Shared pagination fields for List operation inputs (nextToken +
-    # maxResults).
-    #
     # @!attribute [rw] next_token
     #   The token for the next set of results, or `null` to start from the
     #   beginning.
@@ -8144,8 +7931,6 @@ module Aws::Deadline
       include Aws::Structure
     end
 
-    # Shared pagination field for List operation outputs (nextToken).
-    #
     # @!attribute [rw] memberships
     #   The memberships associated with the specified principal.
     #   @return [Array<Types::MembershipSummary>]
@@ -8169,9 +7954,6 @@ module Aws::Deadline
       include Aws::Structure
     end
 
-    # Shared pagination fields for List operation inputs (nextToken +
-    # maxResults).
-    #
     # @!attribute [rw] license_endpoint_id
     #   The license endpoint ID to include on the list of metered products.
     #   @return [String]
@@ -8196,8 +7978,6 @@ module Aws::Deadline
       include Aws::Structure
     end
 
-    # Shared pagination field for List operation outputs (nextToken).
-    #
     # @!attribute [rw] metered_products
     #   The metered products to list.
     #   @return [Array<Types::MeteredProductSummary>]
@@ -8221,9 +8001,6 @@ module Aws::Deadline
       include Aws::Structure
     end
 
-    # Shared pagination fields for List operation inputs (nextToken +
-    # maxResults).
-    #
     # @!attribute [rw] next_token
     #   The token for the next set of results, or `null` to start from the
     #   beginning.
@@ -8243,8 +8020,6 @@ module Aws::Deadline
       include Aws::Structure
     end
 
-    # Shared pagination field for List operation outputs (nextToken).
-    #
     # @!attribute [rw] monitors
     #   A list of `MonitorSummary` objects that describe your monitors in
     #   the Deadline Cloud.
@@ -8269,9 +8044,6 @@ module Aws::Deadline
       include Aws::Structure
     end
 
-    # Shared pagination fields for List operation inputs (nextToken +
-    # maxResults).
-    #
     # @!attribute [rw] farm_id
     #   The farm ID for the queue environment list.
     #   @return [String]
@@ -8301,8 +8073,6 @@ module Aws::Deadline
       include Aws::Structure
     end
 
-    # Shared pagination field for List operation outputs (nextToken).
-    #
     # @!attribute [rw] environments
     #   The environments to include in the queue environments list.
     #   @return [Array<Types::QueueEnvironmentSummary>]
@@ -8326,9 +8096,6 @@ module Aws::Deadline
       include Aws::Structure
     end
 
-    # Shared pagination fields for List operation inputs (nextToken +
-    # maxResults).
-    #
     # @!attribute [rw] farm_id
     #   The farm ID for the queue-fleet association list.
     #   @return [String]
@@ -8363,8 +8130,6 @@ module Aws::Deadline
       include Aws::Structure
     end
 
-    # Shared pagination field for List operation outputs (nextToken).
-    #
     # @!attribute [rw] queue_fleet_associations
     #   The queue-fleet associations on the list.
     #   @return [Array<Types::QueueFleetAssociationSummary>]
@@ -8388,9 +8153,6 @@ module Aws::Deadline
       include Aws::Structure
     end
 
-    # Shared pagination fields for List operation inputs (nextToken +
-    # maxResults).
-    #
     # @!attribute [rw] farm_id
     #   The unique identifier of the farm that contains the limits and
     #   associations.
@@ -8432,8 +8194,6 @@ module Aws::Deadline
       include Aws::Structure
     end
 
-    # Shared pagination field for List operation outputs (nextToken).
-    #
     # @!attribute [rw] queue_limit_associations
     #   A list of associations between limits and queues in the farm
     #   specified in the request.
@@ -8458,9 +8218,6 @@ module Aws::Deadline
       include Aws::Structure
     end
 
-    # Shared pagination fields for List operation inputs (nextToken +
-    # maxResults).
-    #
     # @!attribute [rw] farm_id
     #   The farm ID for the queue.
     #   @return [String]
@@ -8490,8 +8247,6 @@ module Aws::Deadline
       include Aws::Structure
     end
 
-    # Shared pagination field for List operation outputs (nextToken).
-    #
     # @!attribute [rw] members
     #   The members on the list.
     #   @return [Array<Types::QueueMember>]
@@ -8515,9 +8270,6 @@ module Aws::Deadline
       include Aws::Structure
     end
 
-    # Shared pagination fields for List operation inputs (nextToken +
-    # maxResults).
-    #
     # @!attribute [rw] farm_id
     #   The farm ID of the queue.
     #   @return [String]
@@ -8559,8 +8311,6 @@ module Aws::Deadline
       include Aws::Structure
     end
 
-    # Shared pagination field for List operation outputs (nextToken).
-    #
     # @!attribute [rw] queues
     #   The queues on the list.
     #   @return [Array<Types::QueueSummary>]
@@ -8584,9 +8334,6 @@ module Aws::Deadline
       include Aws::Structure
     end
 
-    # Shared pagination fields for List operation inputs (nextToken +
-    # maxResults).
-    #
     # @!attribute [rw] farm_id
     #   The farm ID for the session actions list.
     #   @return [String]
@@ -8631,8 +8378,6 @@ module Aws::Deadline
       include Aws::Structure
     end
 
-    # Shared pagination field for List operation outputs (nextToken).
-    #
     # @!attribute [rw] session_actions
     #   The session actions.
     #   @return [Array<Types::SessionActionSummary>]
@@ -8656,9 +8401,6 @@ module Aws::Deadline
       include Aws::Structure
     end
 
-    # Shared pagination fields for List operation inputs (nextToken +
-    # maxResults).
-    #
     # @!attribute [rw] farm_id
     #   The farm ID for the session.
     #   @return [String]
@@ -8693,8 +8435,6 @@ module Aws::Deadline
       include Aws::Structure
     end
 
-    # Shared pagination field for List operation outputs (nextToken).
-    #
     # @!attribute [rw] sessions
     #   The sessions in the response.
     #   @return [Array<Types::WorkerSessionSummary>]
@@ -8713,9 +8453,6 @@ module Aws::Deadline
       include Aws::Structure
     end
 
-    # Shared pagination fields for List operation inputs (nextToken +
-    # maxResults).
-    #
     # @!attribute [rw] farm_id
     #   The farm ID for the list of sessions.
     #   @return [String]
@@ -8750,8 +8487,6 @@ module Aws::Deadline
       include Aws::Structure
     end
 
-    # Shared pagination field for List operation outputs (nextToken).
-    #
     # @!attribute [rw] sessions
     #   The sessions on the list.
     #   @return [Array<Types::SessionSummary>]
@@ -8814,8 +8549,6 @@ module Aws::Deadline
       include Aws::Structure
     end
 
-    # Shared pagination field for List operation outputs (nextToken).
-    #
     # @!attribute [rw] consumers
     #   The consumers on the list.
     #   @return [Array<Types::StepConsumer>]
@@ -8878,8 +8611,6 @@ module Aws::Deadline
       include Aws::Structure
     end
 
-    # Shared pagination field for List operation outputs (nextToken).
-    #
     # @!attribute [rw] dependencies
     #   The dependencies on the list.
     #   @return [Array<Types::StepDependency>]
@@ -8903,9 +8634,6 @@ module Aws::Deadline
       include Aws::Structure
     end
 
-    # Shared pagination fields for List operation inputs (nextToken +
-    # maxResults).
-    #
     # @!attribute [rw] farm_id
     #   The farm ID to include on the list of steps.
     #   @return [String]
@@ -8940,8 +8668,6 @@ module Aws::Deadline
       include Aws::Structure
     end
 
-    # Shared pagination field for List operation outputs (nextToken).
-    #
     # @!attribute [rw] steps
     #   The steps on the list.
     #   @return [Array<Types::StepSummary>]
@@ -8965,9 +8691,6 @@ module Aws::Deadline
       include Aws::Structure
     end
 
-    # Shared pagination fields for List operation inputs (nextToken +
-    # maxResults).
-    #
     # @!attribute [rw] farm_id
     #   The farm ID of the queue's storage profile.
     #   @return [String]
@@ -8997,8 +8720,6 @@ module Aws::Deadline
       include Aws::Structure
     end
 
-    # Shared pagination field for List operation outputs (nextToken).
-    #
     # @!attribute [rw] storage_profiles
     #   The storage profiles in the queue.
     #   @return [Array<Types::StorageProfileSummary>]
@@ -9022,9 +8743,6 @@ module Aws::Deadline
       include Aws::Structure
     end
 
-    # Shared pagination fields for List operation inputs (nextToken +
-    # maxResults).
-    #
     # @!attribute [rw] farm_id
     #   The farm ID of the storage profile.
     #   @return [String]
@@ -9049,8 +8767,6 @@ module Aws::Deadline
       include Aws::Structure
     end
 
-    # Shared pagination field for List operation outputs (nextToken).
-    #
     # @!attribute [rw] storage_profiles
     #   The storage profiles.
     #   @return [Array<Types::StorageProfileSummary>]
@@ -9099,9 +8815,6 @@ module Aws::Deadline
       include Aws::Structure
     end
 
-    # Shared pagination fields for List operation inputs (nextToken +
-    # maxResults).
-    #
     # @!attribute [rw] farm_id
     #   The farm ID connected to the tasks.
     #   @return [String]
@@ -9141,8 +8854,6 @@ module Aws::Deadline
       include Aws::Structure
     end
 
-    # Shared pagination field for List operation outputs (nextToken).
-    #
     # @!attribute [rw] tasks
     #   Tasks for the job.
     #   @return [Array<Types::TaskSummary>]
@@ -9166,9 +8877,6 @@ module Aws::Deadline
       include Aws::Structure
     end
 
-    # Shared pagination fields for List operation inputs (nextToken +
-    # maxResults).
-    #
     # @!attribute [rw] farm_id
     #   The farm ID of the farm that contains the fleet.
     #   @return [String]
@@ -9198,8 +8906,6 @@ module Aws::Deadline
       include Aws::Structure
     end
 
-    # Shared pagination field for List operation outputs (nextToken).
-    #
     # @!attribute [rw] volumes
     #   The volumes on the list.
     #   @return [Array<Types::VolumeSummary>]
@@ -9223,9 +8929,6 @@ module Aws::Deadline
       include Aws::Structure
     end
 
-    # Shared pagination fields for List operation inputs (nextToken +
-    # maxResults).
-    #
     # @!attribute [rw] farm_id
     #   The farm ID connected to the workers.
     #   @return [String]
@@ -9255,8 +8958,6 @@ module Aws::Deadline
       include Aws::Structure
     end
 
-    # Shared pagination field for List operation outputs (nextToken).
-    #
     # @!attribute [rw] workers
     #   The workers on the list.
     #   @return [Array<Types::WorkerSummary>]
@@ -9625,7 +9326,7 @@ module Aws::Deadline
     #
     # @!attribute [rw] last_used_ttl_hours
     #   The number of hours a persistent volume can remain unused before it
-    #   is deleted. The default is 168 (7 days).
+    #   is deleted. The default is 12.
     #   @return [Integer]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/deadline-2023-10-12/PersistentVolumeConfiguration AWS API Documentation
@@ -10213,9 +9914,6 @@ module Aws::Deadline
       include Aws::Structure
     end
 
-    # Shared input fields for all Search operations (filterExpressions,
-    # sortExpressions, itemOffset, pageSize).
-    #
     # @!attribute [rw] farm_id
     #   The farm ID of the job.
     #   @return [String]
@@ -10253,9 +9951,6 @@ module Aws::Deadline
       include Aws::Structure
     end
 
-    # Shared output fields for all Search operations (nextItemOffset,
-    # totalResults).
-    #
     # @!attribute [rw] jobs
     #   The jobs in the search.
     #   @return [Array<Types::JobSearchSummary>]
@@ -10311,9 +10006,6 @@ module Aws::Deadline
       class Unknown < SearchSortExpression; end
     end
 
-    # Shared input fields for all Search operations (filterExpressions,
-    # sortExpressions, itemOffset, pageSize).
-    #
     # @!attribute [rw] farm_id
     #   The farm ID to use for the step search.
     #   @return [String]
@@ -10356,9 +10048,6 @@ module Aws::Deadline
       include Aws::Structure
     end
 
-    # Shared output fields for all Search operations (nextItemOffset,
-    # totalResults).
-    #
     # @!attribute [rw] steps
     #   The steps in the search.
     #   @return [Array<Types::StepSearchSummary>]
@@ -10381,9 +10070,6 @@ module Aws::Deadline
       include Aws::Structure
     end
 
-    # Shared input fields for all Search operations (filterExpressions,
-    # sortExpressions, itemOffset, pageSize).
-    #
     # @!attribute [rw] farm_id
     #   The farm ID of the task.
     #   @return [String]
@@ -10426,9 +10112,6 @@ module Aws::Deadline
       include Aws::Structure
     end
 
-    # Shared output fields for all Search operations (nextItemOffset,
-    # totalResults).
-    #
     # @!attribute [rw] tasks
     #   Tasks in the search.
     #   @return [Array<Types::TaskSearchSummary>]
@@ -10478,9 +10161,6 @@ module Aws::Deadline
       include Aws::Structure
     end
 
-    # Shared input fields for all Search operations (filterExpressions,
-    # sortExpressions, itemOffset, pageSize).
-    #
     # @!attribute [rw] farm_id
     #   The farm ID in the workers search.
     #   @return [String]
@@ -10518,9 +10198,6 @@ module Aws::Deadline
       include Aws::Structure
     end
 
-    # Shared output fields for all Search operations (nextItemOffset,
-    # totalResults).
-    #
     # @!attribute [rw] workers
     #   The workers for the search.
     #   @return [Array<Types::WorkerSearchSummary>]
@@ -10641,10 +10318,20 @@ module Aws::Deadline
     #
     # @!attribute [rw] allowed_instance_types
     #   The allowable Amazon EC2 instance types.
+    #
+    #   <note markdown="1"> If you specify `allowedInstanceTypes`, you can't specify
+    #   `excludedInstanceTypes`.
+    #
+    #    </note>
     #   @return [Array<String>]
     #
     # @!attribute [rw] excluded_instance_types
     #   The instance types to exclude from the fleet.
+    #
+    #   <note markdown="1"> If you specify `excludedInstanceTypes`, you can't specify
+    #   `allowedInstanceTypes`.
+    #
+    #    </note>
     #   @return [Array<String>]
     #
     # @!attribute [rw] custom_amounts
@@ -12517,9 +12204,6 @@ module Aws::Deadline
     #
     class UpdateQueueEnvironmentResponse < Aws::EmptyStructure; end
 
-    # Identifier mixin for queue-fleet association operations. Composes
-    # QueueIdentifierMixin (farmId + queueId) and adds fleetId.
-    #
     # @!attribute [rw] farm_id
     #   The farm ID to update.
     #   @return [String]

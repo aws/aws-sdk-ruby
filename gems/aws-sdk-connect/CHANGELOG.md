@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.290.0 (2026-10-26)
+------------------
+
+* Feature - Amazon Connect now automatically saves agents' in-progress email drafts preserving the message, recipients, and subject during browser or network interruptions so agents can return to the mail and continue instead of starting over.
+
 1.289.0 (2026-10-22)
 ------------------
 

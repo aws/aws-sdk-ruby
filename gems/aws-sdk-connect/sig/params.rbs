@@ -466,7 +466,7 @@ module Aws
       references: Hash[::String, {
           value: ::String?,
           type: ("URL" | "ATTACHMENT" | "CONTACT_ANALYSIS" | "NUMBER" | "STRING" | "DATE" | "EMAIL" | "EMAIL_MESSAGE" | "EMAIL_MESSAGE_PLAIN_TEXT" | "EMAIL_MESSAGE_PLAIN_TEXT_REDACTED" | "EMAIL_MESSAGE_REDACTED"),
-          status: ("AVAILABLE" | "DELETED" | "APPROVED" | "REJECTED" | "PROCESSING" | "FAILED")?,
+          status: ("AVAILABLE" | "DELETED" | "APPROVED" | "REJECTED" | "PROCESSING" | "FAILED" | "DRAFTING")?,
           arn: ::String?,
           status_reason: ::String?
         }]?

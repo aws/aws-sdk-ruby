@@ -97,6 +97,15 @@ module Aws
       class RegistryPolicyNotFoundException < ServiceError
         def message: () -> ::String
       end
+      class ReplicationBackfillInProgressException < ServiceError
+        def message: () -> ::String
+      end
+      class ReplicationBackfillInvalidStatusException < ServiceError
+        def message: () -> ::String
+      end
+      class ReplicationBackfillNotFoundException < ServiceError
+        def message: () -> ::String
+      end
       class RepositoryAlreadyExistsException < ServiceError
         def message: () -> ::String
       end

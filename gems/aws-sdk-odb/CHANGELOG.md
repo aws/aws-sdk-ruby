@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.34.0 (2026-10-26)
+------------------
+
+* Feature - Adds support for Exascale storage with Oracle Exadata Database Service on Dedicated Infrastructure
+
 1.33.0 (2026-10-21)
 ------------------
 

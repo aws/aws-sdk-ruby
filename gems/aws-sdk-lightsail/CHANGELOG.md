@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.141.0 (2026-10-26)
+------------------
+
+* Feature - This release adds Web Application Firewall (WAF) support for Lightsail distribution.
+
 1.140.0 (2026-10-21)
 ------------------
 
