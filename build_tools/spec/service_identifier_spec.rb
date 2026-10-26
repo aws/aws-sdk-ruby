@@ -13,7 +13,7 @@ module BuildTools
   # serviceAbbreviation, which are documentation identifiers. Released names are never reused.
   describe 'service identifiers' do
     manifest = JSON.load_file(ServiceEnumerator::MANIFEST_PATH)
-    deleted = JSON.load_file(File.expand_path('../../deleted_services.json', __dir__)).fetch('services')
+    removed = JSON.load_file(File.expand_path('../../removed_services.json', __dir__)).fetch('services')
 
     def names(enumerator)
       enumerator.map do |service|
@@ -53,11 +53,11 @@ module BuildTools
     end
 
     it 'does not reuse a removed service name' do
-      expect(manifest.keys.map(&:downcase) & deleted.map(&:downcase)).to be_empty
+      expect(manifest.keys.map(&:downcase) & removed.map(&:downcase)).to be_empty
     end
 
-    it 'keeps deleted_services.json sorted and free of duplicates' do
-      expect(deleted).to eq(deleted.uniq(&:downcase).sort_by(&:downcase))
+    it 'keeps removed_services.json sorted and free of duplicates' do
+      expect(removed).to eq(removed.uniq(&:downcase).sort_by(&:downcase))
     end
   end
 end
