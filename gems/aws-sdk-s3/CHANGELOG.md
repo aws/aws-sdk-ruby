@@ -1,6 +1,8 @@
 Unreleased Changes
 ------------------
 
+* Issue - Create and cache S3 Express sessions using the credentials of the requesting client.
+
 1.235.0 (2026-10-20)
 ------------------
 

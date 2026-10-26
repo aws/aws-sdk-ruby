@@ -128,6 +128,73 @@ module Aws
           end
           client.get_object(bucket: bucket, key: 'key')
         end
+
+        def express_client(akid, **options)
+          c = Aws::S3::Client.new(
+            stub_responses: true,
+            region: 'us-east-1',
+            credentials: Aws::Credentials.new(akid, 'secret'),
+            **options
+          )
+          c.stub_responses(:create_session, lambda do |ctx|
+            caller_akid = ctx.config.credentials.access_key_id
+            { credentials: {
+              access_key_id: "s3-#{caller_akid}",
+              secret_access_key: 's3-secret',
+              session_token: "s3-session-#{caller_akid}",
+              expiration: Time.now + 300
+            } }
+          end)
+          c
+        end
+
+        def session_token(client)
+          resp = client.get_object(bucket: 'bucket--use1-az2--x-s3', key: 'key')
+          resp.context.http_request.headers['x-amz-s3session-token']
+        end
+
+        it 'uses separate sessions for clients with different credentials' do
+          tokens = %w[akid-a akid-b].map { |a| session_token(express_client(a)) }
+          expect(tokens).to eq(%w[s3-session-akid-a s3-session-akid-b])
+        end
+
+        it 'uses separate sessions for clients sharing a provider' do
+          provider = Aws::S3::ExpressCredentialsProvider.new
+          clients = %w[akid-a akid-b].map do |a|
+            express_client(a, express_credentials_provider: provider)
+          end
+          expect(clients.map { |c| session_token(c) })
+            .to eq(%w[s3-session-akid-a s3-session-akid-b])
+        end
+
+        it 'uses the requesting client over the provider client' do
+          other = express_client('akid-a')
+          provider = Aws::S3::ExpressCredentialsProvider.new(client: other)
+          client = express_client('akid-b', express_credentials_provider: provider)
+          expect(session_token(client)).to eq('s3-session-akid-b')
+        end
+
+        it 'refreshes sessions with the requesting client' do
+          provider = Aws::S3::ExpressCredentialsProvider.new
+          a = express_client('akid-a', express_credentials_provider: provider)
+          b = express_client('akid-b', express_credentials_provider: provider)
+          session_token(a)
+          credentials = provider.express_credentials_for('bucket--use1-az2--x-s3', b)
+          expect(b).to receive(:create_session).and_call_original
+          expect(a).not_to receive(:create_session)
+          credentials.refresh!
+          expect(session_token(b)).to eq('s3-session-akid-b')
+        end
+
+        it 'supports custom providers that only accept a bucket' do
+          creds = Aws::Credentials.new('custom-akid', 'secret', 'custom-session')
+          provider = Class.new do
+            define_method(:express_credentials_for) { |_bucket| creds }
+            attr_accessor :client
+          end.new
+          client = express_client('akid-a', express_credentials_provider: provider)
+          expect(session_token(client)).to eq('custom-session')
+        end
       end
 
       # does not have http checksum trait, but requires a checksum (md5)
