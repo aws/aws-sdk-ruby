@@ -1,7 +1,7 @@
 Unreleased Changes
 ------------------
 
-* Feature - Reduce object allocation overhead in `Aws::S3::Presigner` by returning `Aws::Response` instances.
+* Feature - Reduce object allocation overhead when generating S3 presigned URLs.
 
 1.235.0 (2026-10-20)
 ------------------
