@@ -1,6 +1,9 @@
 # frozen_string_literal: true
 
 require_relative 'spec_helper'
+# Puts the repo's gems on the load path before the code generator requires aws-sdk-core;
+# otherwise the installed gem loads too, and specs that run later see its plugins twice.
+require_relative '../../gems/aws-sdk-core/spec/shared_spec_helper'
 
 $GEMS_DIR ||= File.expand_path('../../gems', __dir__)
 require_relative '../build_tools'
