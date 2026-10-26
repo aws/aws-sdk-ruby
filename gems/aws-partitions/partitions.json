@@ -676,6 +676,7 @@
           "il-central-1" : { },
           "me-central-1" : { },
           "me-south-1" : { },
+          "mx-central-1" : { },
           "sa-east-1" : { },
           "us-east-1" : { },
           "us-east-2" : { },
@@ -10919,29 +10920,6 @@
           "eu-central-1" : { },
           "eu-north-1" : { },
           "eu-south-2" : { },
-          "eu-west-1" : { },
-          "us-east-1" : { },
-          "us-east-2" : { },
-          "us-west-2" : { }
-        }
-      },
-      "finspace" : {
-        "endpoints" : {
-          "ap-northeast-1" : { },
-          "ap-southeast-1" : { },
-          "ap-southeast-2" : { },
-          "ca-central-1" : { },
-          "eu-central-1" : { },
-          "eu-west-1" : { },
-          "eu-west-2" : { },
-          "us-east-1" : { },
-          "us-east-2" : { },
-          "us-west-2" : { }
-        }
-      },
-      "finspace-api" : {
-        "endpoints" : {
-          "ca-central-1" : { },
           "eu-west-1" : { },
           "us-east-1" : { },
           "us-east-2" : { },
@@ -26634,6 +26612,7 @@
       },
       "textract" : {
         "endpoints" : {
+          "ap-northeast-1" : { },
           "ap-northeast-2" : {
             "variants" : [ {
               "hostname" : "textract.ap-northeast-2.api.aws",
@@ -26676,6 +26655,7 @@
               "tags" : [ "dualstack" ]
             } ]
           },
+          "eu-central-2" : { },
           "eu-south-2" : {
             "variants" : [ {
               "hostname" : "textract.eu-south-2.api.aws",
@@ -26792,20 +26772,6 @@
           "eu-central-1" : { },
           "eu-west-1" : { },
           "eu-west-2" : { },
-          "us-east-1" : { },
-          "us-west-2" : { }
-        }
-      },
-      "tnb" : {
-        "endpoints" : {
-          "ap-northeast-2" : { },
-          "ap-southeast-2" : { },
-          "ca-central-1" : { },
-          "eu-central-1" : { },
-          "eu-north-1" : { },
-          "eu-south-2" : { },
-          "eu-west-3" : { },
-          "sa-east-1" : { },
           "us-east-1" : { },
           "us-west-2" : { }
         }
@@ -36534,6 +36500,12 @@
           "us-iso-west-1" : { }
         }
       },
+      "aps" : {
+        "endpoints" : {
+          "us-iso-east-1" : { },
+          "us-iso-west-1" : { }
+        }
+      },
       "arc-zonal-shift" : {
         "endpoints" : {
           "us-iso-east-1" : { },
@@ -37086,6 +37058,11 @@
         },
         "isRegionalized" : false,
         "partitionEndpoint" : "aws-iso-global"
+      },
+      "kafka" : {
+        "endpoints" : {
+          "us-iso-east-1" : { }
+        }
       },
       "kinesis" : {
         "endpoints" : {

@@ -300,7 +300,7 @@ module Aws
       instance_storage_configs: Array[
         Params::cluster_instance_storage_config
       ]?,
-      on_start_deep_health_checks: Array[("InstanceStress" | "InstanceConnectivity")]?,
+      on_start_deep_health_checks: Array[("InstanceStress" | "InstanceConnectivity" | "MultiNodeTrainingValidation")]?,
       training_plan_arn: ::String?,
       override_vpc_config: {
         security_group_ids: Array[::String],
@@ -352,7 +352,7 @@ module Aws
       instance_storage_configs: Array[
         Params::cluster_instance_storage_config
       ]?,
-      on_start_deep_health_checks: Array[("InstanceStress" | "InstanceConnectivity")]?,
+      on_start_deep_health_checks: Array[("InstanceStress" | "InstanceConnectivity" | "MultiNodeTrainingValidation")]?,
       training_plan_arn: ::String?,
       override_vpc_config: {
         security_group_ids: Array[::String],

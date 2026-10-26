@@ -4709,11 +4709,40 @@ module Aws::GuardDuty
     #   The ARN of the KMS key to use for encryption.
     #   @return [String]
     #
+    # @!attribute [rw] expected_bucket_owner
+    #   The 12-digit Amazon Web Services account ID of the account that owns
+    #   the Amazon S3 bucket specified in the `DestinationArn` parameter.
+    #
+    #   When you provide this value, GuardDuty verifies that the specified
+    #   account owns the bucket before it exports findings. If the account
+    #   ID doesn't match the actual owner of the bucket, GuardDuty doesn't
+    #   export findings to that bucket. This helps prevent GuardDuty from
+    #   exporting your findings to a bucket that a different Amazon Web
+    #   Services account owns (for example, if the original bucket was
+    #   deleted and its name was later claimed by another account). If you
+    #   don't specify this value, GuardDuty doesn't perform this
+    #   verification. GuardDuty strongly recommends that you provide the
+    #   expected bucket owner when possible.
+    #
+    #   When you update a publishing destination, omitting this field leaves
+    #   the currently stored value unchanged. This field appears in the
+    #   response only if it was provided when the publishing destination was
+    #   created or updated.
+    #
+    #   For more information, see [Verifying the Amazon S3 bucket owner][1]
+    #   in the *Amazon GuardDuty User Guide*.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/guardduty/latest/ug/guardduty_exportfindings.html#guardduty-exportfindings-expected-bucket-owner
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/guardduty-2017-11-28/DestinationProperties AWS API Documentation
     #
     class DestinationProperties < Struct.new(
       :destination_arn,
-      :kms_key_arn)
+      :kms_key_arn,
+      :expected_bucket_owner)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -4734,6 +4763,54 @@ module Aws::GuardDuty
     class Detection < Struct.new(
       :anomaly,
       :sequence)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # The requirements for running a Runtime Monitoring custom detection
+    # rule on Amazon EC2.
+    #
+    # @!attribute [rw] min_agent_version
+    #   The minimum GuardDuty agent version required to run the rule on
+    #   Amazon EC2.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/guardduty-2017-11-28/DetectionRuleEc2Requirements AWS API Documentation
+    #
+    class DetectionRuleEc2Requirements < Struct.new(
+      :min_agent_version)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # The requirements for running a Runtime Monitoring custom detection
+    # rule on Amazon ECS with the Fargate launch type.
+    #
+    # @!attribute [rw] min_agent_version
+    #   The minimum GuardDuty agent version required to run the rule on
+    #   Amazon ECS with the Fargate launch type.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/guardduty-2017-11-28/DetectionRuleEcsFargateRequirements AWS API Documentation
+    #
+    class DetectionRuleEcsFargateRequirements < Struct.new(
+      :min_agent_version)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # The requirements for running a Runtime Monitoring custom detection
+    # rule on Amazon EKS.
+    #
+    # @!attribute [rw] min_agent_version
+    #   The minimum GuardDuty agent version required to run the rule on
+    #   Amazon EKS.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/guardduty-2017-11-28/DetectionRuleEksRequirements AWS API Documentation
+    #
+    class DetectionRuleEksRequirements < Struct.new(
+      :min_agent_version)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -4864,6 +4941,53 @@ module Aws::GuardDuty
       :created_at,
       :updated_at,
       :expires_at)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Contains Runtime Monitoring-specific details for a custom detection
+    # rule.
+    #
+    # @!attribute [rw] platforms
+    #   The platforms on which the rule can run. The presence of a platform
+    #   member indicates that the rule is supported on that platform; the
+    #   absence of a member indicates that the rule cannot run on that
+    #   platform at any agent version.
+    #   @return [Types::DetectionRuleRuntimePlatforms]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/guardduty-2017-11-28/DetectionRuleRuntimeMonitoringDetails AWS API Documentation
+    #
+    class DetectionRuleRuntimeMonitoringDetails < Struct.new(
+      :platforms)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # The platforms on which a Runtime Monitoring custom detection rule can
+    # run. A member's presence is the support statement: when present, the
+    # rule runs on that platform and `minAgentVersion` is the minimum
+    # GuardDuty agent version required there. When absent, the rule cannot
+    # run on that platform at any agent version.
+    #
+    # @!attribute [rw] eks
+    #   The requirements for running the rule on Amazon EKS.
+    #   @return [Types::DetectionRuleEksRequirements]
+    #
+    # @!attribute [rw] ec2
+    #   The requirements for running the rule on Amazon EC2.
+    #   @return [Types::DetectionRuleEc2Requirements]
+    #
+    # @!attribute [rw] ecs_fargate
+    #   The requirements for running the rule on Amazon ECS with the Fargate
+    #   launch type.
+    #   @return [Types::DetectionRuleEcsFargateRequirements]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/guardduty-2017-11-28/DetectionRuleRuntimePlatforms AWS API Documentation
+    #
+    class DetectionRuleRuntimePlatforms < Struct.new(
+      :eks,
+      :ec2,
+      :ecs_fargate)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -5888,6 +6012,10 @@ module Aws::GuardDuty
     #   finding.
     #   @return [String]
     #
+    # @!attribute [rw] custom_detection_rule_name
+    #   The name of the custom detection rule that generated this finding.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/guardduty-2017-11-28/Finding AWS API Documentation
     #
     class Finding < Struct.new(
@@ -5906,7 +6034,8 @@ module Aws::GuardDuty
       :title,
       :type,
       :updated_at,
-      :associated_attack_sequence_arn)
+      :associated_attack_sequence_arn,
+      :custom_detection_rule_name)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -11804,6 +11933,12 @@ module Aws::GuardDuty
     #   The schema version used by the rule definition.
     #   @return [String]
     #
+    # @!attribute [rw] runtime_monitoring_details
+    #   Runtime Monitoring-specific details for the rule, including the
+    #   platforms on which the rule can run and the minimum GuardDuty agent
+    #   version required on each.
+    #   @return [Types::DetectionRuleRuntimeMonitoringDetails]
+    #
     # @!attribute [rw] created_at
     #   The timestamp when the rule was created.
     #   @return [Time]
@@ -11827,6 +11962,7 @@ module Aws::GuardDuty
       :definition,
       :language,
       :schema,
+      :runtime_monitoring_details,
       :created_at,
       :updated_at)
       SENSITIVE = []

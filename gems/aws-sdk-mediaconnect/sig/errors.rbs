@@ -11,49 +11,55 @@ module Aws
       class ServiceError < ::Aws::Errors::ServiceError
       end
 
-      class AddFlowOutputs420Exception < ::Aws::Errors::ServiceError
+      class AddFlowOutputs420Exception < ServiceError
         def message: () -> ::String
       end
-      class BadRequestException < ::Aws::Errors::ServiceError
+      class BadRequestException < ServiceError
         def message: () -> ::String
       end
-      class ConflictException < ::Aws::Errors::ServiceError
+      class ConflictException < ServiceError
         def message: () -> ::String
       end
-      class CreateBridge420Exception < ::Aws::Errors::ServiceError
+      class CreateBridge420Exception < ServiceError
         def message: () -> ::String
       end
-      class CreateFlow420Exception < ::Aws::Errors::ServiceError
+      class CreateFlow420Exception < ServiceError
         def message: () -> ::String
       end
-      class CreateGateway420Exception < ::Aws::Errors::ServiceError
+      class CreateGateway420Exception < ServiceError
         def message: () -> ::String
       end
-      class ForbiddenException < ::Aws::Errors::ServiceError
+      class DestinationEndpointServiceQuotaExceededException < ServiceError
         def message: () -> ::String
       end
-      class GrantFlowEntitlements420Exception < ::Aws::Errors::ServiceError
+      class ForbiddenException < ServiceError
         def message: () -> ::String
       end
-      class InternalServerErrorException < ::Aws::Errors::ServiceError
+      class GrantFlowEntitlements420Exception < ServiceError
         def message: () -> ::String
       end
-      class NotFoundException < ::Aws::Errors::ServiceError
+      class InternalServerErrorException < ServiceError
         def message: () -> ::String
       end
-      class RouterInputServiceQuotaExceededException < ::Aws::Errors::ServiceError
+      class NotFoundException < ServiceError
         def message: () -> ::String
       end
-      class RouterNetworkInterfaceServiceQuotaExceededException < ::Aws::Errors::ServiceError
+      class RouterInputServiceQuotaExceededException < ServiceError
         def message: () -> ::String
       end
-      class RouterOutputServiceQuotaExceededException < ::Aws::Errors::ServiceError
+      class RouterNetworkInterfaceServiceQuotaExceededException < ServiceError
         def message: () -> ::String
       end
-      class ServiceUnavailableException < ::Aws::Errors::ServiceError
+      class RouterOutputServiceQuotaExceededException < ServiceError
         def message: () -> ::String
       end
-      class TooManyRequestsException < ::Aws::Errors::ServiceError
+      class ServiceUnavailableException < ServiceError
+        def message: () -> ::String
+      end
+      class SourceEndpointServiceQuotaExceededException < ServiceError
+        def message: () -> ::String
+      end
+      class TooManyRequestsException < ServiceError
         def message: () -> ::String
       end
     end

@@ -651,6 +651,12 @@ module Aws::IVS
     #   ARN of the ad configuration associated with the channel.
     #   @return [String]
     #
+    # @!attribute [rw] failover_slate_configuration_arn
+    #   Failover-slate-configuration ARN. A valid ARN value here both
+    #   specifies the ARN and enables failover slate. Default: "" (empty
+    #   string, no failover slate configuration is applied).
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ivs-2020-07-14/Channel AWS API Documentation
     #
     class Channel < Struct.new(
@@ -669,7 +675,8 @@ module Aws::IVS
       :playback_restriction_policy_arn,
       :multitrack_input_configuration,
       :container_format,
-      :ad_configuration_arn)
+      :ad_configuration_arn,
+      :failover_slate_configuration_arn)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -793,6 +800,12 @@ module Aws::IVS
     #   ARN of the ad configuration associated with the channel.
     #   @return [String]
     #
+    # @!attribute [rw] failover_slate_configuration_arn
+    #   Failover-slate-configuration ARN. A valid ARN value here both
+    #   specifies the ARN and enables failover slate. Default: "" (empty
+    #   string, no failover slate configuration is applied).
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ivs-2020-07-14/ChannelSummary AWS API Documentation
     #
     class ChannelSummary < Struct.new(
@@ -806,7 +819,8 @@ module Aws::IVS
       :type,
       :preset,
       :playback_restriction_policy_arn,
-      :ad_configuration_arn)
+      :ad_configuration_arn,
+      :failover_slate_configuration_arn)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -994,6 +1008,12 @@ module Aws::IVS
     #   ARN of the ad configuration associated with the channel.
     #   @return [String]
     #
+    # @!attribute [rw] failover_slate_configuration_arn
+    #   Failover-slate-configuration ARN. A valid ARN value here both
+    #   specifies the ARN and enables failover slate. Default: "" (empty
+    #   string, no failover slate configuration is applied).
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ivs-2020-07-14/CreateChannelRequest AWS API Documentation
     #
     class CreateChannelRequest < Struct.new(
@@ -1008,7 +1028,8 @@ module Aws::IVS
       :playback_restriction_policy_arn,
       :multitrack_input_configuration,
       :container_format,
-      :ad_configuration_arn)
+      :ad_configuration_arn,
+      :failover_slate_configuration_arn)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -1024,6 +1045,63 @@ module Aws::IVS
     class CreateChannelResponse < Struct.new(
       :channel,
       :stream_key)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] name
+    #   Failover-slate-configuration name. The value does not need to be
+    #   unique.
+    #   @return [String]
+    #
+    # @!attribute [rw] activation_threshold_seconds
+    #   Number of seconds of ingest interruption before the failover slate
+    #   activates. Minimum: `3`. Maximum: `5`. Default: `3`.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] min_slate_display_seconds
+    #   Minimum number of seconds that the failover slate displays after
+    #   activation. Minimum: `3`. Maximum: `10`. Default: `3`.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] max_slate_display_seconds
+    #   Maximum number of seconds that the failover slate displays. Minimum:
+    #   `60`. Maximum: `180`. Default: `60`.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] tags
+    #   Array of 1-50 maps, each of the form `string:string (key:value)`.
+    #   See [Best practices and strategies][1] in *Tagging Amazon Web
+    #   Services Resources and Tag Editor* for details, including
+    #   restrictions that apply to tags and "Tag naming limits and
+    #   requirements"; Amazon IVS has no service-specific constraints
+    #   beyond what is documented there.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/tag-editor/latest/userguide/best-practices-and-strats.html
+    #   @return [Hash<String,String>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ivs-2020-07-14/CreateFailoverSlateConfigurationRequest AWS API Documentation
+    #
+    class CreateFailoverSlateConfigurationRequest < Struct.new(
+      :name,
+      :activation_threshold_seconds,
+      :min_slate_display_seconds,
+      :max_slate_display_seconds,
+      :tags)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] failover_slate_configuration
+    #   The failover slate configuration that was created.
+    #   @return [Types::FailoverSlateConfiguration]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ivs-2020-07-14/CreateFailoverSlateConfigurationResponse AWS API Documentation
+    #
+    class CreateFailoverSlateConfigurationResponse < Struct.new(
+      :failover_slate_configuration)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -1224,6 +1302,18 @@ module Aws::IVS
     end
 
     # @!attribute [rw] arn
+    #   ARN of the failover slate configuration to be deleted.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ivs-2020-07-14/DeleteFailoverSlateConfigurationRequest AWS API Documentation
+    #
+    class DeleteFailoverSlateConfigurationRequest < Struct.new(
+      :arn)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] arn
     #   ARN of the key pair to be deleted.
     #   @return [String]
     #
@@ -1293,6 +1383,118 @@ module Aws::IVS
       include Aws::Structure
     end
 
+    # Object specifying a failover slate configuration.
+    #
+    # @!attribute [rw] arn
+    #   Failover-slate-configuration ARN.
+    #   @return [String]
+    #
+    # @!attribute [rw] name
+    #   Failover-slate-configuration name.
+    #   @return [String]
+    #
+    # @!attribute [rw] activation_threshold_seconds
+    #   Number of seconds of ingest interruption before the failover slate
+    #   activates. Minimum: `3`. Maximum: `5`. Default: `3`.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] min_slate_display_seconds
+    #   Minimum number of seconds that the failover slate displays after
+    #   activation. Minimum: `3`. Maximum: `10`. Default: `3`.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] max_slate_display_seconds
+    #   Maximum number of seconds that the failover slate displays. Minimum:
+    #   `60`. Maximum: `180`. Default: `60`.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] state
+    #   Current state of the failover slate configuration.
+    #   @return [String]
+    #
+    # @!attribute [rw] tags
+    #   Tags attached to the resource. Array of 1-50 maps, each of the form
+    #   `string:string (key:value)`. See [Best practices and strategies][1]
+    #   in *Tagging Amazon Web Services Resources and Tag Editor* for
+    #   details, including restrictions that apply to tags and "Tag naming
+    #   limits and requirements"; Amazon IVS has no service-specific
+    #   constraints beyond what is documented there.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/tag-editor/latest/userguide/best-practices-and-strats.html
+    #   @return [Hash<String,String>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ivs-2020-07-14/FailoverSlateConfiguration AWS API Documentation
+    #
+    class FailoverSlateConfiguration < Struct.new(
+      :arn,
+      :name,
+      :activation_threshold_seconds,
+      :min_slate_display_seconds,
+      :max_slate_display_seconds,
+      :state,
+      :tags)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Summary information about a failover slate configuration.
+    #
+    # @!attribute [rw] arn
+    #   Failover-slate-configuration ARN.
+    #   @return [String]
+    #
+    # @!attribute [rw] name
+    #   Failover-slate-configuration name.
+    #   @return [String]
+    #
+    # @!attribute [rw] activation_threshold_seconds
+    #   Number of seconds of ingest interruption before the failover slate
+    #   activates. Minimum: `3`. Maximum: `5`. Default: `3`.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] min_slate_display_seconds
+    #   Minimum number of seconds that the failover slate displays after
+    #   activation. Minimum: `3`. Maximum: `10`. Default: `3`.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] max_slate_display_seconds
+    #   Maximum number of seconds that the failover slate displays. Minimum:
+    #   `60`. Maximum: `180`. Default: `60`.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] state
+    #   Current state of the failover slate configuration.
+    #   @return [String]
+    #
+    # @!attribute [rw] tags
+    #   Tags attached to the resource. Array of 1-50 maps, each of the form
+    #   `string:string (key:value)`. See [Best practices and strategies][1]
+    #   in *Tagging Amazon Web Services Resources and Tag Editor* for
+    #   details, including restrictions that apply to tags and "Tag naming
+    #   limits and requirements"; Amazon IVS has no service-specific
+    #   constraints beyond what is documented there.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/tag-editor/latest/userguide/best-practices-and-strats.html
+    #   @return [Hash<String,String>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ivs-2020-07-14/FailoverSlateConfigurationSummary AWS API Documentation
+    #
+    class FailoverSlateConfigurationSummary < Struct.new(
+      :arn,
+      :name,
+      :activation_threshold_seconds,
+      :min_slate_display_seconds,
+      :max_slate_display_seconds,
+      :state,
+      :tags)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # @!attribute [rw] arn
     #   ARN of the ad configuration to be retrieved.
     #   @return [String]
@@ -1335,6 +1537,30 @@ module Aws::IVS
     #
     class GetChannelResponse < Struct.new(
       :channel)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] arn
+    #   ARN of the failover slate configuration to be retrieved.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ivs-2020-07-14/GetFailoverSlateConfigurationRequest AWS API Documentation
+    #
+    class GetFailoverSlateConfigurationRequest < Struct.new(
+      :arn)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] failover_slate_configuration
+    #   The failover slate configuration that was retrieved.
+    #   @return [Types::FailoverSlateConfiguration]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ivs-2020-07-14/GetFailoverSlateConfigurationResponse AWS API Documentation
+    #
+    class GetFailoverSlateConfigurationResponse < Struct.new(
+      :failover_slate_configuration)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -1722,6 +1948,11 @@ module Aws::IVS
     #   ARN.
     #   @return [String]
     #
+    # @!attribute [rw] filter_by_failover_slate_configuration_arn
+    #   Filters the channel list to match the specified
+    #   failover-slate-configuration ARN.
+    #   @return [String]
+    #
     # @!attribute [rw] next_token
     #   The first channel to retrieve. This is used for pagination; see the
     #   `nextToken` response field.
@@ -1738,6 +1969,7 @@ module Aws::IVS
       :filter_by_recording_configuration_arn,
       :filter_by_playback_restriction_policy_arn,
       :filter_by_ad_configuration_arn,
+      :filter_by_failover_slate_configuration_arn,
       :next_token,
       :max_results)
       SENSITIVE = []
@@ -1757,6 +1989,43 @@ module Aws::IVS
     #
     class ListChannelsResponse < Struct.new(
       :channels,
+      :next_token)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] next_token
+    #   The first failover slate configuration to retrieve. This is used for
+    #   pagination; see the `nextToken` response field.
+    #   @return [String]
+    #
+    # @!attribute [rw] max_results
+    #   Maximum number of failover slate configurations to return. Default:
+    #   your service quota or 100, whichever is smaller.
+    #   @return [Integer]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ivs-2020-07-14/ListFailoverSlateConfigurationsRequest AWS API Documentation
+    #
+    class ListFailoverSlateConfigurationsRequest < Struct.new(
+      :next_token,
+      :max_results)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] failover_slate_configurations
+    #   List of the matching failover slate configurations.
+    #   @return [Array<Types::FailoverSlateConfigurationSummary>]
+    #
+    # @!attribute [rw] next_token
+    #   If there are more failover slate configurations than `maxResults`,
+    #   use `nextToken` in the request to get the next set.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ivs-2020-07-14/ListFailoverSlateConfigurationsResponse AWS API Documentation
+    #
+    class ListFailoverSlateConfigurationsResponse < Struct.new(
+      :failover_slate_configurations,
       :next_token)
       SENSITIVE = []
       include Aws::Structure
@@ -2988,6 +3257,11 @@ module Aws::IVS
     #   [1]: https://docs.aws.amazon.com/ivs/latest/userguide/eventbridge.html
     #   @return [Array<Types::StreamEvent>]
     #
+    # @!attribute [rw] failover_slate_configuration
+    #   The properties of the failover slate configuration at the time of
+    #   going live.
+    #   @return [Types::FailoverSlateConfiguration]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ivs-2020-07-14/StreamSession AWS API Documentation
     #
     class StreamSession < Struct.new(
@@ -2998,7 +3272,8 @@ module Aws::IVS
       :ingest_configuration,
       :ingest_configurations,
       :recording_configuration,
-      :truncated_events)
+      :truncated_events,
+      :failover_slate_configuration)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -3415,6 +3690,12 @@ module Aws::IVS
     #   ARN of the ad configuration associated with the channel.
     #   @return [String]
     #
+    # @!attribute [rw] failover_slate_configuration_arn
+    #   Failover-slate-configuration ARN. A valid ARN value here both
+    #   specifies the ARN and enables failover slate. If this is set to an
+    #   empty string, failover slate configuration is disabled.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ivs-2020-07-14/UpdateChannelRequest AWS API Documentation
     #
     class UpdateChannelRequest < Struct.new(
@@ -3429,7 +3710,8 @@ module Aws::IVS
       :playback_restriction_policy_arn,
       :multitrack_input_configuration,
       :container_format,
-      :ad_configuration_arn)
+      :ad_configuration_arn,
+      :failover_slate_configuration_arn)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -3442,6 +3724,54 @@ module Aws::IVS
     #
     class UpdateChannelResponse < Struct.new(
       :channel)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] arn
+    #   ARN of the failover slate configuration to be updated.
+    #   @return [String]
+    #
+    # @!attribute [rw] name
+    #   Failover-slate-configuration name. The value does not need to be
+    #   unique.
+    #   @return [String]
+    #
+    # @!attribute [rw] activation_threshold_seconds
+    #   Number of seconds of ingest interruption before the failover slate
+    #   activates. Minimum: `3`. Maximum: `5`. Default: `3`.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] min_slate_display_seconds
+    #   Minimum number of seconds that the failover slate displays after
+    #   activation. Minimum: `3`. Maximum: `10`. Default: `3`.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] max_slate_display_seconds
+    #   Maximum number of seconds that the failover slate displays. Minimum:
+    #   `60`. Maximum: `180`. Default: `60`.
+    #   @return [Integer]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ivs-2020-07-14/UpdateFailoverSlateConfigurationRequest AWS API Documentation
+    #
+    class UpdateFailoverSlateConfigurationRequest < Struct.new(
+      :arn,
+      :name,
+      :activation_threshold_seconds,
+      :min_slate_display_seconds,
+      :max_slate_display_seconds)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] failover_slate_configuration
+    #   Object specifying the updated failover slate configuration.
+    #   @return [Types::FailoverSlateConfiguration]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ivs-2020-07-14/UpdateFailoverSlateConfigurationResponse AWS API Documentation
+    #
+    class UpdateFailoverSlateConfigurationResponse < Struct.new(
+      :failover_slate_configuration)
       SENSITIVE = []
       include Aws::Structure
     end

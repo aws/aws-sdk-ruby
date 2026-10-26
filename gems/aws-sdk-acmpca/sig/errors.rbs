@@ -11,61 +11,61 @@ module Aws
       class ServiceError < ::Aws::Errors::ServiceError
       end
 
-      class CertificateMismatchException < ::Aws::Errors::ServiceError
+      class CertificateMismatchException < ServiceError
         def message: () -> ::String
       end
-      class ConcurrentModificationException < ::Aws::Errors::ServiceError
+      class ConcurrentModificationException < ServiceError
         def message: () -> ::String
       end
-      class InvalidArgsException < ::Aws::Errors::ServiceError
+      class InvalidArgsException < ServiceError
         def message: () -> ::String
       end
-      class InvalidArnException < ::Aws::Errors::ServiceError
+      class InvalidArnException < ServiceError
         def message: () -> ::String
       end
-      class InvalidNextTokenException < ::Aws::Errors::ServiceError
+      class InvalidNextTokenException < ServiceError
         def message: () -> ::String
       end
-      class InvalidPolicyException < ::Aws::Errors::ServiceError
+      class InvalidPolicyException < ServiceError
         def message: () -> ::String
       end
-      class InvalidRequestException < ::Aws::Errors::ServiceError
+      class InvalidRequestException < ServiceError
         def message: () -> ::String
       end
-      class InvalidStateException < ::Aws::Errors::ServiceError
+      class InvalidStateException < ServiceError
         def message: () -> ::String
       end
-      class InvalidTagException < ::Aws::Errors::ServiceError
+      class InvalidTagException < ServiceError
         def message: () -> ::String
       end
-      class LimitExceededException < ::Aws::Errors::ServiceError
+      class LimitExceededException < ServiceError
         def message: () -> ::String
       end
-      class LockoutPreventedException < ::Aws::Errors::ServiceError
+      class LockoutPreventedException < ServiceError
         def message: () -> ::String
       end
-      class MalformedCSRException < ::Aws::Errors::ServiceError
+      class MalformedCSRException < ServiceError
         def message: () -> ::String
       end
-      class MalformedCertificateException < ::Aws::Errors::ServiceError
+      class MalformedCertificateException < ServiceError
         def message: () -> ::String
       end
-      class PermissionAlreadyExistsException < ::Aws::Errors::ServiceError
+      class PermissionAlreadyExistsException < ServiceError
         def message: () -> ::String
       end
-      class RequestAlreadyProcessedException < ::Aws::Errors::ServiceError
+      class RequestAlreadyProcessedException < ServiceError
         def message: () -> ::String
       end
-      class RequestFailedException < ::Aws::Errors::ServiceError
+      class RequestFailedException < ServiceError
         def message: () -> ::String
       end
-      class RequestInProgressException < ::Aws::Errors::ServiceError
+      class RequestInProgressException < ServiceError
         def message: () -> ::String
       end
-      class ResourceNotFoundException < ::Aws::Errors::ServiceError
+      class ResourceNotFoundException < ServiceError
         def message: () -> ::String
       end
-      class TooManyTagsException < ::Aws::Errors::ServiceError
+      class TooManyTagsException < ServiceError
         def message: () -> ::String
       end
     end

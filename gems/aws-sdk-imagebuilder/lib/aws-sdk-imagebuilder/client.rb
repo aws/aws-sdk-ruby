@@ -199,12 +199,19 @@ module Aws::Imagebuilder
     #     the required types.
     #
     #   @option options [Boolean] :correct_clock_skew (true)
-    #     Used only in `standard` and `adaptive` retry modes. Specifies whether to apply
-    #     a clock skew correction and retry requests with skewed client clocks.
+    #     Used only in `standard` and `adaptive` retry modes. Specifies whether
+    #     to apply a clock skew correction and retry requests with skewed client
+    #     clocks. Takes effect only when `disable_clock_skew_correction` is not set.
     #
     #   @option options [String] :defaults_mode ("legacy")
     #     See {Aws::DefaultsModeConfiguration} for a list of the
     #     accepted modes and the configuration defaults that are included.
+    #
+    #   @option options [Boolean] :disable_clock_skew_correction
+    #     Used only in `standard` and `adaptive` retry modes. When `true`, the
+    #     SDK does not apply a clock skew correction, does not update its stored
+    #     skew from responses, and does not retry clock skew errors. Clock skew
+    #     correction is enabled by default.
     #
     #   @option options [Boolean] :disable_host_prefix_injection (false)
     #     When `true`, the SDK will not prepend the modeled host prefix to the endpoint.
@@ -2102,6 +2109,11 @@ module Aws::Imagebuilder
     #   your AMI if the build or test phase of your workflow fails. Defaults
     #   to `true`.
     #
+    # @option params [Boolean] :terminate_instance_on_completion
+    #   Specifies whether Image Builder terminates build and test instances
+    #   when image creation ends without a failure (success, cancellation, or
+    #   expiration). Defaults to `true`.
+    #
     # @option params [String] :sns_topic_arn
     #   The Amazon Resource Name (ARN) of the SNS topic to which Image Builder
     #   sends image build event notifications. Specify a standard topic. Image
@@ -2151,6 +2163,21 @@ module Aws::Imagebuilder
     #   instances that Image Builder launches during image creation run. These
     #   settings don't affect instances that you launch from the output
     #   image.
+    #
+    # @option params [Types::ParentInstanceConfiguration] :parent_instance
+    #   The Amazon EC2 Auto Scaling group that Image Builder takes the build
+    #   instance from, instead of launching a new instance. This applies only
+    #   to the build phase.
+    #
+    #   To use this feature, the execution role for the build must have
+    #   permissions to describe the Auto Scaling group, tag the instance while
+    #   it's still in the group, and detach it from the group. For more
+    #   information, see [Build on an instance from an Auto Scaling group][1]
+    #   in the *EC2 Image Builder User Guide*.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/imagebuilder/latest/userguide/infra-config-parent-instance.html
     #
     # @option params [required, String] :client_token
     #   A unique, case-sensitive identifier you provide to ensure that the
@@ -2251,6 +2278,7 @@ module Aws::Imagebuilder
     #     },
     #     key_pair: "NonEmptyString",
     #     terminate_instance_on_failure: false,
+    #     terminate_instance_on_completion: false,
     #     sns_topic_arn: "SnsTopicArn",
     #     resource_tags: {
     #       "TagKey" => "TagValue",
@@ -2267,6 +2295,12 @@ module Aws::Imagebuilder
     #       tenancy: "default", # accepts default, dedicated, host
     #       host_id: "NonEmptyString",
     #       host_resource_group_arn: "NonEmptyString",
+    #     },
+    #     parent_instance: {
+    #       auto_scaling_group: { # required
+    #         name: "NonEmptyString", # required
+    #         capacity_wait_timeout_seconds: 1,
+    #       },
     #     },
     #     client_token: "ClientToken", # required
     #     dry_run: false,
@@ -3844,6 +3878,9 @@ module Aws::Imagebuilder
     #   resp.image.infrastructure_configuration.placement.tenancy #=> String, one of "default", "dedicated", "host"
     #   resp.image.infrastructure_configuration.placement.host_id #=> String
     #   resp.image.infrastructure_configuration.placement.host_resource_group_arn #=> String
+    #   resp.image.infrastructure_configuration.terminate_instance_on_completion #=> Boolean
+    #   resp.image.infrastructure_configuration.parent_instance.auto_scaling_group.name #=> String
+    #   resp.image.infrastructure_configuration.parent_instance.auto_scaling_group.capacity_wait_timeout_seconds #=> Integer
     #   resp.image.distribution_configuration.arn #=> String
     #   resp.image.distribution_configuration.name #=> String
     #   resp.image.distribution_configuration.description #=> String
@@ -4356,6 +4393,9 @@ module Aws::Imagebuilder
     #   resp.infrastructure_configuration.placement.tenancy #=> String, one of "default", "dedicated", "host"
     #   resp.infrastructure_configuration.placement.host_id #=> String
     #   resp.infrastructure_configuration.placement.host_resource_group_arn #=> String
+    #   resp.infrastructure_configuration.terminate_instance_on_completion #=> Boolean
+    #   resp.infrastructure_configuration.parent_instance.auto_scaling_group.name #=> String
+    #   resp.infrastructure_configuration.parent_instance.auto_scaling_group.capacity_wait_timeout_seconds #=> Integer
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/imagebuilder-2019-12-02/GetInfrastructureConfiguration AWS API Documentation
     #
@@ -8963,6 +9003,11 @@ module Aws::Imagebuilder
     #   your AMI if the build or test phase of your workflow fails. Defaults
     #   to `true`.
     #
+    # @option params [Boolean] :terminate_instance_on_completion
+    #   Specifies whether Image Builder terminates build and test instances
+    #   when image creation ends without a failure (success, cancellation, or
+    #   expiration). Defaults to `true`.
+    #
     # @option params [String] :sns_topic_arn
     #   The Amazon Resource Name (ARN) of the SNS topic to which Image Builder
     #   sends image build event notifications. Specify a standard topic. Image
@@ -9007,6 +9052,21 @@ module Aws::Imagebuilder
     #   instances that Image Builder launches during image creation run. These
     #   settings don't affect instances that you launch from the output
     #   image.
+    #
+    # @option params [Types::ParentInstanceConfiguration] :parent_instance
+    #   The Amazon EC2 Auto Scaling group that Image Builder takes the build
+    #   instance from, instead of launching a new instance. This applies only
+    #   to the build phase.
+    #
+    #   To use this feature, the execution role for the build must have
+    #   permissions to describe the Auto Scaling group, tag the instance while
+    #   it's still in the group, and detach it from the group. For more
+    #   information, see [Build on an instance from an Auto Scaling group][1]
+    #   in the *EC2 Image Builder User Guide*.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/imagebuilder/latest/userguide/infra-config-parent-instance.html
     #
     # @option params [required, String] :client_token
     #   A unique, case-sensitive identifier you provide to ensure that the
@@ -9069,6 +9129,7 @@ module Aws::Imagebuilder
     #     },
     #     key_pair: "NonEmptyString",
     #     terminate_instance_on_failure: false,
+    #     terminate_instance_on_completion: false,
     #     sns_topic_arn: "SnsTopicArn",
     #     resource_tags: {
     #       "TagKey" => "TagValue",
@@ -9082,6 +9143,12 @@ module Aws::Imagebuilder
     #       tenancy: "default", # accepts default, dedicated, host
     #       host_id: "NonEmptyString",
     #       host_resource_group_arn: "NonEmptyString",
+    #     },
+    #     parent_instance: {
+    #       auto_scaling_group: { # required
+    #         name: "NonEmptyString", # required
+    #         capacity_wait_timeout_seconds: 1,
+    #       },
     #     },
     #     client_token: "ClientToken", # required
     #   })
@@ -9284,7 +9351,7 @@ module Aws::Imagebuilder
         tracer: tracer
       )
       context[:gem_name] = 'aws-sdk-imagebuilder'
-      context[:gem_version] = '1.113.0'
+      context[:gem_version] = '1.117.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

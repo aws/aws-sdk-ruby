@@ -211,12 +211,19 @@ module Aws::DynamoDB
     #     the required types.
     #
     #   @option options [Boolean] :correct_clock_skew (true)
-    #     Used only in `standard` and `adaptive` retry modes. Specifies whether to apply
-    #     a clock skew correction and retry requests with skewed client clocks.
+    #     Used only in `standard` and `adaptive` retry modes. Specifies whether
+    #     to apply a clock skew correction and retry requests with skewed client
+    #     clocks. Takes effect only when `disable_clock_skew_correction` is not set.
     #
     #   @option options [String] :defaults_mode ("legacy")
     #     See {Aws::DefaultsModeConfiguration} for a list of the
     #     accepted modes and the configuration defaults that are included.
+    #
+    #   @option options [Boolean] :disable_clock_skew_correction
+    #     Used only in `standard` and `adaptive` retry modes. When `true`, the
+    #     SDK does not apply a clock skew correction, does not update its stored
+    #     skew from responses, and does not retry clock skew errors. Clock skew
+    #     correction is enabled by default.
     #
     #   @option options [Boolean] :disable_host_prefix_injection (false)
     #     When `true`, the SDK will not prepend the modeled host prefix to the endpoint.
@@ -1948,6 +1955,7 @@ module Aws::DynamoDB
     #   resp.table_description.table_class_summary.table_class #=> String, one of "STANDARD", "STANDARD_INFREQUENT_ACCESS"
     #   resp.table_description.table_class_summary.last_update_date_time #=> Time
     #   resp.table_description.deletion_protection_enabled #=> Boolean
+    #   resp.table_description.disassociation_protection_enabled #=> Boolean
     #   resp.table_description.on_demand_throughput.max_read_request_units #=> Integer
     #   resp.table_description.on_demand_throughput.max_write_request_units #=> Integer
     #   resp.table_description.warm_throughput.read_units_per_second #=> Integer
@@ -2587,6 +2595,7 @@ module Aws::DynamoDB
     #   resp.table_description.table_class_summary.table_class #=> String, one of "STANDARD", "STANDARD_INFREQUENT_ACCESS"
     #   resp.table_description.table_class_summary.last_update_date_time #=> Time
     #   resp.table_description.deletion_protection_enabled #=> Boolean
+    #   resp.table_description.disassociation_protection_enabled #=> Boolean
     #   resp.table_description.on_demand_throughput.max_read_request_units #=> Integer
     #   resp.table_description.on_demand_throughput.max_write_request_units #=> Integer
     #   resp.table_description.warm_throughput.read_units_per_second #=> Integer
@@ -3490,6 +3499,7 @@ module Aws::DynamoDB
     #   resp.table.table_class_summary.table_class #=> String, one of "STANDARD", "STANDARD_INFREQUENT_ACCESS"
     #   resp.table.table_class_summary.last_update_date_time #=> Time
     #   resp.table.deletion_protection_enabled #=> Boolean
+    #   resp.table.disassociation_protection_enabled #=> Boolean
     #   resp.table.on_demand_throughput.max_read_request_units #=> Integer
     #   resp.table.on_demand_throughput.max_write_request_units #=> Integer
     #   resp.table.warm_throughput.read_units_per_second #=> Integer
@@ -6225,6 +6235,7 @@ module Aws::DynamoDB
     #   resp.table_description.table_class_summary.table_class #=> String, one of "STANDARD", "STANDARD_INFREQUENT_ACCESS"
     #   resp.table_description.table_class_summary.last_update_date_time #=> Time
     #   resp.table_description.deletion_protection_enabled #=> Boolean
+    #   resp.table_description.disassociation_protection_enabled #=> Boolean
     #   resp.table_description.on_demand_throughput.max_read_request_units #=> Integer
     #   resp.table_description.on_demand_throughput.max_write_request_units #=> Integer
     #   resp.table_description.warm_throughput.read_units_per_second #=> Integer
@@ -6545,6 +6556,7 @@ module Aws::DynamoDB
     #   resp.table_description.table_class_summary.table_class #=> String, one of "STANDARD", "STANDARD_INFREQUENT_ACCESS"
     #   resp.table_description.table_class_summary.last_update_date_time #=> Time
     #   resp.table_description.deletion_protection_enabled #=> Boolean
+    #   resp.table_description.disassociation_protection_enabled #=> Boolean
     #   resp.table_description.on_demand_throughput.max_read_request_units #=> Integer
     #   resp.table_description.on_demand_throughput.max_write_request_units #=> Integer
     #   resp.table_description.warm_throughput.read_units_per_second #=> Integer
@@ -8521,7 +8533,8 @@ module Aws::DynamoDB
     end
 
     # Modifies the provisioned throughput settings, global secondary
-    # indexes, or DynamoDB Streams settings for a given table.
+    # indexes, DynamoDB Streams settings, or global table replica settings
+    # for a given table.
     #
     # You can only perform one of the following operations at once:
     #
@@ -8533,11 +8546,38 @@ module Aws::DynamoDB
     #   begins backfilling, you can use `UpdateTable` to perform other
     #   operations.
     #
+    # * Enable or disable disassociation protection for the local global
+    #   table replica.
+    #
+    # * Disassociate the local global table replica and keep it as a
+    #   standalone regional table. The `Disassociate` action must be the
+    #   only replica update in the request. If the request includes any
+    #   other update, `UpdateTable` fails with a `ValidationException` and
+    #   the disassociation does not start.
+    #
     # `UpdateTable` is an asynchronous operation; while it's executing, the
     # table status changes from `ACTIVE` to `UPDATING`. While it's
-    # `UPDATING`, you can't issue another `UpdateTable` request. When the
-    # table returns to the `ACTIVE` state, the `UpdateTable` operation is
-    # complete.
+    # `UPDATING`, you can't issue another `UpdateTable` request. Use
+    # `DescribeTable` to monitor the table's status.
+    #
+    # To use this operation to disassociate a local replica, you must have
+    # the `dynamodb:UpdateTable` and `dynamodb:DisassociateTableReplica` IAM
+    # permissions on the local replica. Send disassociation and
+    # disassociation protection requests to the replica's Region using
+    # credentials for the account that owns the replica. For prerequisites
+    # and the procedure, see [Disassociating a global table replica][1] in
+    # the *Amazon DynamoDB Developer Guide*.
+    #
+    # To confirm successful disassociation, call `DescribeTable` in the
+    # replica's Region and verify that `TableStatus` is `ACTIVE` and
+    # `Replicas` is absent or empty. If `TableStatus` returns to `ACTIVE`
+    # but the response still includes a `Replicas` list, the disassociation
+    # did not complete. Check `ReplicaStatus` for a replication-permission
+    # or encryption-access problem, resolve it, and retry.
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/amazondynamodb/latest/developerguide/globaltables-disassociate.html
     #
     # @option params [Array<Types::AttributeDefinition>] :attribute_definitions
     #   An array of attributes that describe the key schema for the table and
@@ -8609,8 +8649,8 @@ module Aws::DynamoDB
     #   The new server-side encryption settings for the specified table.
     #
     # @option params [Array<Types::ReplicationGroupUpdate>] :replica_updates
-    #   A list of replica update actions (create, delete, or update) for the
-    #   table.
+    #   A list of replica update actions (create, delete, update, or
+    #   disassociate) for the table.
     #
     # @option params [String] :table_class
     #   The table class of the table to be updated. Valid values are
@@ -8686,6 +8726,18 @@ module Aws::DynamoDB
     #     Settings replication needs to be defined to ENABLED again in order
     #     to create a Multi-Account Global Table using this table.
     #
+    # @option params [Boolean] :disassociation_protection_enabled
+    #   Specifies whether disassociation protection is enabled (`true`) or
+    #   disabled (`false`) for the local replica of a multi-Region eventual
+    #   consistency (MREC) global table using Version 2019.11.21.
+    #
+    #   Disassociation protection is enabled by default. If you omit this
+    #   parameter, the existing setting is unchanged. This setting is
+    #   independent of `DeletionProtectionEnabled`.
+    #
+    #   You can't combine this change with any other change in the same
+    #   `UpdateTable` request.
+    #
     # @option params [Array<Types::VectorIndexUpdate>] :vector_index_updates
     #   A list of vector indexes to be added to or removed from the table. You
     #   can add or remove one vector index for each `UpdateTable` operation.
@@ -8724,7 +8776,7 @@ module Aws::DynamoDB
     #           attribute_type: "S", 
     #         }, 
     #       ], 
-    #       creation_date_time: Time.parse("1421866952.062"), 
+    #       creation_date_time: Time.parse(1421866952.062), 
     #       item_count: 0, 
     #       key_schema: [
     #         {
@@ -8737,13 +8789,81 @@ module Aws::DynamoDB
     #         }, 
     #       ], 
     #       provisioned_throughput: {
-    #         last_increase_date_time: Time.parse("1421874759.194"), 
+    #         last_increase_date_time: Time.parse(1421874759.194), 
     #         number_of_decreases_today: 1, 
     #         read_capacity_units: 1, 
     #         write_capacity_units: 1, 
     #       }, 
     #       table_name: "MusicCollection", 
     #       table_size_bytes: 0, 
+    #       table_status: "UPDATING", 
+    #     }, 
+    #   }
+    #
+    # @example Example: To disable disassociation protection on a local replica
+    #
+    #   # This example disables disassociation protection on the MusicCollection replica in us-west-2. You must send the request
+    #   # to us-west-2 using credentials for the account that owns the replica. Your table must be a global table that uses
+    #   # Version 2019.11.21 and multi-Region eventual consistency (MREC). You cannot combine this change with any other change in
+    #   # the same UpdateTable request. Before requesting disassociation, use DescribeTable to confirm that
+    #   # DisassociationProtectionEnabled is false and TableStatus is ACTIVE.
+    #
+    #   resp = client.update_table({
+    #     disassociation_protection_enabled: false, 
+    #     table_name: "MusicCollection", 
+    #   })
+    #
+    #   resp.to_h outputs the following:
+    #   {
+    #     table_description: {
+    #       disassociation_protection_enabled: false, 
+    #       global_table_version: "2019.11.21", 
+    #       replicas: [
+    #         {
+    #           region_name: "us-east-1", 
+    #           replica_status: "ACTIVE", 
+    #         }, 
+    #       ], 
+    #       table_arn: "arn:aws:dynamodb:us-west-2:123456789012:table/MusicCollection", 
+    #       table_name: "MusicCollection", 
+    #       table_status: "ACTIVE", 
+    #     }, 
+    #   }
+    #
+    # @example Example: To disassociate a local global table replica
+    #
+    #   # This example disassociates the MusicCollection replica in us-west-2. You must first disable protection in a separate
+    #   # UpdateTable request. You must send the request to us-west-2 using credentials for account 123456789012, the account that
+    #   # owns the replica. This request works for global tables that use Version 2019.11.21 and multi-Region eventual consistency
+    #   # (MREC). Replicas can belong to one account or multiple accounts. You must specify WAIT_FOR_REPLICATION. The response
+    #   # shows that DynamoDB accepted the asynchronous request. To confirm completion, use DescribeTable in us-west-2. Verify
+    #   # that TableStatus is ACTIVE and Replicas is absent or empty. ACTIVE alone does not confirm successful disassociation.
+    #
+    #   resp = client.update_table({
+    #     replica_updates: [
+    #       {
+    #         disassociate: {
+    #           disassociation_mode: "WAIT_FOR_REPLICATION", 
+    #           region_name: "us-west-2", 
+    #         }, 
+    #       }, 
+    #     ], 
+    #     table_name: "arn:aws:dynamodb:us-west-2:123456789012:table/MusicCollection", 
+    #   })
+    #
+    #   resp.to_h outputs the following:
+    #   {
+    #     table_description: {
+    #       disassociation_protection_enabled: false, 
+    #       global_table_version: "2019.11.21", 
+    #       replicas: [
+    #         {
+    #           region_name: "us-east-1", 
+    #           replica_status: "ACTIVE", 
+    #         }, 
+    #       ], 
+    #       table_arn: "arn:aws:dynamodb:us-west-2:123456789012:table/MusicCollection", 
+    #       table_name: "MusicCollection", 
     #       table_status: "UPDATING", 
     #     }, 
     #   }
@@ -8868,6 +8988,10 @@ module Aws::DynamoDB
     #         delete: {
     #           region_name: "RegionName", # required
     #         },
+    #         disassociate: {
+    #           region_name: "RegionName", # required
+    #           disassociation_mode: "WAIT_FOR_REPLICATION", # required, accepts WAIT_FOR_REPLICATION
+    #         },
     #       },
     #     ],
     #     table_class: "STANDARD", # accepts STANDARD, STANDARD_INFREQUENT_ACCESS
@@ -8892,6 +9016,7 @@ module Aws::DynamoDB
     #       write_units_per_second: 1,
     #     },
     #     global_table_settings_replication_mode: "ENABLED", # accepts ENABLED, DISABLED, ENABLED_WITH_OVERRIDES
+    #     disassociation_protection_enabled: false,
     #     vector_index_updates: [
     #       {
     #         create: {
@@ -9021,6 +9146,7 @@ module Aws::DynamoDB
     #   resp.table_description.table_class_summary.table_class #=> String, one of "STANDARD", "STANDARD_INFREQUENT_ACCESS"
     #   resp.table_description.table_class_summary.last_update_date_time #=> Time
     #   resp.table_description.deletion_protection_enabled #=> Boolean
+    #   resp.table_description.disassociation_protection_enabled #=> Boolean
     #   resp.table_description.on_demand_throughput.max_read_request_units #=> Integer
     #   resp.table_description.on_demand_throughput.max_write_request_units #=> Integer
     #   resp.table_description.warm_throughput.read_units_per_second #=> Integer
@@ -9307,7 +9433,7 @@ module Aws::DynamoDB
         tracer: tracer
       )
       context[:gem_name] = 'aws-sdk-dynamodb'
-      context[:gem_version] = '1.175.0'
+      context[:gem_version] = '1.178.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

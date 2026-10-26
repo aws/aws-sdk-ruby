@@ -45,6 +45,7 @@ module Aws::NetworkFirewall
     AttachmentId = Shapes::StringShape.new(name: 'AttachmentId')
     AttachmentStatus = Shapes::StringShape.new(name: 'AttachmentStatus')
     AvailabilityZone = Shapes::StringShape.new(name: 'AvailabilityZone')
+    AvailabilityZoneId = Shapes::StringShape.new(name: 'AvailabilityZoneId')
     AvailabilityZoneMapping = Shapes::StructureShape.new(name: 'AvailabilityZoneMapping')
     AvailabilityZoneMappingString = Shapes::StringShape.new(name: 'AvailabilityZoneMappingString')
     AvailabilityZoneMappings = Shapes::ListShape.new(name: 'AvailabilityZoneMappings')
@@ -100,6 +101,8 @@ module Aws::NetworkFirewall
     CreateVpcEndpointAssociationResponse = Shapes::StructureShape.new(name: 'CreateVpcEndpointAssociationResponse')
     CustomAction = Shapes::StructureShape.new(name: 'CustomAction')
     CustomActions = Shapes::ListShape.new(name: 'CustomActions')
+    DNSExpiryExceptionPolicy = Shapes::StringShape.new(name: 'DNSExpiryExceptionPolicy')
+    DNSFirewallRuleGroupId = Shapes::StringShape.new(name: 'DNSFirewallRuleGroupId')
     DeepThreatInspection = Shapes::BooleanShape.new(name: 'DeepThreatInspection')
     DeleteContainerAssociationRequest = Shapes::StructureShape.new(name: 'DeleteContainerAssociationRequest')
     DeleteContainerAssociationResponse = Shapes::StructureShape.new(name: 'DeleteContainerAssociationResponse')
@@ -187,6 +190,10 @@ module Aws::NetworkFirewall
     FirewallMetadata = Shapes::StructureShape.new(name: 'FirewallMetadata')
     FirewallPolicies = Shapes::ListShape.new(name: 'FirewallPolicies')
     FirewallPolicy = Shapes::StructureShape.new(name: 'FirewallPolicy')
+    FirewallPolicyError = Shapes::StructureShape.new(name: 'FirewallPolicyError')
+    FirewallPolicyErrorCode = Shapes::StringShape.new(name: 'FirewallPolicyErrorCode')
+    FirewallPolicyErrorResourceId = Shapes::StringShape.new(name: 'FirewallPolicyErrorResourceId')
+    FirewallPolicyErrors = Shapes::ListShape.new(name: 'FirewallPolicyErrors')
     FirewallPolicyMetadata = Shapes::StructureShape.new(name: 'FirewallPolicyMetadata')
     FirewallPolicyResponse = Shapes::StructureShape.new(name: 'FirewallPolicyResponse')
     FirewallStatus = Shapes::StructureShape.new(name: 'FirewallStatus')
@@ -355,7 +362,11 @@ module Aws::NetworkFirewall
     ResourceNotFoundException = Shapes::StructureShape.new(name: 'ResourceNotFoundException')
     ResourceOwnerCheckException = Shapes::StructureShape.new(name: 'ResourceOwnerCheckException')
     ResourceStatus = Shapes::StringShape.new(name: 'ResourceStatus')
+    ResourceStatusMessage = Shapes::StringShape.new(name: 'ResourceStatusMessage')
     RevocationCheckAction = Shapes::StringShape.new(name: 'RevocationCheckAction')
+    Route53ResolvedIPValidation = Shapes::StructureShape.new(name: 'Route53ResolvedIPValidation')
+    Route53ResolvedIPValidationAction = Shapes::StringShape.new(name: 'Route53ResolvedIPValidationAction')
+    Route53ResolvedIPValidationAddresses = Shapes::ListShape.new(name: 'Route53ResolvedIPValidationAddresses')
     RuleCapacity = Shapes::IntegerShape.new(name: 'RuleCapacity')
     RuleDefinition = Shapes::StructureShape.new(name: 'RuleDefinition')
     RuleGroup = Shapes::StructureShape.new(name: 'RuleGroup')
@@ -945,6 +956,7 @@ module Aws::NetworkFirewall
 
     DescribeFlowOperationRequest.add_member(:firewall_arn, Shapes::ShapeRef.new(shape: ResourceArn, required: true, location_name: "FirewallArn"))
     DescribeFlowOperationRequest.add_member(:availability_zone, Shapes::ShapeRef.new(shape: AvailabilityZone, location_name: "AvailabilityZone"))
+    DescribeFlowOperationRequest.add_member(:availability_zone_id, Shapes::ShapeRef.new(shape: AvailabilityZoneId, location_name: "AvailabilityZoneId"))
     DescribeFlowOperationRequest.add_member(:vpc_endpoint_association_arn, Shapes::ShapeRef.new(shape: ResourceArn, location_name: "VpcEndpointAssociationArn"))
     DescribeFlowOperationRequest.add_member(:vpc_endpoint_id, Shapes::ShapeRef.new(shape: VpcEndpointId, location_name: "VpcEndpointId"))
     DescribeFlowOperationRequest.add_member(:flow_operation_id, Shapes::ShapeRef.new(shape: FlowOperationId, required: true, location_name: "FlowOperationId"))
@@ -952,6 +964,7 @@ module Aws::NetworkFirewall
 
     DescribeFlowOperationResponse.add_member(:firewall_arn, Shapes::ShapeRef.new(shape: ResourceArn, location_name: "FirewallArn"))
     DescribeFlowOperationResponse.add_member(:availability_zone, Shapes::ShapeRef.new(shape: AvailabilityZone, location_name: "AvailabilityZone"))
+    DescribeFlowOperationResponse.add_member(:availability_zone_id, Shapes::ShapeRef.new(shape: AvailabilityZoneId, location_name: "AvailabilityZoneId"))
     DescribeFlowOperationResponse.add_member(:vpc_endpoint_association_arn, Shapes::ShapeRef.new(shape: ResourceArn, location_name: "VpcEndpointAssociationArn"))
     DescribeFlowOperationResponse.add_member(:vpc_endpoint_id, Shapes::ShapeRef.new(shape: VpcEndpointId, location_name: "VpcEndpointId"))
     DescribeFlowOperationResponse.add_member(:flow_operation_id, Shapes::ShapeRef.new(shape: FlowOperationId, location_name: "FlowOperationId"))
@@ -1170,7 +1183,15 @@ module Aws::NetworkFirewall
     FirewallPolicy.add_member(:tls_inspection_configuration_arn, Shapes::ShapeRef.new(shape: ResourceArn, location_name: "TLSInspectionConfigurationArn"))
     FirewallPolicy.add_member(:policy_variables, Shapes::ShapeRef.new(shape: PolicyVariables, location_name: "PolicyVariables"))
     FirewallPolicy.add_member(:enable_tls_session_holding, Shapes::ShapeRef.new(shape: EnableTLSSessionHolding, location_name: "EnableTLSSessionHolding"))
+    FirewallPolicy.add_member(:route_53_resolved_ip_validation, Shapes::ShapeRef.new(shape: Route53ResolvedIPValidation, location_name: "Route53ResolvedIPValidation"))
     FirewallPolicy.struct_class = Types::FirewallPolicy
+
+    FirewallPolicyError.add_member(:code, Shapes::ShapeRef.new(shape: FirewallPolicyErrorCode, required: true, location_name: "Code"))
+    FirewallPolicyError.add_member(:message, Shapes::ShapeRef.new(shape: StatusReason, required: true, location_name: "Message"))
+    FirewallPolicyError.add_member(:resource_id, Shapes::ShapeRef.new(shape: FirewallPolicyErrorResourceId, location_name: "ResourceId"))
+    FirewallPolicyError.struct_class = Types::FirewallPolicyError
+
+    FirewallPolicyErrors.member = Shapes::ShapeRef.new(shape: FirewallPolicyError)
 
     FirewallPolicyMetadata.add_member(:name, Shapes::ShapeRef.new(shape: ResourceName, location_name: "Name"))
     FirewallPolicyMetadata.add_member(:arn, Shapes::ShapeRef.new(shape: ResourceArn, location_name: "Arn"))
@@ -1181,12 +1202,14 @@ module Aws::NetworkFirewall
     FirewallPolicyResponse.add_member(:firewall_policy_id, Shapes::ShapeRef.new(shape: ResourceId, required: true, location_name: "FirewallPolicyId"))
     FirewallPolicyResponse.add_member(:description, Shapes::ShapeRef.new(shape: Description, location_name: "Description"))
     FirewallPolicyResponse.add_member(:firewall_policy_status, Shapes::ShapeRef.new(shape: ResourceStatus, location_name: "FirewallPolicyStatus"))
+    FirewallPolicyResponse.add_member(:status_message, Shapes::ShapeRef.new(shape: ResourceStatusMessage, location_name: "StatusMessage"))
     FirewallPolicyResponse.add_member(:tags, Shapes::ShapeRef.new(shape: TagList, location_name: "Tags"))
     FirewallPolicyResponse.add_member(:consumed_stateless_rule_capacity, Shapes::ShapeRef.new(shape: RuleCapacity, location_name: "ConsumedStatelessRuleCapacity"))
     FirewallPolicyResponse.add_member(:consumed_stateful_rule_capacity, Shapes::ShapeRef.new(shape: RuleCapacity, location_name: "ConsumedStatefulRuleCapacity"))
     FirewallPolicyResponse.add_member(:consumed_stateful_domain_capacity, Shapes::ShapeRef.new(shape: RuleCapacity, location_name: "ConsumedStatefulDomainCapacity"))
     FirewallPolicyResponse.add_member(:number_of_associations, Shapes::ShapeRef.new(shape: NumberOfAssociations, location_name: "NumberOfAssociations"))
     FirewallPolicyResponse.add_member(:encryption_configuration, Shapes::ShapeRef.new(shape: EncryptionConfiguration, location_name: "EncryptionConfiguration"))
+    FirewallPolicyResponse.add_member(:errors, Shapes::ShapeRef.new(shape: FirewallPolicyErrors, location_name: "Errors"))
     FirewallPolicyResponse.add_member(:last_modified_time, Shapes::ShapeRef.new(shape: LastUpdateTime, location_name: "LastModifiedTime"))
     FirewallPolicyResponse.struct_class = Types::FirewallPolicyResponse
 
@@ -1343,12 +1366,14 @@ module Aws::NetworkFirewall
     ListFlowOperationResultsRequest.add_member(:next_token, Shapes::ShapeRef.new(shape: PaginationToken, location_name: "NextToken"))
     ListFlowOperationResultsRequest.add_member(:max_results, Shapes::ShapeRef.new(shape: PaginationMaxResults, location_name: "MaxResults"))
     ListFlowOperationResultsRequest.add_member(:availability_zone, Shapes::ShapeRef.new(shape: AvailabilityZone, location_name: "AvailabilityZone"))
+    ListFlowOperationResultsRequest.add_member(:availability_zone_id, Shapes::ShapeRef.new(shape: AvailabilityZoneId, location_name: "AvailabilityZoneId"))
     ListFlowOperationResultsRequest.add_member(:vpc_endpoint_id, Shapes::ShapeRef.new(shape: VpcEndpointId, location_name: "VpcEndpointId"))
     ListFlowOperationResultsRequest.add_member(:vpc_endpoint_association_arn, Shapes::ShapeRef.new(shape: ResourceArn, location_name: "VpcEndpointAssociationArn"))
     ListFlowOperationResultsRequest.struct_class = Types::ListFlowOperationResultsRequest
 
     ListFlowOperationResultsResponse.add_member(:firewall_arn, Shapes::ShapeRef.new(shape: ResourceArn, location_name: "FirewallArn"))
     ListFlowOperationResultsResponse.add_member(:availability_zone, Shapes::ShapeRef.new(shape: AvailabilityZone, location_name: "AvailabilityZone"))
+    ListFlowOperationResultsResponse.add_member(:availability_zone_id, Shapes::ShapeRef.new(shape: AvailabilityZoneId, location_name: "AvailabilityZoneId"))
     ListFlowOperationResultsResponse.add_member(:vpc_endpoint_association_arn, Shapes::ShapeRef.new(shape: ResourceArn, location_name: "VpcEndpointAssociationArn"))
     ListFlowOperationResultsResponse.add_member(:vpc_endpoint_id, Shapes::ShapeRef.new(shape: VpcEndpointId, location_name: "VpcEndpointId"))
     ListFlowOperationResultsResponse.add_member(:flow_operation_id, Shapes::ShapeRef.new(shape: FlowOperationId, location_name: "FlowOperationId"))
@@ -1361,6 +1386,7 @@ module Aws::NetworkFirewall
 
     ListFlowOperationsRequest.add_member(:firewall_arn, Shapes::ShapeRef.new(shape: ResourceArn, required: true, location_name: "FirewallArn"))
     ListFlowOperationsRequest.add_member(:availability_zone, Shapes::ShapeRef.new(shape: AvailabilityZone, location_name: "AvailabilityZone"))
+    ListFlowOperationsRequest.add_member(:availability_zone_id, Shapes::ShapeRef.new(shape: AvailabilityZoneId, location_name: "AvailabilityZoneId"))
     ListFlowOperationsRequest.add_member(:vpc_endpoint_association_arn, Shapes::ShapeRef.new(shape: ResourceArn, location_name: "VpcEndpointAssociationArn"))
     ListFlowOperationsRequest.add_member(:vpc_endpoint_id, Shapes::ShapeRef.new(shape: VpcEndpointId, location_name: "VpcEndpointId"))
     ListFlowOperationsRequest.add_member(:flow_operation_type, Shapes::ShapeRef.new(shape: FlowOperationType, location_name: "FlowOperationType"))
@@ -1651,6 +1677,15 @@ module Aws::NetworkFirewall
     ResourceOwnerCheckException.add_member(:message, Shapes::ShapeRef.new(shape: ErrorMessage, location_name: "Message"))
     ResourceOwnerCheckException.struct_class = Types::ResourceOwnerCheckException
 
+    Route53ResolvedIPValidation.add_member(:action, Shapes::ShapeRef.new(shape: Route53ResolvedIPValidationAction, required: true, location_name: "Action"))
+    Route53ResolvedIPValidation.add_member(:dns_firewall_rule_group_id, Shapes::ShapeRef.new(shape: DNSFirewallRuleGroupId, required: true, location_name: "DNSFirewallRuleGroupId"))
+    Route53ResolvedIPValidation.add_member(:dns_expiry_exception_policy, Shapes::ShapeRef.new(shape: DNSExpiryExceptionPolicy, required: true, location_name: "DNSExpiryExceptionPolicy"))
+    Route53ResolvedIPValidation.add_member(:bypass_destination_validation_ip_ranges, Shapes::ShapeRef.new(shape: Route53ResolvedIPValidationAddresses, location_name: "BypassDestinationValidationIPRanges"))
+    Route53ResolvedIPValidation.add_member(:source_ip_ranges, Shapes::ShapeRef.new(shape: Route53ResolvedIPValidationAddresses, location_name: "SourceIPRanges"))
+    Route53ResolvedIPValidation.struct_class = Types::Route53ResolvedIPValidation
+
+    Route53ResolvedIPValidationAddresses.member = Shapes::ShapeRef.new(shape: Address)
+
     RuleDefinition.add_member(:match_attributes, Shapes::ShapeRef.new(shape: MatchAttributes, required: true, location_name: "MatchAttributes"))
     RuleDefinition.add_member(:actions, Shapes::ShapeRef.new(shape: StatelessActions, required: true, location_name: "Actions"))
     RuleDefinition.struct_class = Types::RuleDefinition
@@ -1756,6 +1791,7 @@ module Aws::NetworkFirewall
 
     StartFlowCaptureRequest.add_member(:firewall_arn, Shapes::ShapeRef.new(shape: ResourceArn, required: true, location_name: "FirewallArn"))
     StartFlowCaptureRequest.add_member(:availability_zone, Shapes::ShapeRef.new(shape: AvailabilityZone, location_name: "AvailabilityZone"))
+    StartFlowCaptureRequest.add_member(:availability_zone_id, Shapes::ShapeRef.new(shape: AvailabilityZoneId, location_name: "AvailabilityZoneId"))
     StartFlowCaptureRequest.add_member(:vpc_endpoint_association_arn, Shapes::ShapeRef.new(shape: ResourceArn, location_name: "VpcEndpointAssociationArn"))
     StartFlowCaptureRequest.add_member(:vpc_endpoint_id, Shapes::ShapeRef.new(shape: VpcEndpointId, location_name: "VpcEndpointId"))
     StartFlowCaptureRequest.add_member(:minimum_flow_age_in_seconds, Shapes::ShapeRef.new(shape: Age, location_name: "MinimumFlowAgeInSeconds"))
@@ -1769,6 +1805,7 @@ module Aws::NetworkFirewall
 
     StartFlowFlushRequest.add_member(:firewall_arn, Shapes::ShapeRef.new(shape: ResourceArn, required: true, location_name: "FirewallArn"))
     StartFlowFlushRequest.add_member(:availability_zone, Shapes::ShapeRef.new(shape: AvailabilityZone, location_name: "AvailabilityZone"))
+    StartFlowFlushRequest.add_member(:availability_zone_id, Shapes::ShapeRef.new(shape: AvailabilityZoneId, location_name: "AvailabilityZoneId"))
     StartFlowFlushRequest.add_member(:vpc_endpoint_association_arn, Shapes::ShapeRef.new(shape: ResourceArn, location_name: "VpcEndpointAssociationArn"))
     StartFlowFlushRequest.add_member(:vpc_endpoint_id, Shapes::ShapeRef.new(shape: VpcEndpointId, location_name: "VpcEndpointId"))
     StartFlowFlushRequest.add_member(:minimum_flow_age_in_seconds, Shapes::ShapeRef.new(shape: Age, location_name: "MinimumFlowAgeInSeconds"))
@@ -2318,6 +2355,7 @@ module Aws::NetworkFirewall
         o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
         o.errors << Shapes::ShapeRef.new(shape: InternalServerError)
         o.errors << Shapes::ShapeRef.new(shape: InsufficientCapacityException)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidOperationException)
       end)
 
       api.add_operation(:create_proxy, Seahorse::Model::Operation.new.tap do |o|
@@ -3148,6 +3186,7 @@ module Aws::NetworkFirewall
         o.http_request_uri = "/"
         o.input = Shapes::ShapeRef.new(shape: UpdateContainerAssociationRequest)
         o.output = Shapes::ShapeRef.new(shape: UpdateContainerAssociationResponse)
+        o.errors << Shapes::ShapeRef.new(shape: LimitExceededException)
         o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
         o.errors << Shapes::ShapeRef.new(shape: InvalidRequestException)
         o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
@@ -3220,6 +3259,7 @@ module Aws::NetworkFirewall
         o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
         o.errors << Shapes::ShapeRef.new(shape: InternalServerError)
         o.errors << Shapes::ShapeRef.new(shape: InvalidTokenException)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidOperationException)
       end)
 
       api.add_operation(:update_firewall_policy_change_protection, Seahorse::Model::Operation.new.tap do |o|

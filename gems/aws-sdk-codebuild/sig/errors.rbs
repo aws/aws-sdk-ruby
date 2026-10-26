@@ -11,17 +11,17 @@ module Aws
       class ServiceError < ::Aws::Errors::ServiceError
       end
 
-      class AccountLimitExceededException < ::Aws::Errors::ServiceError
+      class AccountLimitExceededException < ServiceError
       end
-      class AccountSuspendedException < ::Aws::Errors::ServiceError
+      class AccountSuspendedException < ServiceError
       end
-      class InvalidInputException < ::Aws::Errors::ServiceError
+      class InvalidInputException < ServiceError
       end
-      class OAuthProviderException < ::Aws::Errors::ServiceError
+      class OAuthProviderException < ServiceError
       end
-      class ResourceAlreadyExistsException < ::Aws::Errors::ServiceError
+      class ResourceAlreadyExistsException < ServiceError
       end
-      class ResourceNotFoundException < ::Aws::Errors::ServiceError
+      class ResourceNotFoundException < ServiceError
       end
     end
   end

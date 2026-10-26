@@ -44,6 +44,12 @@ module Aws::RDS
   # * {CustomDBEngineVersionAlreadyExistsFault}
   # * {CustomDBEngineVersionNotFoundFault}
   # * {CustomDBEngineVersionQuotaExceededFault}
+  # * {DBCapacityReservationAlreadyExistsFault}
+  #    * This error class is not used. `DBCapacityReservationAlreadyExists` is used during parsing instead.
+  # * {DBCapacityReservationNotFoundFault}
+  #    * This error class is not used. `DBCapacityReservationNotFound` is used during parsing instead.
+  # * {DBCapacityReservationUnsupportedFault}
+  #    * This error class is not used. `DBCapacityReservationUnsupported` is used during parsing instead.
   # * {DBClusterAlreadyExistsFault}
   # * {DBClusterAutomatedBackupNotFoundFault}
   # * {DBClusterAutomatedBackupQuotaExceededFault}
@@ -151,6 +157,8 @@ module Aws::RDS
   # * {IntegrationQuotaExceededFault}
   # * {InvalidBlueGreenDeploymentStateFault}
   # * {InvalidCustomDBEngineVersionStateFault}
+  # * {InvalidDBCapacityReservationStateFault}
+  #    * This error class is not used. `InvalidDBCapacityReservationState` is used during parsing instead.
   # * {InvalidDBClusterAutomatedBackupStateFault}
   # * {InvalidDBClusterCapacityFault}
   # * {InvalidDBClusterEndpointStateFault}
@@ -373,6 +381,42 @@ module Aws::RDS
       # @param [Seahorse::Client::RequestContext] context
       # @param [String] message
       # @param [Aws::RDS::Types::CustomDBEngineVersionQuotaExceededFault] data
+      def initialize(context, message, data = Aws::EmptyStructure.new)
+        super(context, message, data)
+      end
+    end
+
+    # @deprecated This error class is not used during parsing.
+    #   Please use `DBCapacityReservationAlreadyExists` instead.
+    class DBCapacityReservationAlreadyExistsFault < ServiceError
+
+      # @param [Seahorse::Client::RequestContext] context
+      # @param [String] message
+      # @param [Aws::RDS::Types::DBCapacityReservationAlreadyExistsFault] data
+      def initialize(context, message, data = Aws::EmptyStructure.new)
+        super(context, message, data)
+      end
+    end
+
+    # @deprecated This error class is not used during parsing.
+    #   Please use `DBCapacityReservationNotFound` instead.
+    class DBCapacityReservationNotFoundFault < ServiceError
+
+      # @param [Seahorse::Client::RequestContext] context
+      # @param [String] message
+      # @param [Aws::RDS::Types::DBCapacityReservationNotFoundFault] data
+      def initialize(context, message, data = Aws::EmptyStructure.new)
+        super(context, message, data)
+      end
+    end
+
+    # @deprecated This error class is not used during parsing.
+    #   Please use `DBCapacityReservationUnsupported` instead.
+    class DBCapacityReservationUnsupportedFault < ServiceError
+
+      # @param [Seahorse::Client::RequestContext] context
+      # @param [String] message
+      # @param [Aws::RDS::Types::DBCapacityReservationUnsupportedFault] data
       def initialize(context, message, data = Aws::EmptyStructure.new)
         super(context, message, data)
       end
@@ -1171,6 +1215,18 @@ module Aws::RDS
       # @param [Seahorse::Client::RequestContext] context
       # @param [String] message
       # @param [Aws::RDS::Types::InvalidCustomDBEngineVersionStateFault] data
+      def initialize(context, message, data = Aws::EmptyStructure.new)
+        super(context, message, data)
+      end
+    end
+
+    # @deprecated This error class is not used during parsing.
+    #   Please use `InvalidDBCapacityReservationState` instead.
+    class InvalidDBCapacityReservationStateFault < ServiceError
+
+      # @param [Seahorse::Client::RequestContext] context
+      # @param [String] message
+      # @param [Aws::RDS::Types::InvalidDBCapacityReservationStateFault] data
       def initialize(context, message, data = Aws::EmptyStructure.new)
         super(context, message, data)
       end

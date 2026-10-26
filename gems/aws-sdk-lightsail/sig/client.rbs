@@ -27,6 +27,7 @@ module Aws
                       ?convert_params: bool,
                       ?correct_clock_skew: bool,
                       ?defaults_mode: String,
+                      ?disable_clock_skew_correction: bool,
                       ?disable_host_prefix_injection: bool,
                       ?disable_request_compression: bool,
                       ?endpoint: String,
@@ -423,6 +424,10 @@ module Aws
                                      response_page_path: ::String?,
                                      error_caching_min_ttl: ::Integer?
                                    }
+                                 ],
+                                 ?enable_waf: bool,
+                                 ?waf_rules: Array[
+                                   Params::waf_rule
                                  ]
                                ) -> _CreateDistributionResponseSuccess
                              | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _CreateDistributionResponseSuccess
@@ -1280,13 +1285,13 @@ module Aws
 
       interface _GetDistributionMetricDataResponseSuccess
         include ::Seahorse::Client::_ResponseSuccess[Types::GetDistributionMetricDataResult]
-        def metric_name: () -> ("Requests" | "BytesDownloaded" | "BytesUploaded" | "TotalErrorRate" | "Http4xxErrorRate" | "Http5xxErrorRate")
+        def metric_name: () -> ("Requests" | "BytesDownloaded" | "BytesUploaded" | "TotalErrorRate" | "Http4xxErrorRate" | "Http5xxErrorRate" | "WafAllowedRequests" | "WafBlockedRequests")
         def metric_data: () -> ::Array[Types::MetricDatapoint]
       end
       # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Lightsail/Client.html#get_distribution_metric_data-instance_method
       def get_distribution_metric_data: (
                                           distribution_name: ::String,
-                                          metric_name: ("Requests" | "BytesDownloaded" | "BytesUploaded" | "TotalErrorRate" | "Http4xxErrorRate" | "Http5xxErrorRate"),
+                                          metric_name: ("Requests" | "BytesDownloaded" | "BytesUploaded" | "TotalErrorRate" | "Http4xxErrorRate" | "Http5xxErrorRate" | "WafAllowedRequests" | "WafBlockedRequests"),
                                           start_time: ::Time,
                                           end_time: ::Time,
                                           period: ::Integer,
@@ -1362,13 +1367,13 @@ module Aws
 
       interface _GetInstanceMetricDataResponseSuccess
         include ::Seahorse::Client::_ResponseSuccess[Types::GetInstanceMetricDataResult]
-        def metric_name: () -> ("CPUUtilization" | "NetworkIn" | "NetworkOut" | "StatusCheckFailed" | "StatusCheckFailed_Instance" | "StatusCheckFailed_System" | "BurstCapacityTime" | "BurstCapacityPercentage" | "MetadataNoToken")
+        def metric_name: () -> ("CPUUtilization" | "NetworkIn" | "NetworkOut" | "StatusCheckFailed" | "StatusCheckFailed_Instance" | "StatusCheckFailed_System" | "BurstCapacityTime" | "BurstCapacityPercentage" | "MetadataNoToken" | "DiskReadOps" | "DiskWriteOps" | "DiskReadBytes" | "DiskWriteBytes" | "DiskTotalReadTime" | "DiskTotalWriteTime" | "DiskQueueLength")
         def metric_data: () -> ::Array[Types::MetricDatapoint]
       end
       # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Lightsail/Client.html#get_instance_metric_data-instance_method
       def get_instance_metric_data: (
                                       instance_name: ::String,
-                                      metric_name: ("CPUUtilization" | "NetworkIn" | "NetworkOut" | "StatusCheckFailed" | "StatusCheckFailed_Instance" | "StatusCheckFailed_System" | "BurstCapacityTime" | "BurstCapacityPercentage" | "MetadataNoToken"),
+                                      metric_name: ("CPUUtilization" | "NetworkIn" | "NetworkOut" | "StatusCheckFailed" | "StatusCheckFailed_Instance" | "StatusCheckFailed_System" | "BurstCapacityTime" | "BurstCapacityPercentage" | "MetadataNoToken" | "DiskReadOps" | "DiskWriteOps" | "DiskReadBytes" | "DiskWriteBytes" | "DiskTotalReadTime" | "DiskTotalWriteTime" | "DiskQueueLength"),
                                       period: ::Integer,
                                       start_time: ::Time,
                                       end_time: ::Time,
@@ -1791,7 +1796,7 @@ module Aws
       # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Lightsail/Client.html#put_alarm-instance_method
       def put_alarm: (
                        alarm_name: ::String,
-                       metric_name: ("CPUUtilization" | "NetworkIn" | "NetworkOut" | "StatusCheckFailed" | "StatusCheckFailed_Instance" | "StatusCheckFailed_System" | "ClientTLSNegotiationErrorCount" | "HealthyHostCount" | "UnhealthyHostCount" | "HTTPCode_LB_4XX_Count" | "HTTPCode_LB_5XX_Count" | "HTTPCode_Instance_2XX_Count" | "HTTPCode_Instance_3XX_Count" | "HTTPCode_Instance_4XX_Count" | "HTTPCode_Instance_5XX_Count" | "InstanceResponseTime" | "RejectedConnectionCount" | "RequestCount" | "DatabaseConnections" | "DiskQueueDepth" | "FreeStorageSpace" | "NetworkReceiveThroughput" | "NetworkTransmitThroughput" | "FreeableMemory" | "SwapUsage" | "BurstCapacityTime" | "BurstCapacityPercentage"),
+                       metric_name: ("CPUUtilization" | "NetworkIn" | "NetworkOut" | "StatusCheckFailed" | "StatusCheckFailed_Instance" | "StatusCheckFailed_System" | "ClientTLSNegotiationErrorCount" | "HealthyHostCount" | "UnhealthyHostCount" | "HTTPCode_LB_4XX_Count" | "HTTPCode_LB_5XX_Count" | "HTTPCode_Instance_2XX_Count" | "HTTPCode_Instance_3XX_Count" | "HTTPCode_Instance_4XX_Count" | "HTTPCode_Instance_5XX_Count" | "InstanceResponseTime" | "RejectedConnectionCount" | "RequestCount" | "DatabaseConnections" | "DiskQueueDepth" | "FreeStorageSpace" | "NetworkReceiveThroughput" | "NetworkTransmitThroughput" | "FreeableMemory" | "SwapUsage" | "BurstCapacityTime" | "BurstCapacityPercentage" | "DiskReadOps" | "DiskWriteOps" | "DiskReadBytes" | "DiskWriteBytes" | "DiskTotalReadTime" | "DiskTotalWriteTime" | "DiskQueueLength"),
                        monitored_resource_name: ::String,
                        comparison_operator: ("GreaterThanOrEqualToThreshold" | "GreaterThanThreshold" | "LessThanThreshold" | "LessThanOrEqualToThreshold"),
                        threshold: ::Float,
@@ -2137,6 +2142,10 @@ module Aws
                                      response_page_path: ::String?,
                                      error_caching_min_ttl: ::Integer?
                                    }
+                                 ],
+                                 ?enable_waf: bool,
+                                 ?waf_rules: Array[
+                                   Params::waf_rule
                                  ]
                                ) -> _UpdateDistributionResponseSuccess
                              | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _UpdateDistributionResponseSuccess

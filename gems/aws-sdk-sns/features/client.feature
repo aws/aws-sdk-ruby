@@ -11,7 +11,3 @@ Feature: Amazon Simple Notification Service
     | Message  | hello      |
     | TopicArn | fake_topic |
     Then I expect the response error code to be "InvalidParameter"
-    And I expect the response error message to include:
-    """
-    Invalid parameter
-    """

@@ -116,6 +116,15 @@ module Aws
       ]?
     }
 
+      type gateway_elb_access_log_configuration = {
+      destination: {
+        s3: {
+          bucket: ::String,
+          prefix: ::String?
+        }?
+      }?
+    }
+
       type load_balancer = {
       target_group_arn: ::String?,
       load_balancer_name: ::String?,
@@ -202,7 +211,12 @@ module Aws
       access_log_configuration: {
         format: ("TEXT" | "JSON"),
         include_query_parameters: ("DISABLED" | "ENABLED")?
-      }?
+      }?,
+      container_configurations: Array[
+        {
+          log_level: ("debug" | "info")?
+        }
+      ]?
     }
 
       type service_connect_service = {
@@ -280,6 +294,28 @@ module Aws
         alternate_target_group_arn: ::String?,
         production_listener_rule: ::String?,
         test_listener_rule: ::String?
+      }?
+    }
+
+      type gateway_connector_health_check = {
+      health_check_protocol: ("HTTP" | "HTTPS")?,
+      health_check_port: ::Integer?,
+      health_check_path: ::String?,
+      health_check_timeout_seconds: ::Integer?,
+      health_check_interval_seconds: ::Integer?,
+      healthy_threshold_count: ::Integer?,
+      unhealthy_threshold_count: ::Integer?,
+      matcher: {
+        http_code: ::String?,
+        grpc_code: ::String?
+      }?
+    }
+
+      type gateway_connector = {
+      port_name: ::String,
+      health_check: Params::gateway_connector_health_check?,
+      filters: {
+        access_types: Array[("PUBLIC" | "PRIVATE")]?
       }?
     }
 

@@ -27,6 +27,7 @@ module Aws
                       ?convert_params: bool,
                       ?correct_clock_skew: bool,
                       ?defaults_mode: String,
+                      ?disable_clock_skew_correction: bool,
                       ?disable_host_prefix_injection: bool,
                       ?disable_request_compression: bool,
                       ?endpoint: String,
@@ -160,6 +161,16 @@ module Aws
                                   ?use_earliest_time_on_point_in_time_unavailable: bool
                                 ) -> _BacktrackDBClusterResponseSuccess
                               | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _BacktrackDBClusterResponseSuccess
+
+      interface _CancelDBCapacityReservationResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::CancelDBCapacityReservationResponse]
+        def db_capacity_reservation: () -> Types::DBCapacityReservation
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/RDS/Client.html#cancel_db_capacity_reservation-instance_method
+      def cancel_db_capacity_reservation: (
+                                            db_capacity_reservation_identifier: ::String
+                                          ) -> _CancelDBCapacityReservationResponseSuccess
+                                        | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _CancelDBCapacityReservationResponseSuccess
 
       interface _CancelExportTaskResponseSuccess
         include ::Seahorse::Client::_ResponseSuccess[Types::ExportTask]
@@ -380,6 +391,30 @@ module Aws
                                              ]
                                            ) -> _CreateCustomDBEngineVersionResponseSuccess
                                          | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _CreateCustomDBEngineVersionResponseSuccess
+
+      interface _CreateDBCapacityReservationResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::CreateDBCapacityReservationResponse]
+        def db_capacity_reservation: () -> Types::DBCapacityReservation
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/RDS/Client.html#create_db_capacity_reservation-instance_method
+      def create_db_capacity_reservation: (
+                                            db_capacity_reservation_name: ::String,
+                                            db_instance_class: ::String,
+                                            engine: ::String,
+                                            capacity_per_availability_zone: ::Integer,
+                                            availability_zones: Array[::String],
+                                            ?end_date: ::Time,
+                                            ?start_date: ::Time,
+                                            ?commitment_duration: ::Integer,
+                                            ?license_model: ::String,
+                                            ?tags: Array[
+                                              {
+                                                key: ::String?,
+                                                value: ::String?
+                                              }
+                                            ]
+                                          ) -> _CreateDBCapacityReservationResponseSuccess
+                                        | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _CreateDBCapacityReservationResponseSuccess
 
       interface _CreateDBClusterResponseSuccess
         include ::Seahorse::Client::_ResponseSuccess[Types::CreateDBClusterResult]
@@ -637,6 +672,7 @@ module Aws
                                     ]?
                                   }
                                 ],
+                                ?db_capacity_reservation_identifier: ::String,
                                 ?master_user_authentication_type: ("password" | "iam-db-auth")
                               ) -> _CreateDBInstanceResponseSuccess
                             | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _CreateDBInstanceResponseSuccess
@@ -718,6 +754,7 @@ module Aws
                                                  ]?
                                                }
                                              ],
+                                             ?db_capacity_reservation_identifier: ::String,
                                              ?source_region: ::String
                                            ) -> _CreateDBInstanceReadReplicaResponseSuccess
                                          | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _CreateDBInstanceReadReplicaResponseSuccess
@@ -1319,6 +1356,25 @@ module Aws
                                    ?marker: ::String
                                  ) -> _DescribeCertificatesResponseSuccess
                                | (?Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DescribeCertificatesResponseSuccess
+
+      interface _DescribeDBCapacityReservationsResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::DescribeDBCapacityReservationsResponse]
+        def db_capacity_reservations: () -> ::Array[Types::DBCapacityReservation]
+        def marker: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/RDS/Client.html#describe_db_capacity_reservations-instance_method
+      def describe_db_capacity_reservations: (
+                                               ?db_capacity_reservation_identifier: ::String,
+                                               ?marker: ::String,
+                                               ?max_records: ::Integer,
+                                               ?filters: Array[
+                                                 {
+                                                   name: ::String,
+                                                   values: Array[::String]
+                                                 }
+                                               ]
+                                             ) -> _DescribeDBCapacityReservationsResponseSuccess
+                                           | (?Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DescribeDBCapacityReservationsResponseSuccess
 
       interface _DescribeDBClusterAutomatedBackupsResponseSuccess
         include ::Seahorse::Client::_ResponseSuccess[Types::DBClusterAutomatedBackupMessage]
@@ -2355,6 +2411,19 @@ module Aws
                                            ) -> _ModifyCustomDBEngineVersionResponseSuccess
                                          | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ModifyCustomDBEngineVersionResponseSuccess
 
+      interface _ModifyDBCapacityReservationResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ModifyDBCapacityReservationResponse]
+        def db_capacity_reservation: () -> Types::DBCapacityReservation
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/RDS/Client.html#modify_db_capacity_reservation-instance_method
+      def modify_db_capacity_reservation: (
+                                            db_capacity_reservation_identifier: ::String,
+                                            ?capacity_per_availability_zone: ::Integer,
+                                            ?end_date_type: ("unlimited" | "limited"),
+                                            ?end_date: ::Time
+                                          ) -> _ModifyDBCapacityReservationResponseSuccess
+                                        | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ModifyDBCapacityReservationResponseSuccess
+
       interface _ModifyDBClusterResponseSuccess
         include ::Seahorse::Client::_ResponseSuccess[Types::ModifyDBClusterResult]
         def db_cluster: () -> Types::DBCluster
@@ -2553,6 +2622,7 @@ module Aws
                                     set_for_delete: bool?
                                   }
                                 ],
+                                ?db_capacity_reservation_identifier: ::String,
                                 ?tag_specifications: Array[
                                   {
                                     resource_type: ::String?,
@@ -3276,6 +3346,7 @@ module Aws
                                                   ?db_cluster_snapshot_identifier: ::String,
                                                   ?backup_retention_period: ::Integer,
                                                   ?preferred_backup_window: ::String,
+                                                  ?db_capacity_reservation_identifier: ::String,
                                                   ?dedicated_log_volume: bool,
                                                   ?ca_certificate_identifier: ::String,
                                                   ?engine_lifecycle_support: ::String,
@@ -3363,6 +3434,7 @@ module Aws
                                          ?network_type: ::String,
                                          ?manage_master_user_password: bool,
                                          ?master_user_secret_kms_key_id: ::String,
+                                         ?db_capacity_reservation_identifier: ::String,
                                          ?dedicated_log_volume: bool,
                                          ?ca_certificate_identifier: ::String,
                                          ?engine_lifecycle_support: ::String,
@@ -3444,6 +3516,7 @@ module Aws
                                                   ?allocated_storage: ::Integer,
                                                   ?backup_retention_period: ::Integer,
                                                   ?preferred_backup_window: ::String,
+                                                  ?db_capacity_reservation_identifier: ::String,
                                                   ?dedicated_log_volume: bool,
                                                   ?ca_certificate_identifier: ::String,
                                                   ?engine_lifecycle_support: ::String,
@@ -3515,7 +3588,8 @@ module Aws
       end
       # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/RDS/Client.html#start_db_instance-instance_method
       def start_db_instance: (
-                               db_instance_identifier: ::String
+                               db_instance_identifier: ::String,
+                               ?db_capacity_reservation_identifier: ::String
                              ) -> _StartDBInstanceResponseSuccess
                            | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _StartDBInstanceResponseSuccess
 
@@ -3600,7 +3674,8 @@ module Aws
       # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/RDS/Client.html#stop_db_instance-instance_method
       def stop_db_instance: (
                               db_instance_identifier: ::String,
-                              ?db_snapshot_identifier: ::String
+                              ?db_snapshot_identifier: ::String,
+                              ?detach_from_db_capacity_reservation: bool
                             ) -> _StopDBInstanceResponseSuccess
                           | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _StopDBInstanceResponseSuccess
 

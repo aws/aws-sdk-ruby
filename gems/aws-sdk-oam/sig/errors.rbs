@@ -11,34 +11,34 @@ module Aws
       class ServiceError < ::Aws::Errors::ServiceError
       end
 
-      class ConflictException < ::Aws::Errors::ServiceError
+      class ConflictException < ServiceError
         def message: () -> ::String
         def amzn_error_type: () -> ::String
       end
-      class InternalServiceFault < ::Aws::Errors::ServiceError
+      class InternalServiceFault < ServiceError
         def message: () -> ::String
         def amzn_error_type: () -> ::String
       end
-      class InvalidParameterException < ::Aws::Errors::ServiceError
+      class InvalidParameterException < ServiceError
         def amzn_error_type: () -> ::String
         def message: () -> ::String
       end
-      class MissingRequiredParameterException < ::Aws::Errors::ServiceError
+      class MissingRequiredParameterException < ServiceError
         def amzn_error_type: () -> ::String
         def message: () -> ::String
       end
-      class ResourceNotFoundException < ::Aws::Errors::ServiceError
+      class ResourceNotFoundException < ServiceError
         def message: () -> ::String
         def amzn_error_type: () -> ::String
       end
-      class ServiceQuotaExceededException < ::Aws::Errors::ServiceError
+      class ServiceQuotaExceededException < ServiceError
         def message: () -> ::String
         def amzn_error_type: () -> ::String
       end
-      class TooManyTagsException < ::Aws::Errors::ServiceError
+      class TooManyTagsException < ServiceError
         def message: () -> ::String
       end
-      class ValidationException < ::Aws::Errors::ServiceError
+      class ValidationException < ServiceError
         def message: () -> ::String
       end
     end

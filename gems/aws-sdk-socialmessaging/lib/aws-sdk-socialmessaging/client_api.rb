@@ -50,6 +50,8 @@ module Aws::SocialMessaging
     DependencyException = Shapes::StructureShape.new(name: 'DependencyException')
     DeprecateWhatsAppFlowInput = Shapes::StructureShape.new(name: 'DeprecateWhatsAppFlowInput')
     DeprecateWhatsAppFlowOutput = Shapes::StructureShape.new(name: 'DeprecateWhatsAppFlowOutput')
+    DirectSendEnforcementStatus = Shapes::StringShape.new(name: 'DirectSendEnforcementStatus')
+    DirectSendEnforcementStatusExpiresAt = Shapes::TimestampShape.new(name: 'DirectSendEnforcementStatusExpiresAt')
     DisassociateWhatsAppBusinessAccountInput = Shapes::StructureShape.new(name: 'DisassociateWhatsAppBusinessAccountInput')
     DisassociateWhatsAppBusinessAccountOutput = Shapes::StructureShape.new(name: 'DisassociateWhatsAppBusinessAccountOutput')
     ErrorMessage = Shapes::StringShape.new(name: 'ErrorMessage')
@@ -160,6 +162,7 @@ module Aws::SocialMessaging
     MetaTemplateLanguage = Shapes::StringShape.new(name: 'MetaTemplateLanguage')
     MetaTemplateName = Shapes::StringShape.new(name: 'MetaTemplateName')
     MetaTemplateQualityScore = Shapes::StringShape.new(name: 'MetaTemplateQualityScore')
+    MetaTemplateSource = Shapes::StringShape.new(name: 'MetaTemplateSource')
     MetaTemplateStatus = Shapes::StringShape.new(name: 'MetaTemplateStatus')
     MetaTemplateTopic = Shapes::StringShape.new(name: 'MetaTemplateTopic')
     MetaTemplateUseCase = Shapes::StringShape.new(name: 'MetaTemplateUseCase')
@@ -498,6 +501,8 @@ module Aws::SocialMessaging
     LinkedWhatsAppBusinessAccount.add_member(:waba_name, Shapes::ShapeRef.new(shape: WhatsAppBusinessAccountName, required: true, location_name: "wabaName"))
     LinkedWhatsAppBusinessAccount.add_member(:event_destinations, Shapes::ShapeRef.new(shape: WhatsAppBusinessAccountEventDestinations, required: true, location_name: "eventDestinations"))
     LinkedWhatsAppBusinessAccount.add_member(:marketing_messages_onboarding_status, Shapes::ShapeRef.new(shape: WhatsAppBusinessAccountMarketingMessagesOnboardingStatus, location_name: "marketingMessagesOnboardingStatus"))
+    LinkedWhatsAppBusinessAccount.add_member(:direct_send_enforcement_status, Shapes::ShapeRef.new(shape: DirectSendEnforcementStatus, location_name: "directSendEnforcementStatus"))
+    LinkedWhatsAppBusinessAccount.add_member(:direct_send_enforcement_status_expires_at, Shapes::ShapeRef.new(shape: DirectSendEnforcementStatusExpiresAt, location_name: "directSendEnforcementStatusExpiresAt"))
     LinkedWhatsAppBusinessAccount.add_member(:dataset_id, Shapes::ShapeRef.new(shape: WhatsAppDatasetId, location_name: "datasetId"))
     LinkedWhatsAppBusinessAccount.add_member(:phone_numbers, Shapes::ShapeRef.new(shape: WhatsAppPhoneNumberSummaryList, required: true, location_name: "phoneNumbers"))
     LinkedWhatsAppBusinessAccount.struct_class = Types::LinkedWhatsAppBusinessAccount
@@ -516,6 +521,8 @@ module Aws::SocialMessaging
     LinkedWhatsAppBusinessAccountSummary.add_member(:waba_name, Shapes::ShapeRef.new(shape: WhatsAppBusinessAccountName, required: true, location_name: "wabaName"))
     LinkedWhatsAppBusinessAccountSummary.add_member(:event_destinations, Shapes::ShapeRef.new(shape: WhatsAppBusinessAccountEventDestinations, required: true, location_name: "eventDestinations"))
     LinkedWhatsAppBusinessAccountSummary.add_member(:marketing_messages_onboarding_status, Shapes::ShapeRef.new(shape: WhatsAppBusinessAccountMarketingMessagesOnboardingStatus, location_name: "marketingMessagesOnboardingStatus"))
+    LinkedWhatsAppBusinessAccountSummary.add_member(:direct_send_enforcement_status, Shapes::ShapeRef.new(shape: DirectSendEnforcementStatus, location_name: "directSendEnforcementStatus"))
+    LinkedWhatsAppBusinessAccountSummary.add_member(:direct_send_enforcement_status_expires_at, Shapes::ShapeRef.new(shape: DirectSendEnforcementStatusExpiresAt, location_name: "directSendEnforcementStatusExpiresAt"))
     LinkedWhatsAppBusinessAccountSummary.add_member(:dataset_id, Shapes::ShapeRef.new(shape: WhatsAppDatasetId, location_name: "datasetId"))
     LinkedWhatsAppBusinessAccountSummary.struct_class = Types::LinkedWhatsAppBusinessAccountSummary
 
@@ -741,6 +748,8 @@ module Aws::SocialMessaging
     TemplateSummary.add_member(:template_quality_score, Shapes::ShapeRef.new(shape: MetaTemplateQualityScore, location_name: "templateQualityScore"))
     TemplateSummary.add_member(:template_language, Shapes::ShapeRef.new(shape: MetaTemplateLanguage, location_name: "templateLanguage"))
     TemplateSummary.add_member(:template_category, Shapes::ShapeRef.new(shape: MetaTemplateCategory, location_name: "templateCategory"))
+    TemplateSummary.add_member(:template_source, Shapes::ShapeRef.new(shape: MetaTemplateSource, location_name: "templateSource"))
+    TemplateSummary.add_member(:correct_category, Shapes::ShapeRef.new(shape: MetaTemplateCategory, location_name: "correctCategory"))
     TemplateSummary.struct_class = Types::TemplateSummary
 
     TemplateSummaryList.member = Shapes::ShapeRef.new(shape: TemplateSummary)

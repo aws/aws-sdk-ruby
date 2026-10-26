@@ -1,6 +1,20 @@
 Unreleased Changes
 ------------------
 
+3.278.0 (2026-10-22)
+------------------
+
+* Feature - Added a dependency on the new `aws-sdk-continuum` gem.
+
+3.277.0 (2026-10-20)
+------------------
+
+* Feature - Removed a dependency on the deprecated `aws-sdk-tnb` gem.
+
+* Feature - Removed a dependency on the deprecated `aws-sdk-finspace` gem.
+
+* Feature - Removed a dependency on the deprecated `aws-sdk-finspacedata` gem.
+
 3.276.0 (2026-10-12)
 ------------------
 

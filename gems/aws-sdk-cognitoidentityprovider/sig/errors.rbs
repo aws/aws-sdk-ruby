@@ -11,182 +11,182 @@ module Aws
       class ServiceError < ::Aws::Errors::ServiceError
       end
 
-      class AccessDeniedException < ::Aws::Errors::ServiceError
+      class AccessDeniedException < ServiceError
         def message: () -> ::String
       end
-      class AliasExistsException < ::Aws::Errors::ServiceError
+      class AliasExistsException < ServiceError
         def message: () -> ::String
       end
-      class CodeDeliveryFailureException < ::Aws::Errors::ServiceError
+      class CodeDeliveryFailureException < ServiceError
         def message: () -> ::String
       end
-      class CodeMismatchException < ::Aws::Errors::ServiceError
+      class CodeMismatchException < ServiceError
         def message: () -> ::String
       end
-      class ConcurrentModificationException < ::Aws::Errors::ServiceError
+      class ConcurrentModificationException < ServiceError
         def message: () -> ::String
       end
-      class DeviceKeyExistsException < ::Aws::Errors::ServiceError
+      class DeviceKeyExistsException < ServiceError
         def message: () -> ::String
       end
-      class DuplicateProviderException < ::Aws::Errors::ServiceError
+      class DuplicateProviderException < ServiceError
         def message: () -> ::String
       end
-      class EnableSoftwareTokenMFAException < ::Aws::Errors::ServiceError
+      class EnableSoftwareTokenMFAException < ServiceError
         def message: () -> ::String
       end
-      class ExpiredCodeException < ::Aws::Errors::ServiceError
+      class ExpiredCodeException < ServiceError
         def message: () -> ::String
       end
-      class FeatureUnavailableInTierException < ::Aws::Errors::ServiceError
+      class FeatureUnavailableInTierException < ServiceError
         def message: () -> ::String
       end
-      class ForbiddenException < ::Aws::Errors::ServiceError
+      class ForbiddenException < ServiceError
         def message: () -> ::String
       end
-      class GroupExistsException < ::Aws::Errors::ServiceError
+      class GroupExistsException < ServiceError
         def message: () -> ::String
       end
-      class InternalErrorException < ::Aws::Errors::ServiceError
+      class InternalErrorException < ServiceError
         def message: () -> ::String
       end
-      class InternalServerException < ::Aws::Errors::ServiceError
+      class InternalServerException < ServiceError
         def message: () -> ::String
       end
-      class InvalidEmailRoleAccessPolicyException < ::Aws::Errors::ServiceError
+      class InvalidEmailRoleAccessPolicyException < ServiceError
         def message: () -> ::String
       end
-      class InvalidLambdaResponseException < ::Aws::Errors::ServiceError
+      class InvalidLambdaResponseException < ServiceError
         def message: () -> ::String
       end
-      class InvalidOAuthFlowException < ::Aws::Errors::ServiceError
+      class InvalidOAuthFlowException < ServiceError
         def message: () -> ::String
       end
-      class InvalidParameterException < ::Aws::Errors::ServiceError
+      class InvalidParameterException < ServiceError
         def message: () -> ::String
         def reason_code: () -> ::String
       end
-      class InvalidPasswordException < ::Aws::Errors::ServiceError
+      class InvalidPasswordException < ServiceError
         def message: () -> ::String
       end
-      class InvalidSmsRoleAccessPolicyException < ::Aws::Errors::ServiceError
+      class InvalidSmsRoleAccessPolicyException < ServiceError
         def message: () -> ::String
       end
-      class InvalidSmsRoleTrustRelationshipException < ::Aws::Errors::ServiceError
+      class InvalidSmsRoleTrustRelationshipException < ServiceError
         def message: () -> ::String
       end
-      class InvalidUserPoolConfigurationException < ::Aws::Errors::ServiceError
+      class InvalidUserPoolConfigurationException < ServiceError
         def message: () -> ::String
       end
-      class LimitExceededException < ::Aws::Errors::ServiceError
+      class LimitExceededException < ServiceError
         def message: () -> ::String
       end
-      class MFAMethodNotFoundException < ::Aws::Errors::ServiceError
+      class MFAMethodNotFoundException < ServiceError
         def message: () -> ::String
       end
-      class ManagedLoginBrandingExistsException < ::Aws::Errors::ServiceError
+      class ManagedLoginBrandingExistsException < ServiceError
         def message: () -> ::String
       end
-      class NotAuthorizedException < ::Aws::Errors::ServiceError
+      class NotAuthorizedException < ServiceError
         def message: () -> ::String
       end
-      class OperationNotEnabledException < ::Aws::Errors::ServiceError
+      class OperationNotEnabledException < ServiceError
         def message: () -> ::String
       end
-      class PasswordHistoryPolicyViolationException < ::Aws::Errors::ServiceError
+      class PasswordHistoryPolicyViolationException < ServiceError
         def message: () -> ::String
       end
-      class PasswordResetRequiredException < ::Aws::Errors::ServiceError
+      class PasswordResetRequiredException < ServiceError
         def message: () -> ::String
       end
-      class PreconditionNotMetException < ::Aws::Errors::ServiceError
+      class PreconditionNotMetException < ServiceError
         def message: () -> ::String
       end
-      class RefreshTokenReuseException < ::Aws::Errors::ServiceError
+      class RefreshTokenReuseException < ServiceError
         def message: () -> ::String
       end
-      class ResourceNotFoundException < ::Aws::Errors::ServiceError
+      class ResourceNotFoundException < ServiceError
         def message: () -> ::String
       end
-      class ScopeDoesNotExistException < ::Aws::Errors::ServiceError
+      class ScopeDoesNotExistException < ServiceError
         def message: () -> ::String
       end
-      class ServiceQuotaExceededException < ::Aws::Errors::ServiceError
+      class ServiceQuotaExceededException < ServiceError
         def message: () -> ::String
       end
-      class SoftwareTokenMFANotFoundException < ::Aws::Errors::ServiceError
+      class SoftwareTokenMFANotFoundException < ServiceError
         def message: () -> ::String
       end
-      class TermsExistsException < ::Aws::Errors::ServiceError
+      class TermsExistsException < ServiceError
         def message: () -> ::String
       end
-      class TierChangeNotAllowedException < ::Aws::Errors::ServiceError
+      class TierChangeNotAllowedException < ServiceError
         def message: () -> ::String
       end
-      class TooManyFailedAttemptsException < ::Aws::Errors::ServiceError
+      class TooManyFailedAttemptsException < ServiceError
         def message: () -> ::String
       end
-      class TooManyRequestsException < ::Aws::Errors::ServiceError
+      class TooManyRequestsException < ServiceError
         def message: () -> ::String
       end
-      class UnauthorizedException < ::Aws::Errors::ServiceError
+      class UnauthorizedException < ServiceError
         def message: () -> ::String
       end
-      class UnexpectedLambdaException < ::Aws::Errors::ServiceError
+      class UnexpectedLambdaException < ServiceError
         def message: () -> ::String
       end
-      class UnsupportedIdentityProviderException < ::Aws::Errors::ServiceError
+      class UnsupportedIdentityProviderException < ServiceError
         def message: () -> ::String
       end
-      class UnsupportedOperationException < ::Aws::Errors::ServiceError
+      class UnsupportedOperationException < ServiceError
         def message: () -> ::String
       end
-      class UnsupportedTokenTypeException < ::Aws::Errors::ServiceError
+      class UnsupportedTokenTypeException < ServiceError
         def message: () -> ::String
       end
-      class UnsupportedUserStateException < ::Aws::Errors::ServiceError
+      class UnsupportedUserStateException < ServiceError
         def message: () -> ::String
       end
-      class UserImportInProgressException < ::Aws::Errors::ServiceError
+      class UserImportInProgressException < ServiceError
         def message: () -> ::String
       end
-      class UserLambdaValidationException < ::Aws::Errors::ServiceError
+      class UserLambdaValidationException < ServiceError
         def message: () -> ::String
       end
-      class UserNotConfirmedException < ::Aws::Errors::ServiceError
+      class UserNotConfirmedException < ServiceError
         def message: () -> ::String
       end
-      class UserNotFoundException < ::Aws::Errors::ServiceError
+      class UserNotFoundException < ServiceError
         def message: () -> ::String
       end
-      class UserPoolAddOnNotEnabledException < ::Aws::Errors::ServiceError
+      class UserPoolAddOnNotEnabledException < ServiceError
         def message: () -> ::String
       end
-      class UserPoolTaggingException < ::Aws::Errors::ServiceError
+      class UserPoolTaggingException < ServiceError
         def message: () -> ::String
       end
-      class UsernameExistsException < ::Aws::Errors::ServiceError
+      class UsernameExistsException < ServiceError
         def message: () -> ::String
       end
-      class WebAuthnChallengeNotFoundException < ::Aws::Errors::ServiceError
+      class WebAuthnChallengeNotFoundException < ServiceError
         def message: () -> ::String
       end
-      class WebAuthnClientMismatchException < ::Aws::Errors::ServiceError
+      class WebAuthnClientMismatchException < ServiceError
         def message: () -> ::String
       end
-      class WebAuthnConfigurationMissingException < ::Aws::Errors::ServiceError
+      class WebAuthnConfigurationMissingException < ServiceError
         def message: () -> ::String
       end
-      class WebAuthnCredentialNotSupportedException < ::Aws::Errors::ServiceError
+      class WebAuthnCredentialNotSupportedException < ServiceError
         def message: () -> ::String
       end
-      class WebAuthnNotEnabledException < ::Aws::Errors::ServiceError
+      class WebAuthnNotEnabledException < ServiceError
         def message: () -> ::String
       end
-      class WebAuthnOriginNotAllowedException < ::Aws::Errors::ServiceError
+      class WebAuthnOriginNotAllowedException < ServiceError
         def message: () -> ::String
       end
-      class WebAuthnRelyingPartyMismatchException < ::Aws::Errors::ServiceError
+      class WebAuthnRelyingPartyMismatchException < ServiceError
         def message: () -> ::String
       end
     end

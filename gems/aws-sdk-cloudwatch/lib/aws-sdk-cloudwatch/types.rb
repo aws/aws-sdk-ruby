@@ -10,6 +10,23 @@
 module Aws::CloudWatch
   module Types
 
+    # Settings that change the content of the notifications and events that
+    # an alarm sends when its state changes. These settings apply to the
+    # alarm's actions, whichever state triggers them.
+    #
+    # @!attribute [rw] alarm_tags_propagation
+    #   Settings for including the alarm's tags in its action notifications
+    #   and state-change events.
+    #   @return [Types::AlarmTagsPropagation]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/monitoring-2010-08-01/ActionConfiguration AWS API Documentation
+    #
+    class ActionConfiguration < Struct.new(
+      :alarm_tags_propagation)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # Represents an individual contributor to a multi-timeseries alarm,
     # containing information about a specific time series and its
     # contribution to the alarm's state.
@@ -165,6 +182,61 @@ module Aws::CloudWatch
       include Aws::Structure
     end
 
+    # Includes the alarm's tags in the notifications that the alarm sends
+    # to Amazon SNS topics and Lambda functions. The tags are also included
+    # in the alarm's state-change events in Amazon EventBridge. Other types
+    # of alarm actions don't receive the tags.
+    #
+    # By default, the alarm's tags aren't included.
+    #
+    # Use this to route or filter notifications and events by tag, such as
+    # by team or environment. You can also use it to read the alarm's tags
+    # without looking them up separately.
+    #
+    # To limit which tags are included, specify either `IncludedTagKeys` or
+    # `ExcludedTagKeys`. You can't specify both. If you specify neither,
+    # all of the alarm's tags are included. This includes tags that you add
+    # to the alarm later.
+    #
+    # @!attribute [rw] enabled
+    #   Set to `true` to include the alarm's tags. Set to `false` to stop
+    #   including them.
+    #
+    #   When this is `true`, you must have the
+    #   `cloudwatch:ListTagsForResource` permission on the alarm to create
+    #   or update it.
+    #   @return [Boolean]
+    #
+    # @!attribute [rw] included_tag_keys
+    #   The tag keys to include. Only the alarm's tags with these keys are
+    #   included.
+    #
+    #   You can specify 1 to 50 tag keys. Each tag key must be 1 to 128
+    #   characters long.
+    #
+    #   You can't specify both `IncludedTagKeys` and `ExcludedTagKeys`.
+    #   @return [Array<String>]
+    #
+    # @!attribute [rw] excluded_tag_keys
+    #   The tag keys to exclude. All of the alarm's tags except those with
+    #   these keys are included.
+    #
+    #   You can specify 1 to 50 tag keys. Each tag key must be 1 to 128
+    #   characters long.
+    #
+    #   You can't specify both `IncludedTagKeys` and `ExcludedTagKeys`.
+    #   @return [Array<String>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/monitoring-2010-08-01/AlarmTagsPropagation AWS API Documentation
+    #
+    class AlarmTagsPropagation < Struct.new(
+      :enabled,
+      :included_tag_keys,
+      :excluded_tag_keys)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # An anomaly detection model associated with a particular CloudWatch
     # metric, statistic, or metric math expression. You can use the model to
     # display a band of expected, normal values when the metric is graphed.
@@ -267,11 +339,48 @@ module Aws::CloudWatch
     #   [1]: https://en.wikipedia.org/wiki/Tz_database
     #   @return [String]
     #
+    # @!attribute [rw] adaptation_speed
+    #   The speed at which the anomaly detection model adapts to sustained
+    #   changes in the metric's baseline. Faster adaptation lets the model
+    #   track shifting workloads sooner, but increases the chance that the
+    #   model treats a real, lasting change as normal.
+    #
+    #   Valid values:
+    #
+    #   * `FAST` - The model adapts quickly to sustained changes in the
+    #     baseline.
+    #
+    #   * `NORMAL` - The model adapts at a moderate pace. This is the
+    #     default value.
+    #
+    #   * `SLOW` - The model adapts slowly, reducing the risk of treating a
+    #     real change as normal.
+    #   @return [String]
+    #
+    # @!attribute [rw] outlier_filtering_strength
+    #   The aggressiveness with which CloudWatch filters outliers from the
+    #   metric data that the anomaly detection model uses. Stronger
+    #   filtering excludes more extreme values, which can produce a tighter
+    #   band of expected values but may also suppress legitimate spikes.
+    #
+    #   Valid values:
+    #
+    #   * `MINIMAL` - Excludes only the most extreme outliers.
+    #
+    #   * `MODERATE` - Excludes a moderate range of outliers. This is the
+    #     default value.
+    #
+    #   * `STRICT` - Excludes a wider range of outliers, which can suppress
+    #     legitimate spikes.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/monitoring-2010-08-01/AnomalyDetectorConfiguration AWS API Documentation
     #
     class AnomalyDetectorConfiguration < Struct.new(
       :excluded_time_ranges,
-      :metric_timezone)
+      :metric_timezone,
+      :adaptation_speed,
+      :outlier_filtering_strength)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -422,6 +531,12 @@ module Aws::CloudWatch
     #   specified.
     #   @return [Integer]
     #
+    # @!attribute [rw] action_configuration
+    #   Settings that change the content of the notifications and events
+    #   that the alarm sends when its state changes. These settings apply to
+    #   the alarm's actions, whichever state triggers them.
+    #   @return [Types::ActionConfiguration]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/monitoring-2010-08-01/CompositeAlarm AWS API Documentation
     #
     class CompositeAlarm < Struct.new(
@@ -443,7 +558,8 @@ module Aws::CloudWatch
       :actions_suppressed_reason,
       :actions_suppressor,
       :actions_suppressor_wait_period,
-      :actions_suppressor_extension_period)
+      :actions_suppressor_extension_period,
+      :action_configuration)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -3185,6 +3301,12 @@ module Aws::CloudWatch
     #   [1]: https://docs.aws.amazon.com/AmazonCloudWatch/latest/monitoring/alarm-warm-up.html
     #   @return [Types::WarmUpConfiguration]
     #
+    # @!attribute [rw] action_configuration
+    #   Settings that change the content of the notifications and events
+    #   that the alarm sends when its state changes. These settings apply to
+    #   the alarm's actions, whichever state triggers them.
+    #   @return [Types::ActionConfiguration]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/monitoring-2010-08-01/LogAlarm AWS API Documentation
     #
     class LogAlarm < Struct.new(
@@ -3210,7 +3332,8 @@ module Aws::CloudWatch
       :evaluation_state,
       :action_log_line_count,
       :action_log_line_role_arn,
-      :warm_up_configuration)
+      :warm_up_configuration,
+      :action_configuration)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -3557,6 +3680,12 @@ module Aws::CloudWatch
     #   The frequency, in seconds, at which the alarm is evaluated.
     #   @return [Integer]
     #
+    # @!attribute [rw] action_configuration
+    #   Settings that change the content of the notifications and events
+    #   that the alarm sends when its state changes. These settings apply to
+    #   the alarm's actions, whichever state triggers them.
+    #   @return [Types::ActionConfiguration]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/monitoring-2010-08-01/MetricAlarm AWS API Documentation
     #
     class MetricAlarm < Struct.new(
@@ -3592,7 +3721,8 @@ module Aws::CloudWatch
       :evaluation_window,
       :warm_up_configuration,
       :evaluation_criteria,
-      :evaluation_interval)
+      :evaluation_interval,
+      :action_configuration)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -4606,6 +4736,12 @@ module Aws::CloudWatch
     #   specified.
     #   @return [Integer]
     #
+    # @!attribute [rw] action_configuration
+    #   Settings that change the content of the notifications and events
+    #   that the alarm sends when its state changes. These settings apply to
+    #   the alarm's actions, whichever state triggers them.
+    #   @return [Types::ActionConfiguration]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/monitoring-2010-08-01/PutCompositeAlarmInput AWS API Documentation
     #
     class PutCompositeAlarmInput < Struct.new(
@@ -4619,7 +4755,8 @@ module Aws::CloudWatch
       :tags,
       :actions_suppressor,
       :actions_suppressor_wait_period,
-      :actions_suppressor_extension_period)
+      :actions_suppressor_extension_period,
+      :action_configuration)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -4934,6 +5071,12 @@ module Aws::CloudWatch
     #   [1]: https://docs.aws.amazon.com/AmazonCloudWatch/latest/monitoring/alarm-warm-up.html
     #   @return [Types::WarmUpConfiguration]
     #
+    # @!attribute [rw] action_configuration
+    #   Settings that change the content of the notifications and events
+    #   that the alarm sends when its state changes. These settings apply to
+    #   the alarm's actions, whichever state triggers them.
+    #   @return [Types::ActionConfiguration]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/monitoring-2010-08-01/PutLogAlarmInput AWS API Documentation
     #
     class PutLogAlarmInput < Struct.new(
@@ -4952,7 +5095,8 @@ module Aws::CloudWatch
       :comparison_operator,
       :treat_missing_data,
       :tags,
-      :warm_up_configuration)
+      :warm_up_configuration,
+      :action_configuration)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -5497,6 +5641,12 @@ module Aws::CloudWatch
     #   `Metrics`.
     #   @return [Integer]
     #
+    # @!attribute [rw] action_configuration
+    #   Settings that change the content of the notifications and events
+    #   that the alarm sends when its state changes. These settings apply to
+    #   the alarm's actions, whichever state triggers them.
+    #   @return [Types::ActionConfiguration]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/monitoring-2010-08-01/PutMetricAlarmInput AWS API Documentation
     #
     class PutMetricAlarmInput < Struct.new(
@@ -5525,7 +5675,8 @@ module Aws::CloudWatch
       :evaluation_window,
       :warm_up_configuration,
       :evaluation_criteria,
-      :evaluation_interval)
+      :evaluation_interval,
+      :action_configuration)
       SENSITIVE = []
       include Aws::Structure
     end

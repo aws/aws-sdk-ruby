@@ -33,6 +33,9 @@ module Aws::OpenSearchServerless
     BatchGetVpcEndpointRequest = Shapes::StructureShape.new(name: 'BatchGetVpcEndpointRequest')
     BatchGetVpcEndpointResponse = Shapes::StructureShape.new(name: 'BatchGetVpcEndpointResponse')
     Boolean = Shapes::BooleanShape.new(name: 'Boolean')
+    BucketOwnerAccountId = Shapes::StringShape.new(name: 'BucketOwnerAccountId')
+    CancelIngestionJobRequest = Shapes::StructureShape.new(name: 'CancelIngestionJobRequest')
+    CancelIngestionJobResponse = Shapes::StructureShape.new(name: 'CancelIngestionJobResponse')
     CapacityDetails = Shapes::StructureShape.new(name: 'CapacityDetails')
     CapacityLimits = Shapes::StructureShape.new(name: 'CapacityLimits')
     ClientToken = Shapes::StringShape.new(name: 'ClientToken')
@@ -80,6 +83,10 @@ module Aws::OpenSearchServerless
     CreateIamIdentityCenterConfigOptions = Shapes::StructureShape.new(name: 'CreateIamIdentityCenterConfigOptions')
     CreateIndexRequest = Shapes::StructureShape.new(name: 'CreateIndexRequest')
     CreateIndexResponse = Shapes::StructureShape.new(name: 'CreateIndexResponse')
+    CreateIngestionJobRequest = Shapes::StructureShape.new(name: 'CreateIngestionJobRequest')
+    CreateIngestionJobResponse = Shapes::StructureShape.new(name: 'CreateIngestionJobResponse')
+    CreateIngestionStreamRequest = Shapes::StructureShape.new(name: 'CreateIngestionStreamRequest')
+    CreateIngestionStreamResponse = Shapes::StructureShape.new(name: 'CreateIngestionStreamResponse')
     CreateLifecyclePolicyRequest = Shapes::StructureShape.new(name: 'CreateLifecyclePolicyRequest')
     CreateLifecyclePolicyResponse = Shapes::StructureShape.new(name: 'CreateLifecyclePolicyResponse')
     CreateSecurityConfigRequest = Shapes::StructureShape.new(name: 'CreateSecurityConfigRequest')
@@ -99,6 +106,8 @@ module Aws::OpenSearchServerless
     DeleteCollectionResponse = Shapes::StructureShape.new(name: 'DeleteCollectionResponse')
     DeleteIndexRequest = Shapes::StructureShape.new(name: 'DeleteIndexRequest')
     DeleteIndexResponse = Shapes::StructureShape.new(name: 'DeleteIndexResponse')
+    DeleteIngestionStreamRequest = Shapes::StructureShape.new(name: 'DeleteIngestionStreamRequest')
+    DeleteIngestionStreamResponse = Shapes::StructureShape.new(name: 'DeleteIngestionStreamResponse')
     DeleteLifecyclePolicyRequest = Shapes::StructureShape.new(name: 'DeleteLifecyclePolicyRequest')
     DeleteLifecyclePolicyResponse = Shapes::StructureShape.new(name: 'DeleteLifecyclePolicyResponse')
     DeleteSecurityConfigRequest = Shapes::StructureShape.new(name: 'DeleteSecurityConfigRequest')
@@ -124,6 +133,10 @@ module Aws::OpenSearchServerless
     GetAccountSettingsResponse = Shapes::StructureShape.new(name: 'GetAccountSettingsResponse')
     GetIndexRequest = Shapes::StructureShape.new(name: 'GetIndexRequest')
     GetIndexResponse = Shapes::StructureShape.new(name: 'GetIndexResponse')
+    GetIngestionJobRequest = Shapes::StructureShape.new(name: 'GetIngestionJobRequest')
+    GetIngestionJobResponse = Shapes::StructureShape.new(name: 'GetIngestionJobResponse')
+    GetIngestionStreamRequest = Shapes::StructureShape.new(name: 'GetIngestionStreamRequest')
+    GetIngestionStreamResponse = Shapes::StructureShape.new(name: 'GetIngestionStreamResponse')
     GetPoliciesStatsRequest = Shapes::StructureShape.new(name: 'GetPoliciesStatsRequest')
     GetPoliciesStatsResponse = Shapes::StructureShape.new(name: 'GetPoliciesStatsResponse')
     GetSecurityConfigRequest = Shapes::StructureShape.new(name: 'GetSecurityConfigRequest')
@@ -139,6 +152,35 @@ module Aws::OpenSearchServerless
     IndexName = Shapes::StringShape.new(name: 'IndexName')
     IndexSchema = Shapes::DocumentShape.new(name: 'IndexSchema', document: true)
     IndexingCapacityValue = Shapes::IntegerShape.new(name: 'IndexingCapacityValue')
+    IngestionAlert = Shapes::StructureShape.new(name: 'IngestionAlert')
+    IngestionAlertCode = Shapes::StringShape.new(name: 'IngestionAlertCode')
+    IngestionAlerts = Shapes::ListShape.new(name: 'IngestionAlerts')
+    IngestionFailureCode = Shapes::StringShape.new(name: 'IngestionFailureCode')
+    IngestionFailureReason = Shapes::StructureShape.new(name: 'IngestionFailureReason')
+    IngestionFailureReasons = Shapes::ListShape.new(name: 'IngestionFailureReasons')
+    IngestionIndexName = Shapes::StringShape.new(name: 'IngestionIndexName')
+    IngestionJobDetail = Shapes::StructureShape.new(name: 'IngestionJobDetail')
+    IngestionJobId = Shapes::StringShape.new(name: 'IngestionJobId')
+    IngestionJobName = Shapes::StringShape.new(name: 'IngestionJobName')
+    IngestionJobResourceArn = Shapes::StringShape.new(name: 'IngestionJobResourceArn')
+    IngestionJobS3Source = Shapes::StructureShape.new(name: 'IngestionJobS3Source')
+    IngestionJobS3SourceKeyPrefixString = Shapes::StringShape.new(name: 'IngestionJobS3SourceKeyPrefixString')
+    IngestionJobSource = Shapes::StructureShape.new(name: 'IngestionJobSource')
+    IngestionJobStatus = Shapes::StringShape.new(name: 'IngestionJobStatus')
+    IngestionJobSummaries = Shapes::ListShape.new(name: 'IngestionJobSummaries')
+    IngestionJobSummary = Shapes::StructureShape.new(name: 'IngestionJobSummary')
+    IngestionState = Shapes::StringShape.new(name: 'IngestionState')
+    IngestionStatistics = Shapes::StructureShape.new(name: 'IngestionStatistics')
+    IngestionStreamDetail = Shapes::StructureShape.new(name: 'IngestionStreamDetail')
+    IngestionStreamId = Shapes::StringShape.new(name: 'IngestionStreamId')
+    IngestionStreamName = Shapes::StringShape.new(name: 'IngestionStreamName')
+    IngestionStreamResourceArn = Shapes::StringShape.new(name: 'IngestionStreamResourceArn')
+    IngestionStreamS3Source = Shapes::StructureShape.new(name: 'IngestionStreamS3Source')
+    IngestionStreamSource = Shapes::StructureShape.new(name: 'IngestionStreamSource')
+    IngestionStreamStatus = Shapes::StringShape.new(name: 'IngestionStreamStatus')
+    IngestionStreamSummaries = Shapes::ListShape.new(name: 'IngestionStreamSummaries')
+    IngestionStreamSummary = Shapes::StructureShape.new(name: 'IngestionStreamSummary')
+    InitialScan = Shapes::StringShape.new(name: 'InitialScan')
     Integer = Shapes::IntegerShape.new(name: 'Integer')
     InternalServerException = Shapes::StructureShape.new(name: 'InternalServerException')
     LifecyclePolicyDetail = Shapes::StructureShape.new(name: 'LifecyclePolicyDetail')
@@ -164,6 +206,12 @@ module Aws::OpenSearchServerless
     ListCollectionsRequest = Shapes::StructureShape.new(name: 'ListCollectionsRequest')
     ListCollectionsRequestMaxResultsInteger = Shapes::IntegerShape.new(name: 'ListCollectionsRequestMaxResultsInteger')
     ListCollectionsResponse = Shapes::StructureShape.new(name: 'ListCollectionsResponse')
+    ListIngestionJobsRequest = Shapes::StructureShape.new(name: 'ListIngestionJobsRequest')
+    ListIngestionJobsRequestMaxResultsInteger = Shapes::IntegerShape.new(name: 'ListIngestionJobsRequestMaxResultsInteger')
+    ListIngestionJobsResponse = Shapes::StructureShape.new(name: 'ListIngestionJobsResponse')
+    ListIngestionStreamsRequest = Shapes::StructureShape.new(name: 'ListIngestionStreamsRequest')
+    ListIngestionStreamsRequestMaxResultsInteger = Shapes::IntegerShape.new(name: 'ListIngestionStreamsRequestMaxResultsInteger')
+    ListIngestionStreamsResponse = Shapes::StructureShape.new(name: 'ListIngestionStreamsResponse')
     ListLifecyclePoliciesRequest = Shapes::StructureShape.new(name: 'ListLifecyclePoliciesRequest')
     ListLifecyclePoliciesRequestMaxResultsInteger = Shapes::IntegerShape.new(name: 'ListLifecyclePoliciesRequestMaxResultsInteger')
     ListLifecyclePoliciesRequestResourcesList = Shapes::ListShape.new(name: 'ListLifecyclePoliciesRequestResourcesList')
@@ -190,6 +238,9 @@ module Aws::OpenSearchServerless
     ResourceName = Shapes::StringShape.new(name: 'ResourceName')
     ResourceNotFoundException = Shapes::StructureShape.new(name: 'ResourceNotFoundException')
     ResourceType = Shapes::StringShape.new(name: 'ResourceType')
+    RoleArn = Shapes::StringShape.new(name: 'RoleArn')
+    S3BucketNameOrArn = Shapes::StringShape.new(name: 'S3BucketNameOrArn')
+    S3Statistics = Shapes::StructureShape.new(name: 'S3Statistics')
     SamlConfigOptions = Shapes::StructureShape.new(name: 'SamlConfigOptions')
     SamlConfigOptionsSessionTimeoutInteger = Shapes::IntegerShape.new(name: 'SamlConfigOptionsSessionTimeoutInteger')
     SearchCapacityValue = Shapes::IntegerShape.new(name: 'SearchCapacityValue')
@@ -209,7 +260,10 @@ module Aws::OpenSearchServerless
     ServerlessGeneration = Shapes::StringShape.new(name: 'ServerlessGeneration')
     ServerlessVectorAccelerationStatus = Shapes::StringShape.new(name: 'ServerlessVectorAccelerationStatus')
     ServiceQuotaExceededException = Shapes::StructureShape.new(name: 'ServiceQuotaExceededException')
+    SqsArn = Shapes::StringShape.new(name: 'SqsArn')
     StandbyReplicas = Shapes::StringShape.new(name: 'StandbyReplicas')
+    StreamBucketConfig = Shapes::StructureShape.new(name: 'StreamBucketConfig')
+    StreamBucketConfigs = Shapes::ListShape.new(name: 'StreamBucketConfigs')
     String = Shapes::StringShape.new(name: 'String')
     SubnetId = Shapes::StringShape.new(name: 'SubnetId')
     SubnetIds = Shapes::ListShape.new(name: 'SubnetIds')
@@ -220,6 +274,7 @@ module Aws::OpenSearchServerless
     TagResourceResponse = Shapes::StructureShape.new(name: 'TagResourceResponse')
     TagValue = Shapes::StringShape.new(name: 'TagValue')
     Tags = Shapes::ListShape.new(name: 'Tags')
+    Timestamp = Shapes::TimestampShape.new(name: 'Timestamp')
     UntagResourceRequest = Shapes::StructureShape.new(name: 'UntagResourceRequest')
     UntagResourceResponse = Shapes::StructureShape.new(name: 'UntagResourceResponse')
     UpdateAccessPolicyRequest = Shapes::StructureShape.new(name: 'UpdateAccessPolicyRequest')
@@ -328,6 +383,17 @@ module Aws::OpenSearchServerless
     BatchGetVpcEndpointResponse.add_member(:vpc_endpoint_details, Shapes::ShapeRef.new(shape: VpcEndpointDetails, location_name: "vpcEndpointDetails"))
     BatchGetVpcEndpointResponse.add_member(:vpc_endpoint_error_details, Shapes::ShapeRef.new(shape: VpcEndpointErrorDetails, location_name: "vpcEndpointErrorDetails"))
     BatchGetVpcEndpointResponse.struct_class = Types::BatchGetVpcEndpointResponse
+
+    CancelIngestionJobRequest.add_member(:collection_id, Shapes::ShapeRef.new(shape: CollectionId, required: true, location_name: "collectionId"))
+    CancelIngestionJobRequest.add_member(:ingestion_job_id, Shapes::ShapeRef.new(shape: IngestionJobId, required: true, location_name: "ingestionJobId"))
+    CancelIngestionJobRequest.add_member(:client_token, Shapes::ShapeRef.new(shape: ClientToken, location_name: "clientToken", metadata: {"idempotencyToken" => true}))
+    CancelIngestionJobRequest.struct_class = Types::CancelIngestionJobRequest
+
+    CancelIngestionJobResponse.add_member(:ingestion_job_id, Shapes::ShapeRef.new(shape: IngestionJobId, location_name: "ingestionJobId"))
+    CancelIngestionJobResponse.add_member(:collection_id, Shapes::ShapeRef.new(shape: CollectionId, location_name: "collectionId"))
+    CancelIngestionJobResponse.add_member(:ingestion_job_name, Shapes::ShapeRef.new(shape: IngestionJobName, location_name: "ingestionJobName"))
+    CancelIngestionJobResponse.add_member(:status, Shapes::ShapeRef.new(shape: IngestionJobStatus, location_name: "status"))
+    CancelIngestionJobResponse.struct_class = Types::CancelIngestionJobResponse
 
     CapacityDetails.add_member(:capacity_in_ocu, Shapes::ShapeRef.new(shape: Float, location_name: "capacityInOcu"))
     CapacityDetails.add_member(:autoscaling_status, Shapes::ShapeRef.new(shape: AutoscalingStatus, location_name: "autoscalingStatus"))
@@ -508,6 +574,31 @@ module Aws::OpenSearchServerless
 
     CreateIndexResponse.struct_class = Types::CreateIndexResponse
 
+    CreateIngestionJobRequest.add_member(:collection_id, Shapes::ShapeRef.new(shape: CollectionId, required: true, location_name: "collectionId"))
+    CreateIngestionJobRequest.add_member(:ingestion_job_name, Shapes::ShapeRef.new(shape: IngestionJobName, required: true, location_name: "ingestionJobName"))
+    CreateIngestionJobRequest.add_member(:index_name, Shapes::ShapeRef.new(shape: IngestionIndexName, required: true, location_name: "indexName"))
+    CreateIngestionJobRequest.add_member(:failure_index_name, Shapes::ShapeRef.new(shape: IngestionIndexName, location_name: "failureIndexName"))
+    CreateIngestionJobRequest.add_member(:source, Shapes::ShapeRef.new(shape: IngestionJobSource, required: true, location_name: "source"))
+    CreateIngestionJobRequest.add_member(:tags, Shapes::ShapeRef.new(shape: Tags, location_name: "tags"))
+    CreateIngestionJobRequest.add_member(:client_token, Shapes::ShapeRef.new(shape: ClientToken, location_name: "clientToken", metadata: {"idempotencyToken" => true}))
+    CreateIngestionJobRequest.struct_class = Types::CreateIngestionJobRequest
+
+    CreateIngestionJobResponse.add_member(:ingestion_job_detail, Shapes::ShapeRef.new(shape: IngestionJobDetail, location_name: "ingestionJobDetail"))
+    CreateIngestionJobResponse.struct_class = Types::CreateIngestionJobResponse
+
+    CreateIngestionStreamRequest.add_member(:collection_id, Shapes::ShapeRef.new(shape: CollectionId, required: true, location_name: "collectionId"))
+    CreateIngestionStreamRequest.add_member(:ingestion_stream_name, Shapes::ShapeRef.new(shape: IngestionStreamName, required: true, location_name: "ingestionStreamName"))
+    CreateIngestionStreamRequest.add_member(:index_name, Shapes::ShapeRef.new(shape: IngestionIndexName, required: true, location_name: "indexName"))
+    CreateIngestionStreamRequest.add_member(:failure_index_name, Shapes::ShapeRef.new(shape: IngestionIndexName, location_name: "failureIndexName"))
+    CreateIngestionStreamRequest.add_member(:source, Shapes::ShapeRef.new(shape: IngestionStreamSource, required: true, location_name: "source"))
+    CreateIngestionStreamRequest.add_member(:role_arn, Shapes::ShapeRef.new(shape: RoleArn, required: true, location_name: "roleArn"))
+    CreateIngestionStreamRequest.add_member(:tags, Shapes::ShapeRef.new(shape: Tags, location_name: "tags"))
+    CreateIngestionStreamRequest.add_member(:client_token, Shapes::ShapeRef.new(shape: ClientToken, location_name: "clientToken", metadata: {"idempotencyToken" => true}))
+    CreateIngestionStreamRequest.struct_class = Types::CreateIngestionStreamRequest
+
+    CreateIngestionStreamResponse.add_member(:ingestion_stream_detail, Shapes::ShapeRef.new(shape: IngestionStreamDetail, location_name: "ingestionStreamDetail"))
+    CreateIngestionStreamResponse.struct_class = Types::CreateIngestionStreamResponse
+
     CreateLifecyclePolicyRequest.add_member(:type, Shapes::ShapeRef.new(shape: LifecyclePolicyType, required: true, location_name: "type"))
     CreateLifecyclePolicyRequest.add_member(:name, Shapes::ShapeRef.new(shape: PolicyName, required: true, location_name: "name"))
     CreateLifecyclePolicyRequest.add_member(:description, Shapes::ShapeRef.new(shape: PolicyDescription, location_name: "description"))
@@ -591,6 +682,17 @@ module Aws::OpenSearchServerless
 
     DeleteIndexResponse.struct_class = Types::DeleteIndexResponse
 
+    DeleteIngestionStreamRequest.add_member(:collection_id, Shapes::ShapeRef.new(shape: CollectionId, required: true, location_name: "collectionId"))
+    DeleteIngestionStreamRequest.add_member(:ingestion_stream_id, Shapes::ShapeRef.new(shape: IngestionStreamId, required: true, location_name: "ingestionStreamId"))
+    DeleteIngestionStreamRequest.add_member(:client_token, Shapes::ShapeRef.new(shape: ClientToken, location_name: "clientToken", metadata: {"idempotencyToken" => true}))
+    DeleteIngestionStreamRequest.struct_class = Types::DeleteIngestionStreamRequest
+
+    DeleteIngestionStreamResponse.add_member(:ingestion_stream_id, Shapes::ShapeRef.new(shape: IngestionStreamId, location_name: "ingestionStreamId"))
+    DeleteIngestionStreamResponse.add_member(:collection_id, Shapes::ShapeRef.new(shape: CollectionId, location_name: "collectionId"))
+    DeleteIngestionStreamResponse.add_member(:ingestion_stream_name, Shapes::ShapeRef.new(shape: IngestionStreamName, location_name: "ingestionStreamName"))
+    DeleteIngestionStreamResponse.add_member(:status, Shapes::ShapeRef.new(shape: IngestionStreamStatus, location_name: "status"))
+    DeleteIngestionStreamResponse.struct_class = Types::DeleteIngestionStreamResponse
+
     DeleteLifecyclePolicyRequest.add_member(:type, Shapes::ShapeRef.new(shape: LifecyclePolicyType, required: true, location_name: "type"))
     DeleteLifecyclePolicyRequest.add_member(:name, Shapes::ShapeRef.new(shape: PolicyName, required: true, location_name: "name"))
     DeleteLifecyclePolicyRequest.add_member(:client_token, Shapes::ShapeRef.new(shape: ClientToken, location_name: "clientToken", metadata: {"idempotencyToken" => true}))
@@ -668,6 +770,20 @@ module Aws::OpenSearchServerless
     GetIndexResponse.add_member(:index_schema, Shapes::ShapeRef.new(shape: IndexSchema, location_name: "indexSchema"))
     GetIndexResponse.struct_class = Types::GetIndexResponse
 
+    GetIngestionJobRequest.add_member(:collection_id, Shapes::ShapeRef.new(shape: CollectionId, required: true, location_name: "collectionId"))
+    GetIngestionJobRequest.add_member(:ingestion_job_id, Shapes::ShapeRef.new(shape: IngestionJobId, required: true, location_name: "ingestionJobId"))
+    GetIngestionJobRequest.struct_class = Types::GetIngestionJobRequest
+
+    GetIngestionJobResponse.add_member(:ingestion_job_detail, Shapes::ShapeRef.new(shape: IngestionJobDetail, location_name: "ingestionJobDetail"))
+    GetIngestionJobResponse.struct_class = Types::GetIngestionJobResponse
+
+    GetIngestionStreamRequest.add_member(:collection_id, Shapes::ShapeRef.new(shape: CollectionId, required: true, location_name: "collectionId"))
+    GetIngestionStreamRequest.add_member(:ingestion_stream_id, Shapes::ShapeRef.new(shape: IngestionStreamId, required: true, location_name: "ingestionStreamId"))
+    GetIngestionStreamRequest.struct_class = Types::GetIngestionStreamRequest
+
+    GetIngestionStreamResponse.add_member(:ingestion_stream_detail, Shapes::ShapeRef.new(shape: IngestionStreamDetail, location_name: "ingestionStreamDetail"))
+    GetIngestionStreamResponse.struct_class = Types::GetIngestionStreamResponse
+
     GetPoliciesStatsRequest.struct_class = Types::GetPoliciesStatsRequest
 
     GetPoliciesStatsResponse.add_member(:access_policy_stats, Shapes::ShapeRef.new(shape: AccessPolicyStats, location_name: "AccessPolicyStats"))
@@ -701,6 +817,93 @@ module Aws::OpenSearchServerless
     IamIdentityCenterConfigOptions.add_member(:user_attribute, Shapes::ShapeRef.new(shape: IamIdentityCenterUserAttribute, location_name: "userAttribute"))
     IamIdentityCenterConfigOptions.add_member(:group_attribute, Shapes::ShapeRef.new(shape: IamIdentityCenterGroupAttribute, location_name: "groupAttribute"))
     IamIdentityCenterConfigOptions.struct_class = Types::IamIdentityCenterConfigOptions
+
+    IngestionAlert.add_member(:code, Shapes::ShapeRef.new(shape: IngestionAlertCode, location_name: "code"))
+    IngestionAlert.add_member(:message, Shapes::ShapeRef.new(shape: String, location_name: "message"))
+    IngestionAlert.struct_class = Types::IngestionAlert
+
+    IngestionAlerts.member = Shapes::ShapeRef.new(shape: IngestionAlert)
+
+    IngestionFailureReason.add_member(:code, Shapes::ShapeRef.new(shape: IngestionFailureCode, location_name: "code"))
+    IngestionFailureReason.add_member(:message, Shapes::ShapeRef.new(shape: String, location_name: "message"))
+    IngestionFailureReason.struct_class = Types::IngestionFailureReason
+
+    IngestionFailureReasons.member = Shapes::ShapeRef.new(shape: IngestionFailureReason)
+
+    IngestionJobDetail.add_member(:ingestion_job_id, Shapes::ShapeRef.new(shape: IngestionJobId, location_name: "ingestionJobId"))
+    IngestionJobDetail.add_member(:arn, Shapes::ShapeRef.new(shape: IngestionJobResourceArn, location_name: "arn"))
+    IngestionJobDetail.add_member(:collection_id, Shapes::ShapeRef.new(shape: CollectionId, location_name: "collectionId"))
+    IngestionJobDetail.add_member(:ingestion_job_name, Shapes::ShapeRef.new(shape: IngestionJobName, location_name: "ingestionJobName"))
+    IngestionJobDetail.add_member(:index_name, Shapes::ShapeRef.new(shape: IngestionIndexName, location_name: "indexName"))
+    IngestionJobDetail.add_member(:failure_index_name, Shapes::ShapeRef.new(shape: IngestionIndexName, location_name: "failureIndexName"))
+    IngestionJobDetail.add_member(:source, Shapes::ShapeRef.new(shape: IngestionJobSource, location_name: "source"))
+    IngestionJobDetail.add_member(:status, Shapes::ShapeRef.new(shape: IngestionJobStatus, location_name: "status"))
+    IngestionJobDetail.add_member(:state, Shapes::ShapeRef.new(shape: IngestionState, location_name: "state"))
+    IngestionJobDetail.add_member(:statistics, Shapes::ShapeRef.new(shape: IngestionStatistics, location_name: "statistics"))
+    IngestionJobDetail.add_member(:revision, Shapes::ShapeRef.new(shape: Long, location_name: "revision"))
+    IngestionJobDetail.add_member(:created_at, Shapes::ShapeRef.new(shape: Timestamp, location_name: "createdAt"))
+    IngestionJobDetail.add_member(:updated_at, Shapes::ShapeRef.new(shape: Timestamp, location_name: "updatedAt"))
+    IngestionJobDetail.add_member(:failure_reasons, Shapes::ShapeRef.new(shape: IngestionFailureReasons, location_name: "failureReasons"))
+    IngestionJobDetail.add_member(:active_alerts, Shapes::ShapeRef.new(shape: IngestionAlerts, location_name: "activeAlerts"))
+    IngestionJobDetail.struct_class = Types::IngestionJobDetail
+
+    IngestionJobS3Source.add_member(:bucket, Shapes::ShapeRef.new(shape: S3BucketNameOrArn, location_name: "bucket"))
+    IngestionJobS3Source.add_member(:bucket_owner_account_id, Shapes::ShapeRef.new(shape: BucketOwnerAccountId, location_name: "bucketOwnerAccountId"))
+    IngestionJobS3Source.add_member(:key_prefix, Shapes::ShapeRef.new(shape: IngestionJobS3SourceKeyPrefixString, location_name: "keyPrefix"))
+    IngestionJobS3Source.struct_class = Types::IngestionJobS3Source
+
+    IngestionJobSource.add_member(:s3, Shapes::ShapeRef.new(shape: IngestionJobS3Source, required: true, location_name: "s3"))
+    IngestionJobSource.struct_class = Types::IngestionJobSource
+
+    IngestionJobSummaries.member = Shapes::ShapeRef.new(shape: IngestionJobSummary)
+
+    IngestionJobSummary.add_member(:ingestion_job_id, Shapes::ShapeRef.new(shape: IngestionJobId, location_name: "ingestionJobId"))
+    IngestionJobSummary.add_member(:arn, Shapes::ShapeRef.new(shape: IngestionJobResourceArn, location_name: "arn"))
+    IngestionJobSummary.add_member(:ingestion_job_name, Shapes::ShapeRef.new(shape: IngestionJobName, location_name: "ingestionJobName"))
+    IngestionJobSummary.add_member(:index_name, Shapes::ShapeRef.new(shape: IngestionIndexName, location_name: "indexName"))
+    IngestionJobSummary.add_member(:status, Shapes::ShapeRef.new(shape: IngestionJobStatus, location_name: "status"))
+    IngestionJobSummary.add_member(:created_at, Shapes::ShapeRef.new(shape: Timestamp, location_name: "createdAt"))
+    IngestionJobSummary.add_member(:updated_at, Shapes::ShapeRef.new(shape: Timestamp, location_name: "updatedAt"))
+    IngestionJobSummary.struct_class = Types::IngestionJobSummary
+
+    IngestionStatistics.add_member(:s3, Shapes::ShapeRef.new(shape: S3Statistics, location_name: "s3"))
+    IngestionStatistics.struct_class = Types::IngestionStatistics
+
+    IngestionStreamDetail.add_member(:ingestion_stream_id, Shapes::ShapeRef.new(shape: IngestionStreamId, location_name: "ingestionStreamId"))
+    IngestionStreamDetail.add_member(:arn, Shapes::ShapeRef.new(shape: IngestionStreamResourceArn, location_name: "arn"))
+    IngestionStreamDetail.add_member(:collection_id, Shapes::ShapeRef.new(shape: CollectionId, location_name: "collectionId"))
+    IngestionStreamDetail.add_member(:ingestion_stream_name, Shapes::ShapeRef.new(shape: IngestionStreamName, location_name: "ingestionStreamName"))
+    IngestionStreamDetail.add_member(:index_name, Shapes::ShapeRef.new(shape: IngestionIndexName, location_name: "indexName"))
+    IngestionStreamDetail.add_member(:failure_index_name, Shapes::ShapeRef.new(shape: IngestionIndexName, location_name: "failureIndexName"))
+    IngestionStreamDetail.add_member(:source, Shapes::ShapeRef.new(shape: IngestionStreamSource, location_name: "source"))
+    IngestionStreamDetail.add_member(:role_arn, Shapes::ShapeRef.new(shape: RoleArn, location_name: "roleArn"))
+    IngestionStreamDetail.add_member(:status, Shapes::ShapeRef.new(shape: IngestionStreamStatus, location_name: "status"))
+    IngestionStreamDetail.add_member(:state, Shapes::ShapeRef.new(shape: IngestionState, location_name: "state"))
+    IngestionStreamDetail.add_member(:statistics, Shapes::ShapeRef.new(shape: IngestionStatistics, location_name: "statistics"))
+    IngestionStreamDetail.add_member(:revision, Shapes::ShapeRef.new(shape: Long, location_name: "revision"))
+    IngestionStreamDetail.add_member(:created_at, Shapes::ShapeRef.new(shape: Timestamp, location_name: "createdAt"))
+    IngestionStreamDetail.add_member(:updated_at, Shapes::ShapeRef.new(shape: Timestamp, location_name: "updatedAt"))
+    IngestionStreamDetail.add_member(:failure_reasons, Shapes::ShapeRef.new(shape: IngestionFailureReasons, location_name: "failureReasons"))
+    IngestionStreamDetail.add_member(:active_alerts, Shapes::ShapeRef.new(shape: IngestionAlerts, location_name: "activeAlerts"))
+    IngestionStreamDetail.struct_class = Types::IngestionStreamDetail
+
+    IngestionStreamS3Source.add_member(:sqs_arn, Shapes::ShapeRef.new(shape: SqsArn, required: true, location_name: "sqsArn"))
+    IngestionStreamS3Source.add_member(:buckets, Shapes::ShapeRef.new(shape: StreamBucketConfigs, location_name: "buckets"))
+    IngestionStreamS3Source.struct_class = Types::IngestionStreamS3Source
+
+    IngestionStreamSource.add_member(:s3, Shapes::ShapeRef.new(shape: IngestionStreamS3Source, required: true, location_name: "s3"))
+    IngestionStreamSource.struct_class = Types::IngestionStreamSource
+
+    IngestionStreamSummaries.member = Shapes::ShapeRef.new(shape: IngestionStreamSummary)
+
+    IngestionStreamSummary.add_member(:ingestion_stream_id, Shapes::ShapeRef.new(shape: IngestionStreamId, location_name: "ingestionStreamId"))
+    IngestionStreamSummary.add_member(:arn, Shapes::ShapeRef.new(shape: IngestionStreamResourceArn, location_name: "arn"))
+    IngestionStreamSummary.add_member(:ingestion_stream_name, Shapes::ShapeRef.new(shape: IngestionStreamName, location_name: "ingestionStreamName"))
+    IngestionStreamSummary.add_member(:index_name, Shapes::ShapeRef.new(shape: IngestionIndexName, location_name: "indexName"))
+    IngestionStreamSummary.add_member(:status, Shapes::ShapeRef.new(shape: IngestionStreamStatus, location_name: "status"))
+    IngestionStreamSummary.add_member(:created_at, Shapes::ShapeRef.new(shape: Timestamp, location_name: "createdAt"))
+    IngestionStreamSummary.add_member(:updated_at, Shapes::ShapeRef.new(shape: Timestamp, location_name: "updatedAt"))
+    IngestionStreamSummary.struct_class = Types::IngestionStreamSummary
 
     InternalServerException.add_member(:message, Shapes::ShapeRef.new(shape: String, location_name: "message"))
     InternalServerException.struct_class = Types::InternalServerException
@@ -778,6 +981,24 @@ module Aws::OpenSearchServerless
     ListCollectionsResponse.add_member(:next_token, Shapes::ShapeRef.new(shape: String, location_name: "nextToken"))
     ListCollectionsResponse.struct_class = Types::ListCollectionsResponse
 
+    ListIngestionJobsRequest.add_member(:collection_id, Shapes::ShapeRef.new(shape: CollectionId, required: true, location_name: "collectionId"))
+    ListIngestionJobsRequest.add_member(:next_token, Shapes::ShapeRef.new(shape: String, location_name: "nextToken"))
+    ListIngestionJobsRequest.add_member(:max_results, Shapes::ShapeRef.new(shape: ListIngestionJobsRequestMaxResultsInteger, location_name: "maxResults"))
+    ListIngestionJobsRequest.struct_class = Types::ListIngestionJobsRequest
+
+    ListIngestionJobsResponse.add_member(:ingestion_job_summaries, Shapes::ShapeRef.new(shape: IngestionJobSummaries, location_name: "ingestionJobSummaries"))
+    ListIngestionJobsResponse.add_member(:next_token, Shapes::ShapeRef.new(shape: String, location_name: "nextToken"))
+    ListIngestionJobsResponse.struct_class = Types::ListIngestionJobsResponse
+
+    ListIngestionStreamsRequest.add_member(:collection_id, Shapes::ShapeRef.new(shape: CollectionId, required: true, location_name: "collectionId"))
+    ListIngestionStreamsRequest.add_member(:next_token, Shapes::ShapeRef.new(shape: String, location_name: "nextToken"))
+    ListIngestionStreamsRequest.add_member(:max_results, Shapes::ShapeRef.new(shape: ListIngestionStreamsRequestMaxResultsInteger, location_name: "maxResults"))
+    ListIngestionStreamsRequest.struct_class = Types::ListIngestionStreamsRequest
+
+    ListIngestionStreamsResponse.add_member(:ingestion_stream_summaries, Shapes::ShapeRef.new(shape: IngestionStreamSummaries, location_name: "ingestionStreamSummaries"))
+    ListIngestionStreamsResponse.add_member(:next_token, Shapes::ShapeRef.new(shape: String, location_name: "nextToken"))
+    ListIngestionStreamsResponse.struct_class = Types::ListIngestionStreamsResponse
+
     ListLifecyclePoliciesRequest.add_member(:type, Shapes::ShapeRef.new(shape: LifecyclePolicyType, required: true, location_name: "type"))
     ListLifecyclePoliciesRequest.add_member(:resources, Shapes::ShapeRef.new(shape: ListLifecyclePoliciesRequestResourcesList, location_name: "resources"))
     ListLifecyclePoliciesRequest.add_member(:next_token, Shapes::ShapeRef.new(shape: String, location_name: "nextToken"))
@@ -831,6 +1052,11 @@ module Aws::OpenSearchServerless
 
     ResourceNotFoundException.add_member(:message, Shapes::ShapeRef.new(shape: String, location_name: "message"))
     ResourceNotFoundException.struct_class = Types::ResourceNotFoundException
+
+    S3Statistics.add_member(:objects_discovered, Shapes::ShapeRef.new(shape: Long, location_name: "objectsDiscovered"))
+    S3Statistics.add_member(:objects_ingested, Shapes::ShapeRef.new(shape: Long, location_name: "objectsIngested"))
+    S3Statistics.add_member(:objects_failed, Shapes::ShapeRef.new(shape: Long, location_name: "objectsFailed"))
+    S3Statistics.struct_class = Types::S3Statistics
 
     SamlConfigOptions.add_member(:metadata, Shapes::ShapeRef.new(shape: samlMetadata, required: true, location_name: "metadata"))
     SamlConfigOptions.add_member(:user_attribute, Shapes::ShapeRef.new(shape: samlUserAttribute, location_name: "userAttribute"))
@@ -895,6 +1121,13 @@ module Aws::OpenSearchServerless
     ServiceQuotaExceededException.add_member(:quota_code, Shapes::ShapeRef.new(shape: String, location_name: "quotaCode"))
     ServiceQuotaExceededException.struct_class = Types::ServiceQuotaExceededException
 
+    StreamBucketConfig.add_member(:bucket, Shapes::ShapeRef.new(shape: S3BucketNameOrArn, required: true, location_name: "bucket"))
+    StreamBucketConfig.add_member(:bucket_owner_account_id, Shapes::ShapeRef.new(shape: BucketOwnerAccountId, location_name: "bucketOwnerAccountId"))
+    StreamBucketConfig.add_member(:initial_scan, Shapes::ShapeRef.new(shape: InitialScan, location_name: "initialScan"))
+    StreamBucketConfig.struct_class = Types::StreamBucketConfig
+
+    StreamBucketConfigs.member = Shapes::ShapeRef.new(shape: StreamBucketConfig)
+
     SubnetIds.member = Shapes::ShapeRef.new(shape: SubnetId)
 
     Tag.add_member(:key, Shapes::ShapeRef.new(shape: TagKey, required: true, location_name: "key"))
@@ -940,6 +1173,7 @@ module Aws::OpenSearchServerless
     UpdateCollectionDetail.add_member(:type, Shapes::ShapeRef.new(shape: CollectionType, location_name: "type"))
     UpdateCollectionDetail.add_member(:description, Shapes::ShapeRef.new(shape: String, location_name: "description"))
     UpdateCollectionDetail.add_member(:vector_options, Shapes::ShapeRef.new(shape: VectorOptions, location_name: "vectorOptions"))
+    UpdateCollectionDetail.add_member(:kms_key_arn, Shapes::ShapeRef.new(shape: String, location_name: "kmsKeyArn"))
     UpdateCollectionDetail.add_member(:arn, Shapes::ShapeRef.new(shape: String, location_name: "arn"))
     UpdateCollectionDetail.add_member(:created_date, Shapes::ShapeRef.new(shape: Long, location_name: "createdDate"))
     UpdateCollectionDetail.add_member(:last_modified_date, Shapes::ShapeRef.new(shape: Long, location_name: "lastModifiedDate"))
@@ -969,6 +1203,7 @@ module Aws::OpenSearchServerless
     UpdateCollectionRequest.add_member(:description, Shapes::ShapeRef.new(shape: UpdateCollectionRequestDescriptionString, location_name: "description"))
     UpdateCollectionRequest.add_member(:vector_options, Shapes::ShapeRef.new(shape: VectorOptions, location_name: "vectorOptions"))
     UpdateCollectionRequest.add_member(:deletion_protection, Shapes::ShapeRef.new(shape: DeletionProtection, location_name: "deletionProtection"))
+    UpdateCollectionRequest.add_member(:encryption_config, Shapes::ShapeRef.new(shape: EncryptionConfig, location_name: "encryptionConfig"))
     UpdateCollectionRequest.add_member(:client_token, Shapes::ShapeRef.new(shape: ClientToken, location_name: "clientToken", metadata: {"idempotencyToken" => true}))
     UpdateCollectionRequest.struct_class = Types::UpdateCollectionRequest
 
@@ -1148,6 +1383,18 @@ module Aws::OpenSearchServerless
         o.errors << Shapes::ShapeRef.new(shape: ValidationException)
       end)
 
+      api.add_operation(:cancel_ingestion_job, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "CancelIngestionJob"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: CancelIngestionJobRequest)
+        o.output = Shapes::ShapeRef.new(shape: CancelIngestionJobResponse)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
+        o.errors << Shapes::ShapeRef.new(shape: ConflictException)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: ValidationException)
+      end)
+
       api.add_operation(:create_access_policy, Seahorse::Model::Operation.new.tap do |o|
         o.name = "CreateAccessPolicy"
         o.http_method = "POST"
@@ -1195,6 +1442,32 @@ module Aws::OpenSearchServerless
         o.errors << Shapes::ShapeRef.new(shape: ConflictException)
         o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
         o.errors << Shapes::ShapeRef.new(shape: ValidationException)
+      end)
+
+      api.add_operation(:create_ingestion_job, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "CreateIngestionJob"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: CreateIngestionJobRequest)
+        o.output = Shapes::ShapeRef.new(shape: CreateIngestionJobResponse)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
+        o.errors << Shapes::ShapeRef.new(shape: ConflictException)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: ValidationException)
+        o.errors << Shapes::ShapeRef.new(shape: ServiceQuotaExceededException)
+      end)
+
+      api.add_operation(:create_ingestion_stream, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "CreateIngestionStream"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: CreateIngestionStreamRequest)
+        o.output = Shapes::ShapeRef.new(shape: CreateIngestionStreamResponse)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
+        o.errors << Shapes::ShapeRef.new(shape: ConflictException)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: ValidationException)
+        o.errors << Shapes::ShapeRef.new(shape: ServiceQuotaExceededException)
       end)
 
       api.add_operation(:create_lifecycle_policy, Seahorse::Model::Operation.new.tap do |o|
@@ -1292,6 +1565,18 @@ module Aws::OpenSearchServerless
         o.errors << Shapes::ShapeRef.new(shape: ValidationException)
       end)
 
+      api.add_operation(:delete_ingestion_stream, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "DeleteIngestionStream"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: DeleteIngestionStreamRequest)
+        o.output = Shapes::ShapeRef.new(shape: DeleteIngestionStreamResponse)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
+        o.errors << Shapes::ShapeRef.new(shape: ConflictException)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: ValidationException)
+      end)
+
       api.add_operation(:delete_lifecycle_policy, Seahorse::Model::Operation.new.tap do |o|
         o.name = "DeleteLifecyclePolicy"
         o.http_method = "POST"
@@ -1372,6 +1657,28 @@ module Aws::OpenSearchServerless
         o.errors << Shapes::ShapeRef.new(shape: ValidationException)
       end)
 
+      api.add_operation(:get_ingestion_job, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "GetIngestionJob"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: GetIngestionJobRequest)
+        o.output = Shapes::ShapeRef.new(shape: GetIngestionJobResponse)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: ValidationException)
+      end)
+
+      api.add_operation(:get_ingestion_stream, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "GetIngestionStream"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: GetIngestionStreamRequest)
+        o.output = Shapes::ShapeRef.new(shape: GetIngestionStreamResponse)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: ValidationException)
+      end)
+
       api.add_operation(:get_policies_stats, Seahorse::Model::Operation.new.tap do |o|
         o.name = "GetPoliciesStats"
         o.http_method = "POST"
@@ -1442,6 +1749,40 @@ module Aws::OpenSearchServerless
         o.input = Shapes::ShapeRef.new(shape: ListCollectionsRequest)
         o.output = Shapes::ShapeRef.new(shape: ListCollectionsResponse)
         o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
+        o.errors << Shapes::ShapeRef.new(shape: ValidationException)
+        o[:pager] = Aws::Pager.new(
+          limit_key: "max_results",
+          tokens: {
+            "next_token" => "next_token"
+          }
+        )
+      end)
+
+      api.add_operation(:list_ingestion_jobs, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "ListIngestionJobs"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: ListIngestionJobsRequest)
+        o.output = Shapes::ShapeRef.new(shape: ListIngestionJobsResponse)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: ValidationException)
+        o[:pager] = Aws::Pager.new(
+          limit_key: "max_results",
+          tokens: {
+            "next_token" => "next_token"
+          }
+        )
+      end)
+
+      api.add_operation(:list_ingestion_streams, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "ListIngestionStreams"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: ListIngestionStreamsRequest)
+        o.output = Shapes::ShapeRef.new(shape: ListIngestionStreamsResponse)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
         o.errors << Shapes::ShapeRef.new(shape: ValidationException)
         o[:pager] = Aws::Pager.new(
           limit_key: "max_results",

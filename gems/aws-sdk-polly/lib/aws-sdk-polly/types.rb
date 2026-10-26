@@ -363,8 +363,9 @@ module Aws::Polly
     # [1]: https://docs.aws.amazon.com/polly/latest/dg/managing-lexicons.html
     #
     # @!attribute [rw] alphabet
-    #   Phonetic alphabet used in the lexicon. Valid values are `ipa` and
-    #   `x-sampa`.
+    #   Phonetic alphabet used in the lexicon. Valid values are `ipa`,
+    #   `x-sampa`, `x-amazon-pinyin`, `x-amazon-jyutping`,
+    #   `x-amazon-pron-kana`, and `x-amazon-yomigana`.
     #   @return [String]
     #
     # @!attribute [rw] language_code
@@ -681,7 +682,7 @@ module Aws::Polly
     #
     #
     #
-    #   [1]: https://docs.aws.amazon.com/polly/latest/API/API_DescribeVoices.html
+    #   [1]: https://docs.aws.amazon.com/polly/latest/dg/API_DescribeVoices.html
     #   @return [String]
     #
     # @!attribute [rw] action_stream
@@ -1225,7 +1226,10 @@ module Aws::Polly
     end
 
     # The alphabet specified by the lexicon is not a supported alphabet.
-    # Valid values are `x-sampa` and `ipa`.
+    # Valid values are `ipa`, `x-sampa`, `x-amazon-pinyin`,
+    # `x-amazon-jyutping`, `x-amazon-pron-kana`, and `x-amazon-yomigana`.
+    # Replace the unsupported alphabet with one of the valid values and
+    # resubmit your request.
     #
     # @!attribute [rw] message
     #   @return [String]

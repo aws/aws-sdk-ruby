@@ -199,12 +199,19 @@ module Aws::ECR
     #     the required types.
     #
     #   @option options [Boolean] :correct_clock_skew (true)
-    #     Used only in `standard` and `adaptive` retry modes. Specifies whether to apply
-    #     a clock skew correction and retry requests with skewed client clocks.
+    #     Used only in `standard` and `adaptive` retry modes. Specifies whether
+    #     to apply a clock skew correction and retry requests with skewed client
+    #     clocks. Takes effect only when `disable_clock_skew_correction` is not set.
     #
     #   @option options [String] :defaults_mode ("legacy")
     #     See {Aws::DefaultsModeConfiguration} for a list of the
     #     accepted modes and the configuration defaults that are included.
+    #
+    #   @option options [Boolean] :disable_clock_skew_correction
+    #     Used only in `standard` and `adaptive` retry modes. When `true`, the
+    #     SDK does not apply a clock skew correction, does not update its stored
+    #     skew from responses, and does not retry clock skew errors. Clock skew
+    #     correction is enabled by default.
     #
     #   @option options [Boolean] :disable_host_prefix_injection (false)
     #     When `true`, the SDK will not prepend the modeled host prefix to the endpoint.
@@ -2133,6 +2140,114 @@ module Aws::ECR
       req.send_request(options)
     end
 
+    # Returns the status, progress, and per-image results for a replication
+    # backfill. The backfill to describe is identified by the
+    # `replicationBackfillId` returned by the StartReplicationBackfill
+    # operation.
+    #
+    # <note markdown="1"> The per-image results are available only after the replication
+    # backfill reaches a terminal status.
+    #
+    #  </note>
+    #
+    # @option params [String] :registry_id
+    #   The Amazon Web Services account ID associated with the registry that
+    #   contains the replication backfill to describe. If you do not specify a
+    #   registry, the default registry is assumed.
+    #
+    # @option params [required, String] :replication_backfill_id
+    #   The ID of the replication backfill to describe.
+    #
+    # @option params [String] :result_status_filter
+    #   The status used to filter the returned results. Each result has a
+    #   status of `COMPLETE` or `FAILED`. If you omit this parameter, results
+    #   with both statuses are returned.
+    #
+    # @option params [Integer] :max_results
+    #   The maximum number of replication backfill results returned by
+    #   `DescribeReplicationBackfillResults` in paginated output. When this
+    #   parameter is used, `DescribeReplicationBackfillResults` only returns
+    #   `maxResults` results in a single page along with a `nextToken`
+    #   response element. The remaining results of the initial request can be
+    #   seen by sending another `DescribeReplicationBackfillResults` request
+    #   with the returned `nextToken` value. This value can be between 1 and
+    #   1000. If this parameter is not used, then
+    #   `DescribeReplicationBackfillResults` returns up to 100 results and a
+    #   `nextToken` value, if applicable.
+    #
+    # @option params [String] :next_token
+    #   The `nextToken` value returned from a previous paginated
+    #   `DescribeReplicationBackfillResults` request where `maxResults` was
+    #   used and the results exceeded the value of that parameter. Pagination
+    #   continues from the end of the previous results that returned the
+    #   `nextToken` value. This value is `null` when there are no more results
+    #   to return.
+    #
+    #   <note markdown="1"> This token should be treated as an opaque identifier that is only used
+    #   to retrieve the next items in a list and not for other programmatic
+    #   purposes.
+    #
+    #    </note>
+    #
+    # @return [Types::DescribeReplicationBackfillResultsResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::DescribeReplicationBackfillResultsResponse#registry_id #registry_id} => String
+    #   * {Types::DescribeReplicationBackfillResultsResponse#replication_backfill_id #replication_backfill_id} => String
+    #   * {Types::DescribeReplicationBackfillResultsResponse#destination #destination} => Types::ReplicationDestination
+    #   * {Types::DescribeReplicationBackfillResultsResponse#status #status} => String
+    #   * {Types::DescribeReplicationBackfillResultsResponse#failure_code #failure_code} => String
+    #   * {Types::DescribeReplicationBackfillResultsResponse#progress #progress} => Types::ReplicationBackfillProgress
+    #   * {Types::DescribeReplicationBackfillResultsResponse#results #results} => Array&lt;Types::ReplicationBackfillResult&gt;
+    #   * {Types::DescribeReplicationBackfillResultsResponse#started_at #started_at} => Time
+    #   * {Types::DescribeReplicationBackfillResultsResponse#ended_at #ended_at} => Time
+    #   * {Types::DescribeReplicationBackfillResultsResponse#next_token #next_token} => String
+    #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.describe_replication_backfill_results({
+    #     registry_id: "RegistryId",
+    #     replication_backfill_id: "ReplicationBackfillId", # required
+    #     result_status_filter: "COMPLETE", # accepts COMPLETE, FAILED
+    #     max_results: 1,
+    #     next_token: "NextToken",
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.registry_id #=> String
+    #   resp.replication_backfill_id #=> String
+    #   resp.destination.region #=> String
+    #   resp.destination.registry_id #=> String
+    #   resp.status #=> String, one of "PREPARING", "IN_PROGRESS", "COMPLETE", "FAILED", "STOPPING", "STOPPED"
+    #   resp.failure_code #=> String
+    #   resp.progress.total_replication_count #=> Integer
+    #   resp.progress.completed_replication_count #=> Integer
+    #   resp.progress.failed_replication_count #=> Integer
+    #   resp.progress.failure_codes #=> Array
+    #   resp.progress.failure_codes[0] #=> String
+    #   resp.results #=> Array
+    #   resp.results[0].repository_name #=> String
+    #   resp.results[0].image_id.image_digest #=> String
+    #   resp.results[0].image_id.image_tag #=> String
+    #   resp.results[0].status #=> String, one of "COMPLETE", "FAILED"
+    #   resp.results[0].failure_code #=> String
+    #   resp.results[0].sub_image_failure_codes #=> Array
+    #   resp.results[0].sub_image_failure_codes[0] #=> String
+    #   resp.started_at #=> Time
+    #   resp.ended_at #=> Time
+    #   resp.next_token #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ecr-2015-09-21/DescribeReplicationBackfillResults AWS API Documentation
+    #
+    # @overload describe_replication_backfill_results(params = {})
+    # @param [Hash] params ({})
+    def describe_replication_backfill_results(params = {}, options = {})
+      req = build_request(:describe_replication_backfill_results, params)
+      req.send_request(options)
+    end
+
     # Describes image repositories in a registry.
     #
     # @option params [String] :registry_id
@@ -3230,6 +3345,86 @@ module Aws::ECR
       req.send_request(options)
     end
 
+    # Lists the replication backfills for a registry, including their status
+    # and progress.
+    #
+    # <note markdown="1"> Replication backfills that have reached a terminal status are retained
+    # for 90 days after they end, after which they are no longer returned.
+    #
+    #  </note>
+    #
+    # @option params [String] :registry_id
+    #   The Amazon Web Services account ID associated with the registry for
+    #   which to list replication backfills. If you do not specify a registry,
+    #   the default registry is assumed.
+    #
+    # @option params [Integer] :max_results
+    #   The maximum number of replication backfill results returned by
+    #   `ListReplicationBackfills` in paginated output. When this parameter is
+    #   used, `ListReplicationBackfills` only returns `maxResults` results in
+    #   a single page along with a `nextToken` response element. The remaining
+    #   results of the initial request can be seen by sending another
+    #   `ListReplicationBackfills` request with the returned `nextToken`
+    #   value. This value can be between 1 and 50. If this parameter is not
+    #   used, then `ListReplicationBackfills` returns up to 25 results and a
+    #   `nextToken` value, if applicable.
+    #
+    # @option params [String] :next_token
+    #   The `nextToken` value returned from a previous paginated
+    #   `ListReplicationBackfills` request where `maxResults` was used and the
+    #   results exceeded the value of that parameter. Pagination continues
+    #   from the end of the previous results that returned the `nextToken`
+    #   value. This value is `null` when there are no more results to return.
+    #
+    #   <note markdown="1"> This token should be treated as an opaque identifier that is only used
+    #   to retrieve the next items in a list and not for other programmatic
+    #   purposes.
+    #
+    #    </note>
+    #
+    # @return [Types::ListReplicationBackfillsResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::ListReplicationBackfillsResponse#registry_id #registry_id} => String
+    #   * {Types::ListReplicationBackfillsResponse#backfills #backfills} => Array&lt;Types::ReplicationBackfillSummary&gt;
+    #   * {Types::ListReplicationBackfillsResponse#next_token #next_token} => String
+    #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.list_replication_backfills({
+    #     registry_id: "RegistryId",
+    #     max_results: 1,
+    #     next_token: "NextToken",
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.registry_id #=> String
+    #   resp.backfills #=> Array
+    #   resp.backfills[0].replication_backfill_id #=> String
+    #   resp.backfills[0].destination.region #=> String
+    #   resp.backfills[0].destination.registry_id #=> String
+    #   resp.backfills[0].status #=> String, one of "PREPARING", "IN_PROGRESS", "COMPLETE", "FAILED", "STOPPING", "STOPPED"
+    #   resp.backfills[0].failure_code #=> String
+    #   resp.backfills[0].progress.total_replication_count #=> Integer
+    #   resp.backfills[0].progress.completed_replication_count #=> Integer
+    #   resp.backfills[0].progress.failed_replication_count #=> Integer
+    #   resp.backfills[0].progress.failure_codes #=> Array
+    #   resp.backfills[0].progress.failure_codes[0] #=> String
+    #   resp.backfills[0].started_at #=> Time
+    #   resp.backfills[0].ended_at #=> Time
+    #   resp.next_token #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ecr-2015-09-21/ListReplicationBackfills AWS API Documentation
+    #
+    # @overload list_replication_backfills(params = {})
+    # @param [Hash] params ({})
+    def list_replication_backfills(params = {}, options = {})
+      req = build_request(:list_replication_backfills, params)
+      req.send_request(options)
+    end
+
     # List the tags for an Amazon ECR resource.
     #
     # @option params [required, String] :resource_arn
@@ -3990,6 +4185,123 @@ module Aws::ECR
       req.send_request(options)
     end
 
+    # Starts a replication backfill for a registry. A replication backfill
+    # replicates a registry's existing images that match its replication
+    # configuration to the specified destination. Use the
+    # DescribeReplicationBackfillResults operation to monitor the progress
+    # of a replication backfill, and to retrieve its per-image results after
+    # it reaches a terminal status.
+    #
+    # <note markdown="1"> The destination must already be configured in the registry's
+    # replication configuration.
+    #
+    #  </note>
+    #
+    # <note markdown="1"> Only one replication backfill can be in progress for a given
+    # destination Region at a time. Starting a replication backfill for a
+    # destination Region that already has one in progress fails with a
+    # `ReplicationBackfillInProgressException`. In addition, a registry can
+    # have at most 10 replication backfills in progress at once. Starting a
+    # replication backfill that would exceed this limit fails with a
+    # `LimitExceededException`.
+    #
+    #  </note>
+    #
+    # @option params [String] :registry_id
+    #   The Amazon Web Services account ID associated with the registry from
+    #   which to start the replication backfill. If you do not specify a
+    #   registry, the default registry is assumed.
+    #
+    # @option params [required, Types::ReplicationDestination] :destination
+    #   The destination Region and registry to which the images are
+    #   replicated.
+    #
+    # @return [Types::StartReplicationBackfillResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::StartReplicationBackfillResponse#replication_backfill_id #replication_backfill_id} => String
+    #   * {Types::StartReplicationBackfillResponse#registry_id #registry_id} => String
+    #   * {Types::StartReplicationBackfillResponse#destination #destination} => Types::ReplicationDestination
+    #   * {Types::StartReplicationBackfillResponse#status #status} => String
+    #   * {Types::StartReplicationBackfillResponse#started_at #started_at} => Time
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.start_replication_backfill({
+    #     registry_id: "RegistryId",
+    #     destination: { # required
+    #       region: "Region", # required
+    #       registry_id: "RegistryId", # required
+    #     },
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.replication_backfill_id #=> String
+    #   resp.registry_id #=> String
+    #   resp.destination.region #=> String
+    #   resp.destination.registry_id #=> String
+    #   resp.status #=> String, one of "PREPARING", "IN_PROGRESS", "COMPLETE", "FAILED", "STOPPING", "STOPPED"
+    #   resp.started_at #=> Time
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ecr-2015-09-21/StartReplicationBackfill AWS API Documentation
+    #
+    # @overload start_replication_backfill(params = {})
+    # @param [Hash] params ({})
+    def start_replication_backfill(params = {}, options = {})
+      req = build_request(:start_replication_backfill, params)
+      req.send_request(options)
+    end
+
+    # Stops an in progress replication backfill for a registry. The backfill
+    # to stop is identified by the `replicationBackfillId` returned by the
+    # StartReplicationBackfill operation.
+    #
+    # <note markdown="1"> Images that have already been replicated are not affected, and
+    # replications that are already in progress continue to completion.
+    #
+    #  </note>
+    #
+    # @option params [String] :registry_id
+    #   The Amazon Web Services account ID associated with the registry that
+    #   contains the replication backfill to stop. If you do not specify a
+    #   registry, the default registry is assumed.
+    #
+    # @option params [required, String] :replication_backfill_id
+    #   The ID of the replication backfill to stop.
+    #
+    # @return [Types::StopReplicationBackfillResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::StopReplicationBackfillResponse#registry_id #registry_id} => String
+    #   * {Types::StopReplicationBackfillResponse#replication_backfill_id #replication_backfill_id} => String
+    #   * {Types::StopReplicationBackfillResponse#destination #destination} => Types::ReplicationDestination
+    #   * {Types::StopReplicationBackfillResponse#status #status} => String
+    #   * {Types::StopReplicationBackfillResponse#started_at #started_at} => Time
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.stop_replication_backfill({
+    #     registry_id: "RegistryId",
+    #     replication_backfill_id: "ReplicationBackfillId", # required
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.registry_id #=> String
+    #   resp.replication_backfill_id #=> String
+    #   resp.destination.region #=> String
+    #   resp.destination.registry_id #=> String
+    #   resp.status #=> String, one of "PREPARING", "IN_PROGRESS", "COMPLETE", "FAILED", "STOPPING", "STOPPED"
+    #   resp.started_at #=> Time
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ecr-2015-09-21/StopReplicationBackfill AWS API Documentation
+    #
+    # @overload stop_replication_backfill(params = {})
+    # @param [Hash] params ({})
+    def stop_replication_backfill(params = {}, options = {})
+      req = build_request(:stop_replication_backfill, params)
+      req.send_request(options)
+    end
+
     # Adds specified tags to a resource with the specified ARN. Existing
     # tags on a resource are not changed if they are not specified in the
     # request parameters.
@@ -4525,7 +4837,7 @@ module Aws::ECR
         tracer: tracer
       )
       context[:gem_name] = 'aws-sdk-ecr'
-      context[:gem_version] = '1.134.0'
+      context[:gem_version] = '1.138.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

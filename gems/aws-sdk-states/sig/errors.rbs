@@ -11,106 +11,106 @@ module Aws
       class ServiceError < ::Aws::Errors::ServiceError
       end
 
-      class ActivityAlreadyExists < ::Aws::Errors::ServiceError
+      class ActivityAlreadyExists < ServiceError
         def message: () -> ::String
       end
-      class ActivityDoesNotExist < ::Aws::Errors::ServiceError
+      class ActivityDoesNotExist < ServiceError
         def message: () -> ::String
       end
-      class ActivityLimitExceeded < ::Aws::Errors::ServiceError
+      class ActivityLimitExceeded < ServiceError
         def message: () -> ::String
       end
-      class ActivityWorkerLimitExceeded < ::Aws::Errors::ServiceError
+      class ActivityWorkerLimitExceeded < ServiceError
         def message: () -> ::String
       end
-      class ConflictException < ::Aws::Errors::ServiceError
+      class ConflictException < ServiceError
         def message: () -> ::String
       end
-      class ExecutionAlreadyExists < ::Aws::Errors::ServiceError
+      class ExecutionAlreadyExists < ServiceError
         def message: () -> ::String
       end
-      class ExecutionDoesNotExist < ::Aws::Errors::ServiceError
+      class ExecutionDoesNotExist < ServiceError
         def message: () -> ::String
       end
-      class ExecutionLimitExceeded < ::Aws::Errors::ServiceError
+      class ExecutionLimitExceeded < ServiceError
         def message: () -> ::String
       end
-      class ExecutionNotRedrivable < ::Aws::Errors::ServiceError
+      class ExecutionNotRedrivable < ServiceError
         def message: () -> ::String
       end
-      class InvalidArn < ::Aws::Errors::ServiceError
+      class InvalidArn < ServiceError
         def message: () -> ::String
       end
-      class InvalidDefinition < ::Aws::Errors::ServiceError
+      class InvalidDefinition < ServiceError
         def message: () -> ::String
       end
-      class InvalidEncryptionConfiguration < ::Aws::Errors::ServiceError
+      class InvalidEncryptionConfiguration < ServiceError
         def message: () -> ::String
       end
-      class InvalidExecutionInput < ::Aws::Errors::ServiceError
+      class InvalidExecutionInput < ServiceError
         def message: () -> ::String
       end
-      class InvalidLoggingConfiguration < ::Aws::Errors::ServiceError
+      class InvalidLoggingConfiguration < ServiceError
         def message: () -> ::String
       end
-      class InvalidName < ::Aws::Errors::ServiceError
+      class InvalidName < ServiceError
         def message: () -> ::String
       end
-      class InvalidOutput < ::Aws::Errors::ServiceError
+      class InvalidOutput < ServiceError
         def message: () -> ::String
       end
-      class InvalidToken < ::Aws::Errors::ServiceError
+      class InvalidToken < ServiceError
         def message: () -> ::String
       end
-      class InvalidTracingConfiguration < ::Aws::Errors::ServiceError
+      class InvalidTracingConfiguration < ServiceError
         def message: () -> ::String
       end
-      class KmsAccessDeniedException < ::Aws::Errors::ServiceError
+      class KmsAccessDeniedException < ServiceError
         def message: () -> ::String
       end
-      class KmsInvalidStateException < ::Aws::Errors::ServiceError
+      class KmsInvalidStateException < ServiceError
         def kms_key_state: () -> ::String
         def message: () -> ::String
       end
-      class KmsThrottlingException < ::Aws::Errors::ServiceError
+      class KmsThrottlingException < ServiceError
         def message: () -> ::String
       end
-      class MissingRequiredParameter < ::Aws::Errors::ServiceError
+      class MissingRequiredParameter < ServiceError
         def message: () -> ::String
       end
-      class ResourceNotFound < ::Aws::Errors::ServiceError
-        def message: () -> ::String
-        def resource_name: () -> ::String
-      end
-      class ServiceQuotaExceededException < ::Aws::Errors::ServiceError
-        def message: () -> ::String
-      end
-      class StateMachineAlreadyExists < ::Aws::Errors::ServiceError
-        def message: () -> ::String
-      end
-      class StateMachineDeleting < ::Aws::Errors::ServiceError
-        def message: () -> ::String
-      end
-      class StateMachineDoesNotExist < ::Aws::Errors::ServiceError
-        def message: () -> ::String
-      end
-      class StateMachineLimitExceeded < ::Aws::Errors::ServiceError
-        def message: () -> ::String
-      end
-      class StateMachineTypeNotSupported < ::Aws::Errors::ServiceError
-        def message: () -> ::String
-      end
-      class TaskDoesNotExist < ::Aws::Errors::ServiceError
-        def message: () -> ::String
-      end
-      class TaskTimedOut < ::Aws::Errors::ServiceError
-        def message: () -> ::String
-      end
-      class TooManyTags < ::Aws::Errors::ServiceError
+      class ResourceNotFound < ServiceError
         def message: () -> ::String
         def resource_name: () -> ::String
       end
-      class ValidationException < ::Aws::Errors::ServiceError
+      class ServiceQuotaExceededException < ServiceError
+        def message: () -> ::String
+      end
+      class StateMachineAlreadyExists < ServiceError
+        def message: () -> ::String
+      end
+      class StateMachineDeleting < ServiceError
+        def message: () -> ::String
+      end
+      class StateMachineDoesNotExist < ServiceError
+        def message: () -> ::String
+      end
+      class StateMachineLimitExceeded < ServiceError
+        def message: () -> ::String
+      end
+      class StateMachineTypeNotSupported < ServiceError
+        def message: () -> ::String
+      end
+      class TaskDoesNotExist < ServiceError
+        def message: () -> ::String
+      end
+      class TaskTimedOut < ServiceError
+        def message: () -> ::String
+      end
+      class TooManyTags < ServiceError
+        def message: () -> ::String
+        def resource_name: () -> ::String
+      end
+      class ValidationException < ServiceError
         def message: () -> ::String
         def reason: () -> ::String
       end

@@ -1,6 +1,31 @@
 Unreleased Changes
 ------------------
 
+1.203.0 (2026-10-22)
+------------------
+
+* Feature - AWS Lambda durable functions now supports payloads up to 1 MB for checkpoints, callback completion, and error details.
+
+1.202.0 (2026-10-21)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
+1.201.0 (2026-10-20)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
+1.200.0 (2026-10-19)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
+1.199.0 (2026-10-14)
+------------------
+
+* Feature - AWS Lambda now supports an optional X-Ray trace header for chained invocations in durable executions, enabling child invocations to be linked to the initiating span.
+
 1.198.0 (2026-10-12)
 ------------------
 

@@ -140,6 +140,7 @@ module Aws::IVS
       attr_accessor multitrack_input_configuration: Types::MultitrackInputConfiguration
       attr_accessor container_format: ("TS" | "FRAGMENTED_MP4")
       attr_accessor ad_configuration_arn: ::String
+      attr_accessor failover_slate_configuration_arn: ::String
       SENSITIVE: []
     end
 
@@ -168,6 +169,7 @@ module Aws::IVS
       attr_accessor preset: ("HIGHER_BANDWIDTH_DELIVERY" | "CONSTRAINED_BANDWIDTH_DELIVERY")
       attr_accessor playback_restriction_policy_arn: ::String
       attr_accessor ad_configuration_arn: ::String
+      attr_accessor failover_slate_configuration_arn: ::String
       SENSITIVE: []
     end
 
@@ -210,12 +212,27 @@ module Aws::IVS
       attr_accessor multitrack_input_configuration: Types::MultitrackInputConfiguration
       attr_accessor container_format: ("TS" | "FRAGMENTED_MP4")
       attr_accessor ad_configuration_arn: ::String
+      attr_accessor failover_slate_configuration_arn: ::String
       SENSITIVE: []
     end
 
     class CreateChannelResponse
       attr_accessor channel: Types::Channel
       attr_accessor stream_key: Types::StreamKey
+      SENSITIVE: []
+    end
+
+    class CreateFailoverSlateConfigurationRequest
+      attr_accessor name: ::String
+      attr_accessor activation_threshold_seconds: ::Integer
+      attr_accessor min_slate_display_seconds: ::Integer
+      attr_accessor max_slate_display_seconds: ::Integer
+      attr_accessor tags: ::Hash[::String, ::String]
+      SENSITIVE: []
+    end
+
+    class CreateFailoverSlateConfigurationResponse
+      attr_accessor failover_slate_configuration: Types::FailoverSlateConfiguration
       SENSITIVE: []
     end
 
@@ -269,6 +286,11 @@ module Aws::IVS
       SENSITIVE: []
     end
 
+    class DeleteFailoverSlateConfigurationRequest
+      attr_accessor arn: ::String
+      SENSITIVE: []
+    end
+
     class DeletePlaybackKeyPairRequest
       attr_accessor arn: ::String
       SENSITIVE: []
@@ -297,6 +319,28 @@ module Aws::IVS
       SENSITIVE: []
     end
 
+    class FailoverSlateConfiguration
+      attr_accessor arn: ::String
+      attr_accessor name: ::String
+      attr_accessor activation_threshold_seconds: ::Integer
+      attr_accessor min_slate_display_seconds: ::Integer
+      attr_accessor max_slate_display_seconds: ::Integer
+      attr_accessor state: ("CREATING" | "CREATE_FAILED" | "CREATED" | "UPDATING")
+      attr_accessor tags: ::Hash[::String, ::String]
+      SENSITIVE: []
+    end
+
+    class FailoverSlateConfigurationSummary
+      attr_accessor arn: ::String
+      attr_accessor name: ::String
+      attr_accessor activation_threshold_seconds: ::Integer
+      attr_accessor min_slate_display_seconds: ::Integer
+      attr_accessor max_slate_display_seconds: ::Integer
+      attr_accessor state: ("CREATING" | "CREATE_FAILED" | "CREATED" | "UPDATING")
+      attr_accessor tags: ::Hash[::String, ::String]
+      SENSITIVE: []
+    end
+
     class GetAdConfigurationRequest
       attr_accessor arn: ::String
       SENSITIVE: []
@@ -314,6 +358,16 @@ module Aws::IVS
 
     class GetChannelResponse
       attr_accessor channel: Types::Channel
+      SENSITIVE: []
+    end
+
+    class GetFailoverSlateConfigurationRequest
+      attr_accessor arn: ::String
+      SENSITIVE: []
+    end
+
+    class GetFailoverSlateConfigurationResponse
+      attr_accessor failover_slate_configuration: Types::FailoverSlateConfiguration
       SENSITIVE: []
     end
 
@@ -443,6 +497,7 @@ module Aws::IVS
       attr_accessor filter_by_recording_configuration_arn: ::String
       attr_accessor filter_by_playback_restriction_policy_arn: ::String
       attr_accessor filter_by_ad_configuration_arn: ::String
+      attr_accessor filter_by_failover_slate_configuration_arn: ::String
       attr_accessor next_token: ::String
       attr_accessor max_results: ::Integer
       SENSITIVE: []
@@ -450,6 +505,18 @@ module Aws::IVS
 
     class ListChannelsResponse
       attr_accessor channels: ::Array[Types::ChannelSummary]
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class ListFailoverSlateConfigurationsRequest
+      attr_accessor next_token: ::String
+      attr_accessor max_results: ::Integer
+      SENSITIVE: []
+    end
+
+    class ListFailoverSlateConfigurationsResponse
+      attr_accessor failover_slate_configurations: ::Array[Types::FailoverSlateConfigurationSummary]
       attr_accessor next_token: ::String
       SENSITIVE: []
     end
@@ -754,6 +821,7 @@ module Aws::IVS
       attr_accessor ingest_configurations: Types::IngestConfigurations
       attr_accessor recording_configuration: Types::RecordingConfiguration
       attr_accessor truncated_events: ::Array[Types::StreamEvent]
+      attr_accessor failover_slate_configuration: Types::FailoverSlateConfiguration
       SENSITIVE: []
     end
 
@@ -853,11 +921,26 @@ module Aws::IVS
       attr_accessor multitrack_input_configuration: Types::MultitrackInputConfiguration
       attr_accessor container_format: ("TS" | "FRAGMENTED_MP4")
       attr_accessor ad_configuration_arn: ::String
+      attr_accessor failover_slate_configuration_arn: ::String
       SENSITIVE: []
     end
 
     class UpdateChannelResponse
       attr_accessor channel: Types::Channel
+      SENSITIVE: []
+    end
+
+    class UpdateFailoverSlateConfigurationRequest
+      attr_accessor arn: ::String
+      attr_accessor name: ::String
+      attr_accessor activation_threshold_seconds: ::Integer
+      attr_accessor min_slate_display_seconds: ::Integer
+      attr_accessor max_slate_display_seconds: ::Integer
+      SENSITIVE: []
+    end
+
+    class UpdateFailoverSlateConfigurationResponse
+      attr_accessor failover_slate_configuration: Types::FailoverSlateConfiguration
       SENSITIVE: []
     end
 

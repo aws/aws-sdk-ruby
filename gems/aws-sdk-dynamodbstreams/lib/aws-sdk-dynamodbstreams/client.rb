@@ -201,12 +201,19 @@ module Aws::DynamoDBStreams
     #     the required types.
     #
     #   @option options [Boolean] :correct_clock_skew (true)
-    #     Used only in `standard` and `adaptive` retry modes. Specifies whether to apply
-    #     a clock skew correction and retry requests with skewed client clocks.
+    #     Used only in `standard` and `adaptive` retry modes. Specifies whether
+    #     to apply a clock skew correction and retry requests with skewed client
+    #     clocks. Takes effect only when `disable_clock_skew_correction` is not set.
     #
     #   @option options [String] :defaults_mode ("legacy")
     #     See {Aws::DefaultsModeConfiguration} for a list of the
     #     accepted modes and the configuration defaults that are included.
+    #
+    #   @option options [Boolean] :disable_clock_skew_correction
+    #     Used only in `standard` and `adaptive` retry modes. When `true`, the
+    #     SDK does not apply a clock skew correction, does not update its stored
+    #     skew from responses, and does not retry clock skew errors. Clock skew
+    #     correction is enabled by default.
     #
     #   @option options [Boolean] :disable_host_prefix_injection (false)
     #     When `true`, the SDK will not prepend the modeled host prefix to the endpoint.
@@ -807,9 +814,24 @@ module Aws::DynamoDBStreams
     #     the shard, so that you always read the most recent data in the
     #     shard.
     #
+    #   * `AT_TIMESTAMP` - Start reading from the position denoted by a
+    #     specific timestamp, provided in the parameter `Timestamp`.
+    #
     # @option params [String] :sequence_number
     #   The sequence number of a stream record in the shard from which to
     #   start reading.
+    #
+    # @option params [Time,DateTime,Date,Integer,String] :timestamp
+    #   The timestamp of the stream record from which to start reading. Used
+    #   with shard iterator type `AT_TIMESTAMP`. A timestamp is the Unix epoch
+    #   date with precision in milliseconds. For example, `1791316726.480`.
+    #   The iterator points to the first stream record whose
+    #   `ApproximateCreationDateTime` is at or after the specified timestamp.
+    #   If no record with that exact timestamp exists, the iterator points to
+    #   the next (later) record. If the timestamp is older than the current
+    #   trim horizon, the iterator points to the oldest untrimmed stream
+    #   record (`TRIM_HORIZON`). If the timestamp is in the future, the
+    #   request returns a `ValidationException`.
     #
     # @return [Types::GetShardIteratorOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -836,8 +858,9 @@ module Aws::DynamoDBStreams
     #   resp = client.get_shard_iterator({
     #     stream_arn: "StreamArn", # required
     #     shard_id: "ShardId", # required
-    #     shard_iterator_type: "TRIM_HORIZON", # required, accepts TRIM_HORIZON, LATEST, AT_SEQUENCE_NUMBER, AFTER_SEQUENCE_NUMBER
+    #     shard_iterator_type: "TRIM_HORIZON", # required, accepts TRIM_HORIZON, LATEST, AT_SEQUENCE_NUMBER, AFTER_SEQUENCE_NUMBER, AT_TIMESTAMP
     #     sequence_number: "SequenceNumber",
+    #     timestamp: Time.now,
     #   })
     #
     # @example Response structure
@@ -950,7 +973,7 @@ module Aws::DynamoDBStreams
         tracer: tracer
       )
       context[:gem_name] = 'aws-sdk-dynamodbstreams'
-      context[:gem_version] = '1.96.0'
+      context[:gem_version] = '1.100.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

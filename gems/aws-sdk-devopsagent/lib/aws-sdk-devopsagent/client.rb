@@ -201,12 +201,19 @@ module Aws::DevOpsAgent
     #     the required types.
     #
     #   @option options [Boolean] :correct_clock_skew (true)
-    #     Used only in `standard` and `adaptive` retry modes. Specifies whether to apply
-    #     a clock skew correction and retry requests with skewed client clocks.
+    #     Used only in `standard` and `adaptive` retry modes. Specifies whether
+    #     to apply a clock skew correction and retry requests with skewed client
+    #     clocks. Takes effect only when `disable_clock_skew_correction` is not set.
     #
     #   @option options [String] :defaults_mode ("legacy")
     #     See {Aws::DefaultsModeConfiguration} for a list of the
     #     accepted modes and the configuration defaults that are included.
+    #
+    #   @option options [Boolean] :disable_clock_skew_correction
+    #     Used only in `standard` and `adaptive` retry modes. When `true`, the
+    #     SDK does not apply a clock skew correction, does not update its stored
+    #     skew from responses, and does not retry clock skew errors. Clock skew
+    #     correction is enabled by default.
     #
     #   @option options [Boolean] :disable_host_prefix_injection (false)
     #     When `true`, the SDK will not prepend the modeled host prefix to the endpoint.
@@ -631,6 +638,20 @@ module Aws::DevOpsAgent
     #       },
     #       remoteagentsigv4: {
     #       },
+    #       msteams: {
+    #         team_id: "Guid", # required
+    #         team_name: "String", # required
+    #         transmission_target: { # required
+    #           ops_oncall_target: {
+    #             channel_name: "String", # required
+    #             channel_id: "MSTeamsChannelId", # required
+    #           },
+    #           ops_sre_target: {
+    #             channel_name: "String", # required
+    #             channel_id: "MSTeamsChannelId", # required
+    #           },
+    #         },
+    #       },
     #       release_management: {
     #         name: "DisplayName", # required
     #         network_access: { # required
@@ -730,6 +751,12 @@ module Aws::DevOpsAgent
     #   resp.association.configuration.mcpserversigv4.tool_details #=> Array
     #   resp.association.configuration.mcpserversigv4.tool_details[0].name #=> String
     #   resp.association.configuration.mcpserversigv4.tool_details[0].tool_classification #=> String, one of "READ_ONLY", "MUTATIVE", "DESTRUCTIVE"
+    #   resp.association.configuration.msteams.team_id #=> String
+    #   resp.association.configuration.msteams.team_name #=> String
+    #   resp.association.configuration.msteams.transmission_target.ops_oncall_target.channel_name #=> String
+    #   resp.association.configuration.msteams.transmission_target.ops_oncall_target.channel_id #=> String
+    #   resp.association.configuration.msteams.transmission_target.ops_sre_target.channel_name #=> String
+    #   resp.association.configuration.msteams.transmission_target.ops_sre_target.channel_id #=> String
     #   resp.association.configuration.release_management.name #=> String
     #   resp.association.configuration.release_management.network_access.private_access.private_connection_name #=> String
     #   resp.association.configuration.release_management.network_access.private_access.runtime_role_arn #=> String
@@ -1898,6 +1925,12 @@ module Aws::DevOpsAgent
     #   resp.association.configuration.mcpserversigv4.tool_details #=> Array
     #   resp.association.configuration.mcpserversigv4.tool_details[0].name #=> String
     #   resp.association.configuration.mcpserversigv4.tool_details[0].tool_classification #=> String, one of "READ_ONLY", "MUTATIVE", "DESTRUCTIVE"
+    #   resp.association.configuration.msteams.team_id #=> String
+    #   resp.association.configuration.msteams.team_name #=> String
+    #   resp.association.configuration.msteams.transmission_target.ops_oncall_target.channel_name #=> String
+    #   resp.association.configuration.msteams.transmission_target.ops_oncall_target.channel_id #=> String
+    #   resp.association.configuration.msteams.transmission_target.ops_sre_target.channel_name #=> String
+    #   resp.association.configuration.msteams.transmission_target.ops_sre_target.channel_id #=> String
     #   resp.association.configuration.release_management.name #=> String
     #   resp.association.configuration.release_management.network_access.private_access.private_connection_name #=> String
     #   resp.association.configuration.release_management.network_access.private_access.runtime_role_arn #=> String
@@ -2086,7 +2119,7 @@ module Aws::DevOpsAgent
     # @example Response structure
     #
     #   resp.service.service_id #=> String
-    #   resp.service.service_type #=> String, one of "github", "slack", "azure", "azuredevops", "dynatrace", "servicenow", "pagerduty", "gitlab", "eventChannel", "mcpservernewrelic", "mcpservergrafana", "mcpserverdatadog", "mcpserver", "mcpserversplunk", "azureidentity", "mcpserversigv4", "remoteagent", "remoteagentsigv4"
+    #   resp.service.service_type #=> String, one of "github", "slack", "azure", "azuredevops", "msteams", "dynatrace", "servicenow", "pagerduty", "gitlab", "eventChannel", "mcpservernewrelic", "mcpservergrafana", "mcpserverdatadog", "mcpserver", "mcpserversplunk", "azureidentity", "mcpserversigv4", "remoteagent", "remoteagentsigv4"
     #   resp.service.name #=> String
     #   resp.service.accessible_resources #=> Array
     #   resp.service.additional_service_details.github.owner #=> String
@@ -2566,6 +2599,12 @@ module Aws::DevOpsAgent
     #   resp.associations[0].configuration.mcpserversigv4.tool_details #=> Array
     #   resp.associations[0].configuration.mcpserversigv4.tool_details[0].name #=> String
     #   resp.associations[0].configuration.mcpserversigv4.tool_details[0].tool_classification #=> String, one of "READ_ONLY", "MUTATIVE", "DESTRUCTIVE"
+    #   resp.associations[0].configuration.msteams.team_id #=> String
+    #   resp.associations[0].configuration.msteams.team_name #=> String
+    #   resp.associations[0].configuration.msteams.transmission_target.ops_oncall_target.channel_name #=> String
+    #   resp.associations[0].configuration.msteams.transmission_target.ops_oncall_target.channel_id #=> String
+    #   resp.associations[0].configuration.msteams.transmission_target.ops_sre_target.channel_name #=> String
+    #   resp.associations[0].configuration.msteams.transmission_target.ops_sre_target.channel_id #=> String
     #   resp.associations[0].configuration.release_management.name #=> String
     #   resp.associations[0].configuration.release_management.network_access.private_access.private_connection_name #=> String
     #   resp.associations[0].configuration.release_management.network_access.private_access.runtime_role_arn #=> String
@@ -3066,7 +3105,7 @@ module Aws::DevOpsAgent
     #   resp = client.list_services({
     #     max_results: 1,
     #     next_token: "NextToken",
-    #     filter_service_type: "github", # accepts github, slack, azure, azuredevops, dynatrace, servicenow, pagerduty, gitlab, eventChannel, mcpservernewrelic, mcpservergrafana, mcpserverdatadog, mcpserver, mcpserversplunk, azureidentity, mcpserversigv4, remoteagent, remoteagentsigv4
+    #     filter_service_type: "github", # accepts github, slack, azure, azuredevops, msteams, dynatrace, servicenow, pagerduty, gitlab, eventChannel, mcpservernewrelic, mcpservergrafana, mcpserverdatadog, mcpserver, mcpserversplunk, azureidentity, mcpserversigv4, remoteagent, remoteagentsigv4
     #   })
     #
     # @example Response structure
@@ -3074,7 +3113,7 @@ module Aws::DevOpsAgent
     #   resp.next_token #=> String
     #   resp.services #=> Array
     #   resp.services[0].service_id #=> String
-    #   resp.services[0].service_type #=> String, one of "github", "slack", "azure", "azuredevops", "dynatrace", "servicenow", "pagerduty", "gitlab", "eventChannel", "mcpservernewrelic", "mcpservergrafana", "mcpserverdatadog", "mcpserver", "mcpserversplunk", "azureidentity", "mcpserversigv4", "remoteagent", "remoteagentsigv4"
+    #   resp.services[0].service_type #=> String, one of "github", "slack", "azure", "azuredevops", "msteams", "dynatrace", "servicenow", "pagerduty", "gitlab", "eventChannel", "mcpservernewrelic", "mcpservergrafana", "mcpserverdatadog", "mcpserver", "mcpserversplunk", "azureidentity", "mcpserversigv4", "remoteagent", "remoteagentsigv4"
     #   resp.services[0].name #=> String
     #   resp.services[0].accessible_resources #=> Array
     #   resp.services[0].additional_service_details.github.owner #=> String
@@ -4393,6 +4432,20 @@ module Aws::DevOpsAgent
     #       },
     #       remoteagentsigv4: {
     #       },
+    #       msteams: {
+    #         team_id: "Guid", # required
+    #         team_name: "String", # required
+    #         transmission_target: { # required
+    #           ops_oncall_target: {
+    #             channel_name: "String", # required
+    #             channel_id: "MSTeamsChannelId", # required
+    #           },
+    #           ops_sre_target: {
+    #             channel_name: "String", # required
+    #             channel_id: "MSTeamsChannelId", # required
+    #           },
+    #         },
+    #       },
     #       release_management: {
     #         name: "DisplayName", # required
     #         network_access: { # required
@@ -4492,6 +4545,12 @@ module Aws::DevOpsAgent
     #   resp.association.configuration.mcpserversigv4.tool_details #=> Array
     #   resp.association.configuration.mcpserversigv4.tool_details[0].name #=> String
     #   resp.association.configuration.mcpserversigv4.tool_details[0].tool_classification #=> String, one of "READ_ONLY", "MUTATIVE", "DESTRUCTIVE"
+    #   resp.association.configuration.msteams.team_id #=> String
+    #   resp.association.configuration.msteams.team_name #=> String
+    #   resp.association.configuration.msteams.transmission_target.ops_oncall_target.channel_name #=> String
+    #   resp.association.configuration.msteams.transmission_target.ops_oncall_target.channel_id #=> String
+    #   resp.association.configuration.msteams.transmission_target.ops_sre_target.channel_name #=> String
+    #   resp.association.configuration.msteams.transmission_target.ops_sre_target.channel_id #=> String
     #   resp.association.configuration.release_management.name #=> String
     #   resp.association.configuration.release_management.network_access.private_access.private_connection_name #=> String
     #   resp.association.configuration.release_management.network_access.private_access.runtime_role_arn #=> String
@@ -4886,7 +4945,7 @@ module Aws::DevOpsAgent
         tracer: tracer
       )
       context[:gem_name] = 'aws-sdk-devopsagent'
-      context[:gem_version] = '1.18.0'
+      context[:gem_version] = '1.21.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

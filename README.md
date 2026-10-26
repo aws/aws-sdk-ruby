@@ -354,6 +354,7 @@ RubyGems.org page under "LINKS" section.
 | AWS Comprehend Medical                                | Aws::ComprehendMedical                   | aws-sdk-comprehendmedical                   | 2018-10-30  |
 | AWS Compute Optimizer                                 | Aws::ComputeOptimizer                    | aws-sdk-computeoptimizer                    | 2019-11-01  |
 | AWS Config                                            | Aws::ConfigService                       | aws-sdk-configservice                       | 2014-11-12  |
+| AWS Continuum                                         | Aws::Continuum                           | aws-sdk-continuum                           | 2022-07-26  |
 | AWS Control Catalog                                   | Aws::ControlCatalog                      | aws-sdk-controlcatalog                      | 2018-05-10  |
 | AWS Control Tower                                     | Aws::ControlTower                        | aws-sdk-controltower                        | 2018-05-10  |
 | AWS Cost Explorer Service                             | Aws::CostExplorer                        | aws-sdk-costexplorer                        | 2017-10-25  |
@@ -471,7 +472,6 @@ RubyGems.org page under "LINKS" section.
 | AWS Systems Manager Incident Manager Contacts         | Aws::SSMContacts                         | aws-sdk-ssmcontacts                         | 2021-05-03  |
 | AWS Systems Manager QuickSetup                        | Aws::SSMQuickSetup                       | aws-sdk-ssmquicksetup                       | 2018-05-10  |
 | AWS Systems Manager for SAP                           | Aws::SsmSap                              | aws-sdk-ssmsap                              | 2018-05-10  |
-| AWS Telco Network Builder                             | Aws::Tnb                                 | aws-sdk-tnb                                 | 2008-10-21  |
 | AWS Transfer Family                                   | Aws::Transfer                            | aws-sdk-transfer                            | 2018-11-05  |
 | AWS User Experience Customization                     | Aws::Uxc                                 | aws-sdk-uxc                                 | 2024-07-01  |
 | AWS User Notifications                                | Aws::Notifications                       | aws-sdk-notifications                       | 2018-05-10  |
@@ -698,8 +698,6 @@ RubyGems.org page under "LINKS" section.
 | Elastic Disaster Recovery Service                     | Aws::Drs                                 | aws-sdk-drs                                 | 2020-02-26  |
 | Elastic Load Balancing                                | Aws::ElasticLoadBalancing                | aws-sdk-elasticloadbalancing                | 2012-06-01  |
 | Elastic Load Balancing                                | Aws::ElasticLoadBalancingV2              | aws-sdk-elasticloadbalancingv2              | 2015-12-01  |
-| FinSpace Public API                                   | Aws::FinSpaceData                        | aws-sdk-finspacedata                        | 2020-07-13  |
-| FinSpace User Environment Management service          | Aws::Finspace                            | aws-sdk-finspace                            | 2021-03-12  |
 | Firewall Management Service                           | Aws::FMS                                 | aws-sdk-fms                                 | 2018-01-01  |
 | IAM Roles Anywhere                                    | Aws::RolesAnywhere                       | aws-sdk-rolesanywhere                       | 2018-05-10  |
 | IAM Toolbox (Preview)                                 | Aws::IAMToolbox                          | aws-sdk-iamtoolbox                          | 2018-05-10  |

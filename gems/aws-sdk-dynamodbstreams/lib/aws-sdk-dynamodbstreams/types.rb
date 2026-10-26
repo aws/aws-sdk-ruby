@@ -249,6 +249,9 @@ module Aws::DynamoDBStreams
     #   * `LATEST` - Start reading just after the most recent stream record
     #     in the shard, so that you always read the most recent data in the
     #     shard.
+    #
+    #   * `AT_TIMESTAMP` - Start reading from the position denoted by a
+    #     specific timestamp, provided in the parameter `Timestamp`.
     #   @return [String]
     #
     # @!attribute [rw] sequence_number
@@ -256,13 +259,27 @@ module Aws::DynamoDBStreams
     #   start reading.
     #   @return [String]
     #
+    # @!attribute [rw] timestamp
+    #   The timestamp of the stream record from which to start reading. Used
+    #   with shard iterator type `AT_TIMESTAMP`. A timestamp is the Unix
+    #   epoch date with precision in milliseconds. For example,
+    #   `1791316726.480`. The iterator points to the first stream record
+    #   whose `ApproximateCreationDateTime` is at or after the specified
+    #   timestamp. If no record with that exact timestamp exists, the
+    #   iterator points to the next (later) record. If the timestamp is
+    #   older than the current trim horizon, the iterator points to the
+    #   oldest untrimmed stream record (`TRIM_HORIZON`). If the timestamp is
+    #   in the future, the request returns a `ValidationException`.
+    #   @return [Time]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/streams-dynamodb-2012-08-10/GetShardIteratorInput AWS API Documentation
     #
     class GetShardIteratorInput < Struct.new(
       :stream_arn,
       :shard_id,
       :shard_iterator_type,
-      :sequence_number)
+      :sequence_number,
+      :timestamp)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -754,11 +771,14 @@ module Aws::DynamoDBStreams
     #
     # @!attribute [rw] approximate_creation_date_time
     #   The approximate date and time when the stream record was created, in
-    #   [ISO 8601][1] format and rounded down to the closest second.
+    #   [UNIX epoch time][1] format and rounded down to the closest second.
+    #   Some tools and SDKs may convert this value to a different format,
+    #   such as [ISO 8601][2].
     #
     #
     #
-    #   [1]: https://www.iso.org/iso-8601-date-and-time-format.html
+    #   [1]: http://www.epochconverter.com/
+    #   [2]: https://www.iso.org/iso-8601-date-and-time-format.html
     #   @return [Time]
     #
     # @!attribute [rw] keys

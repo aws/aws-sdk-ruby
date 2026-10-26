@@ -1,6 +1,21 @@
 Unreleased Changes
 ------------------
 
+1.75.0 (2026-10-21)
+------------------
+
+* Feature - Update the UpdateProfileWithAgent API to return a streaming response to provide more frequent updates on what the agent is doing.
+
+1.74.0 (2026-10-20)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
+1.73.0 (2026-10-19)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
 1.72.0 (2026-09-11)
 ------------------
 

@@ -1,6 +1,26 @@
 Unreleased Changes
 ------------------
 
+1.1299.0 (2026-10-26)
+------------------
+
+* Feature - Updated the partitions source data that determines the AWS service regions and endpoints.
+
+1.1298.0 (2026-10-22)
+------------------
+
+* Feature - Added support for enumerating regions for `Aws::Continuum`.
+
+1.1297.0 (2026-10-21)
+------------------
+
+* Feature - Updated the partitions source data that determines the AWS service regions and endpoints.
+
+1.1296.0 (2026-10-14)
+------------------
+
+* Feature - Updated the partitions source data that determines the AWS service regions and endpoints.
+
 1.1295.0 (2026-10-13)
 ------------------
 

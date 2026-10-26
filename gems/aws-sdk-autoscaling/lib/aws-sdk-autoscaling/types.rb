@@ -59,6 +59,61 @@ module Aws::AutoScaling
       include Aws::Structure
     end
 
+    # Describes an account setting for Amazon EC2 Auto Scaling. Account
+    # settings control how certain features behave for your account. Some
+    # settings can be enforced after a specified date, meaning that after
+    # the enforcement date, you can no longer modify the setting.
+    #
+    # @!attribute [rw] name
+    #   The name of the account setting. Each account setting has a unique
+    #   name that identifies the specific feature it controls.
+    #   @return [String]
+    #
+    # @!attribute [rw] value
+    #   The current value of the account setting.
+    #   @return [String]
+    #
+    # @!attribute [rw] enforcement_type
+    #   The type of enforcement for the account setting. Valid values
+    #   include: `hard` (the setting has a hard enforcement date after which
+    #   the setting will be enforced and cannot be modified), `flexible`
+    #   (the setting has a flexible enforcement where you can always modify
+    #   the setting value), and `none` (the setting has no enforcement and
+    #   can always be modified).
+    #   @return [String]
+    #
+    # @!attribute [rw] enforcement_date
+    #   The date when the account setting will be enforced. After this date,
+    #   for settings with hard enforcement type, you can no longer modify
+    #   the setting value. This parameter is only returned for settings with
+    #   hard or flexible enforcement types.
+    #   @return [Time]
+    #
+    # @!attribute [rw] default_value
+    #   The default value of the account setting before the enforcement
+    #   date. Valid values are enabled and disabled. This parameter is only
+    #   returned for settings with hard or flexible enforcement types.
+    #   @return [String]
+    #
+    # @!attribute [rw] enforced_value
+    #   The value that will be enforced after the enforcement date. Valid
+    #   values are enabled and disabled. This parameter is only returned for
+    #   settings with hard or flexible enforcement types.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/autoscaling-2011-01-01/AccountSetting AWS API Documentation
+    #
+    class AccountSetting < Struct.new(
+      :name,
+      :value,
+      :enforcement_type,
+      :enforcement_date,
+      :default_value,
+      :enforced_value)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # The request failed because an active instance refresh or rollback for
     # the specified Auto Scaling group was not found.
     #
@@ -2204,6 +2259,52 @@ module Aws::AutoScaling
       :max_number_of_launch_configurations,
       :number_of_auto_scaling_groups,
       :number_of_launch_configurations)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] settings
+    #   Information about the account settings.
+    #   @return [Array<Types::AccountSetting>]
+    #
+    # @!attribute [rw] next_token
+    #   A string that indicates that the response contains more items than
+    #   can be returned in a single response. To receive additional items,
+    #   specify this string for the `NextToken` value when requesting the
+    #   next set of items. This value is `null` when there are no more items
+    #   to return.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/autoscaling-2011-01-01/DescribeAccountSettingsAnswer AWS API Documentation
+    #
+    class DescribeAccountSettingsAnswer < Struct.new(
+      :settings,
+      :next_token)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] name
+    #   The name of the account setting to describe. If you omit this
+    #   parameter, all account settings are described.
+    #   @return [String]
+    #
+    # @!attribute [rw] next_token
+    #   The token for the next set of items to return. (You received this
+    #   token from a previous call.)
+    #   @return [String]
+    #
+    # @!attribute [rw] max_records
+    #   The maximum number of items to return with this call. The default
+    #   value is `50` and the maximum value is `100`.
+    #   @return [Integer]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/autoscaling-2011-01-01/DescribeAccountSettingsType AWS API Documentation
+    #
+    class DescribeAccountSettingsType < Struct.new(
+      :name,
+      :next_token,
+      :max_records)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -6728,6 +6829,28 @@ module Aws::AutoScaling
     #
     class ProcessesType < Struct.new(
       :processes)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @see http://docs.aws.amazon.com/goto/WebAPI/autoscaling-2011-01-01/PutAccountSettingAnswer AWS API Documentation
+    #
+    class PutAccountSettingAnswer < Aws::EmptyStructure; end
+
+    # @!attribute [rw] name
+    #   The name of the account setting to modify. Each account setting has
+    #   a unique name that identifies the specific feature it controls.
+    #   @return [String]
+    #
+    # @!attribute [rw] value
+    #   The value for the account setting.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/autoscaling-2011-01-01/PutAccountSettingType AWS API Documentation
+    #
+    class PutAccountSettingType < Struct.new(
+      :name,
+      :value)
       SENSITIVE = []
       include Aws::Structure
     end

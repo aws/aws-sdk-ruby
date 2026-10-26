@@ -468,7 +468,8 @@ module Aws::ARCRegionswitch
       attr_accessor cross_account_role: ::String
       attr_accessor external_id: ::String
       attr_accessor arn: ::String
-      SENSITIVE: []
+      attr_accessor payload: ::String
+      SENSITIVE: [:payload]
     end
 
     class ListPlanExecutionEventsRequest

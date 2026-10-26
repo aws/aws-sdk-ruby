@@ -11,29 +11,29 @@ module Aws
       class ServiceError < ::Aws::Errors::ServiceError
       end
 
-      class AccessDeniedException < ::Aws::Errors::ServiceError
+      class AccessDeniedException < ServiceError
       end
-      class BadRequestException < ::Aws::Errors::ServiceError
+      class BadRequestException < ServiceError
       end
-      class ConflictException < ::Aws::Errors::ServiceError
+      class ConflictException < ServiceError
       end
-      class ForbiddenException < ::Aws::Errors::ServiceError
+      class ForbiddenException < ServiceError
       end
-      class GoneException < ::Aws::Errors::ServiceError
+      class GoneException < ServiceError
       end
-      class NotFoundException < ::Aws::Errors::ServiceError
+      class NotFoundException < ServiceError
       end
-      class ResourceLimitExceededException < ::Aws::Errors::ServiceError
+      class ResourceLimitExceededException < ServiceError
       end
-      class ServiceFailureException < ::Aws::Errors::ServiceError
+      class ServiceFailureException < ServiceError
       end
-      class ServiceUnavailableException < ::Aws::Errors::ServiceError
+      class ServiceUnavailableException < ServiceError
       end
-      class ThrottledClientException < ::Aws::Errors::ServiceError
+      class ThrottledClientException < ServiceError
       end
-      class UnauthorizedClientException < ::Aws::Errors::ServiceError
+      class UnauthorizedClientException < ServiceError
       end
-      class UnprocessableEntityException < ::Aws::Errors::ServiceError
+      class UnprocessableEntityException < ServiceError
       end
     end
   end

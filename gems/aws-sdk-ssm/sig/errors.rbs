@@ -11,432 +11,432 @@ module Aws
       class ServiceError < ::Aws::Errors::ServiceError
       end
 
-      class AccessDeniedException < ::Aws::Errors::ServiceError
+      class AccessDeniedException < ServiceError
         def message: () -> ::String
       end
-      class AlreadyExistsException < ::Aws::Errors::ServiceError
+      class AlreadyExistsException < ServiceError
         def message: () -> ::String
       end
-      class AssociatedInstances < ::Aws::Errors::ServiceError
+      class AssociatedInstances < ServiceError
       end
-      class AssociationAlreadyExists < ::Aws::Errors::ServiceError
+      class AssociationAlreadyExists < ServiceError
       end
-      class AssociationDoesNotExist < ::Aws::Errors::ServiceError
+      class AssociationDoesNotExist < ServiceError
         def message: () -> ::String
       end
-      class AssociationExecutionDoesNotExist < ::Aws::Errors::ServiceError
+      class AssociationExecutionDoesNotExist < ServiceError
         def message: () -> ::String
       end
-      class AssociationLimitExceeded < ::Aws::Errors::ServiceError
+      class AssociationLimitExceeded < ServiceError
       end
-      class AssociationVersionLimitExceeded < ::Aws::Errors::ServiceError
+      class AssociationVersionLimitExceeded < ServiceError
         def message: () -> ::String
       end
-      class AutomationDefinitionNotApprovedException < ::Aws::Errors::ServiceError
+      class AutomationDefinitionNotApprovedException < ServiceError
         def message: () -> ::String
       end
-      class AutomationDefinitionNotFoundException < ::Aws::Errors::ServiceError
+      class AutomationDefinitionNotFoundException < ServiceError
         def message: () -> ::String
       end
-      class AutomationDefinitionVersionNotFoundException < ::Aws::Errors::ServiceError
+      class AutomationDefinitionVersionNotFoundException < ServiceError
         def message: () -> ::String
       end
-      class AutomationExecutionLimitExceededException < ::Aws::Errors::ServiceError
+      class AutomationExecutionLimitExceededException < ServiceError
         def message: () -> ::String
       end
-      class AutomationExecutionNotFoundException < ::Aws::Errors::ServiceError
+      class AutomationExecutionNotFoundException < ServiceError
         def message: () -> ::String
       end
-      class AutomationStepNotFoundException < ::Aws::Errors::ServiceError
+      class AutomationStepNotFoundException < ServiceError
         def message: () -> ::String
       end
-      class ComplianceTypeCountLimitExceededException < ::Aws::Errors::ServiceError
+      class ComplianceTypeCountLimitExceededException < ServiceError
         def message: () -> ::String
       end
-      class ConflictException < ::Aws::Errors::ServiceError
+      class ConflictException < ServiceError
         def message: () -> ::String
       end
-      class CustomSchemaCountLimitExceededException < ::Aws::Errors::ServiceError
+      class CustomSchemaCountLimitExceededException < ServiceError
         def message: () -> ::String
       end
-      class DocumentAlreadyExists < ::Aws::Errors::ServiceError
+      class DocumentAlreadyExists < ServiceError
         def message: () -> ::String
       end
-      class DocumentLimitExceeded < ::Aws::Errors::ServiceError
+      class DocumentLimitExceeded < ServiceError
         def message: () -> ::String
       end
-      class DocumentPermissionLimit < ::Aws::Errors::ServiceError
+      class DocumentPermissionLimit < ServiceError
         def message: () -> ::String
       end
-      class DocumentVersionLimitExceeded < ::Aws::Errors::ServiceError
+      class DocumentVersionLimitExceeded < ServiceError
         def message: () -> ::String
       end
-      class DoesNotExistException < ::Aws::Errors::ServiceError
+      class DoesNotExistException < ServiceError
         def message: () -> ::String
       end
-      class DuplicateDocumentContent < ::Aws::Errors::ServiceError
+      class DuplicateDocumentContent < ServiceError
         def message: () -> ::String
       end
-      class DuplicateDocumentVersionName < ::Aws::Errors::ServiceError
+      class DuplicateDocumentVersionName < ServiceError
         def message: () -> ::String
       end
-      class DuplicateInstanceId < ::Aws::Errors::ServiceError
+      class DuplicateInstanceId < ServiceError
       end
-      class FeatureNotAvailableException < ::Aws::Errors::ServiceError
+      class FeatureNotAvailableException < ServiceError
         def message: () -> ::String
       end
-      class HierarchyLevelLimitExceededException < ::Aws::Errors::ServiceError
+      class HierarchyLevelLimitExceededException < ServiceError
         def message: () -> ::String
       end
-      class HierarchyTypeMismatchException < ::Aws::Errors::ServiceError
+      class HierarchyTypeMismatchException < ServiceError
         def message: () -> ::String
       end
-      class IdempotentParameterMismatch < ::Aws::Errors::ServiceError
+      class IdempotentParameterMismatch < ServiceError
         def message: () -> ::String
       end
-      class IncompatiblePolicyException < ::Aws::Errors::ServiceError
+      class IncompatiblePolicyException < ServiceError
         def message: () -> ::String
       end
-      class InternalServerError < ::Aws::Errors::ServiceError
+      class InternalServerError < ServiceError
         def message: () -> ::String
       end
-      class InvalidActivation < ::Aws::Errors::ServiceError
+      class InvalidActivation < ServiceError
         def message: () -> ::String
       end
-      class InvalidActivationId < ::Aws::Errors::ServiceError
+      class InvalidActivationId < ServiceError
         def message: () -> ::String
       end
-      class InvalidAggregatorException < ::Aws::Errors::ServiceError
+      class InvalidAggregatorException < ServiceError
         def message: () -> ::String
       end
-      class InvalidAllowedPatternException < ::Aws::Errors::ServiceError
+      class InvalidAllowedPatternException < ServiceError
         def message: () -> ::String
       end
-      class InvalidAssociation < ::Aws::Errors::ServiceError
+      class InvalidAssociation < ServiceError
         def message: () -> ::String
       end
-      class InvalidAssociationVersion < ::Aws::Errors::ServiceError
+      class InvalidAssociationVersion < ServiceError
         def message: () -> ::String
       end
-      class InvalidAutomationExecutionParametersException < ::Aws::Errors::ServiceError
+      class InvalidAutomationExecutionParametersException < ServiceError
         def message: () -> ::String
       end
-      class InvalidAutomationSignalException < ::Aws::Errors::ServiceError
+      class InvalidAutomationSignalException < ServiceError
         def message: () -> ::String
       end
-      class InvalidAutomationStatusUpdateException < ::Aws::Errors::ServiceError
+      class InvalidAutomationStatusUpdateException < ServiceError
         def message: () -> ::String
       end
-      class InvalidCommandId < ::Aws::Errors::ServiceError
+      class InvalidCommandId < ServiceError
       end
-      class InvalidDeleteInventoryParametersException < ::Aws::Errors::ServiceError
+      class InvalidDeleteInventoryParametersException < ServiceError
         def message: () -> ::String
       end
-      class InvalidDeletionIdException < ::Aws::Errors::ServiceError
+      class InvalidDeletionIdException < ServiceError
         def message: () -> ::String
       end
-      class InvalidDocument < ::Aws::Errors::ServiceError
+      class InvalidDocument < ServiceError
         def message: () -> ::String
       end
-      class InvalidDocumentContent < ::Aws::Errors::ServiceError
+      class InvalidDocumentContent < ServiceError
         def message: () -> ::String
       end
-      class InvalidDocumentOperation < ::Aws::Errors::ServiceError
+      class InvalidDocumentOperation < ServiceError
         def message: () -> ::String
       end
-      class InvalidDocumentSchemaVersion < ::Aws::Errors::ServiceError
+      class InvalidDocumentSchemaVersion < ServiceError
         def message: () -> ::String
       end
-      class InvalidDocumentType < ::Aws::Errors::ServiceError
+      class InvalidDocumentType < ServiceError
         def message: () -> ::String
       end
-      class InvalidDocumentVersion < ::Aws::Errors::ServiceError
+      class InvalidDocumentVersion < ServiceError
         def message: () -> ::String
       end
-      class InvalidFilter < ::Aws::Errors::ServiceError
+      class InvalidFilter < ServiceError
         def message: () -> ::String
       end
-      class InvalidFilterKey < ::Aws::Errors::ServiceError
+      class InvalidFilterKey < ServiceError
       end
-      class InvalidFilterOption < ::Aws::Errors::ServiceError
+      class InvalidFilterOption < ServiceError
         def message: () -> ::String
       end
-      class InvalidFilterValue < ::Aws::Errors::ServiceError
+      class InvalidFilterValue < ServiceError
         def message: () -> ::String
       end
-      class InvalidInstanceId < ::Aws::Errors::ServiceError
+      class InvalidInstanceId < ServiceError
         def message: () -> ::String
       end
-      class InvalidInstanceInformationFilterValue < ::Aws::Errors::ServiceError
+      class InvalidInstanceInformationFilterValue < ServiceError
         def message: () -> ::String
       end
-      class InvalidInstancePropertyFilterValue < ::Aws::Errors::ServiceError
+      class InvalidInstancePropertyFilterValue < ServiceError
         def message: () -> ::String
       end
-      class InvalidInventoryGroupException < ::Aws::Errors::ServiceError
+      class InvalidInventoryGroupException < ServiceError
         def message: () -> ::String
       end
-      class InvalidInventoryItemContextException < ::Aws::Errors::ServiceError
+      class InvalidInventoryItemContextException < ServiceError
         def message: () -> ::String
       end
-      class InvalidInventoryRequestException < ::Aws::Errors::ServiceError
+      class InvalidInventoryRequestException < ServiceError
         def message: () -> ::String
       end
-      class InvalidItemContentException < ::Aws::Errors::ServiceError
+      class InvalidItemContentException < ServiceError
         def type_name: () -> ::String
         def message: () -> ::String
       end
-      class InvalidKeyId < ::Aws::Errors::ServiceError
+      class InvalidKeyId < ServiceError
         def message: () -> ::String
       end
-      class InvalidNextToken < ::Aws::Errors::ServiceError
+      class InvalidNextToken < ServiceError
         def message: () -> ::String
       end
-      class InvalidNotificationConfig < ::Aws::Errors::ServiceError
+      class InvalidNotificationConfig < ServiceError
         def message: () -> ::String
       end
-      class InvalidOptionException < ::Aws::Errors::ServiceError
+      class InvalidOptionException < ServiceError
         def message: () -> ::String
       end
-      class InvalidOutputFolder < ::Aws::Errors::ServiceError
+      class InvalidOutputFolder < ServiceError
       end
-      class InvalidOutputLocation < ::Aws::Errors::ServiceError
+      class InvalidOutputLocation < ServiceError
       end
-      class InvalidParameters < ::Aws::Errors::ServiceError
+      class InvalidParameters < ServiceError
         def message: () -> ::String
       end
-      class InvalidPermissionType < ::Aws::Errors::ServiceError
+      class InvalidPermissionType < ServiceError
         def message: () -> ::String
       end
-      class InvalidPluginName < ::Aws::Errors::ServiceError
+      class InvalidPluginName < ServiceError
       end
-      class InvalidPolicyAttributeException < ::Aws::Errors::ServiceError
+      class InvalidPolicyAttributeException < ServiceError
         def message: () -> ::String
       end
-      class InvalidPolicyTypeException < ::Aws::Errors::ServiceError
+      class InvalidPolicyTypeException < ServiceError
         def message: () -> ::String
       end
-      class InvalidResourceId < ::Aws::Errors::ServiceError
+      class InvalidResourceId < ServiceError
       end
-      class InvalidResourceType < ::Aws::Errors::ServiceError
+      class InvalidResourceType < ServiceError
       end
-      class InvalidResultAttributeException < ::Aws::Errors::ServiceError
+      class InvalidResultAttributeException < ServiceError
         def message: () -> ::String
       end
-      class InvalidRole < ::Aws::Errors::ServiceError
+      class InvalidRole < ServiceError
         def message: () -> ::String
       end
-      class InvalidSchedule < ::Aws::Errors::ServiceError
+      class InvalidSchedule < ServiceError
         def message: () -> ::String
       end
-      class InvalidTag < ::Aws::Errors::ServiceError
+      class InvalidTag < ServiceError
         def message: () -> ::String
       end
-      class InvalidTarget < ::Aws::Errors::ServiceError
+      class InvalidTarget < ServiceError
         def message: () -> ::String
       end
-      class InvalidTargetMaps < ::Aws::Errors::ServiceError
+      class InvalidTargetMaps < ServiceError
         def message: () -> ::String
       end
-      class InvalidTypeNameException < ::Aws::Errors::ServiceError
+      class InvalidTypeNameException < ServiceError
         def message: () -> ::String
       end
-      class InvalidUpdate < ::Aws::Errors::ServiceError
+      class InvalidUpdate < ServiceError
         def message: () -> ::String
       end
-      class InvocationDoesNotExist < ::Aws::Errors::ServiceError
+      class InvocationDoesNotExist < ServiceError
       end
-      class ItemContentMismatchException < ::Aws::Errors::ServiceError
+      class ItemContentMismatchException < ServiceError
         def type_name: () -> ::String
         def message: () -> ::String
       end
-      class ItemSizeLimitExceededException < ::Aws::Errors::ServiceError
+      class ItemSizeLimitExceededException < ServiceError
         def type_name: () -> ::String
         def message: () -> ::String
       end
-      class MalformedResourcePolicyDocumentException < ::Aws::Errors::ServiceError
+      class MalformedResourcePolicyDocumentException < ServiceError
         def message: () -> ::String
       end
-      class MaxDocumentSizeExceeded < ::Aws::Errors::ServiceError
+      class MaxDocumentSizeExceeded < ServiceError
         def message: () -> ::String
       end
-      class NoLongerSupportedException < ::Aws::Errors::ServiceError
+      class NoLongerSupportedException < ServiceError
         def message: () -> ::String
       end
-      class OpsItemAccessDeniedException < ::Aws::Errors::ServiceError
+      class OpsItemAccessDeniedException < ServiceError
         def message: () -> ::String
       end
-      class OpsItemAlreadyExistsException < ::Aws::Errors::ServiceError
+      class OpsItemAlreadyExistsException < ServiceError
         def message: () -> ::String
         def ops_item_id: () -> ::String
       end
-      class OpsItemConflictException < ::Aws::Errors::ServiceError
+      class OpsItemConflictException < ServiceError
         def message: () -> ::String
       end
-      class OpsItemInvalidParameterException < ::Aws::Errors::ServiceError
+      class OpsItemInvalidParameterException < ServiceError
         def parameter_names: () -> ::String
         def message: () -> ::String
       end
-      class OpsItemLimitExceededException < ::Aws::Errors::ServiceError
+      class OpsItemLimitExceededException < ServiceError
         def resource_types: () -> ::String
         def limit: () -> ::String
         def limit_type: () -> ::String
         def message: () -> ::String
       end
-      class OpsItemNotFoundException < ::Aws::Errors::ServiceError
+      class OpsItemNotFoundException < ServiceError
         def message: () -> ::String
       end
-      class OpsItemRelatedItemAlreadyExistsException < ::Aws::Errors::ServiceError
+      class OpsItemRelatedItemAlreadyExistsException < ServiceError
         def message: () -> ::String
         def resource_uri: () -> ::String
         def ops_item_id: () -> ::String
       end
-      class OpsItemRelatedItemAssociationNotFoundException < ::Aws::Errors::ServiceError
+      class OpsItemRelatedItemAssociationNotFoundException < ServiceError
         def message: () -> ::String
       end
-      class OpsMetadataAlreadyExistsException < ::Aws::Errors::ServiceError
+      class OpsMetadataAlreadyExistsException < ServiceError
         def message: () -> ::String
       end
-      class OpsMetadataInvalidArgumentException < ::Aws::Errors::ServiceError
+      class OpsMetadataInvalidArgumentException < ServiceError
         def message: () -> ::String
       end
-      class OpsMetadataKeyLimitExceededException < ::Aws::Errors::ServiceError
+      class OpsMetadataKeyLimitExceededException < ServiceError
         def message: () -> ::String
       end
-      class OpsMetadataLimitExceededException < ::Aws::Errors::ServiceError
+      class OpsMetadataLimitExceededException < ServiceError
         def message: () -> ::String
       end
-      class OpsMetadataNotFoundException < ::Aws::Errors::ServiceError
+      class OpsMetadataNotFoundException < ServiceError
         def message: () -> ::String
       end
-      class OpsMetadataTooManyUpdatesException < ::Aws::Errors::ServiceError
+      class OpsMetadataTooManyUpdatesException < ServiceError
         def message: () -> ::String
       end
-      class ParameterAlreadyExists < ::Aws::Errors::ServiceError
+      class ParameterAlreadyExists < ServiceError
         def message: () -> ::String
       end
-      class ParameterLimitExceeded < ::Aws::Errors::ServiceError
+      class ParameterLimitExceeded < ServiceError
         def message: () -> ::String
       end
-      class ParameterMaxVersionLimitExceeded < ::Aws::Errors::ServiceError
+      class ParameterMaxVersionLimitExceeded < ServiceError
         def message: () -> ::String
       end
-      class ParameterNotFound < ::Aws::Errors::ServiceError
+      class ParameterNotFound < ServiceError
         def message: () -> ::String
       end
-      class ParameterPatternMismatchException < ::Aws::Errors::ServiceError
+      class ParameterPatternMismatchException < ServiceError
         def message: () -> ::String
       end
-      class ParameterVersionLabelLimitExceeded < ::Aws::Errors::ServiceError
+      class ParameterVersionLabelLimitExceeded < ServiceError
         def message: () -> ::String
       end
-      class ParameterVersionNotFound < ::Aws::Errors::ServiceError
+      class ParameterVersionNotFound < ServiceError
         def message: () -> ::String
       end
-      class PoliciesLimitExceededException < ::Aws::Errors::ServiceError
+      class PoliciesLimitExceededException < ServiceError
         def message: () -> ::String
       end
-      class ResourceDataSyncAlreadyExistsException < ::Aws::Errors::ServiceError
+      class ResourceDataSyncAlreadyExistsException < ServiceError
         def sync_name: () -> ::String
       end
-      class ResourceDataSyncConflictException < ::Aws::Errors::ServiceError
+      class ResourceDataSyncConflictException < ServiceError
         def message: () -> ::String
       end
-      class ResourceDataSyncCountExceededException < ::Aws::Errors::ServiceError
+      class ResourceDataSyncCountExceededException < ServiceError
         def message: () -> ::String
       end
-      class ResourceDataSyncInvalidConfigurationException < ::Aws::Errors::ServiceError
+      class ResourceDataSyncInvalidConfigurationException < ServiceError
         def message: () -> ::String
       end
-      class ResourceDataSyncNotFoundException < ::Aws::Errors::ServiceError
+      class ResourceDataSyncNotFoundException < ServiceError
         def sync_name: () -> ::String
         def sync_type: () -> ::String
         def message: () -> ::String
       end
-      class ResourceInUseException < ::Aws::Errors::ServiceError
+      class ResourceInUseException < ServiceError
         def message: () -> ::String
       end
-      class ResourceLimitExceededException < ::Aws::Errors::ServiceError
+      class ResourceLimitExceededException < ServiceError
         def message: () -> ::String
       end
-      class ResourceNotFoundException < ::Aws::Errors::ServiceError
+      class ResourceNotFoundException < ServiceError
         def message: () -> ::String
       end
-      class ResourcePolicyConflictException < ::Aws::Errors::ServiceError
+      class ResourcePolicyConflictException < ServiceError
         def message: () -> ::String
       end
-      class ResourcePolicyInvalidParameterException < ::Aws::Errors::ServiceError
+      class ResourcePolicyInvalidParameterException < ServiceError
         def parameter_names: () -> ::String
         def message: () -> ::String
       end
-      class ResourcePolicyLimitExceededException < ::Aws::Errors::ServiceError
+      class ResourcePolicyLimitExceededException < ServiceError
         def limit: () -> ::String
         def limit_type: () -> ::String
         def message: () -> ::String
       end
-      class ResourcePolicyNotFoundException < ::Aws::Errors::ServiceError
+      class ResourcePolicyNotFoundException < ServiceError
         def message: () -> ::String
       end
-      class ServiceQuotaExceededException < ::Aws::Errors::ServiceError
+      class ServiceQuotaExceededException < ServiceError
         def message: () -> ::String
         def resource_id: () -> ::String
         def resource_type: () -> ::String
         def quota_code: () -> ::String
         def service_code: () -> ::String
       end
-      class ServiceSettingNotFound < ::Aws::Errors::ServiceError
+      class ServiceSettingNotFound < ServiceError
         def message: () -> ::String
       end
-      class StatusUnchanged < ::Aws::Errors::ServiceError
+      class StatusUnchanged < ServiceError
       end
-      class SubTypeCountLimitExceededException < ::Aws::Errors::ServiceError
+      class SubTypeCountLimitExceededException < ServiceError
         def message: () -> ::String
       end
-      class TargetInUseException < ::Aws::Errors::ServiceError
+      class TargetInUseException < ServiceError
         def message: () -> ::String
       end
-      class TargetNotConnected < ::Aws::Errors::ServiceError
+      class TargetNotConnected < ServiceError
         def message: () -> ::String
       end
-      class ThrottlingException < ::Aws::Errors::ServiceError
+      class ThrottlingException < ServiceError
         def message: () -> ::String
         def quota_code: () -> ::String
         def service_code: () -> ::String
       end
-      class TooManyTagsError < ::Aws::Errors::ServiceError
+      class TooManyTagsError < ServiceError
       end
-      class TooManyUpdates < ::Aws::Errors::ServiceError
+      class TooManyUpdates < ServiceError
         def message: () -> ::String
       end
-      class TotalSizeLimitExceededException < ::Aws::Errors::ServiceError
+      class TotalSizeLimitExceededException < ServiceError
         def message: () -> ::String
       end
-      class UnsupportedCalendarException < ::Aws::Errors::ServiceError
+      class UnsupportedCalendarException < ServiceError
         def message: () -> ::String
       end
-      class UnsupportedFeatureRequiredException < ::Aws::Errors::ServiceError
+      class UnsupportedFeatureRequiredException < ServiceError
         def message: () -> ::String
       end
-      class UnsupportedInventoryItemContextException < ::Aws::Errors::ServiceError
+      class UnsupportedInventoryItemContextException < ServiceError
         def type_name: () -> ::String
         def message: () -> ::String
       end
-      class UnsupportedInventorySchemaVersionException < ::Aws::Errors::ServiceError
+      class UnsupportedInventorySchemaVersionException < ServiceError
         def message: () -> ::String
       end
-      class UnsupportedOperatingSystem < ::Aws::Errors::ServiceError
+      class UnsupportedOperatingSystem < ServiceError
         def message: () -> ::String
       end
-      class UnsupportedOperationException < ::Aws::Errors::ServiceError
+      class UnsupportedOperationException < ServiceError
         def message: () -> ::String
       end
-      class UnsupportedParameterType < ::Aws::Errors::ServiceError
+      class UnsupportedParameterType < ServiceError
         def message: () -> ::String
       end
-      class UnsupportedPlatformType < ::Aws::Errors::ServiceError
+      class UnsupportedPlatformType < ServiceError
         def message: () -> ::String
       end
-      class ValidationException < ::Aws::Errors::ServiceError
+      class ValidationException < ServiceError
         def message: () -> ::String
         def reason_code: () -> ::String
       end

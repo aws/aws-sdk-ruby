@@ -19,18 +19,6 @@ module Aws::HealthLake
       SENSITIVE: [:body]
     end
 
-    class AgentMessageOutOfContextException
-      attr_accessor message: ::String
-      SENSITIVE: []
-    end
-
-    class AgentOutputMessage
-      attr_accessor body: ::String
-      attr_accessor type: ("INITIAL_GREETING" | "normal" | "confirmation" | "complete" | "error" | "options" | "choices")
-      attr_accessor options_list: ::Array[::String]
-      SENSITIVE: [:body]
-    end
-
     class AnalyticsConfiguration
       attr_accessor status: ("ENABLED" | "ENABLING" | "DISABLED" | "DISABLING" | "PAUSING" | "PAUSED")
       SENSITIVE: []
@@ -51,11 +39,6 @@ module Aws::HealthLake
 
     class ContinuousBackupRestoreConfiguration
       attr_accessor restore_point_time: ::Time
-      SENSITIVE: []
-    end
-
-    class ConversationNotFoundException
-      attr_accessor message: ::String
       SENSITIVE: []
     end
 
@@ -254,10 +237,25 @@ module Aws::HealthLake
       SENSITIVE: []
     end
 
+    class EndOfOutputEvent
+      attr_accessor final_response_message: ::String
+      attr_accessor options: ::Array[::String]
+      attr_accessor conversation_id: ::String
+      attr_accessor event_type: untyped
+      SENSITIVE: [:final_response_message]
+    end
+
     class ErrorCause
       attr_accessor error_message: ::String
       attr_accessor error_category: ("RETRYABLE_ERROR" | "NON_RETRYABLE_ERROR")
       SENSITIVE: []
+    end
+
+    class ErrorEvent
+      attr_accessor error: ("InternalServerException" | "ResourceNotFoundException" | "ValidationException" | "AccessDeniedException" | "ThrottlingException")
+      attr_accessor message: ::String
+      attr_accessor event_type: untyped
+      SENSITIVE: [:message]
     end
 
     class ExistingVersionedProfileSource
@@ -301,6 +299,11 @@ module Aws::HealthLake
       attr_accessor change_description: ::String
       attr_accessor last_updated_at: ::Time
       SENSITIVE: [:profile_mapping]
+    end
+
+    class HeartbeatEvent
+      attr_accessor event_type: untyped
+      SENSITIVE: []
     end
 
     class IdentityProviderConfiguration
@@ -474,11 +477,6 @@ module Aws::HealthLake
       SENSITIVE: []
     end
 
-    class NotImplementedOperationException
-      attr_accessor message: ::String
-      SENSITIVE: []
-    end
-
     class OutputDataConfig
       attr_accessor s3_configuration: Types::S3Configuration
       attr_accessor unknown: untyped
@@ -503,6 +501,12 @@ module Aws::HealthLake
     class ProfileMappingSource
       attr_accessor profile_mapping: ::Hash[::String, ::String]
       SENSITIVE: []
+    end
+
+    class ProgressEvent
+      attr_accessor message: ::String
+      attr_accessor event_type: untyped
+      SENSITIVE: [:message]
     end
 
     class PublishDataTransformationProfileRequest
@@ -658,6 +662,12 @@ module Aws::HealthLake
     class TagResourceResponse < Aws::EmptyStructure
     end
 
+    class TextMessageEvent
+      attr_accessor message: ::String
+      attr_accessor event_type: untyped
+      SENSITIVE: [:message]
+    end
+
     class ThrottlingException
       attr_accessor message: ::String
       SENSITIVE: []
@@ -711,16 +721,6 @@ module Aws::HealthLake
       SENSITIVE: []
     end
 
-    class UnauthorizedException
-      attr_accessor message: ::String
-      SENSITIVE: []
-    end
-
-    class UnsupportedMIMETypeException
-      attr_accessor message: ::String
-      SENSITIVE: []
-    end
-
     class UntagResourceRequest
       attr_accessor resource_arn: ::String
       attr_accessor tag_keys: ::Array[::String]
@@ -764,21 +764,23 @@ module Aws::HealthLake
 
     class UpdateProfileWithAgentRequest
       attr_accessor profile_id: ::String
-      attr_accessor source_format: ("CCDA" | "CSV")
       attr_accessor input_message: Types::AgentInputMessage
       attr_accessor conversation_id: ::String
       SENSITIVE: []
     end
 
     class UpdateProfileWithAgentResponse
-      attr_accessor agent_response: Types::AgentOutputMessage
-      attr_accessor conversation_id: ::String
+      attr_accessor agent_response: Types::AgentOutputMessageStream
       SENSITIVE: []
     end
 
     class ValidationException
       attr_accessor message: ::String
       SENSITIVE: []
+    end
+
+    class AgentOutputMessageStream < Enumerator[untyped, untyped]
+      def event_types: () -> [:text_message_event, :progress_event, :heartbeat_event, :error_event, :end_of_output_event]
     end
   end
 end

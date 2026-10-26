@@ -199,12 +199,19 @@ module Aws::MarketplaceMetering
     #     the required types.
     #
     #   @option options [Boolean] :correct_clock_skew (true)
-    #     Used only in `standard` and `adaptive` retry modes. Specifies whether to apply
-    #     a clock skew correction and retry requests with skewed client clocks.
+    #     Used only in `standard` and `adaptive` retry modes. Specifies whether
+    #     to apply a clock skew correction and retry requests with skewed client
+    #     clocks. Takes effect only when `disable_clock_skew_correction` is not set.
     #
     #   @option options [String] :defaults_mode ("legacy")
     #     See {Aws::DefaultsModeConfiguration} for a list of the
     #     accepted modes and the configuration defaults that are included.
+    #
+    #   @option options [Boolean] :disable_clock_skew_correction
+    #     Used only in `standard` and `adaptive` retry modes. When `true`, the
+    #     SDK does not apply a clock skew correction, does not update its stored
+    #     skew from responses, and does not retry clock skew errors. Clock skew
+    #     correction is enabled by default.
     #
     #   @option options [Boolean] :disable_host_prefix_injection (false)
     #     When `true`, the SDK will not prepend the modeled host prefix to the endpoint.
@@ -481,6 +488,21 @@ module Aws::MarketplaceMetering
 
     # @!group API Operations
 
+    # <note markdown="1"> The Amazon Web Services Marketplace AI Metering Agent Skill
+    # (`aws-marketplace-metering`) helps an AI coding agent integrate your
+    # SaaS product's usage reporting with the `BatchMeterUsage` API. The
+    # skill is a curated package of instructions and reference material that
+    # guides your AI coding agent through building, deploying, and testing
+    # the metering integration. To get the skill on demand without checking
+    # it out locally, install the [Amazon Web Services MCP Server][1] in
+    # your coding agent; the agent then discovers and loads the skill at
+    # runtime. The skill source is also available on [GitHub][2]. For more
+    # information, see [Get started with the Amazon Web Services Marketplace
+    # AI Metering Agent Skill][3] on the Amazon Web Services Marketplace
+    # blog.
+    #
+    #  </note>
+    #
     # Amazon Web Services Marketplace is introducing Concurrent Agreements,
     # enabling buyers to make multiple purchases per Amazon Web Services
     # account. Starting June 1, 2026, new SaaS products must use
@@ -488,8 +510,8 @@ module Aws::MarketplaceMetering
     # (instead of `ProductCode`) to support this feature. `BatchMeterUsage`
     # does not support `CustomerIdentifier` for new integrations. Existing
     # integrations continue to work. Review the new integration for
-    # Concurrent Agreements [here][1]. For additional implementation
-    # details, see [BatchMeterUsage code example with LicenseArn][2] in the
+    # Concurrent Agreements [here][4]. For additional implementation
+    # details, see [BatchMeterUsage code example with LicenseArn][5] in the
     # *Amazon Web Services Marketplace Seller Guide*.
     #
     # To post metering records for customers, SaaS applications call
@@ -523,8 +545,8 @@ module Aws::MarketplaceMetering
     # dimensions, or the total usage that you report. It gives buyers a more
     # granular view of their usage of your product so they can perform cost
     # allocation in the Amazon Web Services Billing and Cost Management
-    # console. For more information, see [Vendor-metered tagging][3] and
-    # [BatchMeterUsage with usage allocation tagging code example][4] in the
+    # console. For more information, see [Vendor-metered tagging][6] and
+    # [BatchMeterUsage with usage allocation tagging code example][7] in the
     # *Amazon Web Services Marketplace Seller Guide*.
     #
     # `BatchMeterUsage` returns a list of `UsageRecordResult` objects, which
@@ -533,21 +555,24 @@ module Aws::MarketplaceMetering
     # should be retried.
     #
     # For Amazon Web Services Regions that support `BatchMeterUsage`, see
-    # [BatchMeterUsage Region support][5].
+    # [BatchMeterUsage Region support][8].
     #
     # <note markdown="1"> For an example of `BatchMeterUsage`, see [ BatchMeterUsage code
-    # example][6] in the *Amazon Web Services Marketplace Seller Guide*.
+    # example][9] in the *Amazon Web Services Marketplace Seller Guide*.
     #
     #  </note>
     #
     #
     #
-    # [1]: https://catalog.workshops.aws/mpseller/en-US/saas/integration-for-concurrent-agreements
-    # [2]: https://docs.aws.amazon.com/marketplace/latest/userguide/saas-code-examples.html#saas-batchmeterusage-licensearn-example
-    # [3]: https://docs.aws.amazon.com/marketplace/latest/userguide/metering-for-usage.html#saas-vendor-metered-tagging
-    # [4]: https://docs.aws.amazon.com/marketplace/latest/userguide/saas-code-examples.html#saas-batchmeterusage-tagging
-    # [5]: https://docs.aws.amazon.com/marketplace/latest/APIReference/metering-regions.html#batchmeterusage-region-support
-    # [6]: https://docs.aws.amazon.com/marketplace/latest/userguide/saas-code-examples.html#saas-batchmeterusage-example
+    # [1]: https://docs.aws.amazon.com/agent-toolkit/latest/userguide/mcp-server.html
+    # [2]: https://github.com/aws/agent-toolkit-for-aws/blob/main/skills/specialized-skills/aws-marketplace-skills/aws-marketplace-metering
+    # [3]: https://aws.amazon.com/blogs/awsmarketplace/build-aws-marketplace-saas-metering-with-the-metering-agent-skill/
+    # [4]: https://catalog.workshops.aws/mpseller/en-US/saas/integration-for-concurrent-agreements
+    # [5]: https://docs.aws.amazon.com/marketplace/latest/userguide/saas-code-examples.html#saas-batchmeterusage-licensearn-example
+    # [6]: https://docs.aws.amazon.com/marketplace/latest/userguide/metering-for-usage.html#saas-vendor-metered-tagging
+    # [7]: https://docs.aws.amazon.com/marketplace/latest/userguide/saas-code-examples.html#saas-batchmeterusage-tagging
+    # [8]: https://docs.aws.amazon.com/marketplace/latest/APIReference/metering-regions.html#batchmeterusage-region-support
+    # [9]: https://docs.aws.amazon.com/marketplace/latest/userguide/saas-code-examples.html#saas-batchmeterusage-example
     #
     # @option params [required, Array<Types::UsageRecord>] :usage_records
     #   The set of `UsageRecords` to submit. `BatchMeterUsage` accepts up to
@@ -989,7 +1014,7 @@ module Aws::MarketplaceMetering
         tracer: tracer
       )
       context[:gem_name] = 'aws-sdk-marketplacemetering'
-      context[:gem_version] = '1.106.0'
+      context[:gem_version] = '1.110.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

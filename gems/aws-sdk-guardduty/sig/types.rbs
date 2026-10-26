@@ -867,12 +867,28 @@ module Aws::GuardDuty
     class DestinationProperties
       attr_accessor destination_arn: ::String
       attr_accessor kms_key_arn: ::String
+      attr_accessor expected_bucket_owner: ::String
       SENSITIVE: []
     end
 
     class Detection
       attr_accessor anomaly: Types::Anomaly
       attr_accessor sequence: Types::Sequence
+      SENSITIVE: []
+    end
+
+    class DetectionRuleEc2Requirements
+      attr_accessor min_agent_version: ::String
+      SENSITIVE: []
+    end
+
+    class DetectionRuleEcsFargateRequirements
+      attr_accessor min_agent_version: ::String
+      SENSITIVE: []
+    end
+
+    class DetectionRuleEksRequirements
+      attr_accessor min_agent_version: ::String
       SENSITIVE: []
     end
 
@@ -904,6 +920,18 @@ module Aws::GuardDuty
       attr_accessor created_at: ::Time
       attr_accessor updated_at: ::Time
       attr_accessor expires_at: ::Time
+      SENSITIVE: []
+    end
+
+    class DetectionRuleRuntimeMonitoringDetails
+      attr_accessor platforms: Types::DetectionRuleRuntimePlatforms
+      SENSITIVE: []
+    end
+
+    class DetectionRuleRuntimePlatforms
+      attr_accessor eks: Types::DetectionRuleEksRequirements
+      attr_accessor ec2: Types::DetectionRuleEc2Requirements
+      attr_accessor ecs_fargate: Types::DetectionRuleEcsFargateRequirements
       SENSITIVE: []
     end
 
@@ -1177,6 +1205,7 @@ module Aws::GuardDuty
       attr_accessor type: ::String
       attr_accessor updated_at: ::String
       attr_accessor associated_attack_sequence_arn: ::String
+      attr_accessor custom_detection_rule_name: ::String
       SENSITIVE: []
     end
 
@@ -2657,13 +2686,14 @@ module Aws::GuardDuty
       attr_accessor name: ::String
       attr_accessor description: ::String
       attr_accessor severity: ("CRITICAL" | "HIGH" | "MEDIUM" | "LOW")
-      attr_accessor data_source: ("CloudTrailManagementEvent")
+      attr_accessor data_source: ("CloudTrailManagementEvent" | "RuntimeMonitoring")
       attr_accessor tactic: ::String
       attr_accessor technique: ::String
       attr_accessor service: ::String
       attr_accessor definition: Types::RuleDefinition
       attr_accessor language: ("SQL")
       attr_accessor schema: ("CloudTrail")
+      attr_accessor runtime_monitoring_details: Types::DetectionRuleRuntimeMonitoringDetails
       attr_accessor created_at: ::Time
       attr_accessor updated_at: ::Time
       SENSITIVE: []
@@ -2675,7 +2705,7 @@ module Aws::GuardDuty
       attr_accessor name: ::String
       attr_accessor description: ::String
       attr_accessor severity: ("CRITICAL" | "HIGH" | "MEDIUM" | "LOW")
-      attr_accessor data_source: ("CloudTrailManagementEvent")
+      attr_accessor data_source: ("CloudTrailManagementEvent" | "RuntimeMonitoring")
       attr_accessor tactic: ::String
       attr_accessor technique: ::String
       attr_accessor service: ::String

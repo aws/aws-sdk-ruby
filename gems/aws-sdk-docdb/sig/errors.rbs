@@ -11,121 +11,121 @@ module Aws
       class ServiceError < ::Aws::Errors::ServiceError
       end
 
-      class AuthorizationNotFoundFault < ::Aws::Errors::ServiceError
+      class AuthorizationNotFoundFault < ServiceError
       end
-      class CertificateNotFoundFault < ::Aws::Errors::ServiceError
+      class CertificateNotFoundFault < ServiceError
       end
-      class DBClusterAlreadyExistsFault < ::Aws::Errors::ServiceError
+      class DBClusterAlreadyExistsFault < ServiceError
       end
-      class DBClusterNotFoundFault < ::Aws::Errors::ServiceError
+      class DBClusterNotFoundFault < ServiceError
       end
-      class DBClusterParameterGroupNotFoundFault < ::Aws::Errors::ServiceError
+      class DBClusterParameterGroupNotFoundFault < ServiceError
       end
-      class DBClusterQuotaExceededFault < ::Aws::Errors::ServiceError
+      class DBClusterQuotaExceededFault < ServiceError
       end
-      class DBClusterSnapshotAlreadyExistsFault < ::Aws::Errors::ServiceError
+      class DBClusterSnapshotAlreadyExistsFault < ServiceError
       end
-      class DBClusterSnapshotNotFoundFault < ::Aws::Errors::ServiceError
+      class DBClusterSnapshotNotFoundFault < ServiceError
       end
-      class DBInstanceAlreadyExistsFault < ::Aws::Errors::ServiceError
+      class DBInstanceAlreadyExistsFault < ServiceError
       end
-      class DBInstanceNotFoundFault < ::Aws::Errors::ServiceError
+      class DBInstanceNotFoundFault < ServiceError
       end
-      class DBParameterGroupAlreadyExistsFault < ::Aws::Errors::ServiceError
+      class DBParameterGroupAlreadyExistsFault < ServiceError
       end
-      class DBParameterGroupNotFoundFault < ::Aws::Errors::ServiceError
+      class DBParameterGroupNotFoundFault < ServiceError
       end
-      class DBParameterGroupQuotaExceededFault < ::Aws::Errors::ServiceError
+      class DBParameterGroupQuotaExceededFault < ServiceError
       end
-      class DBSecurityGroupNotFoundFault < ::Aws::Errors::ServiceError
+      class DBSecurityGroupNotFoundFault < ServiceError
       end
-      class DBSnapshotAlreadyExistsFault < ::Aws::Errors::ServiceError
+      class DBSnapshotAlreadyExistsFault < ServiceError
       end
-      class DBSnapshotNotFoundFault < ::Aws::Errors::ServiceError
+      class DBSnapshotNotFoundFault < ServiceError
       end
-      class DBSubnetGroupAlreadyExistsFault < ::Aws::Errors::ServiceError
+      class DBSubnetGroupAlreadyExistsFault < ServiceError
       end
-      class DBSubnetGroupDoesNotCoverEnoughAZs < ::Aws::Errors::ServiceError
+      class DBSubnetGroupDoesNotCoverEnoughAZs < ServiceError
       end
-      class DBSubnetGroupNotFoundFault < ::Aws::Errors::ServiceError
+      class DBSubnetGroupNotFoundFault < ServiceError
       end
-      class DBSubnetGroupQuotaExceededFault < ::Aws::Errors::ServiceError
+      class DBSubnetGroupQuotaExceededFault < ServiceError
       end
-      class DBSubnetQuotaExceededFault < ::Aws::Errors::ServiceError
+      class DBSubnetQuotaExceededFault < ServiceError
       end
-      class DBUpgradeDependencyFailureFault < ::Aws::Errors::ServiceError
+      class DBUpgradeDependencyFailureFault < ServiceError
       end
-      class EventSubscriptionQuotaExceededFault < ::Aws::Errors::ServiceError
+      class EventSubscriptionQuotaExceededFault < ServiceError
       end
-      class GlobalClusterAlreadyExistsFault < ::Aws::Errors::ServiceError
+      class GlobalClusterAlreadyExistsFault < ServiceError
       end
-      class GlobalClusterNotFoundFault < ::Aws::Errors::ServiceError
+      class GlobalClusterNotFoundFault < ServiceError
       end
-      class GlobalClusterQuotaExceededFault < ::Aws::Errors::ServiceError
+      class GlobalClusterQuotaExceededFault < ServiceError
       end
-      class InstanceQuotaExceededFault < ::Aws::Errors::ServiceError
+      class InstanceQuotaExceededFault < ServiceError
       end
-      class InsufficientDBClusterCapacityFault < ::Aws::Errors::ServiceError
+      class InsufficientDBClusterCapacityFault < ServiceError
       end
-      class InsufficientDBInstanceCapacityFault < ::Aws::Errors::ServiceError
+      class InsufficientDBInstanceCapacityFault < ServiceError
       end
-      class InsufficientStorageClusterCapacityFault < ::Aws::Errors::ServiceError
+      class InsufficientStorageClusterCapacityFault < ServiceError
       end
-      class InvalidDBClusterSnapshotStateFault < ::Aws::Errors::ServiceError
+      class InvalidDBClusterSnapshotStateFault < ServiceError
       end
-      class InvalidDBClusterStateFault < ::Aws::Errors::ServiceError
+      class InvalidDBClusterStateFault < ServiceError
       end
-      class InvalidDBInstanceStateFault < ::Aws::Errors::ServiceError
+      class InvalidDBInstanceStateFault < ServiceError
       end
-      class InvalidDBParameterGroupStateFault < ::Aws::Errors::ServiceError
+      class InvalidDBParameterGroupStateFault < ServiceError
       end
-      class InvalidDBSecurityGroupStateFault < ::Aws::Errors::ServiceError
+      class InvalidDBSecurityGroupStateFault < ServiceError
       end
-      class InvalidDBSnapshotStateFault < ::Aws::Errors::ServiceError
+      class InvalidDBSnapshotStateFault < ServiceError
       end
-      class InvalidDBSubnetGroupStateFault < ::Aws::Errors::ServiceError
+      class InvalidDBSubnetGroupStateFault < ServiceError
       end
-      class InvalidDBSubnetStateFault < ::Aws::Errors::ServiceError
+      class InvalidDBSubnetStateFault < ServiceError
       end
-      class InvalidEventSubscriptionStateFault < ::Aws::Errors::ServiceError
+      class InvalidEventSubscriptionStateFault < ServiceError
       end
-      class InvalidGlobalClusterStateFault < ::Aws::Errors::ServiceError
+      class InvalidGlobalClusterStateFault < ServiceError
       end
-      class InvalidRestoreFault < ::Aws::Errors::ServiceError
+      class InvalidRestoreFault < ServiceError
       end
-      class InvalidSubnet < ::Aws::Errors::ServiceError
+      class InvalidSubnet < ServiceError
       end
-      class InvalidVPCNetworkStateFault < ::Aws::Errors::ServiceError
+      class InvalidVPCNetworkStateFault < ServiceError
       end
-      class KMSKeyNotAccessibleFault < ::Aws::Errors::ServiceError
+      class KMSKeyNotAccessibleFault < ServiceError
       end
-      class NetworkTypeNotSupported < ::Aws::Errors::ServiceError
+      class NetworkTypeNotSupported < ServiceError
       end
-      class ResourceNotFoundFault < ::Aws::Errors::ServiceError
+      class ResourceNotFoundFault < ServiceError
       end
-      class SNSInvalidTopicFault < ::Aws::Errors::ServiceError
+      class SNSInvalidTopicFault < ServiceError
       end
-      class SNSNoAuthorizationFault < ::Aws::Errors::ServiceError
+      class SNSNoAuthorizationFault < ServiceError
       end
-      class SNSTopicArnNotFoundFault < ::Aws::Errors::ServiceError
+      class SNSTopicArnNotFoundFault < ServiceError
       end
-      class SharedSnapshotQuotaExceededFault < ::Aws::Errors::ServiceError
+      class SharedSnapshotQuotaExceededFault < ServiceError
       end
-      class SnapshotQuotaExceededFault < ::Aws::Errors::ServiceError
+      class SnapshotQuotaExceededFault < ServiceError
       end
-      class SourceNotFoundFault < ::Aws::Errors::ServiceError
+      class SourceNotFoundFault < ServiceError
       end
-      class StorageQuotaExceededFault < ::Aws::Errors::ServiceError
+      class StorageQuotaExceededFault < ServiceError
       end
-      class StorageTypeNotSupportedFault < ::Aws::Errors::ServiceError
+      class StorageTypeNotSupportedFault < ServiceError
       end
-      class SubnetAlreadyInUse < ::Aws::Errors::ServiceError
+      class SubnetAlreadyInUse < ServiceError
       end
-      class SubscriptionAlreadyExistFault < ::Aws::Errors::ServiceError
+      class SubscriptionAlreadyExistFault < ServiceError
       end
-      class SubscriptionCategoryNotFoundFault < ::Aws::Errors::ServiceError
+      class SubscriptionCategoryNotFoundFault < ServiceError
       end
-      class SubscriptionNotFoundFault < ::Aws::Errors::ServiceError
+      class SubscriptionNotFoundFault < ServiceError
       end
     end
   end

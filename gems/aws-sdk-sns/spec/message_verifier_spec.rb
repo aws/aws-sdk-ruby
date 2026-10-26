@@ -219,6 +219,27 @@ HqOUdKigPDHYLRo=
           end
         end
 
+        it 'returns false for a body that is not a JSON object' do
+          expect(verifier.authentic?('[]')).to be(false)
+          expect(verifier.authentic?('not json')).to be(false)
+        end
+
+        it 'returns false when the signing fields are not strings' do
+          msg = Json.load(message_SHA1)
+          msg['Signature'] = 1
+          expect(verifier.authentic?(Json.dump(msg))).to be(false)
+
+          msg = Json.load(message_SHA1)
+          msg['SigningCertURL'] = []
+          expect(verifier.authentic?(Json.dump(msg))).to be(false)
+        end
+
+        it 'returns false when the SigningCertURL is not a valid URI' do
+          msg = Json.load(message_SHA1)
+          msg['SigningCertURL'] = 'https://sns.us-east-2.amazonaws.com/ bad.pem'
+          expect(verifier.authentic?(Json.dump(msg))).to be(false)
+        end
+
       end
     end
   end

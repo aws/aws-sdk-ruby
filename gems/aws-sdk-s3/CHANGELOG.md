@@ -3,6 +3,20 @@ Unreleased Changes
 
 * Feature - Add `tagging` to `Aws::S3::PresignedPost`, accepting the same tagging structure as `put_object_tagging` and serializing it to XML in the signed POST form.
 
+1.235.0 (2026-10-20)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
+* Feature - Add RBS signatures for `TransferManager`, `MultipartUploadError`, `Errors::NotFound` and `Errors::SlowDown`.
+
+* Issue - Improve object key validation in `TransferManager#download_directory` on Windows.
+
+1.234.0 (2026-10-19)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
 1.233.2 (2026-10-06)
 ------------------
 

@@ -199,12 +199,19 @@ module Aws::LexModelsV2
     #     the required types.
     #
     #   @option options [Boolean] :correct_clock_skew (true)
-    #     Used only in `standard` and `adaptive` retry modes. Specifies whether to apply
-    #     a clock skew correction and retry requests with skewed client clocks.
+    #     Used only in `standard` and `adaptive` retry modes. Specifies whether
+    #     to apply a clock skew correction and retry requests with skewed client
+    #     clocks. Takes effect only when `disable_clock_skew_correction` is not set.
     #
     #   @option options [String] :defaults_mode ("legacy")
     #     See {Aws::DefaultsModeConfiguration} for a list of the
     #     accepted modes and the configuration defaults that are included.
+    #
+    #   @option options [Boolean] :disable_clock_skew_correction
+    #     Used only in `standard` and `adaptive` retry modes. When `true`, the
+    #     SDK does not apply a clock skew correction, does not update its stored
+    #     skew from responses, and does not retry clock skew errors. Clock skew
+    #     correction is enabled by default.
     #
     #   @option options [Boolean] :disable_host_prefix_injection (false)
     #     When `true`, the SDK will not prepend the modeled host prefix to the endpoint.
@@ -1168,7 +1175,7 @@ module Aws::LexModelsV2
     #         },
     #         nlu_improvement: {
     #           enabled: false, # required
-    #           assisted_nlu_mode: "Primary", # accepts Primary, Fallback
+    #           assisted_nlu_mode: "Primary", # accepts Primary, Fallback, DialogManager
     #           intent_disambiguation_settings: {
     #             enabled: false, # required
     #             max_disambiguation_intents: 1,
@@ -1238,7 +1245,7 @@ module Aws::LexModelsV2
     #   resp.generative_ai_settings.runtime_settings.slot_resolution_improvement.bedrock_model_specification.trace_status #=> String, one of "ENABLED", "DISABLED"
     #   resp.generative_ai_settings.runtime_settings.slot_resolution_improvement.bedrock_model_specification.custom_prompt #=> String
     #   resp.generative_ai_settings.runtime_settings.nlu_improvement.enabled #=> Boolean
-    #   resp.generative_ai_settings.runtime_settings.nlu_improvement.assisted_nlu_mode #=> String, one of "Primary", "Fallback"
+    #   resp.generative_ai_settings.runtime_settings.nlu_improvement.assisted_nlu_mode #=> String, one of "Primary", "Fallback", "DialogManager"
     #   resp.generative_ai_settings.runtime_settings.nlu_improvement.intent_disambiguation_settings.enabled #=> Boolean
     #   resp.generative_ai_settings.runtime_settings.nlu_improvement.intent_disambiguation_settings.max_disambiguation_intents #=> Integer
     #   resp.generative_ai_settings.runtime_settings.nlu_improvement.intent_disambiguation_settings.custom_disambiguation_message #=> String
@@ -1601,9 +1608,9 @@ module Aws::LexModelsV2
     #
     # @option params [Types::QnAIntentConfiguration] :qn_a_intent_configuration
     #   Specifies the configuration of the built-in `Amazon.QnAIntent`. The
-    #   `AMAZON.QnAIntent` intent is called when Amazon Lex can't determine
-    #   another intent to invoke. If you specify this field, you can't
-    #   specify the `kendraConfiguration` field.
+    #   `AMAZON.QnAIntent` intent is called when Amazon Lex V2 can't
+    #   determine another intent to invoke. If you specify this field, you
+    #   can't specify the `kendraConfiguration` field.
     #
     # @option params [Types::QInConnectIntentConfiguration] :q_in_connect_intent_configuration
     #   Qinconnect intent configuration details for the create intent request.
@@ -3820,7 +3827,7 @@ module Aws::LexModelsV2
     #   resp.generative_ai_settings.runtime_settings.slot_resolution_improvement.bedrock_model_specification.trace_status #=> String, one of "ENABLED", "DISABLED"
     #   resp.generative_ai_settings.runtime_settings.slot_resolution_improvement.bedrock_model_specification.custom_prompt #=> String
     #   resp.generative_ai_settings.runtime_settings.nlu_improvement.enabled #=> Boolean
-    #   resp.generative_ai_settings.runtime_settings.nlu_improvement.assisted_nlu_mode #=> String, one of "Primary", "Fallback"
+    #   resp.generative_ai_settings.runtime_settings.nlu_improvement.assisted_nlu_mode #=> String, one of "Primary", "Fallback", "DialogManager"
     #   resp.generative_ai_settings.runtime_settings.nlu_improvement.intent_disambiguation_settings.enabled #=> Boolean
     #   resp.generative_ai_settings.runtime_settings.nlu_improvement.intent_disambiguation_settings.max_disambiguation_intents #=> Integer
     #   resp.generative_ai_settings.runtime_settings.nlu_improvement.intent_disambiguation_settings.custom_disambiguation_message #=> String
@@ -9626,7 +9633,7 @@ module Aws::LexModelsV2
     #         },
     #         nlu_improvement: {
     #           enabled: false, # required
-    #           assisted_nlu_mode: "Primary", # accepts Primary, Fallback
+    #           assisted_nlu_mode: "Primary", # accepts Primary, Fallback, DialogManager
     #           intent_disambiguation_settings: {
     #             enabled: false, # required
     #             max_disambiguation_intents: 1,
@@ -9701,7 +9708,7 @@ module Aws::LexModelsV2
     #   resp.generative_ai_settings.runtime_settings.slot_resolution_improvement.bedrock_model_specification.trace_status #=> String, one of "ENABLED", "DISABLED"
     #   resp.generative_ai_settings.runtime_settings.slot_resolution_improvement.bedrock_model_specification.custom_prompt #=> String
     #   resp.generative_ai_settings.runtime_settings.nlu_improvement.enabled #=> Boolean
-    #   resp.generative_ai_settings.runtime_settings.nlu_improvement.assisted_nlu_mode #=> String, one of "Primary", "Fallback"
+    #   resp.generative_ai_settings.runtime_settings.nlu_improvement.assisted_nlu_mode #=> String, one of "Primary", "Fallback", "DialogManager"
     #   resp.generative_ai_settings.runtime_settings.nlu_improvement.intent_disambiguation_settings.enabled #=> Boolean
     #   resp.generative_ai_settings.runtime_settings.nlu_improvement.intent_disambiguation_settings.max_disambiguation_intents #=> Integer
     #   resp.generative_ai_settings.runtime_settings.nlu_improvement.intent_disambiguation_settings.custom_disambiguation_message #=> String
@@ -9943,9 +9950,9 @@ module Aws::LexModelsV2
     #
     # @option params [Types::QnAIntentConfiguration] :qn_a_intent_configuration
     #   Specifies the configuration of the built-in `Amazon.QnAIntent`. The
-    #   `AMAZON.QnAIntent` intent is called when Amazon Lex can't determine
-    #   another intent to invoke. If you specify this field, you can't
-    #   specify the `kendraConfiguration` field.
+    #   `AMAZON.QnAIntent` intent is called when Amazon Lex V2 can't
+    #   determine another intent to invoke. If you specify this field, you
+    #   can't specify the `kendraConfiguration` field.
     #
     # @option params [Types::QInConnectIntentConfiguration] :q_in_connect_intent_configuration
     #   Qinconnect intent configuration details for the update intent request.
@@ -11074,7 +11081,7 @@ module Aws::LexModelsV2
         tracer: tracer
       )
       context[:gem_name] = 'aws-sdk-lexmodelsv2'
-      context[:gem_version] = '1.98.0'
+      context[:gem_version] = '1.101.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

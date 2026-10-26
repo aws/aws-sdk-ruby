@@ -63,6 +63,36 @@ module Aws
       }?
     }
 
+      type waf_atp_config = {
+      login_path: ::String?,
+      payload_type: ("JSON" | "FORM_ENCODED")?,
+      username_field: ::String?,
+      password_field: ::String?,
+      response_inspection: {
+        success_codes: Array[::Integer]?,
+        failure_codes: Array[::Integer]?
+      }?
+    }
+
+      type waf_acfp_config = {
+      payload_type: ("JSON" | "FORM_ENCODED")?,
+      creation_path: ::String?,
+      registration_page_path: ::String?,
+      response_inspection: {
+        success_codes: Array[::Integer]?,
+        failure_codes: Array[::Integer]?
+      }?
+    }
+
+      type waf_rule = {
+      name: ::String,
+      atp_config: Params::waf_atp_config?,
+      acfp_config: Params::waf_acfp_config?,
+      bot_control_config: {
+        inspection_level: ("COMMON" | "TARGETED")?
+      }?
+    }
+
       type domain_entry = {
       id: ::String?,
       name: ::String?,

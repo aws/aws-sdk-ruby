@@ -1415,6 +1415,11 @@ module Aws::MediaConvert
     #   Specify the Bit depth. You can choose 8-bit or 10-bit.
     #   @return [String]
     #
+    # @!attribute [rw] bitrate
+    #   Specify the average bitrate in bits per second. Required when Rate
+    #   control mode is CBR.
+    #   @return [Integer]
+    #
     # @!attribute [rw] film_grain_synthesis
     #   Film grain synthesis replaces film grain present in your content
     #   with similar quality synthesized AV1 film grain. We recommend that
@@ -1519,15 +1524,25 @@ module Aws::MediaConvert
     #   @return [Array<String>]
     #
     # @!attribute [rw] qvbr_settings
-    #   Settings for quality-defined variable bitrate encoding with the
-    #   H.265 codec. Use these settings only when you set QVBR for Rate
-    #   control mode.
+    #   Settings for quality-defined variable bitrate encoding with the AV1
+    #   codec. Use these settings only when you set QVBR for Rate control
+    #   mode.
     #   @return [Types::Av1QvbrSettings]
     #
     # @!attribute [rw] rate_control_mode
     #   'With AV1 outputs, for rate control mode, MediaConvert supports
-    #   only quality-defined variable bitrate (QVBR). You can''t use CBR
-    #   or VBR.'
+    #   quality-defined variable bitrate (QVBR) and constant bitrate (CBR).
+    #   You can''t use VBR.'
+    #   @return [String]
+    #
+    # @!attribute [rw] scene_change_detect
+    #   Optional. Use this setting to have the service insert I-frames at
+    #   scene changes that it automatically detects. For AV1, scene change
+    #   detection is disabled by default. Choose Enabled to insert I-frames
+    #   at detected scene changes, which can improve video quality. If this
+    #   output uses QVBR, you can instead choose Transition detection for
+    #   further video quality improvement. For more information about QVBR,
+    #   see https://docs.aws.amazon.com/console/mediaconvert/cbr-vbr-qvbr.
     #   @return [String]
     #
     # @!attribute [rw] slices
@@ -1536,6 +1551,21 @@ module Aws::MediaConvert
     #   than or equal to the number of macroblock rows. For interlaced
     #   pictures, this value must be less than or equal to half the number
     #   of macroblock rows.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] sliding_window_ms
+    #   Optional. Specify the duration, in milliseconds, of the sliding
+    #   window over which MediaConvert enforces your Peak bitrate. When you
+    #   specify a Peak bitrate but omit this value, MediaConvert uses a
+    #   default sliding window of 1000.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] sliding_window_peak_bitrate
+    #   Optional. Specify an instantaneous peak bitrate ceiling, in
+    #   bits/second, that MediaConvert enforces over the sliding window set
+    #   by Peak bitrate window. For example, enter fifty megabits per second
+    #   as 50000000. Applies in the QVBR rate control mode. When you specify
+    #   a value below Max bitrate, MediaConvert raises it to Max bitrate.
     #   @return [Integer]
     #
     # @!attribute [rw] spatial_adaptive_quantization
@@ -1563,6 +1593,7 @@ module Aws::MediaConvert
     class Av1Settings < Struct.new(
       :adaptive_quantization,
       :bit_depth,
+      :bitrate,
       :film_grain_synthesis,
       :framerate_control,
       :framerate_conversion_algorithm,
@@ -1574,7 +1605,10 @@ module Aws::MediaConvert
       :per_frame_metrics,
       :qvbr_settings,
       :rate_control_mode,
+      :scene_change_detect,
       :slices,
+      :sliding_window_ms,
+      :sliding_window_peak_bitrate,
       :spatial_adaptive_quantization)
       SENSITIVE = []
       include Aws::Structure
@@ -2657,6 +2691,12 @@ module Aws::MediaConvert
     #   playlist generation.
     #   @return [String]
     #
+    # @!attribute [rw] dash_adaptation_set_grouping
+    #   Specify additional criteria for partitioning video outputs into
+    #   separate AdaptationSets. These criteria are applied on top of the
+    #   grouping produced by DashManifestStyle.
+    #   @return [Array<String>]
+    #
     # @!attribute [rw] dash_i_frame_trick_play_name_modifier
     #   Specify whether MediaConvert generates I-frame only video segments
     #   for DASH trick play, also known as trick mode. When specified, the
@@ -2897,6 +2937,7 @@ module Aws::MediaConvert
       :base_url,
       :client_cache,
       :codec_specification,
+      :dash_adaptation_set_grouping,
       :dash_i_frame_trick_play_name_modifier,
       :dash_manifest_style,
       :destination,
@@ -4235,6 +4276,12 @@ module Aws::MediaConvert
     #   from a different URL than the manifest file.
     #   @return [String]
     #
+    # @!attribute [rw] dash_adaptation_set_grouping
+    #   Specify additional criteria for partitioning video outputs into
+    #   separate AdaptationSets. These criteria are applied on top of the
+    #   grouping produced by DashManifestStyle.
+    #   @return [Array<String>]
+    #
     # @!attribute [rw] dash_i_frame_trick_play_name_modifier
     #   Specify whether MediaConvert generates I-frame only video segments
     #   for DASH trick play, also known as trick mode. When specified, the
@@ -4441,6 +4488,7 @@ module Aws::MediaConvert
       :additional_manifests,
       :audio_channel_config_scheme_id_uri,
       :base_url,
+      :dash_adaptation_set_grouping,
       :dash_i_frame_trick_play_name_modifier,
       :dash_manifest_style,
       :destination,
@@ -7065,6 +7113,22 @@ module Aws::MediaConvert
     #   equal to half the number of macroblock rows for interlaced pictures.
     #   @return [Integer]
     #
+    # @!attribute [rw] sliding_window_ms
+    #   Optional. Specify the duration, in milliseconds, of the sliding
+    #   window over which MediaConvert enforces your Peak bitrate. When you
+    #   specify a Peak bitrate but omit this value, MediaConvert uses a
+    #   default sliding window of 1000.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] sliding_window_peak_bitrate
+    #   Optional. Specify an instantaneous peak bitrate ceiling, in
+    #   bits/second, that MediaConvert enforces over the sliding window set
+    #   by Peak bitrate window. For example, enter fifty megabits per second
+    #   as 50000000. Applies in the VBR, CBR, and QVBR rate control modes.
+    #   When you specify a value below Max bitrate, MediaConvert raises it
+    #   to Max bitrate.
+    #   @return [Integer]
+    #
     # @!attribute [rw] slow_pal
     #   Ignore this setting unless your input frame rate is 23.976 or 24
     #   frames per second (fps). Enable slow PAL to create a 25 fps output.
@@ -7220,6 +7284,8 @@ module Aws::MediaConvert
       :scan_type_conversion_mode,
       :scene_change_detect,
       :slices,
+      :sliding_window_ms,
+      :sliding_window_peak_bitrate,
       :slow_pal,
       :softness,
       :spatial_adaptive_quantization,
@@ -7659,6 +7725,22 @@ module Aws::MediaConvert
     #   equal to half the number of macroblock rows for interlaced pictures.
     #   @return [Integer]
     #
+    # @!attribute [rw] sliding_window_ms
+    #   Optional. Specify the duration, in milliseconds, of the sliding
+    #   window over which MediaConvert enforces your Peak bitrate. When you
+    #   specify a Peak bitrate but omit this value, MediaConvert uses a
+    #   default sliding window of 1000.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] sliding_window_peak_bitrate
+    #   Optional. Specify an instantaneous peak bitrate ceiling, in
+    #   bits/second, that MediaConvert enforces over the sliding window set
+    #   by Peak bitrate window. For example, enter fifty megabits per second
+    #   as 50000000. Applies in the VBR, CBR, and QVBR rate control modes.
+    #   When you specify a value below Max bitrate, MediaConvert raises it
+    #   to Max bitrate.
+    #   @return [Integer]
+    #
     # @!attribute [rw] slow_pal
     #   Ignore this setting unless your input frame rate is 23.976 or 24
     #   frames per second (fps). Enable slow PAL to create a 25 fps output.
@@ -7824,6 +7906,8 @@ module Aws::MediaConvert
       :scan_type_conversion_mode,
       :scene_change_detect,
       :slices,
+      :sliding_window_ms,
+      :sliding_window_peak_bitrate,
       :slow_pal,
       :spatial_adaptive_quantization,
       :telecine,
@@ -12280,6 +12364,22 @@ module Aws::MediaConvert
     #   enabled by default.
     #   @return [String]
     #
+    # @!attribute [rw] sliding_window_ms
+    #   Optional. Specify the duration, in milliseconds, of the sliding
+    #   window over which MediaConvert enforces your Peak bitrate. When you
+    #   specify a Peak bitrate but omit this value, MediaConvert uses a
+    #   default sliding window of 1000.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] sliding_window_peak_bitrate
+    #   Optional. Specify an instantaneous peak bitrate ceiling, in
+    #   bits/second, that MediaConvert enforces over the sliding window set
+    #   by Peak bitrate window. For example, enter fifty megabits per second
+    #   as 50000000. Applies in the VBR and CBR rate control modes. When you
+    #   specify a value below Max bitrate, MediaConvert raises it to Max
+    #   bitrate.
+    #   @return [Integer]
+    #
     # @!attribute [rw] slow_pal
     #   Ignore this setting unless your input frame rate is 23.976 or 24
     #   frames per second (fps). Enable slow PAL to create a 25 fps output.
@@ -12390,6 +12490,8 @@ module Aws::MediaConvert
       :rate_control_mode,
       :scan_type_conversion_mode,
       :scene_change_detect,
+      :sliding_window_ms,
+      :sliding_window_peak_bitrate,
       :slow_pal,
       :softness,
       :spatial_adaptive_quantization,
@@ -12834,7 +12936,15 @@ module Aws::MediaConvert
     #   Mean (softest), Gaussian, Lanczos, and Sharpen (sharpest) do
     #   convolution filtering. * Conserve does min/max noise reduction. *
     #   Spatial does frequency-domain filtering based on JND principles. *
-    #   Temporal optimizes video quality for complex motion.
+    #   Temporal optimizes video quality for complex motion. * Perceptual
+    #   exploits perceptual masking, avoiding encoding bits spent on
+    #   imperceptible detail. * None disables noise reduction, including
+    #   the perceptual filter that MediaConvert otherwise applies by default
+    #   for AVC, HEVC, AV1, MPEG-2, VP8, and VP9 outputs. MediaConvert
+    #   doesn't apply that default to mezzanine and archival outputs
+    #   (AVC-Intra, XAVC, Apple ProRes, VC3, Uncompressed), to frame capture
+    #   outputs, or to outputs that use Dolby Vision, which doesn't support
+    #   any noise reducer.
     #   @return [String]
     #
     # @!attribute [rw] filter_settings

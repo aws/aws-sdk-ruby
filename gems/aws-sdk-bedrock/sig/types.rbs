@@ -2246,12 +2246,24 @@ module Aws::Bedrock
 
     class GuardrailContextualGroundingPolicy
       attr_accessor filters: ::Array[Types::GuardrailContextualGroundingFilter]
+      attr_accessor tier: Types::GuardrailContextualGroundingTier
       SENSITIVE: []
     end
 
     class GuardrailContextualGroundingPolicyConfig
       attr_accessor filters_config: ::Array[Types::GuardrailContextualGroundingFilterConfig]
+      attr_accessor tier_config: Types::GuardrailContextualGroundingTierConfig
       SENSITIVE: []
+    end
+
+    class GuardrailContextualGroundingTier
+      attr_accessor tier_name: ("CLASSIC" | "STANDARD")
+      SENSITIVE: [:tier_name]
+    end
+
+    class GuardrailContextualGroundingTierConfig
+      attr_accessor tier_name: ("CLASSIC" | "STANDARD")
+      SENSITIVE: [:tier_name]
     end
 
     class GuardrailCrossRegionConfig

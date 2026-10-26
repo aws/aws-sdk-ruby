@@ -11,7 +11,7 @@ module Aws
       class ServiceError < ::Aws::Errors::ServiceError
       end
 
-      class MarketplaceCommerceAnalyticsException < ::Aws::Errors::ServiceError
+      class MarketplaceCommerceAnalyticsException < ServiceError
         def message: () -> ::String
       end
     end

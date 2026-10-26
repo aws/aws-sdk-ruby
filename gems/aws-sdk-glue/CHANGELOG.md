@@ -1,6 +1,26 @@
 Unreleased Changes
 ------------------
 
+1.287.0 (2026-10-22)
+------------------
+
+* Feature - Add support for large worker types in AWS Glue
+
+1.286.0 (2026-10-21)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
+1.285.0 (2026-10-20)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
+1.284.0 (2026-10-19)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
 1.283.0 (2026-10-13)
 ------------------
 

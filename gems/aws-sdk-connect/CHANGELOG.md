@@ -1,6 +1,31 @@
 Unreleased Changes
 ------------------
 
+1.290.0 (2026-10-26)
+------------------
+
+* Feature - Amazon Connect now automatically saves agents' in-progress email drafts preserving the message, recipients, and subject during browser or network interruptions so agents can return to the mail and continue instead of starting over.
+
+1.289.0 (2026-10-22)
+------------------
+
+* Feature - Adds support for customer queryable replication errors.
+
+1.288.0 (2026-10-21)
+------------------
+
+* Feature - Added support for AWS-managed security profiles.
+
+1.287.0 (2026-10-20)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
+1.286.0 (2026-10-19)
+------------------
+
+* Feature - Amazon Connect GetAttachedFile API now supports an optional UrlContentDisposition parameter. Set it to INLINE to get a pre-signed URL that displays the file in the browser, so agents can preview email attachments without downloading them. ATTACHMENT (download) remains the default.
+
 1.285.0 (2026-10-13)
 ------------------
 

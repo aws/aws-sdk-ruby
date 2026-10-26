@@ -11,55 +11,55 @@ module Aws
       class ServiceError < ::Aws::Errors::ServiceError
       end
 
-      class AWSServiceAccessNotEnabledException < ::Aws::Errors::ServiceError
+      class AWSServiceAccessNotEnabledException < ServiceError
         def message: () -> ::String
       end
-      class AccessDeniedException < ::Aws::Errors::ServiceError
+      class AccessDeniedException < ServiceError
         def message: () -> ::String
       end
-      class DependencyAccessDeniedException < ::Aws::Errors::ServiceError
+      class DependencyAccessDeniedException < ServiceError
         def message: () -> ::String
       end
-      class IllegalArgumentException < ::Aws::Errors::ServiceError
+      class IllegalArgumentException < ServiceError
         def message: () -> ::String
       end
-      class InvalidPaginationTokenException < ::Aws::Errors::ServiceError
+      class InvalidPaginationTokenException < ServiceError
         def message: () -> ::String
       end
-      class InvalidResourceStateException < ::Aws::Errors::ServiceError
+      class InvalidResourceStateException < ServiceError
         def message: () -> ::String
       end
-      class NoAvailableOrganizationException < ::Aws::Errors::ServiceError
+      class NoAvailableOrganizationException < ServiceError
         def message: () -> ::String
       end
-      class NoSuchResourceException < ::Aws::Errors::ServiceError
+      class NoSuchResourceException < ServiceError
         def message: () -> ::String
       end
-      class OrganizationNotInAllFeaturesModeException < ::Aws::Errors::ServiceError
+      class OrganizationNotInAllFeaturesModeException < ServiceError
         def message: () -> ::String
       end
-      class QuotaExceededException < ::Aws::Errors::ServiceError
+      class QuotaExceededException < ServiceError
         def message: () -> ::String
       end
-      class ResourceAlreadyExistsException < ::Aws::Errors::ServiceError
+      class ResourceAlreadyExistsException < ServiceError
         def message: () -> ::String
       end
-      class ServiceException < ::Aws::Errors::ServiceError
+      class ServiceException < ServiceError
         def message: () -> ::String
       end
-      class ServiceQuotaTemplateNotInUseException < ::Aws::Errors::ServiceError
+      class ServiceQuotaTemplateNotInUseException < ServiceError
         def message: () -> ::String
       end
-      class TagPolicyViolationException < ::Aws::Errors::ServiceError
+      class TagPolicyViolationException < ServiceError
         def message: () -> ::String
       end
-      class TemplatesNotAvailableInRegionException < ::Aws::Errors::ServiceError
+      class TemplatesNotAvailableInRegionException < ServiceError
         def message: () -> ::String
       end
-      class TooManyRequestsException < ::Aws::Errors::ServiceError
+      class TooManyRequestsException < ServiceError
         def message: () -> ::String
       end
-      class TooManyTagsException < ::Aws::Errors::ServiceError
+      class TooManyTagsException < ServiceError
         def message: () -> ::String
       end
     end

@@ -1,6 +1,31 @@
 Unreleased Changes
 ------------------
 
+1.660.0 (2026-10-22)
+------------------
+
+* Feature - AWS Transit Gateway now provides managed one-to-one NAT directly on its attachments, through integration with Regional Private NAT Gateway. Use ModifyTransitGatewayAttachmentNatConfiguration to enable NAT and configure NAT rules, and GetTransitGatewayAttachmentNatConfiguration to view them.
+
+1.659.0 (2026-10-21)
+------------------
+
+* Feature - Adds new response fields to DescribeInstanceStatus and Network Insights analysis results.
+
+1.658.0 (2026-10-20)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
+1.657.0 (2026-10-19)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
+1.656.0 (2026-10-14)
+------------------
+
+* Feature - Adds T8i instance sizes to the InstanceType enum. T8i instances are low-cost burstable instances powered by custom sixth generation Intel Xeon 6 processors, available exclusively on AWS, and built on the latest sixth generation AWS Nitro cards
+
 1.655.0 (2026-10-01)
 ------------------
 

@@ -199,12 +199,19 @@ module Aws::RedshiftDataAPIService
     #     the required types.
     #
     #   @option options [Boolean] :correct_clock_skew (true)
-    #     Used only in `standard` and `adaptive` retry modes. Specifies whether to apply
-    #     a clock skew correction and retry requests with skewed client clocks.
+    #     Used only in `standard` and `adaptive` retry modes. Specifies whether
+    #     to apply a clock skew correction and retry requests with skewed client
+    #     clocks. Takes effect only when `disable_clock_skew_correction` is not set.
     #
     #   @option options [String] :defaults_mode ("legacy")
     #     See {Aws::DefaultsModeConfiguration} for a list of the
     #     accepted modes and the configuration defaults that are included.
+    #
+    #   @option options [Boolean] :disable_clock_skew_correction
+    #     Used only in `standard` and `adaptive` retry modes. When `true`, the
+    #     SDK does not apply a clock skew correction, does not update its stored
+    #     skew from responses, and does not retry clock skew errors. Clock skew
+    #     correction is enabled by default.
     #
     #   @option options [Boolean] :disable_host_prefix_injection (false)
     #     When `true`, the SDK will not prepend the modeled host prefix to the endpoint.
@@ -750,6 +757,7 @@ module Aws::RedshiftDataAPIService
     #   * {Types::DescribeStatementResponse#result_rows #result_rows} => Integer
     #   * {Types::DescribeStatementResponse#result_size #result_size} => Integer
     #   * {Types::DescribeStatementResponse#redshift_query_id #redshift_query_id} => Integer
+    #   * {Types::DescribeStatementResponse#redshift_query_uuid #redshift_query_uuid} => String
     #   * {Types::DescribeStatementResponse#query_parameters #query_parameters} => Array&lt;Types::SqlParameter&gt;
     #   * {Types::DescribeStatementResponse#sub_statements #sub_statements} => Array&lt;Types::SubStatementData&gt;
     #   * {Types::DescribeStatementResponse#workgroup_name #workgroup_name} => String
@@ -782,6 +790,7 @@ module Aws::RedshiftDataAPIService
     #   resp.result_rows #=> Integer
     #   resp.result_size #=> Integer
     #   resp.redshift_query_id #=> Integer
+    #   resp.redshift_query_uuid #=> String
     #   resp.query_parameters #=> Array
     #   resp.query_parameters[0].name #=> String
     #   resp.query_parameters[0].value #=> String
@@ -796,6 +805,7 @@ module Aws::RedshiftDataAPIService
     #   resp.sub_statements[0].result_rows #=> Integer
     #   resp.sub_statements[0].result_size #=> Integer
     #   resp.sub_statements[0].redshift_query_id #=> Integer
+    #   resp.sub_statements[0].redshift_query_uuid #=> String
     #   resp.sub_statements[0].has_result_set #=> Boolean
     #   resp.workgroup_name #=> String
     #   resp.result_format #=> String, one of "JSON", "CSV"
@@ -1935,7 +1945,7 @@ module Aws::RedshiftDataAPIService
         tracer: tracer
       )
       context[:gem_name] = 'aws-sdk-redshiftdataapiservice'
-      context[:gem_version] = '1.81.0'
+      context[:gem_version] = '1.84.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

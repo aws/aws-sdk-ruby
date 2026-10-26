@@ -199,12 +199,19 @@ module Aws::QuickSight
     #     the required types.
     #
     #   @option options [Boolean] :correct_clock_skew (true)
-    #     Used only in `standard` and `adaptive` retry modes. Specifies whether to apply
-    #     a clock skew correction and retry requests with skewed client clocks.
+    #     Used only in `standard` and `adaptive` retry modes. Specifies whether
+    #     to apply a clock skew correction and retry requests with skewed client
+    #     clocks. Takes effect only when `disable_clock_skew_correction` is not set.
     #
     #   @option options [String] :defaults_mode ("legacy")
     #     See {Aws::DefaultsModeConfiguration} for a list of the
     #     accepted modes and the configuration defaults that are included.
+    #
+    #   @option options [Boolean] :disable_clock_skew_correction
+    #     Used only in `standard` and `adaptive` retry modes. When `true`, the
+    #     SDK does not apply a clock skew correction, does not update its stored
+    #     skew from responses, and does not retry clock skew errors. Clock skew
+    #     correction is enabled by default.
     #
     #   @option options [Boolean] :disable_host_prefix_injection (false)
     #     When `true`, the SDK will not prepend the modeled host prefix to the endpoint.
@@ -4610,6 +4617,19 @@ module Aws::QuickSight
     #         client_id: "OAuthClientId",
     #         client_secret: "OAuthClientSecret",
     #         username: "OAuthUsername",
+    #       },
+    #       service_account_credentials: {
+    #         admin_account_email: "AdminAccountEmail", # required
+    #         service_account_private_key: "PrivateKey", # required
+    #         client_email: "ClientEmail", # required
+    #       },
+    #       share_point_client_credentials: {
+    #         kms_key_arn: "DataSourceKmsKeyArn", # required
+    #         cert_thumbprint: "DataSourceCertThumbprint", # required
+    #       },
+    #       one_drive_client_credentials: {
+    #         kms_key_arn: "DataSourceKmsKeyArn", # required
+    #         cert_thumbprint: "DataSourceCertThumbprint", # required
     #       },
     #     },
     #     permissions: [
@@ -25047,6 +25067,19 @@ module Aws::QuickSight
     #         client_secret: "OAuthClientSecret",
     #         username: "OAuthUsername",
     #       },
+    #       service_account_credentials: {
+    #         admin_account_email: "AdminAccountEmail", # required
+    #         service_account_private_key: "PrivateKey", # required
+    #         client_email: "ClientEmail", # required
+    #       },
+    #       share_point_client_credentials: {
+    #         kms_key_arn: "DataSourceKmsKeyArn", # required
+    #         cert_thumbprint: "DataSourceCertThumbprint", # required
+    #       },
+    #       one_drive_client_credentials: {
+    #         kms_key_arn: "DataSourceKmsKeyArn", # required
+    #         cert_thumbprint: "DataSourceCertThumbprint", # required
+    #       },
     #     },
     #     vpc_connection_properties: {
     #       vpc_connection_arn: "Arn", # required
@@ -28015,7 +28048,7 @@ module Aws::QuickSight
         tracer: tracer
       )
       context[:gem_name] = 'aws-sdk-quicksight'
-      context[:gem_version] = '1.201.0'
+      context[:gem_version] = '1.204.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

@@ -199,12 +199,19 @@ module Aws::WorkspacesInstances
     #     the required types.
     #
     #   @option options [Boolean] :correct_clock_skew (true)
-    #     Used only in `standard` and `adaptive` retry modes. Specifies whether to apply
-    #     a clock skew correction and retry requests with skewed client clocks.
+    #     Used only in `standard` and `adaptive` retry modes. Specifies whether
+    #     to apply a clock skew correction and retry requests with skewed client
+    #     clocks. Takes effect only when `disable_clock_skew_correction` is not set.
     #
     #   @option options [String] :defaults_mode ("legacy")
     #     See {Aws::DefaultsModeConfiguration} for a list of the
     #     accepted modes and the configuration defaults that are included.
+    #
+    #   @option options [Boolean] :disable_clock_skew_correction
+    #     Used only in `standard` and `adaptive` retry modes. When `true`, the
+    #     SDK does not apply a clock skew correction, does not update its stored
+    #     skew from responses, and does not retry clock skew errors. Clock skew
+    #     correction is enabled by default.
     #
     #   @option options [Boolean] :disable_host_prefix_injection (false)
     #     When `true`, the SDK will not prepend the modeled host prefix to the endpoint.
@@ -1106,6 +1113,97 @@ module Aws::WorkspacesInstances
       req.send_request(options)
     end
 
+    # Modifies the size, volume type, IOPS (input/output operations per
+    # second), or throughput of a volume. When you modify a volume, you must
+    # specify at least one of these parameters. You can modify a volume only
+    # after any previous modification for that volume has finished.
+    #
+    # To track the progress of a modification, use the Amazon EC2
+    # [DescribeVolumesModifications][1] operation. For more information, see
+    # [Monitor the progress of Amazon EBS volume modifications][2] in the
+    # *Amazon EBS User Guide*.
+    #
+    # After you increase the size of a volume, you must extend the partition
+    # and file system to use the new storage capacity. For more information,
+    # see [Extend the file system after resizing an Amazon EBS volume][3] in
+    # the *Amazon EBS User Guide*, which covers both [Linux][4] and
+    # [Windows][5] instances.
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/AWSEC2/latest/APIReference/API_DescribeVolumesModifications.html
+    # [2]: https://docs.aws.amazon.com/ebs/latest/userguide/monitoring-volume-modifications.html
+    # [3]: https://docs.aws.amazon.com/ebs/latest/userguide/recognize-expanded-volume-linux.html
+    # [4]: https://docs.aws.amazon.com/ebs/latest/userguide/recognize-expanded-volume-linux.html#extend-linux
+    # [5]: https://docs.aws.amazon.com/ebs/latest/userguide/recognize-expanded-volume-linux.html#extend-windows
+    #
+    # @option params [required, String] :volume_id
+    #   Specifies the identifier of the volume to modify.
+    #
+    # @option params [Integer] :size_in_gb
+    #   Specifies the target size of the volume, in GiB. The target size must
+    #   be greater than or equal to the current size of the volume. If you
+    #   don't specify a size, the current size is retained.
+    #
+    # @option params [String] :volume_type
+    #   Specifies the target Amazon Elastic Block Store (Amazon EBS) volume
+    #   type. If you don't specify a volume type, the current volume type is
+    #   retained.
+    #
+    # @option params [Integer] :iops
+    #   Specifies the target IOPS rate of the volume. This parameter is valid
+    #   only for `gp3`, `io1`, and `io2` volumes. If you don't specify IOPS
+    #   and keep the same volume type, the current IOPS rate is retained.
+    #
+    # @option params [Integer] :throughput
+    #   Specifies the target throughput of the volume, in MiB/s. This
+    #   parameter is valid only for `gp3` volumes. If you don't specify
+    #   throughput and the volume remains `gp3`, the current throughput is
+    #   retained.
+    #
+    # @option params [String] :client_token
+    #   Unique token to ensure idempotent volume modification, preventing
+    #   duplicate volume modifications.
+    #
+    #   **A suitable default value is auto-generated.** You should normally
+    #   not need to pass this option.**
+    #
+    # @return [Types::ModifyVolumeResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::ModifyVolumeResponse#volume_id #volume_id} => String
+    #   * {Types::ModifyVolumeResponse#target_size #target_size} => Integer
+    #   * {Types::ModifyVolumeResponse#target_volume_type #target_volume_type} => String
+    #   * {Types::ModifyVolumeResponse#target_iops #target_iops} => Integer
+    #   * {Types::ModifyVolumeResponse#target_throughput #target_throughput} => Integer
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.modify_volume({
+    #     volume_id: "VolumeId", # required
+    #     size_in_gb: 1,
+    #     volume_type: "standard", # accepts standard, io1, io2, gp2, sc1, st1, gp3
+    #     iops: 1,
+    #     throughput: 1,
+    #     client_token: "ClientToken",
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.volume_id #=> String
+    #   resp.target_size #=> Integer
+    #   resp.target_volume_type #=> String, one of "standard", "io1", "io2", "gp2", "sc1", "st1", "gp3"
+    #   resp.target_iops #=> Integer
+    #   resp.target_throughput #=> Integer
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/workspaces-instances-2022-07-26/ModifyVolume AWS API Documentation
+    #
+    # @overload modify_volume(params = {})
+    # @param [Hash] params ({})
+    def modify_volume(params = {}, options = {})
+      req = build_request(:modify_volume, params)
+      req.send_request(options)
+    end
+
     # Adds tags to a WorkSpace Instance.
     #
     # @option params [required, String] :workspace_instance_id
@@ -1181,7 +1279,7 @@ module Aws::WorkspacesInstances
         tracer: tracer
       )
       context[:gem_name] = 'aws-sdk-workspacesinstances'
-      context[:gem_version] = '1.22.0'
+      context[:gem_version] = '1.25.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

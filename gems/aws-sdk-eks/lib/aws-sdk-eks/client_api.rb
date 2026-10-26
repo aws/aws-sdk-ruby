@@ -134,6 +134,7 @@ module Aws::EKS
     ControlPlaneScalingConfig = Shapes::StructureShape.new(name: 'ControlPlaneScalingConfig')
     ControlPlaneScalingTierInfo = Shapes::StructureShape.new(name: 'ControlPlaneScalingTierInfo')
     ControlPlaneScalingTierList = Shapes::ListShape.new(name: 'ControlPlaneScalingTierList')
+    CrdManagementConfiguration = Shapes::StructureShape.new(name: 'CrdManagementConfiguration')
     CreateAccessConfigRequest = Shapes::StructureShape.new(name: 'CreateAccessConfigRequest')
     CreateAccessEntryRequest = Shapes::StructureShape.new(name: 'CreateAccessEntryRequest')
     CreateAccessEntryResponse = Shapes::StructureShape.new(name: 'CreateAccessEntryResponse')
@@ -241,6 +242,7 @@ module Aws::EKS
     FargateProfileSelectors = Shapes::ListShape.new(name: 'FargateProfileSelectors')
     FargateProfileStatus = Shapes::StringShape.new(name: 'FargateProfileStatus')
     FargateProfilesRequestMaxResults = Shapes::IntegerShape.new(name: 'FargateProfilesRequestMaxResults')
+    GatewayApiConfiguration = Shapes::StructureShape.new(name: 'GatewayApiConfiguration')
     HorizontalPodAutoscalerControllerConfigRequest = Shapes::StructureShape.new(name: 'HorizontalPodAutoscalerControllerConfigRequest')
     HorizontalPodAutoscalerControllerConfigResponse = Shapes::StructureShape.new(name: 'HorizontalPodAutoscalerControllerConfigResponse')
     HorizontalPodAutoscalerControllerVersionConfig = Shapes::StructureShape.new(name: 'HorizontalPodAutoscalerControllerVersionConfig')
@@ -906,6 +908,9 @@ module Aws::EKS
 
     ControlPlaneScalingTierList.member = Shapes::ShapeRef.new(shape: ControlPlaneScalingTierInfo)
 
+    CrdManagementConfiguration.add_member(:managed, Shapes::ShapeRef.new(shape: BoxedBoolean, location_name: "managed"))
+    CrdManagementConfiguration.struct_class = Types::CrdManagementConfiguration
+
     CreateAccessConfigRequest.add_member(:bootstrap_cluster_creator_admin_permissions, Shapes::ShapeRef.new(shape: BoxedBoolean, location_name: "bootstrapClusterCreatorAdminPermissions"))
     CreateAccessConfigRequest.add_member(:authentication_mode, Shapes::ShapeRef.new(shape: AuthenticationMode, location_name: "authenticationMode"))
     CreateAccessConfigRequest.struct_class = Types::CreateAccessConfigRequest
@@ -1304,6 +1309,7 @@ module Aws::EKS
     EksAnywhereSubscriptionTerm.struct_class = Types::EksAnywhereSubscriptionTerm
 
     ElasticLoadBalancing.add_member(:enabled, Shapes::ShapeRef.new(shape: BoxedBoolean, location_name: "enabled"))
+    ElasticLoadBalancing.add_member(:gateway_api, Shapes::ShapeRef.new(shape: GatewayApiConfiguration, location_name: "gatewayApi"))
     ElasticLoadBalancing.struct_class = Types::ElasticLoadBalancing
 
     EncryptionConfig.add_member(:resources, Shapes::ShapeRef.new(shape: StringList, deprecated: true, location_name: "resources", metadata: {"deprecatedMessage" => "Deprecated. Amazon EKS encrypts all Kubernetes API data by default, so this value no longer determines which resources are encrypted.", "deprecatedSince" => "2025-03-05"}))
@@ -1355,6 +1361,9 @@ module Aws::EKS
     FargateProfileSelector.struct_class = Types::FargateProfileSelector
 
     FargateProfileSelectors.member = Shapes::ShapeRef.new(shape: FargateProfileSelector)
+
+    GatewayApiConfiguration.add_member(:crds, Shapes::ShapeRef.new(shape: CrdManagementConfiguration, location_name: "crds"))
+    GatewayApiConfiguration.struct_class = Types::GatewayApiConfiguration
 
     HorizontalPodAutoscalerControllerConfigRequest.add_member(:horizontal_pod_autoscaler_sync_period, Shapes::ShapeRef.new(shape: String, location_name: "horizontalPodAutoscalerSyncPeriod"))
     HorizontalPodAutoscalerControllerConfigRequest.struct_class = Types::HorizontalPodAutoscalerControllerConfigRequest

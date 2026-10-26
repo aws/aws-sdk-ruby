@@ -1,6 +1,21 @@
 Unreleased Changes
 ------------------
 
+1.178.0 (2026-10-21)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
+1.177.0 (2026-10-20)
+------------------
+
+* Feature - Adds support for disassociating a replica from an Amazon DynamoDB multi-Region eventual consistency global table, so you can keep it as a single-Region table with its existing data. Also adds disassociation protection, on by default, to help prevent accidental disassociation.
+
+1.176.0 (2026-10-19)
+------------------
+
+* Feature - Enable account endpoint generation for existing CN and GovCloud regions
+
 1.175.0 (2026-09-30)
 ------------------
 

@@ -95,6 +95,7 @@ module Aws::ElastiCache
   # * {InvalidUserStateFault}
   #    * This error class is not used. `InvalidUserState` is used during parsing instead.
   # * {InvalidVPCNetworkStateFault}
+  # * {MigrationHealthFault}
   # * {NoOperationFault}
   # * {NodeGroupNotFoundFault}
   # * {NodeGroupsPerReplicationGroupQuotaExceededFault}
@@ -117,7 +118,9 @@ module Aws::ElastiCache
   # * {ReservedCacheNodesOfferingNotFoundFault}
   #    * This error class is not used. `ReservedCacheNodesOfferingNotFound` is used during parsing instead.
   # * {ServerlessCacheAlreadyExistsFault}
+  # * {ServerlessCacheAlreadyUnderMigrationFault}
   # * {ServerlessCacheNotFoundFault}
+  # * {ServerlessCacheNotUnderMigrationFault}
   # * {ServerlessCacheQuotaForCustomerExceededFault}
   # * {ServerlessCacheSnapshotAlreadyExistsFault}
   # * {ServerlessCacheSnapshotNotFoundFault}
@@ -619,6 +622,16 @@ module Aws::ElastiCache
       end
     end
 
+    class MigrationHealthFault < ServiceError
+
+      # @param [Seahorse::Client::RequestContext] context
+      # @param [String] message
+      # @param [Aws::ElastiCache::Types::MigrationHealthFault] data
+      def initialize(context, message, data = Aws::EmptyStructure.new)
+        super(context, message, data)
+      end
+    end
+
     class NoOperationFault < ServiceError
 
       # @param [Seahorse::Client::RequestContext] context
@@ -775,11 +788,31 @@ module Aws::ElastiCache
       end
     end
 
+    class ServerlessCacheAlreadyUnderMigrationFault < ServiceError
+
+      # @param [Seahorse::Client::RequestContext] context
+      # @param [String] message
+      # @param [Aws::ElastiCache::Types::ServerlessCacheAlreadyUnderMigrationFault] data
+      def initialize(context, message, data = Aws::EmptyStructure.new)
+        super(context, message, data)
+      end
+    end
+
     class ServerlessCacheNotFoundFault < ServiceError
 
       # @param [Seahorse::Client::RequestContext] context
       # @param [String] message
       # @param [Aws::ElastiCache::Types::ServerlessCacheNotFoundFault] data
+      def initialize(context, message, data = Aws::EmptyStructure.new)
+        super(context, message, data)
+      end
+    end
+
+    class ServerlessCacheNotUnderMigrationFault < ServiceError
+
+      # @param [Seahorse::Client::RequestContext] context
+      # @param [String] message
+      # @param [Aws::ElastiCache::Types::ServerlessCacheNotUnderMigrationFault] data
       def initialize(context, message, data = Aws::EmptyStructure.new)
         super(context, message, data)
       end

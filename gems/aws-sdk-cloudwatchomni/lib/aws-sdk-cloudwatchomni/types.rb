@@ -4399,15 +4399,13 @@ module Aws::CloudWatchOmni
     #   @return [String]
     #
     # @!attribute [rw] max_results
-    #   The maximum number of results to return. Defaults to 10. Valid only
-    #   when searchQuery is *; other searches reject this parameter and
-    #   return at most 10 results.
+    #   The maximum number of results to return. Defaults to 100.
     #   @return [Integer]
     #
     # @!attribute [rw] next_token
-    #   A token to retrieve the next page of results. Valid only when
-    #   searchQuery is *; other searches do not paginate and reject this
-    #   parameter. Tokens expire after 24 hours.
+    #   A token to retrieve the next page of results. Supply the same
+    #   searchQuery used on the request that returned it. Tokens expire
+    #   after 24 hours.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/cloudwatchomni-2025-01-01/SearchPrincipalsInput AWS API Documentation

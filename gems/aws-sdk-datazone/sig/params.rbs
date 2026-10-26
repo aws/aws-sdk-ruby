@@ -18,7 +18,8 @@ module Aws
     }
 
       type project_policy_grant_principal = {
-      project_designation: ("OWNER" | "CONTRIBUTOR" | "PROJECT_CATALOG_STEWARD"),
+      project_designation: ("OWNER" | "CONTRIBUTOR" | "PROJECT_CATALOG_STEWARD" | "USER_CREATED_DESIGNATION"),
+      user_created_designation_id: ::String?,
       project_identifier: ::String?,
       project_grant_filter: {
         domain_unit_filter: {

@@ -1,6 +1,31 @@
 Unreleased Changes
 ------------------
 
+1.83.0 (2026-10-22)
+------------------
+
+* Feature - Adds model-based routing and fallback to AgentCore Gateway rules. Rules can match the requested model, route to a specific model, and fall back across inference targets with an optional circuit breaker. Adds multi-dimensional rating scales for AgentCore Evaluations LLM-as-a-Judge evaluators.
+
+1.82.0 (2026-10-21)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
+1.81.0 (2026-10-20)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
+1.80.0 (2026-10-19)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
+1.79.0 (2026-10-14)
+------------------
+
+* Feature - This release supports scoping Amazon Bedrock AgentCore Gateway rate limits by request header or request body field.
+
 1.78.0 (2026-10-12)
 ------------------
 

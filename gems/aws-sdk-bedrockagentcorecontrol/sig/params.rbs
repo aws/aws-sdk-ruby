@@ -174,6 +174,9 @@ module Aws
           definition: ::String,
           label: ::String
         }
+      ]?,
+      multi_dimensional: Array[
+        Params::evaluation_dimension
       ]?
     }
 
@@ -224,6 +227,28 @@ module Aws
         }?
       }?,
       derived: Params::derived_evaluator_config?
+    }
+
+      type dimension_rating_scale = {
+      numerical: Array[
+        {
+          definition: ::String,
+          value: ::Float,
+          label: ::String
+        }
+      ]?,
+      categorical: Array[
+        {
+          definition: ::String,
+          label: ::String
+        }
+      ]?
+    }
+
+      type evaluation_dimension = {
+      dimension_name: ::String,
+      dimension_instruction: ::String,
+      dimension_rating_scale: Params::dimension_rating_scale
     }
 
       type mcp_gateway_configuration = {
@@ -279,6 +304,14 @@ module Aws
       match_principals: Params::match_principals?,
       match_paths: {
         any_of: Array[::String]
+      }?,
+      match_models: {
+        any_of: Array[
+          {
+            value: ::String,
+            operator: ("StringEquals" | "StringLike")?
+          }
+        ]
       }?
     }
 
@@ -296,22 +329,34 @@ module Aws
       weighted_override: Params::weighted_override?
     }
 
+      type fallback = {
+      trigger_on: {
+        status_codes: Array[::String]?,
+        errors: Array[("CONNECTION_ERROR" | "FIRST_BYTE_TIMEOUT" | "UNROUTABLE")]?
+      }?,
+      first_byte_timeout_milliseconds: ::Integer?,
+      circuit_breaker: {
+        mode: ("ENABLED" | "DISABLED")?
+      }?,
+      target_fallback: Array[
+        Params::fallback_target
+      ]
+    }
+
+      type static_route = {
+      target_name: ::String,
+      model: ::String?,
+      fallback: Params::fallback?
+    }
+
       type weighted_route = {
       traffic_split: Array[
-        {
-          name: ::String,
-          weight: ::Integer,
-          target_name: ::String,
-          description: ::String?,
-          metadata: Hash[::String, ::String]?
-        }
+        Params::target_traffic_split_entry
       ]
     }
 
       type route_to_target_action = {
-      static_route: {
-        target_name: ::String
-      }?,
+      static_route: Params::static_route?,
       weighted_route: Params::weighted_route?
     }
 
@@ -327,6 +372,26 @@ module Aws
         bundle_arn: ::String,
         bundle_version: ::String
       },
+      description: ::String?,
+      metadata: Hash[::String, ::String]?
+    }
+
+      type fallback_target = {
+      target_name: ::String,
+      model: ::String?,
+      trigger_on: {
+        status_codes: Array[::String]?,
+        errors: Array[("CONNECTION_ERROR" | "FIRST_BYTE_TIMEOUT" | "UNROUTABLE")]?
+      }?,
+      first_byte_timeout_milliseconds: ::Integer?
+    }
+
+      type target_traffic_split_entry = {
+      target_name: ::String,
+      model: ::String?,
+      fallback: Params::fallback?,
+      name: ::String,
+      weight: ::Integer,
       description: ::String?,
       metadata: Hash[::String, ::String]?
     }

@@ -49,6 +49,8 @@ module Aws::RDS
     AvailabilityZones = Shapes::ListShape.new(name: 'AvailabilityZones')
     AvailableAdditionalStorageVolumesOption = Shapes::StructureShape.new(name: 'AvailableAdditionalStorageVolumesOption')
     AvailableAdditionalStorageVolumesOptionList = Shapes::ListShape.new(name: 'AvailableAdditionalStorageVolumesOptionList')
+    AvailableCapacityPerAvailabilityZone = Shapes::StructureShape.new(name: 'AvailableCapacityPerAvailabilityZone')
+    AvailableCapacityPerAvailabilityZoneList = Shapes::ListShape.new(name: 'AvailableCapacityPerAvailabilityZoneList')
     AvailableProcessorFeature = Shapes::StructureShape.new(name: 'AvailableProcessorFeature')
     AvailableProcessorFeatureList = Shapes::ListShape.new(name: 'AvailableProcessorFeatureList')
     AwsBackupRecoveryPointArn = Shapes::StringShape.new(name: 'AwsBackupRecoveryPointArn')
@@ -70,6 +72,8 @@ module Aws::RDS
     BooleanOptional = Shapes::BooleanShape.new(name: 'BooleanOptional')
     BucketName = Shapes::StringShape.new(name: 'BucketName')
     CACertificateIdentifiersList = Shapes::ListShape.new(name: 'CACertificateIdentifiersList')
+    CancelDBCapacityReservationRequest = Shapes::StructureShape.new(name: 'CancelDBCapacityReservationRequest')
+    CancelDBCapacityReservationResponse = Shapes::StructureShape.new(name: 'CancelDBCapacityReservationResponse')
     CancelExportTaskMessage = Shapes::StructureShape.new(name: 'CancelExportTaskMessage')
     Certificate = Shapes::StructureShape.new(name: 'Certificate')
     CertificateDetails = Shapes::StructureShape.new(name: 'CertificateDetails')
@@ -99,6 +103,8 @@ module Aws::RDS
     CreateBlueGreenDeploymentResponse = Shapes::StructureShape.new(name: 'CreateBlueGreenDeploymentResponse')
     CreateCustomDBEngineVersionFault = Shapes::StructureShape.new(name: 'CreateCustomDBEngineVersionFault', error: {"code" => "CreateCustomDBEngineVersionFault", "httpStatusCode" => 400, "senderFault" => true})
     CreateCustomDBEngineVersionMessage = Shapes::StructureShape.new(name: 'CreateCustomDBEngineVersionMessage')
+    CreateDBCapacityReservationRequest = Shapes::StructureShape.new(name: 'CreateDBCapacityReservationRequest')
+    CreateDBCapacityReservationResponse = Shapes::StructureShape.new(name: 'CreateDBCapacityReservationResponse')
     CreateDBClusterEndpointMessage = Shapes::StructureShape.new(name: 'CreateDBClusterEndpointMessage')
     CreateDBClusterMessage = Shapes::StructureShape.new(name: 'CreateDBClusterMessage')
     CreateDBClusterParameterGroupMessage = Shapes::StructureShape.new(name: 'CreateDBClusterParameterGroupMessage')
@@ -142,6 +148,15 @@ module Aws::RDS
     CustomEngineVersion = Shapes::StringShape.new(name: 'CustomEngineVersion')
     CustomEngineVersionStatus = Shapes::StringShape.new(name: 'CustomEngineVersionStatus')
     DBAndClusterArn = Shapes::StringShape.new(name: 'DBAndClusterArn')
+    DBCapacityReservation = Shapes::StructureShape.new(name: 'DBCapacityReservation')
+    DBCapacityReservationAlreadyExistsFault = Shapes::StructureShape.new(name: 'DBCapacityReservationAlreadyExistsFault', error: {"code" => "DBCapacityReservationAlreadyExists", "httpStatusCode" => 400, "senderFault" => true})
+    DBCapacityReservationCommitmentInfo = Shapes::StructureShape.new(name: 'DBCapacityReservationCommitmentInfo')
+    DBCapacityReservationIdentifier = Shapes::StringShape.new(name: 'DBCapacityReservationIdentifier')
+    DBCapacityReservationList = Shapes::ListShape.new(name: 'DBCapacityReservationList')
+    DBCapacityReservationName = Shapes::StringShape.new(name: 'DBCapacityReservationName')
+    DBCapacityReservationNotFoundFault = Shapes::StructureShape.new(name: 'DBCapacityReservationNotFoundFault', error: {"code" => "DBCapacityReservationNotFound", "httpStatusCode" => 404, "senderFault" => true})
+    DBCapacityReservationState = Shapes::StringShape.new(name: 'DBCapacityReservationState')
+    DBCapacityReservationUnsupportedFault = Shapes::StructureShape.new(name: 'DBCapacityReservationUnsupportedFault', error: {"code" => "DBCapacityReservationUnsupported", "httpStatusCode" => 400, "senderFault" => true})
     DBCluster = Shapes::StructureShape.new(name: 'DBCluster')
     DBClusterAlreadyExistsFault = Shapes::StructureShape.new(name: 'DBClusterAlreadyExistsFault', error: {"code" => "DBClusterAlreadyExistsFault", "httpStatusCode" => 400, "senderFault" => true})
     DBClusterAssociatedRole = Shapes::StructureShape.new(name: 'DBClusterAssociatedRole')
@@ -204,6 +219,7 @@ module Aws::RDS
     DBInstanceAutomatedBackupQuotaExceededFault = Shapes::StructureShape.new(name: 'DBInstanceAutomatedBackupQuotaExceededFault', error: {"code" => "DBInstanceAutomatedBackupQuotaExceeded", "httpStatusCode" => 400, "senderFault" => true})
     DBInstanceAutomatedBackupsReplication = Shapes::StructureShape.new(name: 'DBInstanceAutomatedBackupsReplication')
     DBInstanceAutomatedBackupsReplicationList = Shapes::ListShape.new(name: 'DBInstanceAutomatedBackupsReplicationList')
+    DBInstanceClass = Shapes::StringShape.new(name: 'DBInstanceClass')
     DBInstanceList = Shapes::ListShape.new(name: 'DBInstanceList')
     DBInstanceMessage = Shapes::StructureShape.new(name: 'DBInstanceMessage')
     DBInstanceNotFoundFault = Shapes::StructureShape.new(name: 'DBInstanceNotFoundFault', error: {"code" => "DBInstanceNotFound", "httpStatusCode" => 404, "senderFault" => true})
@@ -333,6 +349,8 @@ module Aws::RDS
     DescribeBlueGreenDeploymentsRequest = Shapes::StructureShape.new(name: 'DescribeBlueGreenDeploymentsRequest')
     DescribeBlueGreenDeploymentsResponse = Shapes::StructureShape.new(name: 'DescribeBlueGreenDeploymentsResponse')
     DescribeCertificatesMessage = Shapes::StructureShape.new(name: 'DescribeCertificatesMessage')
+    DescribeDBCapacityReservationsRequest = Shapes::StructureShape.new(name: 'DescribeDBCapacityReservationsRequest')
+    DescribeDBCapacityReservationsResponse = Shapes::StructureShape.new(name: 'DescribeDBCapacityReservationsResponse')
     DescribeDBClusterAutomatedBackupsMessage = Shapes::StructureShape.new(name: 'DescribeDBClusterAutomatedBackupsMessage')
     DescribeDBClusterBacktracksMessage = Shapes::StructureShape.new(name: 'DescribeDBClusterBacktracksMessage')
     DescribeDBClusterEndpointsMessage = Shapes::StructureShape.new(name: 'DescribeDBClusterEndpointsMessage')
@@ -412,6 +430,7 @@ module Aws::RDS
     EnableHttpEndpointRequest = Shapes::StructureShape.new(name: 'EnableHttpEndpointRequest')
     EnableHttpEndpointResponse = Shapes::StructureShape.new(name: 'EnableHttpEndpointResponse')
     EncryptionContextMap = Shapes::MapShape.new(name: 'EncryptionContextMap')
+    EndDateType = Shapes::StringShape.new(name: 'EndDateType')
     Endpoint = Shapes::StructureShape.new(name: 'Endpoint')
     EndpointNetworkType = Shapes::StringShape.new(name: 'EndpointNetworkType')
     Engine = Shapes::StringShape.new(name: 'Engine')
@@ -483,6 +502,7 @@ module Aws::RDS
     IntegrationStatus = Shapes::StringShape.new(name: 'IntegrationStatus')
     InvalidBlueGreenDeploymentStateFault = Shapes::StructureShape.new(name: 'InvalidBlueGreenDeploymentStateFault', error: {"code" => "InvalidBlueGreenDeploymentStateFault", "httpStatusCode" => 400, "senderFault" => true})
     InvalidCustomDBEngineVersionStateFault = Shapes::StructureShape.new(name: 'InvalidCustomDBEngineVersionStateFault', error: {"code" => "InvalidCustomDBEngineVersionStateFault", "httpStatusCode" => 400, "senderFault" => true})
+    InvalidDBCapacityReservationStateFault = Shapes::StructureShape.new(name: 'InvalidDBCapacityReservationStateFault', error: {"code" => "InvalidDBCapacityReservationState", "httpStatusCode" => 400, "senderFault" => true})
     InvalidDBClusterAutomatedBackupStateFault = Shapes::StructureShape.new(name: 'InvalidDBClusterAutomatedBackupStateFault', error: {"code" => "InvalidDBClusterAutomatedBackupStateFault", "httpStatusCode" => 400, "senderFault" => true})
     InvalidDBClusterCapacityFault = Shapes::StructureShape.new(name: 'InvalidDBClusterCapacityFault', error: {"code" => "InvalidDBClusterCapacityFault", "httpStatusCode" => 400, "senderFault" => true})
     InvalidDBClusterEndpointStateFault = Shapes::StructureShape.new(name: 'InvalidDBClusterEndpointStateFault', error: {"code" => "InvalidDBClusterEndpointStateFault", "httpStatusCode" => 400, "senderFault" => true})
@@ -544,6 +564,8 @@ module Aws::RDS
     ModifyCertificatesResult = Shapes::StructureShape.new(name: 'ModifyCertificatesResult')
     ModifyCurrentDBClusterCapacityMessage = Shapes::StructureShape.new(name: 'ModifyCurrentDBClusterCapacityMessage')
     ModifyCustomDBEngineVersionMessage = Shapes::StructureShape.new(name: 'ModifyCustomDBEngineVersionMessage')
+    ModifyDBCapacityReservationRequest = Shapes::StructureShape.new(name: 'ModifyDBCapacityReservationRequest')
+    ModifyDBCapacityReservationResponse = Shapes::StructureShape.new(name: 'ModifyDBCapacityReservationResponse')
     ModifyDBClusterEndpointMessage = Shapes::StructureShape.new(name: 'ModifyDBClusterEndpointMessage')
     ModifyDBClusterMessage = Shapes::StructureShape.new(name: 'ModifyDBClusterMessage')
     ModifyDBClusterParameterGroupMessage = Shapes::StructureShape.new(name: 'ModifyDBClusterParameterGroupMessage')
@@ -913,6 +935,12 @@ module Aws::RDS
 
     AvailableAdditionalStorageVolumesOptionList.member = Shapes::ShapeRef.new(shape: AvailableAdditionalStorageVolumesOption, location_name: "AvailableAdditionalStorageVolumesOption")
 
+    AvailableCapacityPerAvailabilityZone.add_member(:availability_zone, Shapes::ShapeRef.new(shape: String, location_name: "AvailabilityZone"))
+    AvailableCapacityPerAvailabilityZone.add_member(:available_capacity, Shapes::ShapeRef.new(shape: IntegerOptional, location_name: "AvailableCapacity"))
+    AvailableCapacityPerAvailabilityZone.struct_class = Types::AvailableCapacityPerAvailabilityZone
+
+    AvailableCapacityPerAvailabilityZoneList.member = Shapes::ShapeRef.new(shape: AvailableCapacityPerAvailabilityZone, location_name: "AvailableCapacityPerAvailabilityZone")
+
     AvailableProcessorFeature.add_member(:name, Shapes::ShapeRef.new(shape: String, location_name: "Name"))
     AvailableProcessorFeature.add_member(:default_value, Shapes::ShapeRef.new(shape: String, location_name: "DefaultValue"))
     AvailableProcessorFeature.add_member(:allowed_values, Shapes::ShapeRef.new(shape: String, location_name: "AllowedValues"))
@@ -954,6 +982,12 @@ module Aws::RDS
     BlueGreenDeploymentTaskList.member = Shapes::ShapeRef.new(shape: BlueGreenDeploymentTask)
 
     CACertificateIdentifiersList.member = Shapes::ShapeRef.new(shape: String)
+
+    CancelDBCapacityReservationRequest.add_member(:db_capacity_reservation_identifier, Shapes::ShapeRef.new(shape: DBCapacityReservationIdentifier, required: true, location_name: "DBCapacityReservationIdentifier"))
+    CancelDBCapacityReservationRequest.struct_class = Types::CancelDBCapacityReservationRequest
+
+    CancelDBCapacityReservationResponse.add_member(:db_capacity_reservation, Shapes::ShapeRef.new(shape: DBCapacityReservation, location_name: "DBCapacityReservation"))
+    CancelDBCapacityReservationResponse.struct_class = Types::CancelDBCapacityReservationResponse
 
     CancelExportTaskMessage.add_member(:export_task_identifier, Shapes::ShapeRef.new(shape: String, required: true, location_name: "ExportTaskIdentifier"))
     CancelExportTaskMessage.struct_class = Types::CancelExportTaskMessage
@@ -1112,6 +1146,21 @@ module Aws::RDS
     CreateCustomDBEngineVersionMessage.add_member(:tags, Shapes::ShapeRef.new(shape: TagList, location_name: "Tags"))
     CreateCustomDBEngineVersionMessage.struct_class = Types::CreateCustomDBEngineVersionMessage
 
+    CreateDBCapacityReservationRequest.add_member(:db_capacity_reservation_name, Shapes::ShapeRef.new(shape: DBCapacityReservationName, required: true, location_name: "DBCapacityReservationName"))
+    CreateDBCapacityReservationRequest.add_member(:db_instance_class, Shapes::ShapeRef.new(shape: DBInstanceClass, required: true, location_name: "DBInstanceClass"))
+    CreateDBCapacityReservationRequest.add_member(:engine, Shapes::ShapeRef.new(shape: String, required: true, location_name: "Engine"))
+    CreateDBCapacityReservationRequest.add_member(:capacity_per_availability_zone, Shapes::ShapeRef.new(shape: IntegerOptional, required: true, location_name: "CapacityPerAvailabilityZone"))
+    CreateDBCapacityReservationRequest.add_member(:availability_zones, Shapes::ShapeRef.new(shape: AvailabilityZones, required: true, location_name: "AvailabilityZones"))
+    CreateDBCapacityReservationRequest.add_member(:end_date, Shapes::ShapeRef.new(shape: TStamp, location_name: "EndDate"))
+    CreateDBCapacityReservationRequest.add_member(:start_date, Shapes::ShapeRef.new(shape: TStamp, location_name: "StartDate"))
+    CreateDBCapacityReservationRequest.add_member(:commitment_duration, Shapes::ShapeRef.new(shape: LongOptional, location_name: "CommitmentDuration"))
+    CreateDBCapacityReservationRequest.add_member(:license_model, Shapes::ShapeRef.new(shape: String, location_name: "LicenseModel"))
+    CreateDBCapacityReservationRequest.add_member(:tags, Shapes::ShapeRef.new(shape: TagList, location_name: "Tags"))
+    CreateDBCapacityReservationRequest.struct_class = Types::CreateDBCapacityReservationRequest
+
+    CreateDBCapacityReservationResponse.add_member(:db_capacity_reservation, Shapes::ShapeRef.new(shape: DBCapacityReservation, location_name: "DBCapacityReservation"))
+    CreateDBCapacityReservationResponse.struct_class = Types::CreateDBCapacityReservationResponse
+
     CreateDBClusterEndpointMessage.add_member(:db_cluster_identifier, Shapes::ShapeRef.new(shape: String, required: true, location_name: "DBClusterIdentifier"))
     CreateDBClusterEndpointMessage.add_member(:db_cluster_endpoint_identifier, Shapes::ShapeRef.new(shape: String, required: true, location_name: "DBClusterEndpointIdentifier"))
     CreateDBClusterEndpointMessage.add_member(:endpoint_type, Shapes::ShapeRef.new(shape: String, required: true, location_name: "EndpointType"))
@@ -1269,6 +1318,7 @@ module Aws::RDS
     CreateDBInstanceMessage.add_member(:engine_lifecycle_support, Shapes::ShapeRef.new(shape: String, location_name: "EngineLifecycleSupport"))
     CreateDBInstanceMessage.add_member(:additional_storage_volumes, Shapes::ShapeRef.new(shape: AdditionalStorageVolumesList, location_name: "AdditionalStorageVolumes"))
     CreateDBInstanceMessage.add_member(:tag_specifications, Shapes::ShapeRef.new(shape: TagSpecificationList, location_name: "TagSpecifications"))
+    CreateDBInstanceMessage.add_member(:db_capacity_reservation_identifier, Shapes::ShapeRef.new(shape: DBCapacityReservationIdentifier, location_name: "DBCapacityReservationIdentifier"))
     CreateDBInstanceMessage.add_member(:master_user_authentication_type, Shapes::ShapeRef.new(shape: MasterUserAuthenticationType, location_name: "MasterUserAuthenticationType"))
     CreateDBInstanceMessage.struct_class = Types::CreateDBInstanceMessage
 
@@ -1321,6 +1371,7 @@ module Aws::RDS
     CreateDBInstanceReadReplicaMessage.add_member(:ca_certificate_identifier, Shapes::ShapeRef.new(shape: String, location_name: "CACertificateIdentifier"))
     CreateDBInstanceReadReplicaMessage.add_member(:additional_storage_volumes, Shapes::ShapeRef.new(shape: AdditionalStorageVolumesList, location_name: "AdditionalStorageVolumes"))
     CreateDBInstanceReadReplicaMessage.add_member(:tag_specifications, Shapes::ShapeRef.new(shape: TagSpecificationList, location_name: "TagSpecifications"))
+    CreateDBInstanceReadReplicaMessage.add_member(:db_capacity_reservation_identifier, Shapes::ShapeRef.new(shape: DBCapacityReservationIdentifier, location_name: "DBCapacityReservationIdentifier"))
     CreateDBInstanceReadReplicaMessage.add_member(:source_region, Shapes::ShapeRef.new(shape: String, location_name: "SourceRegion"))
     CreateDBInstanceReadReplicaMessage.struct_class = Types::CreateDBInstanceReadReplicaMessage
 
@@ -1474,6 +1525,34 @@ module Aws::RDS
     CustomDBEngineVersionNotFoundFault.struct_class = Types::CustomDBEngineVersionNotFoundFault
 
     CustomDBEngineVersionQuotaExceededFault.struct_class = Types::CustomDBEngineVersionQuotaExceededFault
+
+    DBCapacityReservation.add_member(:db_capacity_reservation_name, Shapes::ShapeRef.new(shape: DBCapacityReservationName, location_name: "DBCapacityReservationName"))
+    DBCapacityReservation.add_member(:db_instance_class, Shapes::ShapeRef.new(shape: DBInstanceClass, location_name: "DBInstanceClass"))
+    DBCapacityReservation.add_member(:engine, Shapes::ShapeRef.new(shape: String, location_name: "Engine"))
+    DBCapacityReservation.add_member(:license_model, Shapes::ShapeRef.new(shape: String, location_name: "LicenseModel"))
+    DBCapacityReservation.add_member(:reserved_capacity_per_availability_zone, Shapes::ShapeRef.new(shape: IntegerOptional, location_name: "ReservedCapacityPerAvailabilityZone"))
+    DBCapacityReservation.add_member(:available_capacity_per_availability_zone_list, Shapes::ShapeRef.new(shape: AvailableCapacityPerAvailabilityZoneList, location_name: "AvailableCapacityPerAvailabilityZoneList"))
+    DBCapacityReservation.add_member(:end_date, Shapes::ShapeRef.new(shape: TStamp, location_name: "EndDate"))
+    DBCapacityReservation.add_member(:create_date, Shapes::ShapeRef.new(shape: TStamp, location_name: "CreateDate"))
+    DBCapacityReservation.add_member(:start_date, Shapes::ShapeRef.new(shape: TStamp, location_name: "StartDate"))
+    DBCapacityReservation.add_member(:commitment_info, Shapes::ShapeRef.new(shape: DBCapacityReservationCommitmentInfo, location_name: "CommitmentInfo"))
+    DBCapacityReservation.add_member(:state, Shapes::ShapeRef.new(shape: DBCapacityReservationState, location_name: "State"))
+    DBCapacityReservation.add_member(:db_capacity_reservation_arn, Shapes::ShapeRef.new(shape: String, location_name: "DBCapacityReservationArn"))
+    DBCapacityReservation.add_member(:db_capacity_reservation_identifier, Shapes::ShapeRef.new(shape: DBCapacityReservationIdentifier, location_name: "DBCapacityReservationIdentifier"))
+    DBCapacityReservation.add_member(:tag_list, Shapes::ShapeRef.new(shape: TagList, location_name: "TagList"))
+    DBCapacityReservation.struct_class = Types::DBCapacityReservation
+
+    DBCapacityReservationAlreadyExistsFault.struct_class = Types::DBCapacityReservationAlreadyExistsFault
+
+    DBCapacityReservationCommitmentInfo.add_member(:committed_capacity_per_availability_zone, Shapes::ShapeRef.new(shape: IntegerOptional, location_name: "CommittedCapacityPerAvailabilityZone"))
+    DBCapacityReservationCommitmentInfo.add_member(:commitment_end_date, Shapes::ShapeRef.new(shape: TStamp, location_name: "CommitmentEndDate"))
+    DBCapacityReservationCommitmentInfo.struct_class = Types::DBCapacityReservationCommitmentInfo
+
+    DBCapacityReservationList.member = Shapes::ShapeRef.new(shape: DBCapacityReservation)
+
+    DBCapacityReservationNotFoundFault.struct_class = Types::DBCapacityReservationNotFoundFault
+
+    DBCapacityReservationUnsupportedFault.struct_class = Types::DBCapacityReservationUnsupportedFault
 
     DBCluster.add_member(:allocated_storage, Shapes::ShapeRef.new(shape: IntegerOptional, location_name: "AllocatedStorage"))
     DBCluster.add_member(:availability_zones, Shapes::ShapeRef.new(shape: AvailabilityZones, location_name: "AvailabilityZones"))
@@ -1915,6 +1994,7 @@ module Aws::RDS
     DBInstance.add_member(:storage_volume_status, Shapes::ShapeRef.new(shape: String, location_name: "StorageVolumeStatus"))
     DBInstance.add_member(:storage_operation_status, Shapes::ShapeRef.new(shape: String, location_name: "StorageOperationStatus"))
     DBInstance.add_member(:storage_operation_percent_progress, Shapes::ShapeRef.new(shape: IntegerOptional, location_name: "StorageOperationPercentProgress"))
+    DBInstance.add_member(:db_capacity_reservation_identifier, Shapes::ShapeRef.new(shape: DBCapacityReservationIdentifier, location_name: "DBCapacityReservationIdentifier"))
     DBInstance.struct_class = Types::DBInstance
 
     DBInstanceAlreadyExistsFault.struct_class = Types::DBInstanceAlreadyExistsFault
@@ -2451,6 +2531,16 @@ module Aws::RDS
     DescribeCertificatesMessage.add_member(:max_records, Shapes::ShapeRef.new(shape: IntegerOptional, location_name: "MaxRecords"))
     DescribeCertificatesMessage.add_member(:marker, Shapes::ShapeRef.new(shape: String, location_name: "Marker"))
     DescribeCertificatesMessage.struct_class = Types::DescribeCertificatesMessage
+
+    DescribeDBCapacityReservationsRequest.add_member(:db_capacity_reservation_identifier, Shapes::ShapeRef.new(shape: DBCapacityReservationIdentifier, location_name: "DBCapacityReservationIdentifier"))
+    DescribeDBCapacityReservationsRequest.add_member(:marker, Shapes::ShapeRef.new(shape: String, location_name: "Marker"))
+    DescribeDBCapacityReservationsRequest.add_member(:max_records, Shapes::ShapeRef.new(shape: MaxRecords, location_name: "MaxRecords"))
+    DescribeDBCapacityReservationsRequest.add_member(:filters, Shapes::ShapeRef.new(shape: FilterList, location_name: "Filters"))
+    DescribeDBCapacityReservationsRequest.struct_class = Types::DescribeDBCapacityReservationsRequest
+
+    DescribeDBCapacityReservationsResponse.add_member(:db_capacity_reservations, Shapes::ShapeRef.new(shape: DBCapacityReservationList, location_name: "DBCapacityReservations"))
+    DescribeDBCapacityReservationsResponse.add_member(:marker, Shapes::ShapeRef.new(shape: String, location_name: "Marker"))
+    DescribeDBCapacityReservationsResponse.struct_class = Types::DescribeDBCapacityReservationsResponse
 
     DescribeDBClusterAutomatedBackupsMessage.add_member(:db_cluster_resource_id, Shapes::ShapeRef.new(shape: String, location_name: "DbClusterResourceId"))
     DescribeDBClusterAutomatedBackupsMessage.add_member(:db_cluster_identifier, Shapes::ShapeRef.new(shape: String, location_name: "DBClusterIdentifier"))
@@ -3097,6 +3187,8 @@ module Aws::RDS
 
     InvalidCustomDBEngineVersionStateFault.struct_class = Types::InvalidCustomDBEngineVersionStateFault
 
+    InvalidDBCapacityReservationStateFault.struct_class = Types::InvalidDBCapacityReservationStateFault
+
     InvalidDBClusterAutomatedBackupStateFault.struct_class = Types::InvalidDBClusterAutomatedBackupStateFault
 
     InvalidDBClusterCapacityFault.struct_class = Types::InvalidDBClusterCapacityFault
@@ -3242,6 +3334,15 @@ module Aws::RDS
     ModifyCustomDBEngineVersionMessage.add_member(:status, Shapes::ShapeRef.new(shape: CustomEngineVersionStatus, location_name: "Status"))
     ModifyCustomDBEngineVersionMessage.struct_class = Types::ModifyCustomDBEngineVersionMessage
 
+    ModifyDBCapacityReservationRequest.add_member(:db_capacity_reservation_identifier, Shapes::ShapeRef.new(shape: DBCapacityReservationIdentifier, required: true, location_name: "DBCapacityReservationIdentifier"))
+    ModifyDBCapacityReservationRequest.add_member(:capacity_per_availability_zone, Shapes::ShapeRef.new(shape: IntegerOptional, location_name: "CapacityPerAvailabilityZone"))
+    ModifyDBCapacityReservationRequest.add_member(:end_date_type, Shapes::ShapeRef.new(shape: EndDateType, location_name: "EndDateType"))
+    ModifyDBCapacityReservationRequest.add_member(:end_date, Shapes::ShapeRef.new(shape: TStamp, location_name: "EndDate"))
+    ModifyDBCapacityReservationRequest.struct_class = Types::ModifyDBCapacityReservationRequest
+
+    ModifyDBCapacityReservationResponse.add_member(:db_capacity_reservation, Shapes::ShapeRef.new(shape: DBCapacityReservation, location_name: "DBCapacityReservation"))
+    ModifyDBCapacityReservationResponse.struct_class = Types::ModifyDBCapacityReservationResponse
+
     ModifyDBClusterEndpointMessage.add_member(:db_cluster_endpoint_identifier, Shapes::ShapeRef.new(shape: String, required: true, location_name: "DBClusterEndpointIdentifier"))
     ModifyDBClusterEndpointMessage.add_member(:endpoint_type, Shapes::ShapeRef.new(shape: String, location_name: "EndpointType"))
     ModifyDBClusterEndpointMessage.add_member(:static_members, Shapes::ShapeRef.new(shape: StringList, location_name: "StaticMembers"))
@@ -3376,6 +3477,7 @@ module Aws::RDS
     ModifyDBInstanceMessage.add_member(:dedicated_log_volume, Shapes::ShapeRef.new(shape: BooleanOptional, location_name: "DedicatedLogVolume"))
     ModifyDBInstanceMessage.add_member(:engine, Shapes::ShapeRef.new(shape: String, location_name: "Engine"))
     ModifyDBInstanceMessage.add_member(:additional_storage_volumes, Shapes::ShapeRef.new(shape: ModifyAdditionalStorageVolumesList, location_name: "AdditionalStorageVolumes"))
+    ModifyDBInstanceMessage.add_member(:db_capacity_reservation_identifier, Shapes::ShapeRef.new(shape: DBCapacityReservationIdentifier, location_name: "DBCapacityReservationIdentifier"))
     ModifyDBInstanceMessage.add_member(:tag_specifications, Shapes::ShapeRef.new(shape: TagSpecificationList, location_name: "TagSpecifications"))
     ModifyDBInstanceMessage.add_member(:master_user_authentication_type, Shapes::ShapeRef.new(shape: MasterUserAuthenticationType, location_name: "MasterUserAuthenticationType"))
     ModifyDBInstanceMessage.add_member(:engine_lifecycle_support, Shapes::ShapeRef.new(shape: String, location_name: "EngineLifecycleSupport"))
@@ -3731,6 +3833,7 @@ module Aws::RDS
     PendingModifiedValues.add_member(:dedicated_log_volume, Shapes::ShapeRef.new(shape: BooleanOptional, location_name: "DedicatedLogVolume"))
     PendingModifiedValues.add_member(:engine, Shapes::ShapeRef.new(shape: String, location_name: "Engine"))
     PendingModifiedValues.add_member(:additional_storage_volumes, Shapes::ShapeRef.new(shape: AdditionalStorageVolumesList, location_name: "AdditionalStorageVolumes"))
+    PendingModifiedValues.add_member(:db_capacity_reservation_identifier, Shapes::ShapeRef.new(shape: DBCapacityReservationIdentifier, location_name: "DBCapacityReservationIdentifier"))
     PendingModifiedValues.struct_class = Types::PendingModifiedValues
 
     PerformanceInsightsMetricDimensionGroup.add_member(:dimensions, Shapes::ShapeRef.new(shape: StringList, location_name: "Dimensions"))
@@ -4132,6 +4235,7 @@ module Aws::RDS
     RestoreDBInstanceFromDBSnapshotMessage.add_member(:db_cluster_snapshot_identifier, Shapes::ShapeRef.new(shape: String, location_name: "DBClusterSnapshotIdentifier"))
     RestoreDBInstanceFromDBSnapshotMessage.add_member(:backup_retention_period, Shapes::ShapeRef.new(shape: IntegerOptional, location_name: "BackupRetentionPeriod"))
     RestoreDBInstanceFromDBSnapshotMessage.add_member(:preferred_backup_window, Shapes::ShapeRef.new(shape: String, location_name: "PreferredBackupWindow"))
+    RestoreDBInstanceFromDBSnapshotMessage.add_member(:db_capacity_reservation_identifier, Shapes::ShapeRef.new(shape: DBCapacityReservationIdentifier, location_name: "DBCapacityReservationIdentifier"))
     RestoreDBInstanceFromDBSnapshotMessage.add_member(:dedicated_log_volume, Shapes::ShapeRef.new(shape: BooleanOptional, location_name: "DedicatedLogVolume"))
     RestoreDBInstanceFromDBSnapshotMessage.add_member(:ca_certificate_identifier, Shapes::ShapeRef.new(shape: String, location_name: "CACertificateIdentifier"))
     RestoreDBInstanceFromDBSnapshotMessage.add_member(:engine_lifecycle_support, Shapes::ShapeRef.new(shape: String, location_name: "EngineLifecycleSupport"))
@@ -4193,6 +4297,7 @@ module Aws::RDS
     RestoreDBInstanceFromS3Message.add_member(:network_type, Shapes::ShapeRef.new(shape: String, location_name: "NetworkType"))
     RestoreDBInstanceFromS3Message.add_member(:manage_master_user_password, Shapes::ShapeRef.new(shape: BooleanOptional, location_name: "ManageMasterUserPassword"))
     RestoreDBInstanceFromS3Message.add_member(:master_user_secret_kms_key_id, Shapes::ShapeRef.new(shape: String, location_name: "MasterUserSecretKmsKeyId"))
+    RestoreDBInstanceFromS3Message.add_member(:db_capacity_reservation_identifier, Shapes::ShapeRef.new(shape: DBCapacityReservationIdentifier, location_name: "DBCapacityReservationIdentifier"))
     RestoreDBInstanceFromS3Message.add_member(:dedicated_log_volume, Shapes::ShapeRef.new(shape: BooleanOptional, location_name: "DedicatedLogVolume"))
     RestoreDBInstanceFromS3Message.add_member(:ca_certificate_identifier, Shapes::ShapeRef.new(shape: String, location_name: "CACertificateIdentifier"))
     RestoreDBInstanceFromS3Message.add_member(:engine_lifecycle_support, Shapes::ShapeRef.new(shape: String, location_name: "EngineLifecycleSupport"))
@@ -4248,6 +4353,7 @@ module Aws::RDS
     RestoreDBInstanceToPointInTimeMessage.add_member(:allocated_storage, Shapes::ShapeRef.new(shape: IntegerOptional, location_name: "AllocatedStorage"))
     RestoreDBInstanceToPointInTimeMessage.add_member(:backup_retention_period, Shapes::ShapeRef.new(shape: IntegerOptional, location_name: "BackupRetentionPeriod"))
     RestoreDBInstanceToPointInTimeMessage.add_member(:preferred_backup_window, Shapes::ShapeRef.new(shape: String, location_name: "PreferredBackupWindow"))
+    RestoreDBInstanceToPointInTimeMessage.add_member(:db_capacity_reservation_identifier, Shapes::ShapeRef.new(shape: DBCapacityReservationIdentifier, location_name: "DBCapacityReservationIdentifier"))
     RestoreDBInstanceToPointInTimeMessage.add_member(:dedicated_log_volume, Shapes::ShapeRef.new(shape: BooleanOptional, location_name: "DedicatedLogVolume"))
     RestoreDBInstanceToPointInTimeMessage.add_member(:ca_certificate_identifier, Shapes::ShapeRef.new(shape: String, location_name: "CACertificateIdentifier"))
     RestoreDBInstanceToPointInTimeMessage.add_member(:engine_lifecycle_support, Shapes::ShapeRef.new(shape: String, location_name: "EngineLifecycleSupport"))
@@ -4384,6 +4490,7 @@ module Aws::RDS
     StartDBInstanceAutomatedBackupsReplicationResult.struct_class = Types::StartDBInstanceAutomatedBackupsReplicationResult
 
     StartDBInstanceMessage.add_member(:db_instance_identifier, Shapes::ShapeRef.new(shape: String, required: true, location_name: "DBInstanceIdentifier"))
+    StartDBInstanceMessage.add_member(:db_capacity_reservation_identifier, Shapes::ShapeRef.new(shape: DBCapacityReservationIdentifier, location_name: "DBCapacityReservationIdentifier"))
     StartDBInstanceMessage.struct_class = Types::StartDBInstanceMessage
 
     StartDBInstanceResult.add_member(:db_instance, Shapes::ShapeRef.new(shape: DBInstance, location_name: "DBInstance"))
@@ -4421,6 +4528,7 @@ module Aws::RDS
 
     StopDBInstanceMessage.add_member(:db_instance_identifier, Shapes::ShapeRef.new(shape: String, required: true, location_name: "DBInstanceIdentifier"))
     StopDBInstanceMessage.add_member(:db_snapshot_identifier, Shapes::ShapeRef.new(shape: String, location_name: "DBSnapshotIdentifier"))
+    StopDBInstanceMessage.add_member(:detach_from_db_capacity_reservation, Shapes::ShapeRef.new(shape: BooleanOptional, location_name: "DetachFromDBCapacityReservation"))
     StopDBInstanceMessage.struct_class = Types::StopDBInstanceMessage
 
     StopDBInstanceResult.add_member(:db_instance, Shapes::ShapeRef.new(shape: DBInstance, location_name: "DBInstance"))
@@ -4705,6 +4813,7 @@ module Aws::RDS
         o.errors << Shapes::ShapeRef.new(shape: DBInstanceNotFoundFault)
         o.errors << Shapes::ShapeRef.new(shape: DBProxyTargetGroupNotFoundFault)
         o.errors << Shapes::ShapeRef.new(shape: InvalidDBClusterStateFault)
+        o.errors << Shapes::ShapeRef.new(shape: DBCapacityReservationNotFoundFault)
       end)
 
       api.add_operation(:apply_pending_maintenance_action, Seahorse::Model::Operation.new.tap do |o|
@@ -4738,6 +4847,16 @@ module Aws::RDS
         o.output = Shapes::ShapeRef.new(shape: DBClusterBacktrack)
         o.errors << Shapes::ShapeRef.new(shape: InvalidDBClusterStateFault)
         o.errors << Shapes::ShapeRef.new(shape: DBClusterNotFoundFault)
+      end)
+
+      api.add_operation(:cancel_db_capacity_reservation, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "CancelDBCapacityReservation"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: CancelDBCapacityReservationRequest)
+        o.output = Shapes::ShapeRef.new(shape: CancelDBCapacityReservationResponse)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidDBCapacityReservationStateFault)
+        o.errors << Shapes::ShapeRef.new(shape: DBCapacityReservationNotFoundFault)
       end)
 
       api.add_operation(:cancel_export_task, Seahorse::Model::Operation.new.tap do |o|
@@ -4846,6 +4965,18 @@ module Aws::RDS
         o.errors << Shapes::ShapeRef.new(shape: CustomDBEngineVersionAlreadyExistsFault)
       end)
 
+      api.add_operation(:create_db_capacity_reservation, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "CreateDBCapacityReservation"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: CreateDBCapacityReservationRequest)
+        o.output = Shapes::ShapeRef.new(shape: CreateDBCapacityReservationResponse)
+        o.errors << Shapes::ShapeRef.new(shape: DBCapacityReservationAlreadyExistsFault)
+        o.errors << Shapes::ShapeRef.new(shape: InstanceQuotaExceededFault)
+        o.errors << Shapes::ShapeRef.new(shape: DBCapacityReservationUnsupportedFault)
+        o.errors << Shapes::ShapeRef.new(shape: InsufficientDBInstanceCapacityFault)
+      end)
+
       api.add_operation(:create_db_cluster, Seahorse::Model::Operation.new.tap do |o|
         o.name = "CreateDBCluster"
         o.http_method = "POST"
@@ -4934,6 +5065,7 @@ module Aws::RDS
         o.errors << Shapes::ShapeRef.new(shape: OptionGroupNotFoundFault)
         o.errors << Shapes::ShapeRef.new(shape: NetworkTypeNotSupported)
         o.errors << Shapes::ShapeRef.new(shape: InstanceQuotaExceededFault)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidDBCapacityReservationStateFault)
         o.errors << Shapes::ShapeRef.new(shape: StorageQuotaExceededFault)
         o.errors << Shapes::ShapeRef.new(shape: BackupPolicyNotFoundFault)
         o.errors << Shapes::ShapeRef.new(shape: DomainNotFoundFault)
@@ -4944,6 +5076,7 @@ module Aws::RDS
         o.errors << Shapes::ShapeRef.new(shape: DBSecurityGroupNotFoundFault)
         o.errors << Shapes::ShapeRef.new(shape: InvalidVPCNetworkStateFault)
         o.errors << Shapes::ShapeRef.new(shape: InvalidDBClusterStateFault)
+        o.errors << Shapes::ShapeRef.new(shape: DBCapacityReservationNotFoundFault)
         o.errors << Shapes::ShapeRef.new(shape: DBSubnetGroupNotFoundFault)
       end)
 
@@ -4967,6 +5100,7 @@ module Aws::RDS
         o.errors << Shapes::ShapeRef.new(shape: DBInstanceNotFoundFault)
         o.errors << Shapes::ShapeRef.new(shape: NetworkTypeNotSupported)
         o.errors << Shapes::ShapeRef.new(shape: InstanceQuotaExceededFault)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidDBCapacityReservationStateFault)
         o.errors << Shapes::ShapeRef.new(shape: StorageQuotaExceededFault)
         o.errors << Shapes::ShapeRef.new(shape: DomainNotFoundFault)
         o.errors << Shapes::ShapeRef.new(shape: CertificateNotFoundFault)
@@ -4977,6 +5111,7 @@ module Aws::RDS
         o.errors << Shapes::ShapeRef.new(shape: DBSecurityGroupNotFoundFault)
         o.errors << Shapes::ShapeRef.new(shape: InvalidVPCNetworkStateFault)
         o.errors << Shapes::ShapeRef.new(shape: InvalidDBClusterStateFault)
+        o.errors << Shapes::ShapeRef.new(shape: DBCapacityReservationNotFoundFault)
         o.errors << Shapes::ShapeRef.new(shape: DBSubnetGroupNotFoundFault)
       end)
 
@@ -5400,6 +5535,21 @@ module Aws::RDS
         o.input = Shapes::ShapeRef.new(shape: DescribeCertificatesMessage)
         o.output = Shapes::ShapeRef.new(shape: CertificateMessage)
         o.errors << Shapes::ShapeRef.new(shape: CertificateNotFoundFault)
+        o[:pager] = Aws::Pager.new(
+          limit_key: "max_records",
+          tokens: {
+            "marker" => "marker"
+          }
+        )
+      end)
+
+      api.add_operation(:describe_db_capacity_reservations, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "DescribeDBCapacityReservations"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: DescribeDBCapacityReservationsRequest)
+        o.output = Shapes::ShapeRef.new(shape: DescribeDBCapacityReservationsResponse)
+        o.errors << Shapes::ShapeRef.new(shape: DBCapacityReservationNotFoundFault)
         o[:pager] = Aws::Pager.new(
           limit_key: "max_records",
           tokens: {
@@ -6115,6 +6265,7 @@ module Aws::RDS
         o.errors << Shapes::ShapeRef.new(shape: DBClusterNotFoundFault)
         o.errors << Shapes::ShapeRef.new(shape: DBInstanceNotFoundFault)
         o.errors << Shapes::ShapeRef.new(shape: DBProxyTargetGroupNotFoundFault)
+        o.errors << Shapes::ShapeRef.new(shape: DBCapacityReservationNotFoundFault)
       end)
 
       api.add_operation(:modify_activity_stream, Seahorse::Model::Operation.new.tap do |o|
@@ -6156,6 +6307,18 @@ module Aws::RDS
         o.output = Shapes::ShapeRef.new(shape: DBEngineVersion)
         o.errors << Shapes::ShapeRef.new(shape: CustomDBEngineVersionNotFoundFault)
         o.errors << Shapes::ShapeRef.new(shape: InvalidCustomDBEngineVersionStateFault)
+      end)
+
+      api.add_operation(:modify_db_capacity_reservation, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "ModifyDBCapacityReservation"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: ModifyDBCapacityReservationRequest)
+        o.output = Shapes::ShapeRef.new(shape: ModifyDBCapacityReservationResponse)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidDBCapacityReservationStateFault)
+        o.errors << Shapes::ShapeRef.new(shape: DBCapacityReservationNotFoundFault)
+        o.errors << Shapes::ShapeRef.new(shape: InstanceQuotaExceededFault)
+        o.errors << Shapes::ShapeRef.new(shape: InsufficientDBInstanceCapacityFault)
       end)
 
       api.add_operation(:modify_db_cluster, Seahorse::Model::Operation.new.tap do |o|
@@ -6237,6 +6400,7 @@ module Aws::RDS
         o.errors << Shapes::ShapeRef.new(shape: OptionGroupNotFoundFault)
         o.errors << Shapes::ShapeRef.new(shape: DBInstanceNotFoundFault)
         o.errors << Shapes::ShapeRef.new(shape: NetworkTypeNotSupported)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidDBCapacityReservationStateFault)
         o.errors << Shapes::ShapeRef.new(shape: StorageQuotaExceededFault)
         o.errors << Shapes::ShapeRef.new(shape: BackupPolicyNotFoundFault)
         o.errors << Shapes::ShapeRef.new(shape: DomainNotFoundFault)
@@ -6249,6 +6413,7 @@ module Aws::RDS
         o.errors << Shapes::ShapeRef.new(shape: DBSecurityGroupNotFoundFault)
         o.errors << Shapes::ShapeRef.new(shape: InvalidVPCNetworkStateFault)
         o.errors << Shapes::ShapeRef.new(shape: InvalidDBClusterStateFault)
+        o.errors << Shapes::ShapeRef.new(shape: DBCapacityReservationNotFoundFault)
       end)
 
       api.add_operation(:modify_db_parameter_group, Seahorse::Model::Operation.new.tap do |o|
@@ -6555,6 +6720,7 @@ module Aws::RDS
         o.errors << Shapes::ShapeRef.new(shape: DBInstanceNotFoundFault)
         o.errors << Shapes::ShapeRef.new(shape: DBProxyTargetGroupNotFoundFault)
         o.errors << Shapes::ShapeRef.new(shape: InvalidDBClusterStateFault)
+        o.errors << Shapes::ShapeRef.new(shape: DBCapacityReservationNotFoundFault)
       end)
 
       api.add_operation(:reset_db_cluster_parameter_group, Seahorse::Model::Operation.new.tap do |o|
@@ -6685,6 +6851,7 @@ module Aws::RDS
         o.errors << Shapes::ShapeRef.new(shape: OptionGroupNotFoundFault)
         o.errors << Shapes::ShapeRef.new(shape: NetworkTypeNotSupported)
         o.errors << Shapes::ShapeRef.new(shape: InstanceQuotaExceededFault)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidDBCapacityReservationStateFault)
         o.errors << Shapes::ShapeRef.new(shape: StorageQuotaExceededFault)
         o.errors << Shapes::ShapeRef.new(shape: BackupPolicyNotFoundFault)
         o.errors << Shapes::ShapeRef.new(shape: DomainNotFoundFault)
@@ -6695,6 +6862,7 @@ module Aws::RDS
         o.errors << Shapes::ShapeRef.new(shape: TenantDatabaseQuotaExceededFault)
         o.errors << Shapes::ShapeRef.new(shape: DBSecurityGroupNotFoundFault)
         o.errors << Shapes::ShapeRef.new(shape: InvalidVPCNetworkStateFault)
+        o.errors << Shapes::ShapeRef.new(shape: DBCapacityReservationNotFoundFault)
         o.errors << Shapes::ShapeRef.new(shape: DBSubnetGroupNotFoundFault)
         o.errors << Shapes::ShapeRef.new(shape: InvalidRestoreFault)
       end)
@@ -6706,6 +6874,7 @@ module Aws::RDS
         o.input = Shapes::ShapeRef.new(shape: RestoreDBInstanceFromS3Message)
         o.output = Shapes::ShapeRef.new(shape: RestoreDBInstanceFromS3Result)
         o.errors << Shapes::ShapeRef.new(shape: AuthorizationNotFoundFault)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidDBCapacityReservationStateFault)
         o.errors << Shapes::ShapeRef.new(shape: StorageQuotaExceededFault)
         o.errors << Shapes::ShapeRef.new(shape: DBParameterGroupNotFoundFault)
         o.errors << Shapes::ShapeRef.new(shape: BackupPolicyNotFoundFault)
@@ -6721,6 +6890,7 @@ module Aws::RDS
         o.errors << Shapes::ShapeRef.new(shape: OptionGroupNotFoundFault)
         o.errors << Shapes::ShapeRef.new(shape: DBSecurityGroupNotFoundFault)
         o.errors << Shapes::ShapeRef.new(shape: InvalidVPCNetworkStateFault)
+        o.errors << Shapes::ShapeRef.new(shape: DBCapacityReservationNotFoundFault)
         o.errors << Shapes::ShapeRef.new(shape: NetworkTypeNotSupported)
         o.errors << Shapes::ShapeRef.new(shape: InstanceQuotaExceededFault)
         o.errors << Shapes::ShapeRef.new(shape: DBSubnetGroupNotFoundFault)
@@ -6746,6 +6916,7 @@ module Aws::RDS
         o.errors << Shapes::ShapeRef.new(shape: DBInstanceAutomatedBackupNotFoundFault)
         o.errors << Shapes::ShapeRef.new(shape: NetworkTypeNotSupported)
         o.errors << Shapes::ShapeRef.new(shape: InstanceQuotaExceededFault)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidDBCapacityReservationStateFault)
         o.errors << Shapes::ShapeRef.new(shape: StorageQuotaExceededFault)
         o.errors << Shapes::ShapeRef.new(shape: BackupPolicyNotFoundFault)
         o.errors << Shapes::ShapeRef.new(shape: DomainNotFoundFault)
@@ -6756,6 +6927,7 @@ module Aws::RDS
         o.errors << Shapes::ShapeRef.new(shape: TenantDatabaseQuotaExceededFault)
         o.errors << Shapes::ShapeRef.new(shape: DBSecurityGroupNotFoundFault)
         o.errors << Shapes::ShapeRef.new(shape: InvalidVPCNetworkStateFault)
+        o.errors << Shapes::ShapeRef.new(shape: DBCapacityReservationNotFoundFault)
         o.errors << Shapes::ShapeRef.new(shape: PointInTimeRestoreNotEnabledFault)
         o.errors << Shapes::ShapeRef.new(shape: DBSubnetGroupNotFoundFault)
         o.errors << Shapes::ShapeRef.new(shape: InvalidRestoreFault)
@@ -6807,6 +6979,7 @@ module Aws::RDS
         o.input = Shapes::ShapeRef.new(shape: StartDBInstanceMessage)
         o.output = Shapes::ShapeRef.new(shape: StartDBInstanceResult)
         o.errors << Shapes::ShapeRef.new(shape: AuthorizationNotFoundFault)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidDBCapacityReservationStateFault)
         o.errors << Shapes::ShapeRef.new(shape: DBSubnetGroupDoesNotCoverEnoughAZs)
         o.errors << Shapes::ShapeRef.new(shape: InvalidDBInstanceStateFault)
         o.errors << Shapes::ShapeRef.new(shape: KMSKeyNotAccessibleFault)
@@ -6817,6 +6990,7 @@ module Aws::RDS
         o.errors << Shapes::ShapeRef.new(shape: DBInstanceNotFoundFault)
         o.errors << Shapes::ShapeRef.new(shape: InvalidVPCNetworkStateFault)
         o.errors << Shapes::ShapeRef.new(shape: InvalidDBClusterStateFault)
+        o.errors << Shapes::ShapeRef.new(shape: DBCapacityReservationNotFoundFault)
         o.errors << Shapes::ShapeRef.new(shape: DBSubnetGroupNotFoundFault)
       end)
 
@@ -6883,6 +7057,7 @@ module Aws::RDS
         o.http_request_uri = "/"
         o.input = Shapes::ShapeRef.new(shape: StopDBInstanceMessage)
         o.output = Shapes::ShapeRef.new(shape: StopDBInstanceResult)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidDBCapacityReservationStateFault)
         o.errors << Shapes::ShapeRef.new(shape: DBInstanceNotFoundFault)
         o.errors << Shapes::ShapeRef.new(shape: InvalidDBClusterStateFault)
         o.errors << Shapes::ShapeRef.new(shape: SnapshotQuotaExceededFault)

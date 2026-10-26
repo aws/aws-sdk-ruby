@@ -199,12 +199,19 @@ module Aws::EKS
     #     the required types.
     #
     #   @option options [Boolean] :correct_clock_skew (true)
-    #     Used only in `standard` and `adaptive` retry modes. Specifies whether to apply
-    #     a clock skew correction and retry requests with skewed client clocks.
+    #     Used only in `standard` and `adaptive` retry modes. Specifies whether
+    #     to apply a clock skew correction and retry requests with skewed client
+    #     clocks. Takes effect only when `disable_clock_skew_correction` is not set.
     #
     #   @option options [String] :defaults_mode ("legacy")
     #     See {Aws::DefaultsModeConfiguration} for a list of the
     #     accepted modes and the configuration defaults that are included.
+    #
+    #   @option options [Boolean] :disable_clock_skew_correction
+    #     Used only in `standard` and `adaptive` retry modes. When `true`, the
+    #     SDK does not apply a clock skew correction, does not update its stored
+    #     skew from responses, and does not retry clock skew errors. Clock skew
+    #     correction is enabled by default.
     #
     #   @option options [Boolean] :disable_host_prefix_injection (false)
     #     When `true`, the SDK will not prepend the modeled host prefix to the endpoint.
@@ -1721,6 +1728,11 @@ module Aws::EKS
     #       ip_family: "ipv4", # accepts ipv4, ipv6
     #       elastic_load_balancing: {
     #         enabled: false,
+    #         gateway_api: {
+    #           crds: {
+    #             managed: false,
+    #           },
+    #         },
     #       },
     #     },
     #     logging: {
@@ -1845,6 +1857,7 @@ module Aws::EKS
     #   resp.cluster.kubernetes_network_config.service_ipv_6_cidr #=> String
     #   resp.cluster.kubernetes_network_config.ip_family #=> String, one of "ipv4", "ipv6"
     #   resp.cluster.kubernetes_network_config.elastic_load_balancing.enabled #=> Boolean
+    #   resp.cluster.kubernetes_network_config.elastic_load_balancing.gateway_api.crds.managed #=> Boolean
     #   resp.cluster.logging.cluster_logging #=> Array
     #   resp.cluster.logging.cluster_logging[0].types #=> Array
     #   resp.cluster.logging.cluster_logging[0].types[0] #=> String, one of "api", "audit", "authenticator", "controllerManager", "scheduler"
@@ -3036,6 +3049,7 @@ module Aws::EKS
     #   resp.cluster.kubernetes_network_config.service_ipv_6_cidr #=> String
     #   resp.cluster.kubernetes_network_config.ip_family #=> String, one of "ipv4", "ipv6"
     #   resp.cluster.kubernetes_network_config.elastic_load_balancing.enabled #=> Boolean
+    #   resp.cluster.kubernetes_network_config.elastic_load_balancing.gateway_api.crds.managed #=> Boolean
     #   resp.cluster.logging.cluster_logging #=> Array
     #   resp.cluster.logging.cluster_logging[0].types #=> Array
     #   resp.cluster.logging.cluster_logging[0].types[0] #=> String, one of "api", "audit", "authenticator", "controllerManager", "scheduler"
@@ -3403,6 +3417,7 @@ module Aws::EKS
     #   resp.cluster.kubernetes_network_config.service_ipv_6_cidr #=> String
     #   resp.cluster.kubernetes_network_config.ip_family #=> String, one of "ipv4", "ipv6"
     #   resp.cluster.kubernetes_network_config.elastic_load_balancing.enabled #=> Boolean
+    #   resp.cluster.kubernetes_network_config.elastic_load_balancing.gateway_api.crds.managed #=> Boolean
     #   resp.cluster.logging.cluster_logging #=> Array
     #   resp.cluster.logging.cluster_logging[0].types #=> Array
     #   resp.cluster.logging.cluster_logging[0].types[0] #=> String, one of "api", "audit", "authenticator", "controllerManager", "scheduler"
@@ -3932,6 +3947,7 @@ module Aws::EKS
     #   resp.cluster.kubernetes_network_config.service_ipv_6_cidr #=> String
     #   resp.cluster.kubernetes_network_config.ip_family #=> String, one of "ipv4", "ipv6"
     #   resp.cluster.kubernetes_network_config.elastic_load_balancing.enabled #=> Boolean
+    #   resp.cluster.kubernetes_network_config.elastic_load_balancing.gateway_api.crds.managed #=> Boolean
     #   resp.cluster.logging.cluster_logging #=> Array
     #   resp.cluster.logging.cluster_logging[0].types #=> Array
     #   resp.cluster.logging.cluster_logging[0].types[0] #=> String, one of "api", "audit", "authenticator", "controllerManager", "scheduler"
@@ -5741,6 +5757,7 @@ module Aws::EKS
     #   resp.cluster.kubernetes_network_config.service_ipv_6_cidr #=> String
     #   resp.cluster.kubernetes_network_config.ip_family #=> String, one of "ipv4", "ipv6"
     #   resp.cluster.kubernetes_network_config.elastic_load_balancing.enabled #=> Boolean
+    #   resp.cluster.kubernetes_network_config.elastic_load_balancing.gateway_api.crds.managed #=> Boolean
     #   resp.cluster.logging.cluster_logging #=> Array
     #   resp.cluster.logging.cluster_logging[0].types #=> Array
     #   resp.cluster.logging.cluster_logging[0].types[0] #=> String, one of "api", "audit", "authenticator", "controllerManager", "scheduler"
@@ -6446,6 +6463,11 @@ module Aws::EKS
     #       ip_family: "ipv4", # accepts ipv4, ipv6
     #       elastic_load_balancing: {
     #         enabled: false,
+    #         gateway_api: {
+    #           crds: {
+    #             managed: false,
+    #           },
+    #         },
     #       },
     #     },
     #     storage_config: {
@@ -7125,7 +7147,7 @@ module Aws::EKS
         tracer: tracer
       )
       context[:gem_name] = 'aws-sdk-eks'
-      context[:gem_version] = '1.180.0'
+      context[:gem_version] = '1.184.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

@@ -578,6 +578,7 @@ module Aws::NetworkFirewall
     class DescribeFlowOperationRequest
       attr_accessor firewall_arn: ::String
       attr_accessor availability_zone: ::String
+      attr_accessor availability_zone_id: ::String
       attr_accessor vpc_endpoint_association_arn: ::String
       attr_accessor vpc_endpoint_id: ::String
       attr_accessor flow_operation_id: ::String
@@ -587,6 +588,7 @@ module Aws::NetworkFirewall
     class DescribeFlowOperationResponse
       attr_accessor firewall_arn: ::String
       attr_accessor availability_zone: ::String
+      attr_accessor availability_zone_id: ::String
       attr_accessor vpc_endpoint_association_arn: ::String
       attr_accessor vpc_endpoint_id: ::String
       attr_accessor flow_operation_id: ::String
@@ -867,6 +869,14 @@ module Aws::NetworkFirewall
       attr_accessor tls_inspection_configuration_arn: ::String
       attr_accessor policy_variables: Types::PolicyVariables
       attr_accessor enable_tls_session_holding: bool
+      attr_accessor route_53_resolved_ip_validation: Types::Route53ResolvedIPValidation
+      SENSITIVE: []
+    end
+
+    class FirewallPolicyError
+      attr_accessor code: ("DNS_FIREWALL_RULE_GROUP_UNAVAILABLE" | "ROUTE53_RESOLVED_IP_VALIDATION_MISSING")
+      attr_accessor message: ::String
+      attr_accessor resource_id: ::String
       SENSITIVE: []
     end
 
@@ -881,13 +891,15 @@ module Aws::NetworkFirewall
       attr_accessor firewall_policy_arn: ::String
       attr_accessor firewall_policy_id: ::String
       attr_accessor description: ::String
-      attr_accessor firewall_policy_status: ("ACTIVE" | "DELETING" | "ERROR")
+      attr_accessor firewall_policy_status: ("ACTIVE" | "DELETING" | "ERROR" | "UPDATING")
+      attr_accessor status_message: ::String
       attr_accessor tags: ::Array[Types::Tag]
       attr_accessor consumed_stateless_rule_capacity: ::Integer
       attr_accessor consumed_stateful_rule_capacity: ::Integer
       attr_accessor consumed_stateful_domain_capacity: ::Integer
       attr_accessor number_of_associations: ::Integer
       attr_accessor encryption_configuration: Types::EncryptionConfiguration
+      attr_accessor errors: ::Array[Types::FirewallPolicyError]
       attr_accessor last_modified_time: ::Time
       SENSITIVE: []
     end
@@ -1083,6 +1095,7 @@ module Aws::NetworkFirewall
       attr_accessor next_token: ::String
       attr_accessor max_results: ::Integer
       attr_accessor availability_zone: ::String
+      attr_accessor availability_zone_id: ::String
       attr_accessor vpc_endpoint_id: ::String
       attr_accessor vpc_endpoint_association_arn: ::String
       SENSITIVE: []
@@ -1091,6 +1104,7 @@ module Aws::NetworkFirewall
     class ListFlowOperationResultsResponse
       attr_accessor firewall_arn: ::String
       attr_accessor availability_zone: ::String
+      attr_accessor availability_zone_id: ::String
       attr_accessor vpc_endpoint_association_arn: ::String
       attr_accessor vpc_endpoint_id: ::String
       attr_accessor flow_operation_id: ::String
@@ -1105,6 +1119,7 @@ module Aws::NetworkFirewall
     class ListFlowOperationsRequest
       attr_accessor firewall_arn: ::String
       attr_accessor availability_zone: ::String
+      attr_accessor availability_zone_id: ::String
       attr_accessor vpc_endpoint_association_arn: ::String
       attr_accessor vpc_endpoint_id: ::String
       attr_accessor flow_operation_type: ("FLOW_FLUSH" | "FLOW_CAPTURE")
@@ -1449,6 +1464,15 @@ module Aws::NetworkFirewall
       SENSITIVE: []
     end
 
+    class Route53ResolvedIPValidation
+      attr_accessor action: ("REJECT" | "DROP" | "ALERT")
+      attr_accessor dns_firewall_rule_group_id: ::String
+      attr_accessor dns_expiry_exception_policy: ("REJECT" | "DROP" | "CONTINUE")
+      attr_accessor bypass_destination_validation_ip_ranges: ::Array[Types::Address]
+      attr_accessor source_ip_ranges: ::Array[Types::Address]
+      SENSITIVE: []
+    end
+
     class RuleDefinition
       attr_accessor match_attributes: Types::MatchAttributes
       attr_accessor actions: ::Array[::String]
@@ -1477,7 +1501,7 @@ module Aws::NetworkFirewall
       attr_accessor description: ::String
       attr_accessor type: ("STATELESS" | "STATEFUL" | "STATEFUL_DOMAIN")
       attr_accessor capacity: ::Integer
-      attr_accessor rule_group_status: ("ACTIVE" | "DELETING" | "ERROR")
+      attr_accessor rule_group_status: ("ACTIVE" | "DELETING" | "ERROR" | "UPDATING")
       attr_accessor tags: ::Array[Types::Tag]
       attr_accessor consumed_capacity: ::Integer
       attr_accessor number_of_associations: ::Integer
@@ -1519,7 +1543,7 @@ module Aws::NetworkFirewall
 
     class RulesSourceList
       attr_accessor targets: ::Array[::String]
-      attr_accessor target_types: ::Array[("TLS_SNI" | "HTTP_HOST")]
+      attr_accessor target_types: ::Array[("TLS_SNI" | "HTTP_HOST" | "AWS_ROUTE_53_RESOLVED_DOMAIN")]
       attr_accessor generated_rules_type: ("ALLOWLIST" | "DENYLIST" | "REJECTLIST" | "ALERTLIST")
       SENSITIVE: []
     end
@@ -1567,6 +1591,7 @@ module Aws::NetworkFirewall
     class StartFlowCaptureRequest
       attr_accessor firewall_arn: ::String
       attr_accessor availability_zone: ::String
+      attr_accessor availability_zone_id: ::String
       attr_accessor vpc_endpoint_association_arn: ::String
       attr_accessor vpc_endpoint_id: ::String
       attr_accessor minimum_flow_age_in_seconds: ::Integer
@@ -1584,6 +1609,7 @@ module Aws::NetworkFirewall
     class StartFlowFlushRequest
       attr_accessor firewall_arn: ::String
       attr_accessor availability_zone: ::String
+      attr_accessor availability_zone_id: ::String
       attr_accessor vpc_endpoint_association_arn: ::String
       attr_accessor vpc_endpoint_id: ::String
       attr_accessor minimum_flow_age_in_seconds: ::Integer
@@ -1692,7 +1718,7 @@ module Aws::NetworkFirewall
       attr_accessor tls_inspection_configuration_arn: ::String
       attr_accessor tls_inspection_configuration_name: ::String
       attr_accessor tls_inspection_configuration_id: ::String
-      attr_accessor tls_inspection_configuration_status: ("ACTIVE" | "DELETING" | "ERROR")
+      attr_accessor tls_inspection_configuration_status: ("ACTIVE" | "DELETING" | "ERROR" | "UPDATING")
       attr_accessor description: ::String
       attr_accessor tags: ::Array[Types::Tag]
       attr_accessor last_modified_time: ::Time

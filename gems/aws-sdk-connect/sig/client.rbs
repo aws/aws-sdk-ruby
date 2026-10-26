@@ -27,6 +27,7 @@ module Aws
                       ?convert_params: bool,
                       ?correct_clock_skew: bool,
                       ?defaults_mode: String,
+                      ?disable_clock_skew_correction: bool,
                       ?disable_host_prefix_injection: bool,
                       ?disable_request_compression: bool,
                       ?endpoint: String,
@@ -543,7 +544,7 @@ module Aws
         def file_arn: () -> ::String
         def file_id: () -> ::String
         def creation_time: () -> ::String
-        def file_status: () -> ("APPROVED" | "REJECTED" | "PROCESSING" | "FAILED")
+        def file_status: () -> ("APPROVED" | "REJECTED" | "PROCESSING" | "FAILED" | "DRAFTING")
       end
       # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Connect/Client.html#create_attached_file-instance_method
       def create_attached_file: (
@@ -591,7 +592,7 @@ module Aws
                             ?references: Hash[::String, {
                                 value: ::String?,
                                 type: ("URL" | "ATTACHMENT" | "CONTACT_ANALYSIS" | "NUMBER" | "STRING" | "DATE" | "EMAIL" | "EMAIL_MESSAGE" | "EMAIL_MESSAGE_PLAIN_TEXT" | "EMAIL_MESSAGE_PLAIN_TEXT_REDACTED" | "EMAIL_MESSAGE_REDACTED"),
-                                status: ("AVAILABLE" | "DELETED" | "APPROVED" | "REJECTED" | "PROCESSING" | "FAILED")?,
+                                status: ("AVAILABLE" | "DELETED" | "APPROVED" | "REJECTED" | "PROCESSING" | "FAILED" | "DRAFTING")?,
                                 arn: ::String?,
                                 status_reason: ::String?
                               }],
@@ -2421,7 +2422,7 @@ module Aws
         def file_arn: () -> ::String
         def file_id: () -> ::String
         def creation_time: () -> ::String
-        def file_status: () -> ("APPROVED" | "REJECTED" | "PROCESSING" | "FAILED")
+        def file_status: () -> ("APPROVED" | "REJECTED" | "PROCESSING" | "FAILED" | "DRAFTING")
         def file_name: () -> ::String
         def file_size_in_bytes: () -> ::Integer
         def associated_resource_arn: () -> ::String
@@ -2435,7 +2436,8 @@ module Aws
                                instance_id: ::String,
                                file_id: ::String,
                                ?url_expiry_in_seconds: ::Integer,
-                               associated_resource_arn: ::String
+                               associated_resource_arn: ::String,
+                               ?url_content_disposition: ("INLINE" | "ATTACHMENT")
                              ) -> _GetAttachedFileResponseSuccess
                            | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _GetAttachedFileResponseSuccess
 
@@ -2726,6 +2728,7 @@ module Aws
         def arn: () -> ::String
         def sign_in_config: () -> Types::SignInConfig
         def agent_config: () -> Types::AgentConfig
+        def last_failover_time: () -> ::Time
       end
       # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Connect/Client.html#get_traffic_distribution-instance_method
       def get_traffic_distribution: (
@@ -3433,6 +3436,22 @@ module Aws
                                                         segment_types: Array[("Transcript" | "Categories" | "Issues" | "Event" | "Attachments" | "PostContactSummary" | "ExtractedInformation")]
                                                       ) -> _ListRealtimeContactAnalysisSegmentsV2ResponseSuccess
                                                     | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListRealtimeContactAnalysisSegmentsV2ResponseSuccess
+
+      interface _ListReplicationFindingsResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ListReplicationFindingsResponse]
+        def replication_findings_list: () -> ::Array[Types::ReplicationFinding]
+        def approximate_drifted_resource_counts: () -> ::Array[Types::ApproximateDriftedResourceCount]
+        def next_token: () -> ::String
+        def resource_replication_statuses: () -> ::Array[Types::ResourceReplicationStatus]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Connect/Client.html#list_replication_findings-instance_method
+      def list_replication_findings: (
+                                       instance_id: ::String,
+                                       resource_type: ::String,
+                                       ?max_results: ::Integer,
+                                       ?next_token: ::String
+                                     ) -> _ListReplicationFindingsResponseSuccess
+                                   | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListReplicationFindingsResponseSuccess
 
       interface _ListRoutingProfileManualAssignmentQueuesResponseSuccess
         include ::Seahorse::Client::_ResponseSuccess[Types::ListRoutingProfileManualAssignmentQueuesResponse]
@@ -4683,7 +4702,7 @@ module Aws
         def file_arn: () -> ::String
         def file_id: () -> ::String
         def creation_time: () -> ::String
-        def file_status: () -> ("APPROVED" | "REJECTED" | "PROCESSING" | "FAILED")
+        def file_status: () -> ("APPROVED" | "REJECTED" | "PROCESSING" | "FAILED" | "DRAFTING")
         def created_by: () -> Types::CreatedByInfo
         def upload_url_metadata: () -> Types::UploadUrlMetadata
       end
@@ -4857,7 +4876,7 @@ module Aws
                                  ?references: Hash[::String, {
                                      value: ::String?,
                                      type: ("URL" | "ATTACHMENT" | "CONTACT_ANALYSIS" | "NUMBER" | "STRING" | "DATE" | "EMAIL" | "EMAIL_MESSAGE" | "EMAIL_MESSAGE_PLAIN_TEXT" | "EMAIL_MESSAGE_PLAIN_TEXT_REDACTED" | "EMAIL_MESSAGE_REDACTED"),
-                                     status: ("AVAILABLE" | "DELETED" | "APPROVED" | "REJECTED" | "PROCESSING" | "FAILED")?,
+                                     status: ("AVAILABLE" | "DELETED" | "APPROVED" | "REJECTED" | "PROCESSING" | "FAILED" | "DRAFTING")?,
                                      arn: ::String?,
                                      status_reason: ::String?
                                    }],
@@ -4986,7 +5005,7 @@ module Aws
                                           ?references: Hash[::String, {
                                               value: ::String?,
                                               type: ("URL" | "ATTACHMENT" | "CONTACT_ANALYSIS" | "NUMBER" | "STRING" | "DATE" | "EMAIL" | "EMAIL_MESSAGE" | "EMAIL_MESSAGE_PLAIN_TEXT" | "EMAIL_MESSAGE_PLAIN_TEXT_REDACTED" | "EMAIL_MESSAGE_REDACTED"),
-                                              status: ("AVAILABLE" | "DELETED" | "APPROVED" | "REJECTED" | "PROCESSING" | "FAILED")?,
+                                              status: ("AVAILABLE" | "DELETED" | "APPROVED" | "REJECTED" | "PROCESSING" | "FAILED" | "DRAFTING")?,
                                               arn: ::String?,
                                               status_reason: ::String?
                                             }],
@@ -5034,7 +5053,7 @@ module Aws
                                 ?references: Hash[::String, {
                                     value: ::String?,
                                     type: ("URL" | "ATTACHMENT" | "CONTACT_ANALYSIS" | "NUMBER" | "STRING" | "DATE" | "EMAIL" | "EMAIL_MESSAGE" | "EMAIL_MESSAGE_PLAIN_TEXT" | "EMAIL_MESSAGE_PLAIN_TEXT_REDACTED" | "EMAIL_MESSAGE_REDACTED"),
-                                    status: ("AVAILABLE" | "DELETED" | "APPROVED" | "REJECTED" | "PROCESSING" | "FAILED")?,
+                                    status: ("AVAILABLE" | "DELETED" | "APPROVED" | "REJECTED" | "PROCESSING" | "FAILED" | "DRAFTING")?,
                                     arn: ::String?,
                                     status_reason: ::String?
                                   }],
@@ -5098,7 +5117,7 @@ module Aws
                                    ?references: Hash[::String, {
                                        value: ::String?,
                                        type: ("URL" | "ATTACHMENT" | "CONTACT_ANALYSIS" | "NUMBER" | "STRING" | "DATE" | "EMAIL" | "EMAIL_MESSAGE" | "EMAIL_MESSAGE_PLAIN_TEXT" | "EMAIL_MESSAGE_PLAIN_TEXT_REDACTED" | "EMAIL_MESSAGE_REDACTED"),
-                                       status: ("AVAILABLE" | "DELETED" | "APPROVED" | "REJECTED" | "PROCESSING" | "FAILED")?,
+                                       status: ("AVAILABLE" | "DELETED" | "APPROVED" | "REJECTED" | "PROCESSING" | "FAILED" | "DRAFTING")?,
                                        arn: ::String?,
                                        status_reason: ::String?
                                      }],
@@ -5309,7 +5328,7 @@ module Aws
                             ?references: Hash[::String, {
                                 value: ::String?,
                                 type: ("URL" | "ATTACHMENT" | "CONTACT_ANALYSIS" | "NUMBER" | "STRING" | "DATE" | "EMAIL" | "EMAIL_MESSAGE" | "EMAIL_MESSAGE_PLAIN_TEXT" | "EMAIL_MESSAGE_PLAIN_TEXT_REDACTED" | "EMAIL_MESSAGE_REDACTED"),
-                                status: ("AVAILABLE" | "DELETED" | "APPROVED" | "REJECTED" | "PROCESSING" | "FAILED")?,
+                                status: ("AVAILABLE" | "DELETED" | "APPROVED" | "REJECTED" | "PROCESSING" | "FAILED" | "DRAFTING")?,
                                 arn: ::String?,
                                 status_reason: ::String?
                               }],
@@ -5327,6 +5346,14 @@ module Aws
                             ?system_endpoint: {
                               type: ("TELEPHONE_NUMBER" | "VOIP" | "CONTACT_FLOW" | "CONNECT_PHONENUMBER_ARN" | "EMAIL_ADDRESS")?,
                               address: ::String?
+                            },
+                            ?additional_recipients: {
+                              cc_email_addresses: Array[
+                                {
+                                  email_address: ::String,
+                                  display_name: ::String?
+                                }
+                              ]?
                             }
                           ) -> _UpdateContactResponseSuccess
                         | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _UpdateContactResponseSuccess
@@ -5721,6 +5748,24 @@ module Aws
                                          content: Hash[("en_US" | "de_DE" | "es_ES" | "fr_FR" | "id_ID" | "it_IT" | "ja_JP" | "ko_KR" | "pt_BR" | "zh_CN" | "zh_TW"), ::String]
                                        ) -> _UpdateNotificationContentResponseSuccess
                                      | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _UpdateNotificationContentResponseSuccess
+
+      interface _UpdateOutboundEmailContactMessageResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::UpdateOutboundEmailContactMessageResponse]
+        def contact_id: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Connect/Client.html#update_outbound_email_contact_message-instance_method
+      def update_outbound_email_contact_message: (
+                                                   instance_id: ::String,
+                                                   contact_id: ::String,
+                                                   email_message: {
+                                                     message_source_type: ("RAW"),
+                                                     raw_message: {
+                                                       body: ::String,
+                                                       content_type: ::String
+                                                     }
+                                                   }
+                                                 ) -> _UpdateOutboundEmailContactMessageResponseSuccess
+                                               | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _UpdateOutboundEmailContactMessageResponseSuccess
 
       interface _UpdateParticipantAuthenticationResponseSuccess
         include ::Seahorse::Client::_ResponseSuccess[Types::UpdateParticipantAuthenticationResponse]

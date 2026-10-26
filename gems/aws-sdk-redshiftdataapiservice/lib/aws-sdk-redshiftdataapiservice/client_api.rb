@@ -196,6 +196,7 @@ module Aws::RedshiftDataAPIService
     DescribeStatementResponse.add_member(:result_rows, Shapes::ShapeRef.new(shape: Long, location_name: "ResultRows"))
     DescribeStatementResponse.add_member(:result_size, Shapes::ShapeRef.new(shape: Long, location_name: "ResultSize"))
     DescribeStatementResponse.add_member(:redshift_query_id, Shapes::ShapeRef.new(shape: Long, location_name: "RedshiftQueryId"))
+    DescribeStatementResponse.add_member(:redshift_query_uuid, Shapes::ShapeRef.new(shape: String, location_name: "RedshiftQueryUuid"))
     DescribeStatementResponse.add_member(:query_parameters, Shapes::ShapeRef.new(shape: SqlParametersList, location_name: "QueryParameters"))
     DescribeStatementResponse.add_member(:sub_statements, Shapes::ShapeRef.new(shape: SubStatementList, location_name: "SubStatements"))
     DescribeStatementResponse.add_member(:workgroup_name, Shapes::ShapeRef.new(shape: WorkgroupNameString, location_name: "WorkgroupName"))
@@ -441,6 +442,7 @@ module Aws::RedshiftDataAPIService
     SubStatementData.add_member(:result_rows, Shapes::ShapeRef.new(shape: Long, location_name: "ResultRows"))
     SubStatementData.add_member(:result_size, Shapes::ShapeRef.new(shape: Long, location_name: "ResultSize"))
     SubStatementData.add_member(:redshift_query_id, Shapes::ShapeRef.new(shape: Long, location_name: "RedshiftQueryId"))
+    SubStatementData.add_member(:redshift_query_uuid, Shapes::ShapeRef.new(shape: String, location_name: "RedshiftQueryUuid"))
     SubStatementData.add_member(:has_result_set, Shapes::ShapeRef.new(shape: Boolean, location_name: "HasResultSet"))
     SubStatementData.struct_class = Types::SubStatementData
 

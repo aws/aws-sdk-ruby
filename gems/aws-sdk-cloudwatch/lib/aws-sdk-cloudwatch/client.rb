@@ -199,12 +199,19 @@ module Aws::CloudWatch
     #     the required types.
     #
     #   @option options [Boolean] :correct_clock_skew (true)
-    #     Used only in `standard` and `adaptive` retry modes. Specifies whether to apply
-    #     a clock skew correction and retry requests with skewed client clocks.
+    #     Used only in `standard` and `adaptive` retry modes. Specifies whether
+    #     to apply a clock skew correction and retry requests with skewed client
+    #     clocks. Takes effect only when `disable_clock_skew_correction` is not set.
     #
     #   @option options [String] :defaults_mode ("legacy")
     #     See {Aws::DefaultsModeConfiguration} for a list of the
     #     accepted modes and the configuration defaults that are included.
+    #
+    #   @option options [Boolean] :disable_clock_skew_correction
+    #     Used only in `standard` and `adaptive` retry modes. When `true`, the
+    #     SDK does not apply a clock skew correction, does not update its stored
+    #     skew from responses, and does not retry clock skew errors. Clock skew
+    #     correction is enabled by default.
     #
     #   @option options [Boolean] :disable_host_prefix_injection (false)
     #     When `true`, the SDK will not prepend the modeled host prefix to the endpoint.
@@ -1286,6 +1293,11 @@ module Aws::CloudWatch
     #   resp.composite_alarms[0].actions_suppressor #=> String
     #   resp.composite_alarms[0].actions_suppressor_wait_period #=> Integer
     #   resp.composite_alarms[0].actions_suppressor_extension_period #=> Integer
+    #   resp.composite_alarms[0].action_configuration.alarm_tags_propagation.enabled #=> Boolean
+    #   resp.composite_alarms[0].action_configuration.alarm_tags_propagation.included_tag_keys #=> Array
+    #   resp.composite_alarms[0].action_configuration.alarm_tags_propagation.included_tag_keys[0] #=> String
+    #   resp.composite_alarms[0].action_configuration.alarm_tags_propagation.excluded_tag_keys #=> Array
+    #   resp.composite_alarms[0].action_configuration.alarm_tags_propagation.excluded_tag_keys[0] #=> String
     #   resp.metric_alarms #=> Array
     #   resp.metric_alarms[0].alarm_name #=> String
     #   resp.metric_alarms[0].alarm_arn #=> String
@@ -1342,6 +1354,11 @@ module Aws::CloudWatch
     #   resp.metric_alarms[0].evaluation_criteria.prom_ql_criteria.pending_period #=> Integer
     #   resp.metric_alarms[0].evaluation_criteria.prom_ql_criteria.recovery_period #=> Integer
     #   resp.metric_alarms[0].evaluation_interval #=> Integer
+    #   resp.metric_alarms[0].action_configuration.alarm_tags_propagation.enabled #=> Boolean
+    #   resp.metric_alarms[0].action_configuration.alarm_tags_propagation.included_tag_keys #=> Array
+    #   resp.metric_alarms[0].action_configuration.alarm_tags_propagation.included_tag_keys[0] #=> String
+    #   resp.metric_alarms[0].action_configuration.alarm_tags_propagation.excluded_tag_keys #=> Array
+    #   resp.metric_alarms[0].action_configuration.alarm_tags_propagation.excluded_tag_keys[0] #=> String
     #   resp.log_alarms #=> Array
     #   resp.log_alarms[0].alarm_name #=> String
     #   resp.log_alarms[0].alarm_arn #=> String
@@ -1381,6 +1398,11 @@ module Aws::CloudWatch
     #   resp.log_alarms[0].action_log_line_role_arn #=> String
     #   resp.log_alarms[0].warm_up_configuration.warm_up_period_duration_in_minutes #=> Integer
     #   resp.log_alarms[0].warm_up_configuration.only_start_evaluating_after_warm_up_period_ends #=> Boolean
+    #   resp.log_alarms[0].action_configuration.alarm_tags_propagation.enabled #=> Boolean
+    #   resp.log_alarms[0].action_configuration.alarm_tags_propagation.included_tag_keys #=> Array
+    #   resp.log_alarms[0].action_configuration.alarm_tags_propagation.included_tag_keys[0] #=> String
+    #   resp.log_alarms[0].action_configuration.alarm_tags_propagation.excluded_tag_keys #=> Array
+    #   resp.log_alarms[0].action_configuration.alarm_tags_propagation.excluded_tag_keys[0] #=> String
     #   resp.next_token #=> String
     #
     #
@@ -1511,6 +1533,11 @@ module Aws::CloudWatch
     #   resp.metric_alarms[0].evaluation_criteria.prom_ql_criteria.pending_period #=> Integer
     #   resp.metric_alarms[0].evaluation_criteria.prom_ql_criteria.recovery_period #=> Integer
     #   resp.metric_alarms[0].evaluation_interval #=> Integer
+    #   resp.metric_alarms[0].action_configuration.alarm_tags_propagation.enabled #=> Boolean
+    #   resp.metric_alarms[0].action_configuration.alarm_tags_propagation.included_tag_keys #=> Array
+    #   resp.metric_alarms[0].action_configuration.alarm_tags_propagation.included_tag_keys[0] #=> String
+    #   resp.metric_alarms[0].action_configuration.alarm_tags_propagation.excluded_tag_keys #=> Array
+    #   resp.metric_alarms[0].action_configuration.alarm_tags_propagation.excluded_tag_keys[0] #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/monitoring-2010-08-01/DescribeAlarmsForMetric AWS API Documentation
     #
@@ -1605,6 +1632,8 @@ module Aws::CloudWatch
     #   resp.anomaly_detectors[0].configuration.excluded_time_ranges[0].start_time #=> Time
     #   resp.anomaly_detectors[0].configuration.excluded_time_ranges[0].end_time #=> Time
     #   resp.anomaly_detectors[0].configuration.metric_timezone #=> String
+    #   resp.anomaly_detectors[0].configuration.adaptation_speed #=> String, one of "FAST", "NORMAL", "SLOW"
+    #   resp.anomaly_detectors[0].configuration.outlier_filtering_strength #=> String, one of "MINIMAL", "MODERATE", "STRICT"
     #   resp.anomaly_detectors[0].state_value #=> String, one of "PENDING_TRAINING", "TRAINED_INSUFFICIENT_DATA", "TRAINED"
     #   resp.anomaly_detectors[0].metric_characteristics.periodic_spikes #=> Boolean
     #   resp.anomaly_detectors[0].single_metric_anomaly_detector.account_id #=> String
@@ -2706,6 +2735,14 @@ module Aws::CloudWatch
     # regularly, such as every minute, and create your own custom live
     # dashboard.
     #
+    # <note markdown="1"> `GetMetricWidgetImage` is not available in the Amazon Web Services
+    # GovCloud (US) Regions. In those Regions, calls to this operation fail.
+    # For the list of Amazon CloudWatch features that are not available in
+    # Amazon Web Services GovCloud (US), see [Amazon CloudWatch in Amazon
+    # Web Services GovCloud (US)][1].
+    #
+    #  </note>
+    #
     # The graph you retrieve can include all CloudWatch metric graph
     # features, including metric math and horizontal and vertical
     # annotations.
@@ -2716,6 +2753,10 @@ module Aws::CloudWatch
     # * As many as 100 metrics in the graph.
     #
     # * Up to 100 KB uncompressed payload.
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/govcloud-us/latest/UserGuide/govcloud-cw.html
     #
     # @option params [required, String] :metric_widget
     #   A JSON string that defines the bitmap graph to be retrieved. The
@@ -3482,6 +3523,8 @@ module Aws::CloudWatch
     #         },
     #       ],
     #       metric_timezone: "AnomalyDetectorMetricTimezone",
+    #       adaptation_speed: "FAST", # accepts FAST, NORMAL, SLOW
+    #       outlier_filtering_strength: "MINIMAL", # accepts MINIMAL, MODERATE, STRICT
     #     },
     #     metric_characteristics: {
     #       periodic_spikes: false,
@@ -3793,6 +3836,11 @@ module Aws::CloudWatch
     #   `ExtensionPeriod` is required only when `ActionsSuppressor` is
     #   specified.
     #
+    # @option params [Types::ActionConfiguration] :action_configuration
+    #   Settings that change the content of the notifications and events that
+    #   the alarm sends when its state changes. These settings apply to the
+    #   alarm's actions, whichever state triggers them.
+    #
     # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
     #
     # @example Request syntax with placeholder values
@@ -3814,6 +3862,13 @@ module Aws::CloudWatch
     #     actions_suppressor: "AlarmArn",
     #     actions_suppressor_wait_period: 1,
     #     actions_suppressor_extension_period: 1,
+    #     action_configuration: {
+    #       alarm_tags_propagation: {
+    #         enabled: false, # required
+    #         included_tag_keys: ["AlarmTagsPropagationTagKey"],
+    #         excluded_tag_keys: ["AlarmTagsPropagationTagKey"],
+    #       },
+    #     },
     #   })
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/monitoring-2010-08-01/PutCompositeAlarm AWS API Documentation
@@ -4186,6 +4241,11 @@ module Aws::CloudWatch
     #
     #   [1]: https://docs.aws.amazon.com/AmazonCloudWatch/latest/monitoring/alarm-warm-up.html
     #
+    # @option params [Types::ActionConfiguration] :action_configuration
+    #   Settings that change the content of the notifications and events that
+    #   the alarm sends when its state changes. These settings apply to the
+    #   alarm's actions, whichever state triggers them.
+    #
     # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
     #
     # @example Request syntax with placeholder values
@@ -4231,6 +4291,13 @@ module Aws::CloudWatch
     #     warm_up_configuration: {
     #       warm_up_period_duration_in_minutes: 1, # required
     #       only_start_evaluating_after_warm_up_period_ends: false,
+    #     },
+    #     action_configuration: {
+    #       alarm_tags_propagation: {
+    #         enabled: false, # required
+    #         included_tag_keys: ["AlarmTagsPropagationTagKey"],
+    #         excluded_tag_keys: ["AlarmTagsPropagationTagKey"],
+    #       },
     #     },
     #   })
     #
@@ -4843,6 +4910,11 @@ module Aws::CloudWatch
     #   and cannot be specified for alarms configured with `MetricName` or
     #   `Metrics`.
     #
+    # @option params [Types::ActionConfiguration] :action_configuration
+    #   Settings that change the content of the notifications and events that
+    #   the alarm sends when its state changes. These settings apply to the
+    #   alarm's actions, whichever state triggers them.
+    #
     # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
     #
     # @example Request syntax with placeholder values
@@ -4923,6 +4995,13 @@ module Aws::CloudWatch
     #       },
     #     },
     #     evaluation_interval: 1,
+    #     action_configuration: {
+    #       alarm_tags_propagation: {
+    #         enabled: false, # required
+    #         included_tag_keys: ["AlarmTagsPropagationTagKey"],
+    #         excluded_tag_keys: ["AlarmTagsPropagationTagKey"],
+    #       },
+    #     },
     #   })
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/monitoring-2010-08-01/PutMetricAlarm AWS API Documentation
@@ -5840,7 +5919,7 @@ module Aws::CloudWatch
         tracer: tracer
       )
       context[:gem_name] = 'aws-sdk-cloudwatch'
-      context[:gem_version] = '1.149.0'
+      context[:gem_version] = '1.152.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

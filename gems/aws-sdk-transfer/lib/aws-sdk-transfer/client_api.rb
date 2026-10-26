@@ -173,6 +173,7 @@ module Aws::Transfer
     HostKeyDescription = Shapes::StringShape.new(name: 'HostKeyDescription')
     HostKeyFingerprint = Shapes::StringShape.new(name: 'HostKeyFingerprint')
     HostKeyId = Shapes::StringShape.new(name: 'HostKeyId')
+    HostKeyStorageType = Shapes::StringShape.new(name: 'HostKeyStorageType')
     HostKeyType = Shapes::StringShape.new(name: 'HostKeyType')
     IdentityCenterApplicationArn = Shapes::StringShape.new(name: 'IdentityCenterApplicationArn')
     IdentityCenterConfig = Shapes::StructureShape.new(name: 'IdentityCenterConfig')
@@ -190,6 +191,7 @@ module Aws::Transfer
     InvalidNextTokenException = Shapes::StructureShape.new(name: 'InvalidNextTokenException')
     InvalidRequestException = Shapes::StructureShape.new(name: 'InvalidRequestException')
     IpAddressType = Shapes::StringShape.new(name: 'IpAddressType')
+    KmsKey = Shapes::StringShape.new(name: 'KmsKey')
     ListAccessesRequest = Shapes::StructureShape.new(name: 'ListAccessesRequest')
     ListAccessesResponse = Shapes::StructureShape.new(name: 'ListAccessesResponse')
     ListAgreementsRequest = Shapes::StructureShape.new(name: 'ListAgreementsRequest')
@@ -550,6 +552,7 @@ module Aws::Transfer
     CreateServerRequest.add_member(:structured_log_destinations, Shapes::ShapeRef.new(shape: StructuredLogDestinations, location_name: "StructuredLogDestinations"))
     CreateServerRequest.add_member(:s3_storage_options, Shapes::ShapeRef.new(shape: S3StorageOptions, location_name: "S3StorageOptions"))
     CreateServerRequest.add_member(:ip_address_type, Shapes::ShapeRef.new(shape: IpAddressType, location_name: "IpAddressType"))
+    CreateServerRequest.add_member(:host_key_storage_type, Shapes::ShapeRef.new(shape: HostKeyStorageType, location_name: "HostKeyStorageType"))
     CreateServerRequest.struct_class = Types::CreateServerRequest
 
     CreateServerResponse.add_member(:server_id, Shapes::ShapeRef.new(shape: ServerId, required: true, location_name: "ServerId"))
@@ -834,6 +837,8 @@ module Aws::Transfer
     DescribedHostKey.add_member(:type, Shapes::ShapeRef.new(shape: HostKeyType, location_name: "Type"))
     DescribedHostKey.add_member(:date_imported, Shapes::ShapeRef.new(shape: DateImported, location_name: "DateImported"))
     DescribedHostKey.add_member(:tags, Shapes::ShapeRef.new(shape: Tags, location_name: "Tags"))
+    DescribedHostKey.add_member(:storage_type, Shapes::ShapeRef.new(shape: HostKeyStorageType, location_name: "StorageType"))
+    DescribedHostKey.add_member(:secret_id, Shapes::ShapeRef.new(shape: SecretId, location_name: "SecretId"))
     DescribedHostKey.struct_class = Types::DescribedHostKey
 
     DescribedIdentityCenterConfig.add_member(:application_arn, Shapes::ShapeRef.new(shape: IdentityCenterApplicationArn, location_name: "ApplicationArn"))
@@ -1009,6 +1014,8 @@ module Aws::Transfer
     ImportHostKeyRequest.add_member(:host_key_body, Shapes::ShapeRef.new(shape: HostKey, required: true, location_name: "HostKeyBody"))
     ImportHostKeyRequest.add_member(:description, Shapes::ShapeRef.new(shape: HostKeyDescription, location_name: "Description"))
     ImportHostKeyRequest.add_member(:tags, Shapes::ShapeRef.new(shape: Tags, location_name: "Tags"))
+    ImportHostKeyRequest.add_member(:storage_type, Shapes::ShapeRef.new(shape: HostKeyStorageType, location_name: "StorageType"))
+    ImportHostKeyRequest.add_member(:kms_key, Shapes::ShapeRef.new(shape: KmsKey, location_name: "KmsKey"))
     ImportHostKeyRequest.struct_class = Types::ImportHostKeyRequest
 
     ImportHostKeyResponse.add_member(:server_id, Shapes::ShapeRef.new(shape: ServerId, required: true, location_name: "ServerId"))
@@ -1216,6 +1223,8 @@ module Aws::Transfer
     ListedHostKey.add_member(:description, Shapes::ShapeRef.new(shape: HostKeyDescription, location_name: "Description"))
     ListedHostKey.add_member(:type, Shapes::ShapeRef.new(shape: HostKeyType, location_name: "Type"))
     ListedHostKey.add_member(:date_imported, Shapes::ShapeRef.new(shape: DateImported, location_name: "DateImported"))
+    ListedHostKey.add_member(:storage_type, Shapes::ShapeRef.new(shape: HostKeyStorageType, location_name: "StorageType"))
+    ListedHostKey.add_member(:secret_id, Shapes::ShapeRef.new(shape: SecretId, location_name: "SecretId"))
     ListedHostKey.struct_class = Types::ListedHostKey
 
     ListedHostKeys.member = Shapes::ShapeRef.new(shape: ListedHostKey)
@@ -1530,7 +1539,9 @@ module Aws::Transfer
 
     UpdateHostKeyRequest.add_member(:server_id, Shapes::ShapeRef.new(shape: ServerId, required: true, location_name: "ServerId"))
     UpdateHostKeyRequest.add_member(:host_key_id, Shapes::ShapeRef.new(shape: HostKeyId, required: true, location_name: "HostKeyId"))
-    UpdateHostKeyRequest.add_member(:description, Shapes::ShapeRef.new(shape: HostKeyDescription, required: true, location_name: "Description"))
+    UpdateHostKeyRequest.add_member(:description, Shapes::ShapeRef.new(shape: HostKeyDescription, location_name: "Description"))
+    UpdateHostKeyRequest.add_member(:storage_type, Shapes::ShapeRef.new(shape: HostKeyStorageType, location_name: "StorageType"))
+    UpdateHostKeyRequest.add_member(:kms_key, Shapes::ShapeRef.new(shape: KmsKey, location_name: "KmsKey"))
     UpdateHostKeyRequest.struct_class = Types::UpdateHostKeyRequest
 
     UpdateHostKeyResponse.add_member(:server_id, Shapes::ShapeRef.new(shape: ServerId, required: true, location_name: "ServerId"))

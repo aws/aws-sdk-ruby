@@ -199,12 +199,19 @@ module Aws::SSOAdmin
     #     the required types.
     #
     #   @option options [Boolean] :correct_clock_skew (true)
-    #     Used only in `standard` and `adaptive` retry modes. Specifies whether to apply
-    #     a clock skew correction and retry requests with skewed client clocks.
+    #     Used only in `standard` and `adaptive` retry modes. Specifies whether
+    #     to apply a clock skew correction and retry requests with skewed client
+    #     clocks. Takes effect only when `disable_clock_skew_correction` is not set.
     #
     #   @option options [String] :defaults_mode ("legacy")
     #     See {Aws::DefaultsModeConfiguration} for a list of the
     #     accepted modes and the configuration defaults that are included.
+    #
+    #   @option options [Boolean] :disable_clock_skew_correction
+    #     Used only in `standard` and `adaptive` retry modes. When `true`, the
+    #     SDK does not apply a clock skew correction, does not update its stored
+    #     skew from responses, and does not retry clock skew errors. Clock skew
+    #     correction is enabled by default.
     #
     #   @option options [Boolean] :disable_host_prefix_injection (false)
     #     When `true`, the SDK will not prepend the modeled host prefix to the endpoint.
@@ -3164,6 +3171,18 @@ module Aws::SSOAdmin
     #   The pagination token for the list API. Initially the value is null.
     #   Use the output of previous API calls to make subsequent calls.
     #
+    # @option params [String] :region_scope
+    #   Specifies which Amazon Web Services Regions to list IAM Identity
+    #   Center instances from. Valid values:
+    #
+    #   * `CURRENT_REGION` - Lists only the instances in the Region that you
+    #     call this API from.
+    #
+    #   * `ALL_REGIONS` - Lists the instances that the caller owns or that are
+    #     shared with the caller across all Regions.
+    #
+    #   If you don't specify a value, the default is `CURRENT_REGION`.
+    #
     # @return [Types::ListInstancesResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::ListInstancesResponse#instances #instances} => Array&lt;Types::InstanceMetadata&gt;
@@ -3176,6 +3195,7 @@ module Aws::SSOAdmin
     #   resp = client.list_instances({
     #     max_results: 1,
     #     next_token: "Token",
+    #     region_scope: "CURRENT_REGION", # accepts CURRENT_REGION, ALL_REGIONS
     #   })
     #
     # @example Response structure
@@ -4151,10 +4171,11 @@ module Aws::SSOAdmin
     # * Enable permission sets for the instance by specifying
     #   `PermissionSetsEnabled`.
     #
-    # A request that specifies both `EncryptionConfiguration` and
-    # `PermissionSetsEnabled` returns a `ValidationException`. To perform
-    # both operations, call `UpdateInstance` separately for each. The two
-    # calls can be made in parallel.
+    # If you specify both `EncryptionConfiguration` and
+    # `PermissionSetsEnabled` in a request, the request returns a
+    # `ValidationException`. To perform both operations, call
+    # `UpdateInstance` separately for each. You can make the two calls in
+    # parallel.
     #
     # @option params [String] :name
     #   Updates the instance name.
@@ -4178,7 +4199,7 @@ module Aws::SSOAdmin
     #
     #   <note markdown="1"> You can't set `EncryptionConfiguration` and `PermissionSetsEnabled`
     #   in the same request. To configure both, make two separate
-    #   `UpdateInstance` calls. These calls can be made in parallel.
+    #   `UpdateInstance` calls. You can make these calls in parallel.
     #
     #    </note>
     #
@@ -4361,7 +4382,7 @@ module Aws::SSOAdmin
         tracer: tracer
       )
       context[:gem_name] = 'aws-sdk-ssoadmin'
-      context[:gem_version] = '1.80.0'
+      context[:gem_version] = '1.84.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

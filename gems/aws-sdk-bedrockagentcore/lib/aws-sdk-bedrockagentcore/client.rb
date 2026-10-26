@@ -201,12 +201,19 @@ module Aws::BedrockAgentCore
     #     the required types.
     #
     #   @option options [Boolean] :correct_clock_skew (true)
-    #     Used only in `standard` and `adaptive` retry modes. Specifies whether to apply
-    #     a clock skew correction and retry requests with skewed client clocks.
+    #     Used only in `standard` and `adaptive` retry modes. Specifies whether
+    #     to apply a clock skew correction and retry requests with skewed client
+    #     clocks. Takes effect only when `disable_clock_skew_correction` is not set.
     #
     #   @option options [String] :defaults_mode ("legacy")
     #     See {Aws::DefaultsModeConfiguration} for a list of the
     #     accepted modes and the configuration defaults that are included.
+    #
+    #   @option options [Boolean] :disable_clock_skew_correction
+    #     Used only in `standard` and `adaptive` retry modes. When `true`, the
+    #     SDK does not apply a clock skew correction, does not update its stored
+    #     skew from responses, and does not retry clock skew errors. Clock skew
+    #     correction is enabled by default.
     #
     #   @option options [Boolean] :disable_host_prefix_injection (false)
     #     When `true`, the SDK will not prepend the modeled host prefix to the endpoint.
@@ -1581,6 +1588,7 @@ module Aws::BedrockAgentCore
     #   resp.evaluation_results[0].evaluator_arn #=> String
     #   resp.evaluation_results[0].evaluator_id #=> String
     #   resp.evaluation_results[0].evaluator_name #=> String
+    #   resp.evaluation_results[0].evaluation_dimension_name #=> String
     #   resp.evaluation_results[0].explanation #=> String
     #   resp.evaluation_results[0].context.span_context.session_id #=> String
     #   resp.evaluation_results[0].context.span_context.trace_id #=> String
@@ -1757,6 +1765,7 @@ module Aws::BedrockAgentCore
     #   * {Types::GetBatchEvaluationResponse#data_source_config #data_source_config} => Types::DataSourceConfig
     #   * {Types::GetBatchEvaluationResponse#output_config #output_config} => Types::OutputConfig
     #   * {Types::GetBatchEvaluationResponse#evaluation_results #evaluation_results} => Types::EvaluationJobResults
+    #   * {Types::GetBatchEvaluationResponse#insight_results #insight_results} => Array&lt;Types::InsightResult&gt;
     #   * {Types::GetBatchEvaluationResponse#failure_analysis_result #failure_analysis_result} => Types::FailureAnalysisResultContent
     #   * {Types::GetBatchEvaluationResponse#user_intent_result #user_intent_result} => Types::UserIntentClusteringResultContent
     #   * {Types::GetBatchEvaluationResponse#execution_summary_result #execution_summary_result} => Types::ExecutionSummaryClusteringResultContent
@@ -1810,9 +1819,39 @@ module Aws::BedrockAgentCore
     #   resp.evaluation_results.number_of_sessions_ignored #=> Integer
     #   resp.evaluation_results.evaluator_summaries #=> Array
     #   resp.evaluation_results.evaluator_summaries[0].evaluator_id #=> String
+    #   resp.evaluation_results.evaluator_summaries[0].evaluation_dimension_name #=> String
     #   resp.evaluation_results.evaluator_summaries[0].statistics.average_score #=> Float
     #   resp.evaluation_results.evaluator_summaries[0].total_evaluated #=> Integer
     #   resp.evaluation_results.evaluator_summaries[0].total_failed #=> Integer
+    #   resp.insight_results #=> Array
+    #   resp.insight_results[0].type #=> String, one of "FAILURE"
+    #   resp.insight_results[0].name #=> String
+    #   resp.insight_results[0].description #=> String
+    #   resp.insight_results[0].created_at #=> Time
+    #   resp.insight_results[0].affected_session_count #=> Integer
+    #   resp.insight_results[0].sample_sessions #=> Array
+    #   resp.insight_results[0].sample_sessions[0].session_id #=> String
+    #   resp.insight_results[0].sample_sessions[0].last_seen_at #=> Time
+    #   resp.insight_results[0].sample_sessions[0].findings #=> Array
+    #   resp.insight_results[0].sample_sessions[0].findings[0].target_id #=> String
+    #   resp.insight_results[0].sample_sessions[0].findings[0].target_type #=> String, one of "SPAN_ID", "TRACE_ID", "SPAN_NAME"
+    #   resp.insight_results[0].sample_sessions[0].findings[0].description #=> String
+    #   resp.insight_results[0].sample_sessions[0].findings[0].category #=> String
+    #   resp.insight_results[0].sample_sessions[0].findings[0].confidence #=> Float
+    #   resp.insight_results[0].root_causes #=> Array
+    #   resp.insight_results[0].root_causes[0].name #=> String
+    #   resp.insight_results[0].root_causes[0].explanation #=> String
+    #   resp.insight_results[0].root_causes[0].affected_session_count #=> Integer
+    #   resp.insight_results[0].root_causes[0].suggested_fix #=> String
+    #   resp.insight_results[0].root_causes[0].sample_sessions #=> Array
+    #   resp.insight_results[0].root_causes[0].sample_sessions[0].session_id #=> String
+    #   resp.insight_results[0].root_causes[0].sample_sessions[0].last_seen_at #=> Time
+    #   resp.insight_results[0].root_causes[0].sample_sessions[0].findings #=> Array
+    #   resp.insight_results[0].root_causes[0].sample_sessions[0].findings[0].target_id #=> String
+    #   resp.insight_results[0].root_causes[0].sample_sessions[0].findings[0].target_type #=> String, one of "SPAN_ID", "TRACE_ID", "SPAN_NAME"
+    #   resp.insight_results[0].root_causes[0].sample_sessions[0].findings[0].description #=> String
+    #   resp.insight_results[0].root_causes[0].sample_sessions[0].findings[0].category #=> String
+    #   resp.insight_results[0].root_causes[0].sample_sessions[0].findings[0].confidence #=> Float
     #   resp.failure_analysis_result.failures #=> Array
     #   resp.failure_analysis_result.failures[0].cluster_id #=> Integer
     #   resp.failure_analysis_result.failures[0].name #=> String
@@ -4397,6 +4436,7 @@ module Aws::BedrockAgentCore
     #   resp.batch_evaluations[0].evaluation_results.number_of_sessions_ignored #=> Integer
     #   resp.batch_evaluations[0].evaluation_results.evaluator_summaries #=> Array
     #   resp.batch_evaluations[0].evaluation_results.evaluator_summaries[0].evaluator_id #=> String
+    #   resp.batch_evaluations[0].evaluation_results.evaluator_summaries[0].evaluation_dimension_name #=> String
     #   resp.batch_evaluations[0].evaluation_results.evaluator_summaries[0].statistics.average_score #=> Float
     #   resp.batch_evaluations[0].evaluation_results.evaluator_summaries[0].total_evaluated #=> Integer
     #   resp.batch_evaluations[0].evaluation_results.evaluator_summaries[0].total_failed #=> Integer
@@ -4746,9 +4786,9 @@ module Aws::BedrockAgentCore
     #   memory records.
     #
     # @option params [String] :namespace
-    #   The namespace prefix to filter memory records by. Returns all memory
-    #   records in namespaces that start with the provided prefix. Either
-    #   `namespace` or `namespacePath` is required.
+    #   The exact namespace to filter memory records by. Returns all memory
+    #   records that matches the provided namespace. Either `namespace` or
+    #   `namespacePath` is required.
     #
     # @option params [String] :namespace_path
     #   Use namespacePath for hierarchical retrievals. Return all memory
@@ -5173,9 +5213,9 @@ module Aws::BedrockAgentCore
     #   memory records.
     #
     # @option params [String] :namespace
-    #   The namespace prefix to filter memory records by. Searches for memory
-    #   records in namespaces that start with the provided prefix. Either
-    #   `namespace` or `namespacePath` is required.
+    #   The exact namespace to filter memory records by. Searches for memory
+    #   records that matches the provided namespace value. Either `namespace`
+    #   or `namespacePath` is required.
     #
     # @option params [String] :namespace_path
     #   Use namespacePath for hierarchical retrievals. Return all memory
@@ -6626,7 +6666,7 @@ module Aws::BedrockAgentCore
         tracer: tracer
       )
       context[:gem_name] = 'aws-sdk-bedrockagentcore'
-      context[:gem_version] = '1.58.0'
+      context[:gem_version] = '1.62.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

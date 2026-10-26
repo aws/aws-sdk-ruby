@@ -202,6 +202,7 @@ module Aws::Lambda
     class ChainedInvokeOptions
       attr_accessor function_name: ::String
       attr_accessor tenant_id: ::String
+      attr_accessor x_amzn_trace_id: ::String
       SENSITIVE: []
     end
 

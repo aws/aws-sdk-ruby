@@ -199,12 +199,19 @@ module Aws::KafkaConnect
     #     the required types.
     #
     #   @option options [Boolean] :correct_clock_skew (true)
-    #     Used only in `standard` and `adaptive` retry modes. Specifies whether to apply
-    #     a clock skew correction and retry requests with skewed client clocks.
+    #     Used only in `standard` and `adaptive` retry modes. Specifies whether
+    #     to apply a clock skew correction and retry requests with skewed client
+    #     clocks. Takes effect only when `disable_clock_skew_correction` is not set.
     #
     #   @option options [String] :defaults_mode ("legacy")
     #     See {Aws::DefaultsModeConfiguration} for a list of the
     #     accepted modes and the configuration defaults that are included.
+    #
+    #   @option options [Boolean] :disable_clock_skew_correction
+    #     Used only in `standard` and `adaptive` retry modes. When `true`, the
+    #     SDK does not apply a clock skew correction, does not update its stored
+    #     skew from responses, and does not retry clock skew errors. Clock skew
+    #     correction is enabled by default.
     #
     #   @option options [Boolean] :disable_host_prefix_injection (false)
     #     When `true`, the SDK will not prepend the modeled host prefix to the endpoint.
@@ -621,7 +628,7 @@ module Aws::KafkaConnect
     #
     #   resp.connector_arn #=> String
     #   resp.connector_name #=> String
-    #   resp.connector_state #=> String, one of "RUNNING", "CREATING", "UPDATING", "DELETING", "FAILED", "RESTARTING"
+    #   resp.connector_state #=> String, one of "RUNNING", "CREATING", "UPDATING", "DELETING", "FAILED", "PAUSED", "RESTARTING", "PAUSING", "RESUMING"
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/kafkaconnect-2021-09-14/CreateConnector AWS API Documentation
     #
@@ -766,7 +773,7 @@ module Aws::KafkaConnect
     # @example Response structure
     #
     #   resp.connector_arn #=> String
-    #   resp.connector_state #=> String, one of "RUNNING", "CREATING", "UPDATING", "DELETING", "FAILED", "RESTARTING"
+    #   resp.connector_state #=> String, one of "RUNNING", "CREATING", "UPDATING", "DELETING", "FAILED", "PAUSED", "RESTARTING", "PAUSING", "RESUMING"
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/kafkaconnect-2021-09-14/DeleteConnector AWS API Documentation
     #
@@ -887,7 +894,7 @@ module Aws::KafkaConnect
     #   resp.connector_configuration["__string"] #=> String
     #   resp.connector_description #=> String
     #   resp.connector_name #=> String
-    #   resp.connector_state #=> String, one of "RUNNING", "CREATING", "UPDATING", "DELETING", "FAILED", "RESTARTING"
+    #   resp.connector_state #=> String, one of "RUNNING", "CREATING", "UPDATING", "DELETING", "FAILED", "PAUSED", "RESTARTING", "PAUSING", "RESUMING"
     #   resp.creation_time #=> Time
     #   resp.current_version #=> String
     #   resp.kafka_cluster.apache_kafka_cluster.bootstrap_servers #=> String
@@ -954,8 +961,8 @@ module Aws::KafkaConnect
     #
     #   resp.connector_arn #=> String
     #   resp.connector_operation_arn #=> String
-    #   resp.connector_operation_state #=> String, one of "PENDING", "UPDATE_IN_PROGRESS", "UPDATE_COMPLETE", "UPDATE_FAILED", "ROLLBACK_IN_PROGRESS", "ROLLBACK_FAILED", "ROLLBACK_COMPLETE", "RESTART_IN_PROGRESS", "RESTART_COMPLETE", "RESTART_FAILED"
-    #   resp.connector_operation_type #=> String, one of "UPDATE_WORKER_SETTING", "UPDATE_CONNECTOR_CONFIGURATION", "ISOLATE_CONNECTOR", "RESTORE_CONNECTOR", "RESTART_CONNECTOR"
+    #   resp.connector_operation_state #=> String, one of "PENDING", "UPDATE_IN_PROGRESS", "UPDATE_COMPLETE", "UPDATE_FAILED", "ROLLBACK_IN_PROGRESS", "ROLLBACK_FAILED", "ROLLBACK_COMPLETE", "PAUSE_COMPLETE", "PAUSE_FAILED", "RESUME_COMPLETE", "RESUME_FAILED", "PAUSE_IN_PROGRESS", "RESUME_IN_PROGRESS", "RESTART_IN_PROGRESS", "RESTART_COMPLETE", "RESTART_FAILED"
+    #   resp.connector_operation_type #=> String, one of "UPDATE_WORKER_SETTING", "UPDATE_CONNECTOR_CONFIGURATION", "ISOLATE_CONNECTOR", "RESTORE_CONNECTOR", "RESTART_CONNECTOR", "PAUSE_CONNECTOR", "RESUME_CONNECTOR"
     #   resp.operation_steps #=> Array
     #   resp.operation_steps[0].step_type #=> String, one of "INITIALIZE_UPDATE", "FINALIZE_UPDATE", "UPDATE_WORKER_SETTING", "UPDATE_CONNECTOR_CONFIGURATION", "VALIDATE_UPDATE"
     #   resp.operation_steps[0].step_state #=> String, one of "PENDING", "IN_PROGRESS", "COMPLETED", "FAILED", "CANCELLED"
@@ -1117,8 +1124,8 @@ module Aws::KafkaConnect
     #
     #   resp.connector_operations #=> Array
     #   resp.connector_operations[0].connector_operation_arn #=> String
-    #   resp.connector_operations[0].connector_operation_type #=> String, one of "UPDATE_WORKER_SETTING", "UPDATE_CONNECTOR_CONFIGURATION", "ISOLATE_CONNECTOR", "RESTORE_CONNECTOR", "RESTART_CONNECTOR"
-    #   resp.connector_operations[0].connector_operation_state #=> String, one of "PENDING", "UPDATE_IN_PROGRESS", "UPDATE_COMPLETE", "UPDATE_FAILED", "ROLLBACK_IN_PROGRESS", "ROLLBACK_FAILED", "ROLLBACK_COMPLETE", "RESTART_IN_PROGRESS", "RESTART_COMPLETE", "RESTART_FAILED"
+    #   resp.connector_operations[0].connector_operation_type #=> String, one of "UPDATE_WORKER_SETTING", "UPDATE_CONNECTOR_CONFIGURATION", "ISOLATE_CONNECTOR", "RESTORE_CONNECTOR", "RESTART_CONNECTOR", "PAUSE_CONNECTOR", "RESUME_CONNECTOR"
+    #   resp.connector_operations[0].connector_operation_state #=> String, one of "PENDING", "UPDATE_IN_PROGRESS", "UPDATE_COMPLETE", "UPDATE_FAILED", "ROLLBACK_IN_PROGRESS", "ROLLBACK_FAILED", "ROLLBACK_COMPLETE", "PAUSE_COMPLETE", "PAUSE_FAILED", "RESUME_COMPLETE", "RESUME_FAILED", "PAUSE_IN_PROGRESS", "RESUME_IN_PROGRESS", "RESTART_IN_PROGRESS", "RESTART_COMPLETE", "RESTART_FAILED"
     #   resp.connector_operations[0].creation_time #=> Time
     #   resp.connector_operations[0].end_time #=> Time
     #   resp.next_token #=> String
@@ -1178,7 +1185,7 @@ module Aws::KafkaConnect
     #   resp.connectors[0].connector_arn #=> String
     #   resp.connectors[0].connector_description #=> String
     #   resp.connectors[0].connector_name #=> String
-    #   resp.connectors[0].connector_state #=> String, one of "RUNNING", "CREATING", "UPDATING", "DELETING", "FAILED", "RESTARTING"
+    #   resp.connectors[0].connector_state #=> String, one of "RUNNING", "CREATING", "UPDATING", "DELETING", "FAILED", "PAUSED", "RESTARTING", "PAUSING", "RESUMING"
     #   resp.connectors[0].creation_time #=> Time
     #   resp.connectors[0].current_version #=> String
     #   resp.connectors[0].kafka_cluster.apache_kafka_cluster.bootstrap_servers #=> String
@@ -1354,6 +1361,39 @@ module Aws::KafkaConnect
       req.send_request(options)
     end
 
+    # Pauses the specified connector. The operation runs asynchronously. To
+    # track the pause, pass the connector operation ARN from the response to
+    # `DescribeConnectorOperation`.
+    #
+    # @option params [required, String] :connector_arn
+    #   The Amazon Resource Name (ARN) of the connector that you want to
+    #   pause.
+    #
+    # @return [Types::PauseConnectorResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::PauseConnectorResponse#connector_arn #connector_arn} => String
+    #   * {Types::PauseConnectorResponse#connector_operation_arn #connector_operation_arn} => String
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.pause_connector({
+    #     connector_arn: "__string", # required
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.connector_arn #=> String
+    #   resp.connector_operation_arn #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/kafkaconnect-2021-09-14/PauseConnector AWS API Documentation
+    #
+    # @overload pause_connector(params = {})
+    # @param [Hash] params ({})
+    def pause_connector(params = {}, options = {})
+      req = build_request(:pause_connector, params)
+      req.send_request(options)
+    end
+
     # Restarts the specified connector. By default, this operation restarts
     # the connector and all of its tasks. This operation is asynchronous and
     # returns a connector operation ARN that you can pass to
@@ -1392,6 +1432,39 @@ module Aws::KafkaConnect
     # @param [Hash] params ({})
     def restart_connector(params = {}, options = {})
       req = build_request(:restart_connector, params)
+      req.send_request(options)
+    end
+
+    # Resumes the specified paused connector. The operation runs
+    # asynchronously. To track the resume, pass the connector operation ARN
+    # from the response to `DescribeConnectorOperation`.
+    #
+    # @option params [required, String] :connector_arn
+    #   The Amazon Resource Name (ARN) of the connector that you want to
+    #   resume.
+    #
+    # @return [Types::ResumeConnectorResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::ResumeConnectorResponse#connector_arn #connector_arn} => String
+    #   * {Types::ResumeConnectorResponse#connector_operation_arn #connector_operation_arn} => String
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.resume_connector({
+    #     connector_arn: "__string", # required
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.connector_arn #=> String
+    #   resp.connector_operation_arn #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/kafkaconnect-2021-09-14/ResumeConnector AWS API Documentation
+    #
+    # @overload resume_connector(params = {})
+    # @param [Hash] params ({})
+    def resume_connector(params = {}, options = {})
+      req = build_request(:resume_connector, params)
       req.send_request(options)
     end
 
@@ -1461,6 +1534,16 @@ module Aws::KafkaConnect
     #   A map of keys to values that represent the configuration for the
     #   connector.
     #
+    # @option params [Boolean] :skip_health_validation
+    #   Specifies whether the update bypasses connector-level and task-level
+    #   health checks. If `true`, the update skips the health checks. The
+    #   update stays in effect even if the connector or its tasks are
+    #   unhealthy, and Amazon MSK Connect doesn't roll it back. If `false` or
+    #   not specified, the health checks run. If they fail, MSK Connect
+    #   automatically rolls the connector back to its previous configuration,
+    #   and the update doesn't take effect. To update a connector that is in
+    #   the `PAUSED` state, you must set this parameter to `true`.
+    #
     # @option params [required, String] :connector_arn
     #   The Amazon Resource Name (ARN) of the connector that you want to
     #   update.
@@ -1498,6 +1581,7 @@ module Aws::KafkaConnect
     #     connector_configuration: {
     #       "__string" => "__string",
     #     },
+    #     skip_health_validation: false,
     #     connector_arn: "__string", # required
     #     current_version: "__string", # required
     #   })
@@ -1505,7 +1589,7 @@ module Aws::KafkaConnect
     # @example Response structure
     #
     #   resp.connector_arn #=> String
-    #   resp.connector_state #=> String, one of "RUNNING", "CREATING", "UPDATING", "DELETING", "FAILED", "RESTARTING"
+    #   resp.connector_state #=> String, one of "RUNNING", "CREATING", "UPDATING", "DELETING", "FAILED", "PAUSED", "RESTARTING", "PAUSING", "RESUMING"
     #   resp.connector_operation_arn #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/kafkaconnect-2021-09-14/UpdateConnector AWS API Documentation
@@ -1535,7 +1619,7 @@ module Aws::KafkaConnect
         tracer: tracer
       )
       context[:gem_name] = 'aws-sdk-kafkaconnect'
-      context[:gem_version] = '1.63.0'
+      context[:gem_version] = '1.67.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

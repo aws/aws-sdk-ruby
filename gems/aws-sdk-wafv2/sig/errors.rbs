@@ -11,69 +11,69 @@ module Aws
       class ServiceError < ::Aws::Errors::ServiceError
       end
 
-      class WAFAssociatedItemException < ::Aws::Errors::ServiceError
+      class WAFAssociatedItemException < ServiceError
         def message: () -> ::String
       end
-      class WAFConfigurationWarningException < ::Aws::Errors::ServiceError
+      class WAFConfigurationWarningException < ServiceError
         def message: () -> ::String
       end
-      class WAFDuplicateItemException < ::Aws::Errors::ServiceError
+      class WAFDuplicateItemException < ServiceError
         def message: () -> ::String
       end
-      class WAFExpiredManagedRuleGroupVersionException < ::Aws::Errors::ServiceError
+      class WAFExpiredManagedRuleGroupVersionException < ServiceError
         def message: () -> ::String
       end
-      class WAFFeatureNotIncludedInPricingPlanException < ::Aws::Errors::ServiceError
+      class WAFFeatureNotIncludedInPricingPlanException < ServiceError
         def message: () -> ::String
         def disallowed_features: () -> ::String
       end
-      class WAFInternalErrorException < ::Aws::Errors::ServiceError
+      class WAFInternalErrorException < ServiceError
         def message: () -> ::String
       end
-      class WAFInvalidOperationException < ::Aws::Errors::ServiceError
+      class WAFInvalidOperationException < ServiceError
         def message: () -> ::String
       end
-      class WAFInvalidParameterException < ::Aws::Errors::ServiceError
+      class WAFInvalidParameterException < ServiceError
         def message: () -> ::String
         def field: () -> ::String
         def parameter: () -> ::String
         def reason: () -> ::String
       end
-      class WAFInvalidPermissionPolicyException < ::Aws::Errors::ServiceError
+      class WAFInvalidPermissionPolicyException < ServiceError
         def message: () -> ::String
       end
-      class WAFInvalidResourceException < ::Aws::Errors::ServiceError
+      class WAFInvalidResourceException < ServiceError
         def message: () -> ::String
       end
-      class WAFLimitsExceededException < ::Aws::Errors::ServiceError
+      class WAFLimitsExceededException < ServiceError
         def message: () -> ::String
         def source_type: () -> ::String
       end
-      class WAFLogDestinationPermissionIssueException < ::Aws::Errors::ServiceError
+      class WAFLogDestinationPermissionIssueException < ServiceError
         def message: () -> ::String
       end
-      class WAFNonexistentItemException < ::Aws::Errors::ServiceError
+      class WAFNonexistentItemException < ServiceError
         def message: () -> ::String
       end
-      class WAFOptimisticLockException < ::Aws::Errors::ServiceError
+      class WAFOptimisticLockException < ServiceError
         def message: () -> ::String
       end
-      class WAFServiceLinkedRoleErrorException < ::Aws::Errors::ServiceError
+      class WAFServiceLinkedRoleErrorException < ServiceError
         def message: () -> ::String
       end
-      class WAFSubscriptionNotFoundException < ::Aws::Errors::ServiceError
+      class WAFSubscriptionNotFoundException < ServiceError
         def message: () -> ::String
       end
-      class WAFTagOperationException < ::Aws::Errors::ServiceError
+      class WAFTagOperationException < ServiceError
         def message: () -> ::String
       end
-      class WAFTagOperationInternalErrorException < ::Aws::Errors::ServiceError
+      class WAFTagOperationInternalErrorException < ServiceError
         def message: () -> ::String
       end
-      class WAFUnavailableEntityException < ::Aws::Errors::ServiceError
+      class WAFUnavailableEntityException < ServiceError
         def message: () -> ::String
       end
-      class WAFUnsupportedAggregateKeyTypeException < ::Aws::Errors::ServiceError
+      class WAFUnsupportedAggregateKeyTypeException < ServiceError
         def message: () -> ::String
       end
     end

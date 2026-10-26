@@ -199,12 +199,19 @@ module Aws::Billing
     #     the required types.
     #
     #   @option options [Boolean] :correct_clock_skew (true)
-    #     Used only in `standard` and `adaptive` retry modes. Specifies whether to apply
-    #     a clock skew correction and retry requests with skewed client clocks.
+    #     Used only in `standard` and `adaptive` retry modes. Specifies whether
+    #     to apply a clock skew correction and retry requests with skewed client
+    #     clocks. Takes effect only when `disable_clock_skew_correction` is not set.
     #
     #   @option options [String] :defaults_mode ("legacy")
     #     See {Aws::DefaultsModeConfiguration} for a list of the
     #     accepted modes and the configuration defaults that are included.
+    #
+    #   @option options [Boolean] :disable_clock_skew_correction
+    #     Used only in `standard` and `adaptive` retry modes. When `true`, the
+    #     SDK does not apply a clock skew correction, does not update its stored
+    #     skew from responses, and does not retry clock skew errors. Clock skew
+    #     correction is enabled by default.
     #
     #   @option options [Boolean] :disable_host_prefix_injection (false)
     #     When `true`, the SDK will not prepend the modeled host prefix to the endpoint.
@@ -481,6 +488,52 @@ module Aws::Billing
 
     # @!group API Operations
 
+    # Private Pricing contracts let eligible payer accounts manage private
+    # pricing agreements with Amazon Web Services. This operation associates
+    # a private pricing contract with the caller's Amazon Web Services
+    # account. The caller must be a payer (management) account listed on the
+    # contract. This operation is idempotent, so retrying a request that
+    # already succeeded is safe.
+    #
+    # @option params [required, String] :contract_arn
+    #   The Amazon Resource Name (ARN) of the contract to associate with your
+    #   account.
+    #
+    # @option params [required, String] :contract_document_id
+    #   The contract ID from the contract document. It can be found in the top
+    #   right corner of your contract's pages. This value confirms that you
+    #   have access to the contract you are associating.
+    #
+    # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
+    #
+    #
+    # @example Example: Invoke AssociateContract
+    #
+    #   resp = client.associate_contract({
+    #     contract_arn: "arn:aws:billing::123456789012:contract/1a2b3c4d-5e6f-7a8b-9c0d-111122223333", 
+    #     contract_document_id: "CC OTH XXXXXXXX XXXX TR", 
+    #   })
+    #
+    #   resp.to_h outputs the following:
+    #   {
+    #   }
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.associate_contract({
+    #     contract_arn: "ArnString", # required
+    #     contract_document_id: "ContractDocumentId", # required
+    #   })
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/billing-2023-09-07/AssociateContract AWS API Documentation
+    #
+    # @overload associate_contract(params = {})
+    # @param [Hash] params ({})
+    def associate_contract(params = {}, options = {})
+      req = build_request(:associate_contract, params)
+      req.send_request(options)
+    end
+
     # Associates one or more source billing views with an existing billing
     # view. This allows creating aggregate billing views that combine data
     # from multiple sources.
@@ -529,6 +582,52 @@ module Aws::Billing
     # @param [Hash] params ({})
     def associate_source_views(params = {}, options = {})
       req = build_request(:associate_source_views, params)
+      req.send_request(options)
+    end
+
+    # Cancels a contractual investment attestation. This operation is
+    # idempotent, so retrying is safe. You can cancel an attestation only
+    # while it is still pending (its `isCancellable` value is `true`).
+    #
+    # @option params [required, String] :attestation_id
+    #   The identifier of the investment attestation to cancel.
+    #
+    # @option params [required, String] :contract_arn
+    #   The Amazon Resource Name (ARN) of the contract that contains the
+    #   attested investment.
+    #
+    # @option params [required, String] :reason
+    #   The reason for the cancellation. This value can be 1 to 80 characters.
+    #
+    # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
+    #
+    #
+    # @example Example: Invoke CancelContractualInvestmentAttestation
+    #
+    #   resp = client.cancel_contractual_investment_attestation({
+    #     attestation_id: "a1b2c3d4-5678-90ab-cdef-111122223333", 
+    #     contract_arn: "arn:aws:billing::123456789012:contract/1a2b3c4d-5e6f-7a8b-9c0d-111122223333", 
+    #     reason: "Example cancellation reason", 
+    #   })
+    #
+    #   resp.to_h outputs the following:
+    #   {
+    #   }
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.cancel_contractual_investment_attestation({
+    #     attestation_id: "IdentifierString", # required
+    #     contract_arn: "ArnString", # required
+    #     reason: "CancellationReason", # required
+    #   })
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/billing-2023-09-07/CancelContractualInvestmentAttestation AWS API Documentation
+    #
+    # @overload cancel_contractual_investment_attestation(params = {})
+    # @param [Hash] params ({})
+    def cancel_contractual_investment_attestation(params = {}, options = {})
+      req = build_request(:cancel_contractual_investment_attestation, params)
       req.send_request(options)
     end
 
@@ -643,6 +742,241 @@ module Aws::Billing
       req.send_request(options)
     end
 
+    # Creates an attestation that claims an investment award for a completed
+    # milestone or outcome within a private pricing contract. Supply a
+    # `clientToken` to make the request idempotent so a safe retry does not
+    # create a duplicate attestation. This operation starts an asynchronous
+    # review and returns an `attestationId` while the attestation is
+    # pending.
+    #
+    # @option params [required, String] :contract_arn
+    #   The Amazon Resource Name (ARN) of the contract that contains the
+    #   investment being attested.
+    #
+    # @option params [required, String] :investment_summary_id
+    #   The identifier of the investment summary being attested. This is the
+    #   parent to the investmentId.
+    #
+    # @option params [required, String] :investment_id
+    #   The identifier of the investment (outcome) being attested.
+    #
+    # @option params [required, String] :contract_document_id
+    #   The contract ID from the contract document, located in the top-right
+    #   corner of the private pricing contract pages. This value confirms that
+    #   you have access to the contract.
+    #
+    # @option params [required, Types::ApproverDetails] :approver_details
+    #   The details of the executive who authorized the attestation, under the
+    #   terms of the private pricing contract. The executive receives a
+    #   click-to-accept email to confirm the attestation.
+    #
+    # @option params [Time,DateTime,Date,Integer,String] :investment_disbursed_at
+    #   The date on which the investment is disbursed to the investment
+    #   accounts. The disbursement date is subject to review timelines.
+    #
+    # @option params [required, Types::AttestationDetails] :attestation_details
+    #   The details of the attestation, including the value being claimed and
+    #   how the resulting investment is distributed across investment
+    #   accounts.
+    #
+    # @option params [Array<Types::AdditionalRecipient>] :additional_recipients
+    #   The email addresses to copy as viewers on the executive approval
+    #   request.
+    #
+    # @option params [String] :client_token
+    #   A unique, case-sensitive identifier that you provide to ensure the
+    #   idempotency of the request. If you retry a request that completed
+    #   successfully using the same client token and parameters, the retry
+    #   completes without performing any further actions.
+    #
+    #   **A suitable default value is auto-generated.** You should normally
+    #   not need to pass this option.**
+    #
+    # @return [Types::CreateContractualInvestmentAttestationResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::CreateContractualInvestmentAttestationResponse#attestation_id #attestation_id} => String
+    #
+    #
+    # @example Example: Invoke CreateContractualInvestmentAttestation with a direct amount
+    #
+    #   resp = client.create_contractual_investment_attestation({
+    #     additional_recipients: [
+    #       {
+    #         email: "recipient@example.com", 
+    #       }, 
+    #     ], 
+    #     approver_details: {
+    #       name: "First-Name Last-Name", 
+    #       email: "first-name.last-name@example.com", 
+    #       title: "Title", 
+    #     }, 
+    #     attestation_details: {
+    #       attestation_value: {
+    #         attestation_amount: {
+    #           currency_amount: "1.00", 
+    #           currency_code: "USD", 
+    #         }, 
+    #       }, 
+    #       investment_distributions: [
+    #         {
+    #           account_id: "123456789012", 
+    #           investment_amount: {
+    #             currency_amount: "1.00", 
+    #             currency_code: "USD", 
+    #           }, 
+    #         }, 
+    #       ], 
+    #     }, 
+    #     client_token: "c0ffee00-1234-4abc-9def-0123456789ab", 
+    #     contract_arn: "arn:aws:billing::123456789012:contract/1a2b3c4d-5e6f-7a8b-9c0d-111122223333", 
+    #     contract_document_id: "CC OTH XXXXXXXX XXXX TR", 
+    #     investment_disbursed_at: Time.parse(1199923200), 
+    #     investment_id: "Investment-Id", 
+    #     investment_summary_id: "Example-Investment-Summary-Id", 
+    #   })
+    #
+    #   resp.to_h outputs the following:
+    #   {
+    #     attestation_id: "a1b2c3d4-5678-90ab-cdef-111122223333", 
+    #   }
+    #
+    # @example Example: Invoke CreateContractualInvestmentAttestation with a flat rate multiplier
+    #
+    #   resp = client.create_contractual_investment_attestation({
+    #     approver_details: {
+    #       name: "First-Name Last-Name", 
+    #       email: "first-name.last-name@example.com", 
+    #       title: "Title", 
+    #     }, 
+    #     attestation_details: {
+    #       attestation_value: {
+    #         attestation_quantities: [
+    #           {
+    #             attestation_unit: "Example attestation unit", 
+    #             attestation_volume: "3", 
+    #           }, 
+    #         ], 
+    #       }, 
+    #       investment_distributions: [
+    #         {
+    #           account_id: "123456789012", 
+    #           investment_amount: {
+    #             currency_amount: "1500.00", 
+    #             currency_code: "USD", 
+    #           }, 
+    #         }, 
+    #       ], 
+    #     }, 
+    #     client_token: "c0ffee00-1234-4abc-9def-0123456789ac", 
+    #     contract_arn: "arn:aws:billing::123456789012:contract/1a2b3c4d-5e6f-7a8b-9c0d-111122223333", 
+    #     contract_document_id: "CC OTH XXXXXXXX XXXX TR", 
+    #     investment_disbursed_at: Time.parse(1199923200), 
+    #     investment_id: "Investment-Id", 
+    #     investment_summary_id: "Example-Investment-Summary-Id", 
+    #   })
+    #
+    #   resp.to_h outputs the following:
+    #   {
+    #     attestation_id: "b2c3d4e5-6789-01bc-def0-222233334444", 
+    #   }
+    #
+    # @example Example: Invoke CreateContractualInvestmentAttestation with a percentage multiplier
+    #
+    #   resp = client.create_contractual_investment_attestation({
+    #     approver_details: {
+    #       name: "First-Name Last-Name", 
+    #       email: "first-name.last-name@example.com", 
+    #       title: "Title", 
+    #     }, 
+    #     attestation_details: {
+    #       attestation_value: {
+    #         attestation_quantities: [
+    #           {
+    #             attestation_unit: "Example attestation unit", 
+    #             attestation_volume: "1000", 
+    #           }, 
+    #         ], 
+    #       }, 
+    #       investment_distributions: [
+    #         {
+    #           account_id: "123456789012", 
+    #           investment_amount: {
+    #             currency_amount: "150.00", 
+    #             currency_code: "USD", 
+    #           }, 
+    #         }, 
+    #       ], 
+    #     }, 
+    #     client_token: "c0ffee00-1234-4abc-9def-0123456789ad", 
+    #     contract_arn: "arn:aws:billing::123456789012:contract/1a2b3c4d-5e6f-7a8b-9c0d-111122223333", 
+    #     contract_document_id: "CC OTH XXXXXXXX XXXX TR", 
+    #     investment_disbursed_at: Time.parse(1199923200), 
+    #     investment_id: "Investment-Id", 
+    #     investment_summary_id: "Example-Investment-Summary-Id", 
+    #   })
+    #
+    #   resp.to_h outputs the following:
+    #   {
+    #     attestation_id: "c3d4e5f6-7890-12cd-ef01-333344445555", 
+    #   }
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.create_contractual_investment_attestation({
+    #     contract_arn: "ArnString", # required
+    #     investment_summary_id: "IdentifierString", # required
+    #     investment_id: "IdentifierString", # required
+    #     contract_document_id: "ContractDocumentId", # required
+    #     approver_details: { # required
+    #       name: "SensitiveString", # required
+    #       title: "SensitiveString", # required
+    #       email: "SensitiveEmail", # required
+    #     },
+    #     investment_disbursed_at: Time.now,
+    #     attestation_details: { # required
+    #       attestation_value: { # required
+    #         attestation_amount: {
+    #           currency_code: "CurrencyCode", # required
+    #           currency_amount: "CurrencyAmount", # required
+    #         },
+    #         attestation_quantities: [
+    #           {
+    #             attestation_volume: "AttestationQuantityAttestationVolumeString", # required
+    #             attestation_unit: "AttestationQuantityAttestationUnitString", # required
+    #           },
+    #         ],
+    #       },
+    #       investment_distributions: [
+    #         {
+    #           account_id: "AccountId", # required
+    #           investment_amount: { # required
+    #             currency_code: "CurrencyCode", # required
+    #             currency_amount: "CurrencyAmount", # required
+    #           },
+    #         },
+    #       ],
+    #     },
+    #     additional_recipients: [
+    #       {
+    #         email: "SensitiveEmail", # required
+    #       },
+    #     ],
+    #     client_token: "AttestationClientToken",
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.attestation_id #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/billing-2023-09-07/CreateContractualInvestmentAttestation AWS API Documentation
+    #
+    # @overload create_contractual_investment_attestation(params = {})
+    # @param [Hash] params ({})
+    def create_contractual_investment_attestation(params = {}, options = {})
+      req = build_request(:create_contractual_investment_attestation, params)
+      req.send_request(options)
+    end
+
     # Deletes the specified billing view.
     #
     # @option params [required, String] :arn
@@ -687,6 +1021,43 @@ module Aws::Billing
     # @param [Hash] params ({})
     def delete_billing_view(params = {}, options = {})
       req = build_request(:delete_billing_view, params)
+      req.send_request(options)
+    end
+
+    # Removes the association between a private pricing contract and your
+    # Amazon Web Services account. The account must have been associated
+    # with the contract previously. This operation is idempotent, so
+    # retrying is safe.
+    #
+    # @option params [required, String] :contract_arn
+    #   The Amazon Resource Name (ARN) of the contract to disassociate from
+    #   your account.
+    #
+    # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
+    #
+    #
+    # @example Example: Invoke DisassociateContract
+    #
+    #   resp = client.disassociate_contract({
+    #     contract_arn: "arn:aws:billing::123456789012:contract/1a2b3c4d-5e6f-7a8b-9c0d-111122223333", 
+    #   })
+    #
+    #   resp.to_h outputs the following:
+    #   {
+    #   }
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.disassociate_contract({
+    #     contract_arn: "ArnString", # required
+    #   })
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/billing-2023-09-07/DisassociateContract AWS API Documentation
+    #
+    # @overload disassociate_contract(params = {})
+    # @param [Hash] params ({})
+    def disassociate_contract(params = {}, options = {})
+      req = build_request(:disassociate_contract, params)
       req.send_request(options)
     end
 
@@ -881,6 +1252,79 @@ module Aws::Billing
     # @param [Hash] params ({})
     def get_billing_view(params = {}, options = {})
       req = build_request(:get_billing_view, params)
+      req.send_request(options)
+    end
+
+    # Returns information about a specific private pricing contract,
+    # including its term (duration), eligible payer accounts, investment
+    # accounts, and legal entities. This operation is read-only.
+    #
+    # @option params [required, String] :contract_arn
+    #   The Amazon Resource Name (ARN) of the contract to retrieve information
+    #   about.
+    #
+    # @return [Types::GetContractInformationResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::GetContractInformationResponse#contract #contract} => Types::ContractDetails
+    #
+    #
+    # @example Example: Invoke GetContractInformation
+    #
+    #   resp = client.get_contract_information({
+    #     contract_arn: "arn:aws:billing::123456789012:contract/1a2b3c4d-5e6f-7a8b-9c0d-111122223333", 
+    #   })
+    #
+    #   resp.to_h outputs the following:
+    #   {
+    #     contract: {
+    #       private_pricing_addendum: {
+    #         contract_arn: "arn:aws:billing::123456789012:contract/1a2b3c4d-5e6f-7a8b-9c0d-111122223333", 
+    #         contract_term: {
+    #           end_date_inclusive: Time.parse(1222222222), 
+    #           start_date_inclusive: Time.parse(1111111111), 
+    #         }, 
+    #         eligible_payer_accounts: [
+    #           "123456789012", 
+    #           "210987654321", 
+    #         ], 
+    #         investment_accounts: [
+    #           "123456789012", 
+    #         ], 
+    #         legal_entities: [
+    #           {
+    #             legal_entity_name: "Example Legal Entity Name", 
+    #           }, 
+    #         ], 
+    #       }, 
+    #     }, 
+    #   }
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.get_contract_information({
+    #     contract_arn: "ArnString", # required
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.contract.private_pricing_addendum.contract_arn #=> String
+    #   resp.contract.private_pricing_addendum.contract_term.start_date_inclusive #=> Time
+    #   resp.contract.private_pricing_addendum.contract_term.end_date_inclusive #=> Time
+    #   resp.contract.private_pricing_addendum.eligible_payer_accounts #=> Array
+    #   resp.contract.private_pricing_addendum.eligible_payer_accounts[0] #=> String
+    #   resp.contract.private_pricing_addendum.investment_accounts #=> Array
+    #   resp.contract.private_pricing_addendum.investment_accounts[0] #=> String
+    #   resp.contract.private_pricing_addendum.legal_entities #=> Array
+    #   resp.contract.private_pricing_addendum.legal_entities[0].legal_entity_name #=> String
+    #   resp.contract.private_pricing_addendum.contract_restrictions #=> Array
+    #   resp.contract.private_pricing_addendum.contract_restrictions[0] #=> String, one of "ATTESTATION_SELF_SERVICE_BLOCKED"
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/billing-2023-09-07/GetContractInformation AWS API Documentation
+    #
+    # @overload get_contract_information(params = {})
+    # @param [Hash] params ({})
+    def get_contract_information(params = {}, options = {})
+      req = build_request(:get_contract_information, params)
       req.send_request(options)
     end
 
@@ -1601,6 +2045,361 @@ module Aws::Billing
       req.send_request(options)
     end
 
+    # Lists the private pricing contracts that your Amazon Web Services
+    # account is an eligible payer account of. This operation is read-only
+    # and paginated.
+    #
+    # @option params [String] :next_token
+    #   The pagination token that indicates the next set of results to
+    #   retrieve.
+    #
+    # @option params [Integer] :max_results
+    #   The maximum number of contracts to return in a single call. Minimum
+    #   value of 1, maximum value of 100.
+    #
+    # @return [Types::ListContractsResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::ListContractsResponse#items #items} => Array&lt;Types::ContractSummary&gt;
+    #   * {Types::ListContractsResponse#next_token #next_token} => String
+    #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
+    #
+    #
+    # @example Example: Invoke ListContracts
+    #
+    #   resp = client.list_contracts({
+    #     max_results: 100, 
+    #   })
+    #
+    #   resp.to_h outputs the following:
+    #   {
+    #     items: [
+    #       {
+    #         association_status: "ASSOCIATED", 
+    #         contract_arn: "arn:aws:billing::123456789012:contract/1a2b3c4d-5e6f-7a8b-9c0d-111122223333", 
+    #         contract_term: {
+    #           end_date_inclusive: Time.parse(1222222222), 
+    #           start_date_inclusive: Time.parse(1111111111), 
+    #         }, 
+    #         contract_type: "Cross-Service", 
+    #       }, 
+    #     ], 
+    #   }
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.list_contracts({
+    #     next_token: "PageToken",
+    #     max_results: 1,
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.items #=> Array
+    #   resp.items[0].contract_arn #=> String
+    #   resp.items[0].contract_term.start_date_inclusive #=> Time
+    #   resp.items[0].contract_term.end_date_inclusive #=> Time
+    #   resp.items[0].contract_type #=> String, one of "Cross-Service", "Service-Specific", "Other"
+    #   resp.items[0].association_status #=> String, one of "ASSOCIATED", "NOT_ASSOCIATED"
+    #   resp.items[0].last_updated_at #=> Time
+    #   resp.next_token #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/billing-2023-09-07/ListContracts AWS API Documentation
+    #
+    # @overload list_contracts(params = {})
+    # @param [Hash] params ({})
+    def list_contracts(params = {}, options = {})
+      req = build_request(:list_contracts, params)
+      req.send_request(options)
+    end
+
+    # Lists the investment attestations submitted under a specific private
+    # pricing contract. Use this operation to track attestation status,
+    # including the terminal statuses `DISBURSED`, `REJECTED`, and
+    # `CANCELLED`. This operation is read-only and paginated.
+    #
+    # @option params [required, String] :contract_arn
+    #   The Amazon Resource Name (ARN) of the contract whose attestations you
+    #   want to list.
+    #
+    # @option params [String] :investment_summary_id
+    #   The identifier of a specific investment summary to filter the
+    #   attestations by. If omitted, attestations for all investment summaries
+    #   in the contract are returned.
+    #
+    # @option params [String] :next_token
+    #   The pagination token that indicates the next set of results to
+    #   retrieve.
+    #
+    # @option params [Integer] :max_results
+    #   The maximum number of attestations to return in a single call. Minimum
+    #   value of 1, maximum value of 100.
+    #
+    # @return [Types::ListContractualInvestmentAttestationsResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::ListContractualInvestmentAttestationsResponse#items #items} => Array&lt;Types::InvestmentAttestation&gt;
+    #   * {Types::ListContractualInvestmentAttestationsResponse#next_token #next_token} => String
+    #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
+    #
+    #
+    # @example Example: Invoke ListContractualInvestmentAttestations
+    #
+    #   resp = client.list_contractual_investment_attestations({
+    #     contract_arn: "arn:aws:billing::123456789012:contract/1a2b3c4d-5e6f-7a8b-9c0d-111122223333", 
+    #     max_results: 25, 
+    #   })
+    #
+    #   resp.to_h outputs the following:
+    #   {
+    #     items: [
+    #       {
+    #         attestation_id: "a1b2c3d4-5678-90ab-cdef-111122223333", 
+    #         attestation_status: "PENDING_CANCELLATION", 
+    #         attested_at: Time.parse(1333333333), 
+    #         attested_value: {
+    #           currency_amount: "1.00", 
+    #           currency_code: "USD", 
+    #         }, 
+    #         investment_id: "Investment-Id", 
+    #         investment_name: "Example Investment Name", 
+    #         investment_summary_id: "Example-Investment-Summary-Id", 
+    #         outcome_description: "Example outcome description", 
+    #         updated_at: Time.parse(1444444444), 
+    #       }, 
+    #       {
+    #         attestation_id: "b2c3d4e5-6789-01bc-def0-222233334444", 
+    #         attestation_status: "CANCELLED", 
+    #         attested_at: Time.parse(1555555555), 
+    #         attested_value: {
+    #           currency_amount: "1.00", 
+    #           currency_code: "USD", 
+    #         }, 
+    #         investment_id: "Investment-Id", 
+    #         investment_name: "Example Investment Name", 
+    #         investment_summary_id: "Example-Investment-Summary-Id", 
+    #         outcome_description: "Example outcome description", 
+    #         updated_at: Time.parse(1666666666), 
+    #       }, 
+    #     ], 
+    #   }
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.list_contractual_investment_attestations({
+    #     contract_arn: "ArnString", # required
+    #     investment_summary_id: "IdentifierString",
+    #     next_token: "PageToken",
+    #     max_results: 1,
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.items #=> Array
+    #   resp.items[0].attestation_id #=> String
+    #   resp.items[0].investment_name #=> String
+    #   resp.items[0].outcome_description #=> String
+    #   resp.items[0].investment_summary_id #=> String
+    #   resp.items[0].investment_id #=> String
+    #   resp.items[0].attested_at #=> Time
+    #   resp.items[0].updated_at #=> Time
+    #   resp.items[0].attestation_status #=> String, one of "PENDING_REVIEW", "PENDING_C_LEVEL_APPROVAL", "PENDING_CANCELLATION", "REJECTED", "CANCELLED", "DISBURSED"
+    #   resp.items[0].investment_disbursed_at #=> Time
+    #   resp.items[0].attested_value.currency_code #=> String
+    #   resp.items[0].attested_value.currency_amount #=> String
+    #   resp.items[0].investment_distributions #=> Array
+    #   resp.items[0].investment_distributions[0].account_id #=> String
+    #   resp.items[0].investment_distributions[0].investment_amount.currency_code #=> String
+    #   resp.items[0].investment_distributions[0].investment_amount.currency_amount #=> String
+    #   resp.items[0].rejection_reasons #=> Array
+    #   resp.items[0].rejection_reasons[0] #=> String
+    #   resp.items[0].is_cancellable #=> Boolean
+    #   resp.next_token #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/billing-2023-09-07/ListContractualInvestmentAttestations AWS API Documentation
+    #
+    # @overload list_contractual_investment_attestations(params = {})
+    # @param [Hash] params ({})
+    def list_contractual_investment_attestations(params = {}, options = {})
+      req = build_request(:list_contractual_investment_attestations, params)
+      req.send_request(options)
+    end
+
+    # Lists the investment summaries within a specific private pricing
+    # contract. This operation is read-only and paginated.
+    #
+    # @option params [required, String] :contract_arn
+    #   The Amazon Resource Name (ARN) of the contract whose investment
+    #   summaries you want to list.
+    #
+    # @option params [String] :next_token
+    #   The pagination token that indicates the next set of results to
+    #   retrieve.
+    #
+    # @option params [Integer] :max_results
+    #   The maximum number of investment summaries to return in a single call.
+    #   Minimum value of 1, maximum value of 100.
+    #
+    # @return [Types::ListContractualInvestmentSummariesResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::ListContractualInvestmentSummariesResponse#items #items} => Array&lt;Types::InvestmentSummary&gt;
+    #   * {Types::ListContractualInvestmentSummariesResponse#next_token #next_token} => String
+    #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
+    #
+    #
+    # @example Example: Invoke ListContractualInvestmentSummaries
+    #
+    #   resp = client.list_contractual_investment_summaries({
+    #     contract_arn: "arn:aws:billing::123456789012:contract/1a2b3c4d-5e6f-7a8b-9c0d-111122223333", 
+    #     max_results: 100, 
+    #   })
+    #
+    #   resp.to_h outputs the following:
+    #   {
+    #     items: [
+    #       {
+    #         investment_name: "Example Investment Name", 
+    #         investment_summary_id: "Example-Investment-Summary-Id", 
+    #         investment_type: "OUTCOME_BASED", 
+    #         max_allowed_investment_disbursement_value: {
+    #           currency_amount: "100000000.00", 
+    #           currency_code: "USD", 
+    #         }, 
+    #       }, 
+    #     ], 
+    #   }
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.list_contractual_investment_summaries({
+    #     contract_arn: "ArnString", # required
+    #     next_token: "PageToken",
+    #     max_results: 1,
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.items #=> Array
+    #   resp.items[0].investment_summary_id #=> String
+    #   resp.items[0].investment_name #=> String
+    #   resp.items[0].investment_type #=> String, one of "MILESTONE_BASED", "OUTCOME_BASED"
+    #   resp.items[0].max_allowed_investment_disbursement_value.currency_code #=> String
+    #   resp.items[0].max_allowed_investment_disbursement_value.currency_amount #=> String
+    #   resp.next_token #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/billing-2023-09-07/ListContractualInvestmentSummaries AWS API Documentation
+    #
+    # @overload list_contractual_investment_summaries(params = {})
+    # @param [Hash] params ({})
+    def list_contractual_investment_summaries(params = {}, options = {})
+      req = build_request(:list_contractual_investment_summaries, params)
+      req.send_request(options)
+    end
+
+    # Lists the investments within a specific investment summary. This
+    # operation is read-only and paginated.
+    #
+    # @option params [required, String] :contract_arn
+    #   The Amazon Resource Name (ARN) of the contract that contains the
+    #   investment summary.
+    #
+    # @option params [required, String] :investment_summary_id
+    #   The identifier of the investment summary whose investments you want to
+    #   list.
+    #
+    # @option params [String] :next_token
+    #   The pagination token that indicates the next set of results to
+    #   retrieve.
+    #
+    # @option params [Integer] :max_results
+    #   The maximum number of investments to return in a single call. Minimum
+    #   value of 1, maximum value of 100.
+    #
+    # @return [Types::ListContractualInvestmentsResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::ListContractualInvestmentsResponse#items #items} => Array&lt;Types::Investment&gt;
+    #   * {Types::ListContractualInvestmentsResponse#next_token #next_token} => String
+    #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
+    #
+    #
+    # @example Example: Invoke ListContractualInvestments
+    #
+    #   resp = client.list_contractual_investments({
+    #     contract_arn: "arn:aws:billing::123456789012:contract/1a2b3c4d-5e6f-7a8b-9c0d-111122223333", 
+    #     investment_summary_id: "Example-Investment-Summary-Id", 
+    #     max_results: 100, 
+    #   })
+    #
+    #   resp.to_h outputs the following:
+    #   {
+    #     items: [
+    #       {
+    #         outcome_based_investment: {
+    #           attestation_window: {
+    #             end_date_inclusive: Time.parse(1222222222), 
+    #             start_date_inclusive: Time.parse(1111111111), 
+    #           }, 
+    #           disbursed_value: {
+    #             currency_amount: "0.00", 
+    #             currency_code: "USD", 
+    #           }, 
+    #           investment_id: "Investment-Id", 
+    #           investment_restrictions: [
+    #             {
+    #               amount: {
+    #                 currency_amount: "50000.00", 
+    #                 currency_code: "USD", 
+    #               }, 
+    #             }, 
+    #           ], 
+    #           outcome_description: "Example outcome description", 
+    #         }, 
+    #       }, 
+    #     ], 
+    #   }
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.list_contractual_investments({
+    #     contract_arn: "ArnString", # required
+    #     investment_summary_id: "IdentifierString", # required
+    #     next_token: "PageToken",
+    #     max_results: 1,
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.items #=> Array
+    #   resp.items[0].milestone_based_investment.investment_id #=> String
+    #   resp.items[0].milestone_based_investment.investment_value.currency_code #=> String
+    #   resp.items[0].milestone_based_investment.investment_value.currency_amount #=> String
+    #   resp.items[0].milestone_based_investment.investment_disbursed_at #=> Time
+    #   resp.items[0].outcome_based_investment.investment_id #=> String
+    #   resp.items[0].outcome_based_investment.outcome_description #=> String
+    #   resp.items[0].outcome_based_investment.attestation_window.start_date_inclusive #=> Time
+    #   resp.items[0].outcome_based_investment.attestation_window.end_date_inclusive #=> Time
+    #   resp.items[0].outcome_based_investment.investment_restrictions #=> Array
+    #   resp.items[0].outcome_based_investment.investment_restrictions[0].amount.currency_code #=> String
+    #   resp.items[0].outcome_based_investment.investment_restrictions[0].amount.currency_amount #=> String
+    #   resp.items[0].outcome_based_investment.investment_multipliers #=> Array
+    #   resp.items[0].outcome_based_investment.investment_multipliers[0].value #=> String
+    #   resp.items[0].outcome_based_investment.investment_multipliers[0].investment_attestation_input_unit #=> String
+    #   resp.items[0].outcome_based_investment.investment_multipliers[0].multiplier_type #=> String, one of "PERCENTAGE", "CURRENCY_AMOUNT"
+    #   resp.items[0].outcome_based_investment.disbursed_value.currency_code #=> String
+    #   resp.items[0].outcome_based_investment.disbursed_value.currency_amount #=> String
+    #   resp.next_token #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/billing-2023-09-07/ListContractualInvestments AWS API Documentation
+    #
+    # @overload list_contractual_investments(params = {})
+    # @param [Hash] params ({})
+    def list_contractual_investments(params = {}, options = {})
+      req = build_request(:list_contractual_investments, params)
+      req.send_request(options)
+    end
+
     # Returns Support-eligible spend broken down at linked account level.
     #
     # @option params [required, String] :billing_month
@@ -2040,7 +2839,7 @@ module Aws::Billing
         tracer: tracer
       )
       context[:gem_name] = 'aws-sdk-billing'
-      context[:gem_version] = '1.35.0'
+      context[:gem_version] = '1.39.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

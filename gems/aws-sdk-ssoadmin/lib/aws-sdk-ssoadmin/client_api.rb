@@ -266,6 +266,7 @@ module Aws::SSOAdmin
     RegionMetadata = Shapes::StructureShape.new(name: 'RegionMetadata')
     RegionMetadataList = Shapes::ListShape.new(name: 'RegionMetadataList')
     RegionName = Shapes::StringShape.new(name: 'RegionName')
+    RegionScope = Shapes::StringShape.new(name: 'RegionScope')
     RegionStatus = Shapes::StringShape.new(name: 'RegionStatus')
     RelayState = Shapes::StringShape.new(name: 'RelayState')
     RemoveRegionRequest = Shapes::StructureShape.new(name: 'RemoveRegionRequest')
@@ -982,6 +983,7 @@ module Aws::SSOAdmin
 
     ListInstancesRequest.add_member(:max_results, Shapes::ShapeRef.new(shape: MaxResults, location_name: "MaxResults"))
     ListInstancesRequest.add_member(:next_token, Shapes::ShapeRef.new(shape: Token, location_name: "NextToken"))
+    ListInstancesRequest.add_member(:region_scope, Shapes::ShapeRef.new(shape: RegionScope, location_name: "RegionScope"))
     ListInstancesRequest.struct_class = Types::ListInstancesRequest
 
     ListInstancesResponse.add_member(:instances, Shapes::ShapeRef.new(shape: InstanceList, location_name: "Instances"))

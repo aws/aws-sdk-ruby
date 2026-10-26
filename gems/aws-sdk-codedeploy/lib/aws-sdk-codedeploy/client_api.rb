@@ -42,6 +42,8 @@ module Aws::CodeDeploy
     AutoScalingGroupList = Shapes::ListShape.new(name: 'AutoScalingGroupList')
     AutoScalingGroupName = Shapes::StringShape.new(name: 'AutoScalingGroupName')
     AutoScalingGroupNameList = Shapes::ListShape.new(name: 'AutoScalingGroupNameList')
+    AutoScalingGroupProcess = Shapes::StringShape.new(name: 'AutoScalingGroupProcess')
+    AutoScalingGroupProcessesToSuspendList = Shapes::ListShape.new(name: 'AutoScalingGroupProcessesToSuspendList')
     BatchGetApplicationRevisionsInput = Shapes::StructureShape.new(name: 'BatchGetApplicationRevisionsInput')
     BatchGetApplicationRevisionsOutput = Shapes::StructureShape.new(name: 'BatchGetApplicationRevisionsOutput')
     BatchGetApplicationsInput = Shapes::StructureShape.new(name: 'BatchGetApplicationsInput')
@@ -135,6 +137,7 @@ module Aws::CodeDeploy
     DescriptionTooLongException = Shapes::StructureShape.new(name: 'DescriptionTooLongException')
     Diagnostics = Shapes::StructureShape.new(name: 'Diagnostics')
     Duration = Shapes::IntegerShape.new(name: 'Duration')
+    EC2DeploymentOptions = Shapes::StructureShape.new(name: 'EC2DeploymentOptions')
     EC2TagFilter = Shapes::StructureShape.new(name: 'EC2TagFilter')
     EC2TagFilterList = Shapes::ListShape.new(name: 'EC2TagFilterList')
     EC2TagFilterType = Shapes::StringShape.new(name: 'EC2TagFilterType')
@@ -219,6 +222,7 @@ module Aws::CodeDeploy
     InvalidArnException = Shapes::StructureShape.new(name: 'InvalidArnException')
     InvalidAutoRollbackConfigException = Shapes::StructureShape.new(name: 'InvalidAutoRollbackConfigException')
     InvalidAutoScalingGroupException = Shapes::StructureShape.new(name: 'InvalidAutoScalingGroupException')
+    InvalidAutoScalingGroupProcessToSuspendException = Shapes::StructureShape.new(name: 'InvalidAutoScalingGroupProcessToSuspendException')
     InvalidBlueGreenDeploymentConfigurationException = Shapes::StructureShape.new(name: 'InvalidBlueGreenDeploymentConfigurationException')
     InvalidBucketNameFilterException = Shapes::StructureShape.new(name: 'InvalidBucketNameFilterException')
     InvalidComputePlatformException = Shapes::StructureShape.new(name: 'InvalidComputePlatformException')
@@ -469,6 +473,8 @@ module Aws::CodeDeploy
 
     AutoScalingGroupNameList.member = Shapes::ShapeRef.new(shape: AutoScalingGroupName)
 
+    AutoScalingGroupProcessesToSuspendList.member = Shapes::ShapeRef.new(shape: AutoScalingGroupProcess)
+
     BatchGetApplicationRevisionsInput.add_member(:application_name, Shapes::ShapeRef.new(shape: ApplicationName, required: true, location_name: "applicationName"))
     BatchGetApplicationRevisionsInput.add_member(:revisions, Shapes::ShapeRef.new(shape: RevisionLocationList, required: true, location_name: "revisions"))
     BatchGetApplicationRevisionsInput.struct_class = Types::BatchGetApplicationRevisionsInput
@@ -581,6 +587,7 @@ module Aws::CodeDeploy
     CreateDeploymentGroupInput.add_member(:ecs_services, Shapes::ShapeRef.new(shape: ECSServiceList, location_name: "ecsServices"))
     CreateDeploymentGroupInput.add_member(:on_premises_tag_set, Shapes::ShapeRef.new(shape: OnPremisesTagSet, location_name: "onPremisesTagSet"))
     CreateDeploymentGroupInput.add_member(:tags, Shapes::ShapeRef.new(shape: TagList, location_name: "tags"))
+    CreateDeploymentGroupInput.add_member(:ec2_deployment_options, Shapes::ShapeRef.new(shape: EC2DeploymentOptions, location_name: "ec2DeploymentOptions"))
     CreateDeploymentGroupInput.add_member(:termination_hook_enabled, Shapes::ShapeRef.new(shape: NullableBoolean, location_name: "terminationHookEnabled"))
     CreateDeploymentGroupInput.struct_class = Types::CreateDeploymentGroupInput
 
@@ -599,6 +606,7 @@ module Aws::CodeDeploy
     CreateDeploymentInput.add_member(:file_exists_behavior, Shapes::ShapeRef.new(shape: FileExistsBehavior, location_name: "fileExistsBehavior"))
     CreateDeploymentInput.add_member(:deployment_mode, Shapes::ShapeRef.new(shape: DeploymentMode, location_name: "deploymentMode"))
     CreateDeploymentInput.add_member(:override_alarm_configuration, Shapes::ShapeRef.new(shape: AlarmConfiguration, location_name: "overrideAlarmConfiguration"))
+    CreateDeploymentInput.add_member(:ec2_deployment_options, Shapes::ShapeRef.new(shape: EC2DeploymentOptions, location_name: "ec2DeploymentOptions"))
     CreateDeploymentInput.struct_class = Types::CreateDeploymentInput
 
     CreateDeploymentOutput.add_member(:deployment_id, Shapes::ShapeRef.new(shape: DeploymentId, location_name: "deploymentId"))
@@ -681,6 +689,7 @@ module Aws::CodeDeploy
     DeploymentGroupInfo.add_member(:on_premises_tag_set, Shapes::ShapeRef.new(shape: OnPremisesTagSet, location_name: "onPremisesTagSet"))
     DeploymentGroupInfo.add_member(:compute_platform, Shapes::ShapeRef.new(shape: ComputePlatform, location_name: "computePlatform"))
     DeploymentGroupInfo.add_member(:ecs_services, Shapes::ShapeRef.new(shape: ECSServiceList, location_name: "ecsServices"))
+    DeploymentGroupInfo.add_member(:ec2_deployment_options, Shapes::ShapeRef.new(shape: EC2DeploymentOptions, location_name: "ec2DeploymentOptions"))
     DeploymentGroupInfo.add_member(:termination_hook_enabled, Shapes::ShapeRef.new(shape: Boolean, location_name: "terminationHookEnabled"))
     DeploymentGroupInfo.struct_class = Types::DeploymentGroupInfo
 
@@ -725,6 +734,7 @@ module Aws::CodeDeploy
     DeploymentInfo.add_member(:external_id, Shapes::ShapeRef.new(shape: ExternalId, location_name: "externalId"))
     DeploymentInfo.add_member(:related_deployments, Shapes::ShapeRef.new(shape: RelatedDeployments, location_name: "relatedDeployments"))
     DeploymentInfo.add_member(:override_alarm_configuration, Shapes::ShapeRef.new(shape: AlarmConfiguration, location_name: "overrideAlarmConfiguration"))
+    DeploymentInfo.add_member(:ec2_deployment_options, Shapes::ShapeRef.new(shape: EC2DeploymentOptions, location_name: "ec2DeploymentOptions"))
     DeploymentInfo.struct_class = Types::DeploymentInfo
 
     DeploymentIsNotInReadyStateException.struct_class = Types::DeploymentIsNotInReadyStateException
@@ -782,6 +792,9 @@ module Aws::CodeDeploy
     Diagnostics.add_member(:message, Shapes::ShapeRef.new(shape: LifecycleMessage, location_name: "message"))
     Diagnostics.add_member(:log_tail, Shapes::ShapeRef.new(shape: LogTail, location_name: "logTail"))
     Diagnostics.struct_class = Types::Diagnostics
+
+    EC2DeploymentOptions.add_member(:auto_scaling_group_processes_to_suspend, Shapes::ShapeRef.new(shape: AutoScalingGroupProcessesToSuspendList, location_name: "autoScalingGroupProcessesToSuspend"))
+    EC2DeploymentOptions.struct_class = Types::EC2DeploymentOptions
 
     EC2TagFilter.add_member(:key, Shapes::ShapeRef.new(shape: Key, location_name: "Key"))
     EC2TagFilter.add_member(:value, Shapes::ShapeRef.new(shape: Value, location_name: "Value"))
@@ -976,6 +989,8 @@ module Aws::CodeDeploy
     InvalidAutoRollbackConfigException.struct_class = Types::InvalidAutoRollbackConfigException
 
     InvalidAutoScalingGroupException.struct_class = Types::InvalidAutoScalingGroupException
+
+    InvalidAutoScalingGroupProcessToSuspendException.struct_class = Types::InvalidAutoScalingGroupProcessToSuspendException
 
     InvalidBlueGreenDeploymentConfigurationException.struct_class = Types::InvalidBlueGreenDeploymentConfigurationException
 
@@ -1421,6 +1436,7 @@ module Aws::CodeDeploy
     UpdateDeploymentGroupInput.add_member(:ec2_tag_set, Shapes::ShapeRef.new(shape: EC2TagSet, location_name: "ec2TagSet"))
     UpdateDeploymentGroupInput.add_member(:ecs_services, Shapes::ShapeRef.new(shape: ECSServiceList, location_name: "ecsServices"))
     UpdateDeploymentGroupInput.add_member(:on_premises_tag_set, Shapes::ShapeRef.new(shape: OnPremisesTagSet, location_name: "onPremisesTagSet"))
+    UpdateDeploymentGroupInput.add_member(:ec2_deployment_options, Shapes::ShapeRef.new(shape: EC2DeploymentOptions, location_name: "ec2DeploymentOptions"))
     UpdateDeploymentGroupInput.add_member(:termination_hook_enabled, Shapes::ShapeRef.new(shape: NullableBoolean, location_name: "terminationHookEnabled"))
     UpdateDeploymentGroupInput.struct_class = Types::UpdateDeploymentGroupInput
 
@@ -1628,6 +1644,7 @@ module Aws::CodeDeploy
         o.errors << Shapes::ShapeRef.new(shape: InvalidIgnoreApplicationStopFailuresValueException)
         o.errors << Shapes::ShapeRef.new(shape: InvalidGitHubAccountTokenException)
         o.errors << Shapes::ShapeRef.new(shape: InvalidTrafficRoutingConfigurationException)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidAutoScalingGroupProcessToSuspendException)
         o.errors << Shapes::ShapeRef.new(shape: InvalidECSServiceException)
         o.errors << Shapes::ShapeRef.new(shape: InvalidInputException)
       end)
@@ -1687,6 +1704,7 @@ module Aws::CodeDeploy
         o.errors << Shapes::ShapeRef.new(shape: ECSServiceMappingLimitExceededException)
         o.errors << Shapes::ShapeRef.new(shape: InvalidTagsToAddException)
         o.errors << Shapes::ShapeRef.new(shape: InvalidTrafficRoutingConfigurationException)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidAutoScalingGroupProcessToSuspendException)
       end)
 
       api.add_operation(:delete_application, Seahorse::Model::Operation.new.tap do |o|
@@ -2204,6 +2222,7 @@ module Aws::CodeDeploy
         o.errors << Shapes::ShapeRef.new(shape: InvalidTargetGroupPairException)
         o.errors << Shapes::ShapeRef.new(shape: ECSServiceMappingLimitExceededException)
         o.errors << Shapes::ShapeRef.new(shape: InvalidTrafficRoutingConfigurationException)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidAutoScalingGroupProcessToSuspendException)
       end)
     end
 

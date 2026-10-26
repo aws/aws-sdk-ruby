@@ -6764,6 +6764,19 @@ module Aws
         client_id: ::String?,
         client_secret: ::String?,
         username: ::String?
+      }?,
+      service_account_credentials: {
+        admin_account_email: ::String,
+        service_account_private_key: ::String,
+        client_email: ::String
+      }?,
+      share_point_client_credentials: {
+        kms_key_arn: ::String,
+        cert_thumbprint: ::String
+      }?,
+      one_drive_client_credentials: {
+        kms_key_arn: ::String,
+        cert_thumbprint: ::String
       }?
     }
 

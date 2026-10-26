@@ -201,12 +201,19 @@ module Aws::BedrockAgentRuntime
     #     the required types.
     #
     #   @option options [Boolean] :correct_clock_skew (true)
-    #     Used only in `standard` and `adaptive` retry modes. Specifies whether to apply
-    #     a clock skew correction and retry requests with skewed client clocks.
+    #     Used only in `standard` and `adaptive` retry modes. Specifies whether
+    #     to apply a clock skew correction and retry requests with skewed client
+    #     clocks. Takes effect only when `disable_clock_skew_correction` is not set.
     #
     #   @option options [String] :defaults_mode ("legacy")
     #     See {Aws::DefaultsModeConfiguration} for a list of the
     #     accepted modes and the configuration defaults that are included.
+    #
+    #   @option options [Boolean] :disable_clock_skew_correction
+    #     Used only in `standard` and `adaptive` retry modes. When `true`, the
+    #     SDK does not apply a clock skew correction, does not update its stored
+    #     skew from responses, and does not retry clock skew errors. Clock skew
+    #     correction is enabled by default.
     #
     #   @option options [Boolean] :disable_host_prefix_injection (false)
     #     When `true`, the SDK will not prepend the modeled host prefix to the endpoint.
@@ -516,6 +523,9 @@ module Aws::BedrockAgentRuntime
     # @option params [Types::AgenticRetrievePolicyConfiguration] :policy_configuration
     #   Policy configuration for guardrails and content filtering.
     #
+    # @option params [Types::AgenticRetrieveInstructionConfiguration] :retrieval_instruction_configuration
+    #   A retrieval instruction to apply to this request.
+    #
     # @option params [required, Array<Types::AgenticRetriever>] :retrievers
     #   The list of retrievers to use for agentic retrieval.
     #
@@ -793,6 +803,10 @@ module Aws::BedrockAgentRuntime
     #         guardrail_version: "AgenticRetrieveBedrockGuardrailConfigurationGuardrailVersionString", # required
     #       },
     #     },
+    #     retrieval_instruction_configuration: {
+    #       retrieval_instruction_id: "RetrievalInstructionId", # required
+    #       version: "RetrievalInstructionVersion",
+    #     },
     #     retrievers: [ # required
     #       {
     #         configuration: { # required
@@ -941,6 +955,8 @@ module Aws::BedrockAgentRuntime
     #   event.attributes.actions[0].retrieve.input_query.text #=> String
     #   event.attributes.actions[0].retrieve.source_retrievers #=> Array
     #   event.attributes.actions[0].retrieve.source_retrievers[0].identifier #=> String
+    #   event.attributes.applied_instruction.id #=> String
+    #   event.attributes.applied_instruction.version #=> String
     #   event.attributes.failures #=> Array
     #   event.attributes.failures[0].message #=> String
     #   event.attributes.message #=> String
@@ -8473,7 +8489,7 @@ module Aws::BedrockAgentRuntime
         tracer: tracer
       )
       context[:gem_name] = 'aws-sdk-bedrockagentruntime'
-      context[:gem_version] = '1.83.0'
+      context[:gem_version] = '1.86.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

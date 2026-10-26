@@ -1,6 +1,21 @@
 Unreleased Changes
 ------------------
 
+1.97.0 (2026-10-21)
+------------------
+
+* Feature - Added custom designations support with new CRUD APIs. The designation field in project membership and policy grant APIs supports a new enum for custom designations. These APIs also support a new field for custom designation id.
+
+1.96.0 (2026-10-20)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
+1.95.0 (2026-10-19)
+------------------
+
+* Feature - Adds SDK and CLI support for the Iceberg REST catalog connection types already available in Amazon SageMaker Unified Studio - ICEBERGRESTCATALOG, SNOWFLAKEICEBERGRESTCATALOG, and DATABRICKSICEBERGRESTCATALOG.
+
 1.94.0 (2026-10-08)
 ------------------
 

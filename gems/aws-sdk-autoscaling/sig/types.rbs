@@ -20,6 +20,16 @@ module Aws::AutoScaling
       SENSITIVE: []
     end
 
+    class AccountSetting
+      attr_accessor name: ::String
+      attr_accessor value: ::String
+      attr_accessor enforcement_type: ::String
+      attr_accessor enforcement_date: ::Time
+      attr_accessor default_value: ::String
+      attr_accessor enforced_value: ::String
+      SENSITIVE: []
+    end
+
     class ActiveInstanceRefreshNotFoundFault
       attr_accessor message: ::String
       SENSITIVE: []
@@ -420,6 +430,19 @@ module Aws::AutoScaling
       attr_accessor max_number_of_launch_configurations: ::Integer
       attr_accessor number_of_auto_scaling_groups: ::Integer
       attr_accessor number_of_launch_configurations: ::Integer
+      SENSITIVE: []
+    end
+
+    class DescribeAccountSettingsAnswer
+      attr_accessor settings: ::Array[Types::AccountSetting]
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class DescribeAccountSettingsType
+      attr_accessor name: ::String
+      attr_accessor next_token: ::String
+      attr_accessor max_records: ::Integer
       SENSITIVE: []
     end
 
@@ -1183,6 +1206,15 @@ module Aws::AutoScaling
 
     class ProcessesType
       attr_accessor processes: ::Array[Types::ProcessType]
+      SENSITIVE: []
+    end
+
+    class PutAccountSettingAnswer < Aws::EmptyStructure
+    end
+
+    class PutAccountSettingType
+      attr_accessor name: ::String
+      attr_accessor value: ::String
       SENSITIVE: []
     end
 

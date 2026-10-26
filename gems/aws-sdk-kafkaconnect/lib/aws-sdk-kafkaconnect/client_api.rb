@@ -92,6 +92,8 @@ module Aws::KafkaConnect
     MaxResults = Shapes::IntegerShape.new(name: 'MaxResults')
     NetworkType = Shapes::StringShape.new(name: 'NetworkType')
     NotFoundException = Shapes::StructureShape.new(name: 'NotFoundException')
+    PauseConnectorRequest = Shapes::StructureShape.new(name: 'PauseConnectorRequest')
+    PauseConnectorResponse = Shapes::StructureShape.new(name: 'PauseConnectorResponse')
     Plugin = Shapes::StructureShape.new(name: 'Plugin')
     PluginDescription = Shapes::StructureShape.new(name: 'PluginDescription')
     ProvisionedCapacity = Shapes::StructureShape.new(name: 'ProvisionedCapacity')
@@ -99,6 +101,8 @@ module Aws::KafkaConnect
     ProvisionedCapacityUpdate = Shapes::StructureShape.new(name: 'ProvisionedCapacityUpdate')
     RestartConnectorRequest = Shapes::StructureShape.new(name: 'RestartConnectorRequest')
     RestartConnectorResponse = Shapes::StructureShape.new(name: 'RestartConnectorResponse')
+    ResumeConnectorRequest = Shapes::StructureShape.new(name: 'ResumeConnectorRequest')
+    ResumeConnectorResponse = Shapes::StructureShape.new(name: 'ResumeConnectorResponse')
     S3Location = Shapes::StructureShape.new(name: 'S3Location')
     S3LocationDescription = Shapes::StructureShape.new(name: 'S3LocationDescription')
     S3LogDelivery = Shapes::StructureShape.new(name: 'S3LogDelivery')
@@ -496,6 +500,13 @@ module Aws::KafkaConnect
     NotFoundException.add_member(:message, Shapes::ShapeRef.new(shape: __string, location_name: "message"))
     NotFoundException.struct_class = Types::NotFoundException
 
+    PauseConnectorRequest.add_member(:connector_arn, Shapes::ShapeRef.new(shape: __string, required: true, location: "uri", location_name: "connectorArn"))
+    PauseConnectorRequest.struct_class = Types::PauseConnectorRequest
+
+    PauseConnectorResponse.add_member(:connector_arn, Shapes::ShapeRef.new(shape: __string, location_name: "connectorArn"))
+    PauseConnectorResponse.add_member(:connector_operation_arn, Shapes::ShapeRef.new(shape: __string, location_name: "connectorOperationArn"))
+    PauseConnectorResponse.struct_class = Types::PauseConnectorResponse
+
     Plugin.add_member(:custom_plugin, Shapes::ShapeRef.new(shape: CustomPlugin, required: true, location_name: "customPlugin"))
     Plugin.struct_class = Types::Plugin
 
@@ -521,6 +532,13 @@ module Aws::KafkaConnect
     RestartConnectorResponse.add_member(:connector_arn, Shapes::ShapeRef.new(shape: __string, location_name: "connectorArn"))
     RestartConnectorResponse.add_member(:connector_operation_arn, Shapes::ShapeRef.new(shape: __string, location_name: "connectorOperationArn"))
     RestartConnectorResponse.struct_class = Types::RestartConnectorResponse
+
+    ResumeConnectorRequest.add_member(:connector_arn, Shapes::ShapeRef.new(shape: __string, required: true, location: "uri", location_name: "connectorArn"))
+    ResumeConnectorRequest.struct_class = Types::ResumeConnectorRequest
+
+    ResumeConnectorResponse.add_member(:connector_arn, Shapes::ShapeRef.new(shape: __string, location_name: "connectorArn"))
+    ResumeConnectorResponse.add_member(:connector_operation_arn, Shapes::ShapeRef.new(shape: __string, location_name: "connectorOperationArn"))
+    ResumeConnectorResponse.struct_class = Types::ResumeConnectorResponse
 
     S3Location.add_member(:bucket_arn, Shapes::ShapeRef.new(shape: __string, required: true, location_name: "bucketArn"))
     S3Location.add_member(:file_key, Shapes::ShapeRef.new(shape: __string, required: true, location_name: "fileKey"))
@@ -592,6 +610,7 @@ module Aws::KafkaConnect
 
     UpdateConnectorRequest.add_member(:capacity, Shapes::ShapeRef.new(shape: CapacityUpdate, location_name: "capacity"))
     UpdateConnectorRequest.add_member(:connector_configuration, Shapes::ShapeRef.new(shape: ConnectorConfigurationUpdate, location_name: "connectorConfiguration"))
+    UpdateConnectorRequest.add_member(:skip_health_validation, Shapes::ShapeRef.new(shape: __boolean, location_name: "skipHealthValidation"))
     UpdateConnectorRequest.add_member(:connector_arn, Shapes::ShapeRef.new(shape: __string, required: true, location: "uri", location_name: "connectorArn"))
     UpdateConnectorRequest.add_member(:current_version, Shapes::ShapeRef.new(shape: __string, required: true, location: "querystring", location_name: "currentVersion"))
     UpdateConnectorRequest.struct_class = Types::UpdateConnectorRequest
@@ -937,12 +956,44 @@ module Aws::KafkaConnect
         )
       end)
 
+      api.add_operation(:pause_connector, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "PauseConnector"
+        o.http_method = "PUT"
+        o.http_request_uri = "/v1/connectors/{connectorArn}/pause"
+        o.input = Shapes::ShapeRef.new(shape: PauseConnectorRequest)
+        o.output = Shapes::ShapeRef.new(shape: PauseConnectorResponse)
+        o.errors << Shapes::ShapeRef.new(shape: ConflictException)
+        o.errors << Shapes::ShapeRef.new(shape: NotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: BadRequestException)
+        o.errors << Shapes::ShapeRef.new(shape: ForbiddenException)
+        o.errors << Shapes::ShapeRef.new(shape: ServiceUnavailableException)
+        o.errors << Shapes::ShapeRef.new(shape: TooManyRequestsException)
+        o.errors << Shapes::ShapeRef.new(shape: UnauthorizedException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServerErrorException)
+      end)
+
       api.add_operation(:restart_connector, Seahorse::Model::Operation.new.tap do |o|
         o.name = "RestartConnector"
         o.http_method = "POST"
         o.http_request_uri = "/v1/connectors/{connectorArn}/restart"
         o.input = Shapes::ShapeRef.new(shape: RestartConnectorRequest)
         o.output = Shapes::ShapeRef.new(shape: RestartConnectorResponse)
+        o.errors << Shapes::ShapeRef.new(shape: NotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: BadRequestException)
+        o.errors << Shapes::ShapeRef.new(shape: ForbiddenException)
+        o.errors << Shapes::ShapeRef.new(shape: ServiceUnavailableException)
+        o.errors << Shapes::ShapeRef.new(shape: TooManyRequestsException)
+        o.errors << Shapes::ShapeRef.new(shape: UnauthorizedException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServerErrorException)
+      end)
+
+      api.add_operation(:resume_connector, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "ResumeConnector"
+        o.http_method = "PUT"
+        o.http_request_uri = "/v1/connectors/{connectorArn}/resume"
+        o.input = Shapes::ShapeRef.new(shape: ResumeConnectorRequest)
+        o.output = Shapes::ShapeRef.new(shape: ResumeConnectorResponse)
+        o.errors << Shapes::ShapeRef.new(shape: ConflictException)
         o.errors << Shapes::ShapeRef.new(shape: NotFoundException)
         o.errors << Shapes::ShapeRef.new(shape: BadRequestException)
         o.errors << Shapes::ShapeRef.new(shape: ForbiddenException)

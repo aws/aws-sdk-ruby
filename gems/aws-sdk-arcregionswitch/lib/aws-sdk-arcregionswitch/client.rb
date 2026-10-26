@@ -199,12 +199,19 @@ module Aws::ARCRegionswitch
     #     the required types.
     #
     #   @option options [Boolean] :correct_clock_skew (true)
-    #     Used only in `standard` and `adaptive` retry modes. Specifies whether to apply
-    #     a clock skew correction and retry requests with skewed client clocks.
+    #     Used only in `standard` and `adaptive` retry modes. Specifies whether
+    #     to apply a clock skew correction and retry requests with skewed client
+    #     clocks. Takes effect only when `disable_clock_skew_correction` is not set.
     #
     #   @option options [String] :defaults_mode ("legacy")
     #     See {Aws::DefaultsModeConfiguration} for a list of the
     #     accepted modes and the configuration defaults that are included.
+    #
+    #   @option options [Boolean] :disable_clock_skew_correction
+    #     Used only in `standard` and `adaptive` retry modes. When `true`, the
+    #     SDK does not apply a clock skew correction, does not update its stored
+    #     skew from responses, and does not retry clock skew errors. Clock skew
+    #     correction is enabled by default.
     #
     #   @option options [Boolean] :disable_host_prefix_injection (false)
     #     When `true`, the SDK will not prepend the modeled host prefix to the endpoint.
@@ -639,6 +646,7 @@ module Aws::ARCRegionswitch
     #                     cross_account_role: "IamRoleArn",
     #                     external_id: "String",
     #                     arn: "LambdaArn",
+    #                     payload: "LambdaPayload",
     #                   },
     #                 ],
     #                 retry_interval_minutes: 1.0, # required
@@ -938,6 +946,7 @@ module Aws::ARCRegionswitch
     #   resp.plan.workflows[0].steps[0].execution_block_configuration.custom_action_lambda_config.lambdas[0].cross_account_role #=> String
     #   resp.plan.workflows[0].steps[0].execution_block_configuration.custom_action_lambda_config.lambdas[0].external_id #=> String
     #   resp.plan.workflows[0].steps[0].execution_block_configuration.custom_action_lambda_config.lambdas[0].arn #=> String
+    #   resp.plan.workflows[0].steps[0].execution_block_configuration.custom_action_lambda_config.lambdas[0].payload #=> String
     #   resp.plan.workflows[0].steps[0].execution_block_configuration.custom_action_lambda_config.retry_interval_minutes #=> Float
     #   resp.plan.workflows[0].steps[0].execution_block_configuration.custom_action_lambda_config.region_to_run #=> String, one of "activatingRegion", "deactivatingRegion", "activeRegion", "inactiveRegion"
     #   resp.plan.workflows[0].steps[0].execution_block_configuration.custom_action_lambda_config.ungraceful.behavior #=> String, one of "skip"
@@ -1169,6 +1178,7 @@ module Aws::ARCRegionswitch
     #   resp.plan.workflows[0].steps[0].execution_block_configuration.custom_action_lambda_config.lambdas[0].cross_account_role #=> String
     #   resp.plan.workflows[0].steps[0].execution_block_configuration.custom_action_lambda_config.lambdas[0].external_id #=> String
     #   resp.plan.workflows[0].steps[0].execution_block_configuration.custom_action_lambda_config.lambdas[0].arn #=> String
+    #   resp.plan.workflows[0].steps[0].execution_block_configuration.custom_action_lambda_config.lambdas[0].payload #=> String
     #   resp.plan.workflows[0].steps[0].execution_block_configuration.custom_action_lambda_config.retry_interval_minutes #=> Float
     #   resp.plan.workflows[0].steps[0].execution_block_configuration.custom_action_lambda_config.region_to_run #=> String, one of "activatingRegion", "deactivatingRegion", "activeRegion", "inactiveRegion"
     #   resp.plan.workflows[0].steps[0].execution_block_configuration.custom_action_lambda_config.ungraceful.behavior #=> String, one of "skip"
@@ -1498,6 +1508,7 @@ module Aws::ARCRegionswitch
     #   resp.plan.workflows[0].steps[0].execution_block_configuration.custom_action_lambda_config.lambdas[0].cross_account_role #=> String
     #   resp.plan.workflows[0].steps[0].execution_block_configuration.custom_action_lambda_config.lambdas[0].external_id #=> String
     #   resp.plan.workflows[0].steps[0].execution_block_configuration.custom_action_lambda_config.lambdas[0].arn #=> String
+    #   resp.plan.workflows[0].steps[0].execution_block_configuration.custom_action_lambda_config.lambdas[0].payload #=> String
     #   resp.plan.workflows[0].steps[0].execution_block_configuration.custom_action_lambda_config.retry_interval_minutes #=> Float
     #   resp.plan.workflows[0].steps[0].execution_block_configuration.custom_action_lambda_config.region_to_run #=> String, one of "activatingRegion", "deactivatingRegion", "activeRegion", "inactiveRegion"
     #   resp.plan.workflows[0].steps[0].execution_block_configuration.custom_action_lambda_config.ungraceful.behavior #=> String, one of "skip"
@@ -1717,6 +1728,7 @@ module Aws::ARCRegionswitch
     #   resp.plan.workflows[0].steps[0].execution_block_configuration.custom_action_lambda_config.lambdas[0].cross_account_role #=> String
     #   resp.plan.workflows[0].steps[0].execution_block_configuration.custom_action_lambda_config.lambdas[0].external_id #=> String
     #   resp.plan.workflows[0].steps[0].execution_block_configuration.custom_action_lambda_config.lambdas[0].arn #=> String
+    #   resp.plan.workflows[0].steps[0].execution_block_configuration.custom_action_lambda_config.lambdas[0].payload #=> String
     #   resp.plan.workflows[0].steps[0].execution_block_configuration.custom_action_lambda_config.retry_interval_minutes #=> Float
     #   resp.plan.workflows[0].steps[0].execution_block_configuration.custom_action_lambda_config.region_to_run #=> String, one of "activatingRegion", "deactivatingRegion", "activeRegion", "inactiveRegion"
     #   resp.plan.workflows[0].steps[0].execution_block_configuration.custom_action_lambda_config.ungraceful.behavior #=> String, one of "skip"
@@ -2580,6 +2592,7 @@ module Aws::ARCRegionswitch
     #                     cross_account_role: "IamRoleArn",
     #                     external_id: "String",
     #                     arn: "LambdaArn",
+    #                     payload: "LambdaPayload",
     #                   },
     #                 ],
     #                 retry_interval_minutes: 1.0, # required
@@ -2872,6 +2885,7 @@ module Aws::ARCRegionswitch
     #   resp.plan.workflows[0].steps[0].execution_block_configuration.custom_action_lambda_config.lambdas[0].cross_account_role #=> String
     #   resp.plan.workflows[0].steps[0].execution_block_configuration.custom_action_lambda_config.lambdas[0].external_id #=> String
     #   resp.plan.workflows[0].steps[0].execution_block_configuration.custom_action_lambda_config.lambdas[0].arn #=> String
+    #   resp.plan.workflows[0].steps[0].execution_block_configuration.custom_action_lambda_config.lambdas[0].payload #=> String
     #   resp.plan.workflows[0].steps[0].execution_block_configuration.custom_action_lambda_config.retry_interval_minutes #=> Float
     #   resp.plan.workflows[0].steps[0].execution_block_configuration.custom_action_lambda_config.region_to_run #=> String, one of "activatingRegion", "deactivatingRegion", "activeRegion", "inactiveRegion"
     #   resp.plan.workflows[0].steps[0].execution_block_configuration.custom_action_lambda_config.ungraceful.behavior #=> String, one of "skip"
@@ -3147,7 +3161,7 @@ module Aws::ARCRegionswitch
         tracer: tracer
       )
       context[:gem_name] = 'aws-sdk-arcregionswitch'
-      context[:gem_version] = '1.26.0'
+      context[:gem_version] = '1.30.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

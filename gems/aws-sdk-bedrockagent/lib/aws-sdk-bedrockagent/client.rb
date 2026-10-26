@@ -199,12 +199,19 @@ module Aws::BedrockAgent
     #     the required types.
     #
     #   @option options [Boolean] :correct_clock_skew (true)
-    #     Used only in `standard` and `adaptive` retry modes. Specifies whether to apply
-    #     a clock skew correction and retry requests with skewed client clocks.
+    #     Used only in `standard` and `adaptive` retry modes. Specifies whether
+    #     to apply a clock skew correction and retry requests with skewed client
+    #     clocks. Takes effect only when `disable_clock_skew_correction` is not set.
     #
     #   @option options [String] :defaults_mode ("legacy")
     #     See {Aws::DefaultsModeConfiguration} for a list of the
     #     accepted modes and the configuration defaults that are included.
+    #
+    #   @option options [Boolean] :disable_clock_skew_correction
+    #     Used only in `standard` and `adaptive` retry modes. When `true`, the
+    #     SDK does not apply a clock skew correction, does not update its stored
+    #     skew from responses, and does not retry clock skew errors. Clock skew
+    #     correction is enabled by default.
     #
     #   @option options [Boolean] :disable_host_prefix_injection (false)
     #     When `true`, the SDK will not prepend the modeled host prefix to the endpoint.
@@ -3037,6 +3044,138 @@ module Aws::BedrockAgent
       req.send_request(options)
     end
 
+    # Creates a new retrieval instruction. The retrieval instruction is
+    # usable once its status becomes ACTIVE. Use GetRetrievalInstruction to
+    # check whether it is ready.
+    #
+    # @option params [String] :client_token
+    #   A caller-supplied token that makes a retried create return the
+    #   existing resource rather than a second one. The window is 8 hours.
+    #
+    #   **A suitable default value is auto-generated.** You should normally
+    #   not need to pass this option.**
+    #
+    # @option params [required, String] :name
+    #   Specifies the name of the retrieval instruction.
+    #
+    # @option params [required, Types::RetrievalInstructionContent] :instruction
+    #   The instruction content, as a set of named fields. Get does not return
+    #   this field until the create review passes.
+    #
+    # @option params [String] :description
+    #   Specifies a description of the retrieval instruction.
+    #
+    # @option params [String] :customer_encryption_key_arn
+    #   The Amazon Resource Name (ARN) of a customer managed AWS Key
+    #   Management Service (AWS KMS) key used to encrypt the instruction
+    #   content at rest. If you omit it, the service uses an AWS owned key.
+    #   You fix the key at create and cannot change it later.
+    #
+    # @option params [Hash<String,String>] :tags
+    #   Tags for the retrieval instruction.
+    #
+    # @return [Types::CreateRetrievalInstructionResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::CreateRetrievalInstructionResponse#retrieval_instruction_id #retrieval_instruction_id} => String
+    #   * {Types::CreateRetrievalInstructionResponse#retrieval_instruction_arn #retrieval_instruction_arn} => String
+    #   * {Types::CreateRetrievalInstructionResponse#name #name} => String
+    #   * {Types::CreateRetrievalInstructionResponse#status #status} => String
+    #   * {Types::CreateRetrievalInstructionResponse#last_transition_status #last_transition_status} => String
+    #   * {Types::CreateRetrievalInstructionResponse#created_at #created_at} => Time
+    #   * {Types::CreateRetrievalInstructionResponse#updated_at #updated_at} => Time
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.create_retrieval_instruction({
+    #     client_token: "ClientToken",
+    #     name: "RetrievalInstructionName", # required
+    #     instruction: { # required
+    #       retrieval_guidance: "RetrievalInstructionFieldText",
+    #       persona: "RetrievalInstructionFieldText",
+    #       answer_format: "RetrievalInstructionFieldText",
+    #       answer_policy: "RetrievalInstructionFieldText",
+    #     },
+    #     description: "RetrievalInstructionDescription",
+    #     customer_encryption_key_arn: "KmsKeyArn",
+    #     tags: {
+    #       "TagKey" => "TagValue",
+    #     },
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.retrieval_instruction_id #=> String
+    #   resp.retrieval_instruction_arn #=> String
+    #   resp.name #=> String
+    #   resp.status #=> String, one of "ACTIVE", "INACTIVE"
+    #   resp.last_transition_status #=> String, one of "CREATING", "UPDATING", "CREATE_SUCCESSFUL", "CREATE_FAILED", "UPDATE_SUCCESSFUL", "UPDATE_FAILED"
+    #   resp.created_at #=> Time
+    #   resp.updated_at #=> Time
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/bedrock-agent-2023-06-05/CreateRetrievalInstruction AWS API Documentation
+    #
+    # @overload create_retrieval_instruction(params = {})
+    # @param [Hash] params ({})
+    def create_retrieval_instruction(params = {}, options = {})
+      req = build_request(:create_retrieval_instruction, params)
+      req.send_request(options)
+    end
+
+    # Creates an immutable numbered version from the retrieval
+    # instruction's current reviewed content. The service creates the
+    # version synchronously.
+    #
+    # The service numbers versions from 1 and assigns them in order, never
+    # reusing a number.
+    #
+    # @option params [required, String] :retrieval_instruction_id
+    #   The identifier of the retrieval instruction to version.
+    #
+    # @option params [String] :description
+    #   A description of this version. Independent of the retrieval
+    #   instruction's own description.
+    #
+    # @option params [String] :client_token
+    #   A caller-supplied token that makes a retried call return the version
+    #   created by the first call rather than a second version. The window is
+    #   8 hours.
+    #
+    #   **A suitable default value is auto-generated.** You should normally
+    #   not need to pass this option.**
+    #
+    # @return [Types::CreateRetrievalInstructionVersionResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::CreateRetrievalInstructionVersionResponse#retrieval_instruction_id #retrieval_instruction_id} => String
+    #   * {Types::CreateRetrievalInstructionVersionResponse#retrieval_instruction_arn #retrieval_instruction_arn} => String
+    #   * {Types::CreateRetrievalInstructionVersionResponse#version #version} => String
+    #   * {Types::CreateRetrievalInstructionVersionResponse#created_at #created_at} => Time
+    #   * {Types::CreateRetrievalInstructionVersionResponse#description #description} => String
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.create_retrieval_instruction_version({
+    #     retrieval_instruction_id: "RetrievalInstructionId", # required
+    #     description: "RetrievalInstructionDescription",
+    #     client_token: "ClientToken",
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.retrieval_instruction_id #=> String
+    #   resp.retrieval_instruction_arn #=> String
+    #   resp.version #=> String
+    #   resp.created_at #=> Time
+    #   resp.description #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/bedrock-agent-2023-06-05/CreateRetrievalInstructionVersion AWS API Documentation
+    #
+    # @overload create_retrieval_instruction_version(params = {})
+    # @param [Hash] params ({})
+    def create_retrieval_instruction_version(params = {}, options = {})
+      req = build_request(:create_retrieval_instruction_version, params)
+      req.send_request(options)
+    end
+
     # Creates a VPC configuration that lets a knowledge base connect to a
     # resource in your private VPC. This operation is asynchronous: it
     # returns a `vpcConfigurationId` with status `CREATING`. Poll
@@ -3654,6 +3793,52 @@ module Aws::BedrockAgent
     # @param [Hash] params ({})
     def delete_resource_policy(params = {}, options = {})
       req = build_request(:delete_resource_policy, params)
+      req.send_request(options)
+    end
+
+    # Deletes a retrieval instruction or a single version of it. Omit
+    # retrievalInstructionVersion to delete the retrieval instruction
+    # itself; the service rejects that request with ConflictException while
+    # the retrieval instruction has versions or while lastTransitionStatus
+    # is CREATING or UPDATING. Specify retrievalInstructionVersion to delete
+    # only that version; the retrieval instruction and its other versions
+    # are unaffected.
+    #
+    # @option params [required, String] :retrieval_instruction_id
+    #   The identifier of the retrieval instruction to delete.
+    #
+    # @option params [String] :retrieval_instruction_version
+    #   The version to delete. Omit this field to delete the retrieval
+    #   instruction itself, which you can do only when it has no versions;
+    #   while any version exists the service rejects the request with
+    #   ConflictException. You cannot delete DRAFT on its own; deleting the
+    #   retrieval instruction removes it.
+    #
+    # @return [Types::DeleteRetrievalInstructionResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::DeleteRetrievalInstructionResponse#retrieval_instruction_id #retrieval_instruction_id} => String
+    #   * {Types::DeleteRetrievalInstructionResponse#retrieval_instruction_arn #retrieval_instruction_arn} => String
+    #   * {Types::DeleteRetrievalInstructionResponse#version #version} => String
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.delete_retrieval_instruction({
+    #     retrieval_instruction_id: "RetrievalInstructionId", # required
+    #     retrieval_instruction_version: "RetrievalInstructionNumericalVersion",
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.retrieval_instruction_id #=> String
+    #   resp.retrieval_instruction_arn #=> String
+    #   resp.version #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/bedrock-agent-2023-06-05/DeleteRetrievalInstruction AWS API Documentation
+    #
+    # @overload delete_retrieval_instruction(params = {})
+    # @param [Hash] params ({})
+    def delete_retrieval_instruction(params = {}, options = {})
+      req = build_request(:delete_retrieval_instruction, params)
       req.send_request(options)
     end
 
@@ -5020,6 +5205,72 @@ module Aws::BedrockAgent
       req.send_request(options)
     end
 
+    # Gets a retrieval instruction. Also used to poll the terminal reporting
+    # of an asynchronous create or update.
+    #
+    # @option params [required, String] :retrieval_instruction_id
+    #   The identifier of the retrieval instruction to get.
+    #
+    # @option params [String] :retrieval_instruction_version
+    #   The version to return: a version number, or DRAFT for the retrieval
+    #   instruction's current reviewed content. When omitted, DRAFT is used.
+    #   This default is permanent: omitting retrievalInstructionVersion will
+    #   never resolve to a numbered version.
+    #
+    # @return [Types::GetRetrievalInstructionResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::GetRetrievalInstructionResponse#retrieval_instruction_id #retrieval_instruction_id} => String
+    #   * {Types::GetRetrievalInstructionResponse#retrieval_instruction_arn #retrieval_instruction_arn} => String
+    #   * {Types::GetRetrievalInstructionResponse#name #name} => String
+    #   * {Types::GetRetrievalInstructionResponse#status #status} => String
+    #   * {Types::GetRetrievalInstructionResponse#last_transition_status #last_transition_status} => String
+    #   * {Types::GetRetrievalInstructionResponse#instruction #instruction} => Types::RetrievalInstructionContent
+    #   * {Types::GetRetrievalInstructionResponse#created_at #created_at} => Time
+    #   * {Types::GetRetrievalInstructionResponse#updated_at #updated_at} => Time
+    #   * {Types::GetRetrievalInstructionResponse#description #description} => String
+    #   * {Types::GetRetrievalInstructionResponse#customer_encryption_key_arn #customer_encryption_key_arn} => String
+    #   * {Types::GetRetrievalInstructionResponse#last_transition_status_reasons #last_transition_status_reasons} => Array&lt;Types::RetrievalInstructionFailureReason&gt;
+    #   * {Types::GetRetrievalInstructionResponse#version #version} => String
+    #   * {Types::GetRetrievalInstructionResponse#latest_version #latest_version} => String
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.get_retrieval_instruction({
+    #     retrieval_instruction_id: "RetrievalInstructionId", # required
+    #     retrieval_instruction_version: "RetrievalInstructionVersionSelector",
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.retrieval_instruction_id #=> String
+    #   resp.retrieval_instruction_arn #=> String
+    #   resp.name #=> String
+    #   resp.status #=> String, one of "ACTIVE", "INACTIVE"
+    #   resp.last_transition_status #=> String, one of "CREATING", "UPDATING", "CREATE_SUCCESSFUL", "CREATE_FAILED", "UPDATE_SUCCESSFUL", "UPDATE_FAILED"
+    #   resp.instruction.retrieval_guidance #=> String
+    #   resp.instruction.persona #=> String
+    #   resp.instruction.answer_format #=> String
+    #   resp.instruction.answer_policy #=> String
+    #   resp.created_at #=> Time
+    #   resp.updated_at #=> Time
+    #   resp.description #=> String
+    #   resp.customer_encryption_key_arn #=> String
+    #   resp.last_transition_status_reasons #=> Array
+    #   resp.last_transition_status_reasons[0].field_name #=> String, one of "RETRIEVAL_GUIDANCE", "PERSONA", "ANSWER_FORMAT", "ANSWER_POLICY"
+    #   resp.last_transition_status_reasons[0].code #=> String, one of "CONTENT_REJECTED", "CLIENT_ERROR", "INTERNAL_ERROR"
+    #   resp.last_transition_status_reasons[0].message #=> String
+    #   resp.version #=> String
+    #   resp.latest_version #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/bedrock-agent-2023-06-05/GetRetrievalInstruction AWS API Documentation
+    #
+    # @overload get_retrieval_instruction(params = {})
+    # @param [Hash] params ({})
+    def get_retrieval_instruction(params = {}, options = {})
+      req = build_request(:get_retrieval_instruction, params)
+      req.send_request(options)
+    end
+
     # Returns the details and current status of a single VPC configuration.
     # Use this operation to poll for the outcome of an asynchronous create
     # or delete.
@@ -6009,6 +6260,104 @@ module Aws::BedrockAgent
     # @param [Hash] params ({})
     def list_prompts(params = {}, options = {})
       req = build_request(:list_prompts, params)
+      req.send_request(options)
+    end
+
+    # Lists the numbered versions of a retrieval instruction, newest first.
+    # DRAFT is not listed; read it with GetRetrievalInstruction without
+    # retrievalInstructionVersion. Results are paginated. Use the nextToken
+    # parameter to retrieve additional results.
+    #
+    # @option params [required, String] :retrieval_instruction_id
+    #   The identifier of the retrieval instruction whose versions to list.
+    #
+    # @option params [Integer] :max_results
+    #   Specifies the maximum number of versions to return in a single page.
+    #   The service enforces the effective upper bound.
+    #
+    # @option params [String] :next_token
+    #   The pagination token from a previous ListRetrievalInstructionVersions
+    #   response.
+    #
+    # @return [Types::ListRetrievalInstructionVersionsResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::ListRetrievalInstructionVersionsResponse#retrieval_instruction_version_summaries #retrieval_instruction_version_summaries} => Array&lt;Types::RetrievalInstructionVersionSummary&gt;
+    #   * {Types::ListRetrievalInstructionVersionsResponse#next_token #next_token} => String
+    #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.list_retrieval_instruction_versions({
+    #     retrieval_instruction_id: "RetrievalInstructionId", # required
+    #     max_results: 1,
+    #     next_token: "NextToken",
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.retrieval_instruction_version_summaries #=> Array
+    #   resp.retrieval_instruction_version_summaries[0].version #=> String
+    #   resp.retrieval_instruction_version_summaries[0].created_at #=> Time
+    #   resp.next_token #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/bedrock-agent-2023-06-05/ListRetrievalInstructionVersions AWS API Documentation
+    #
+    # @overload list_retrieval_instruction_versions(params = {})
+    # @param [Hash] params ({})
+    def list_retrieval_instruction_versions(params = {}, options = {})
+      req = build_request(:list_retrieval_instruction_versions, params)
+      req.send_request(options)
+    end
+
+    # Lists the retrieval instructions in the caller's account. Results are
+    # paginated. Use the nextToken parameter to retrieve additional results.
+    #
+    # @option params [String] :status
+    #   Return only instructions with this availability status.
+    #
+    # @option params [Integer] :max_results
+    #   The maximum number of results to return in a single page. The
+    #   effective upper bound is enforced service-side.
+    #
+    # @option params [String] :next_token
+    #   The pagination token from a previous ListRetrievalInstructions
+    #   response.
+    #
+    # @return [Types::ListRetrievalInstructionsResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::ListRetrievalInstructionsResponse#retrieval_instruction_summaries #retrieval_instruction_summaries} => Array&lt;Types::RetrievalInstructionSummary&gt;
+    #   * {Types::ListRetrievalInstructionsResponse#next_token #next_token} => String
+    #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.list_retrieval_instructions({
+    #     status: "ACTIVE", # accepts ACTIVE, INACTIVE
+    #     max_results: 1,
+    #     next_token: "NextToken",
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.retrieval_instruction_summaries #=> Array
+    #   resp.retrieval_instruction_summaries[0].retrieval_instruction_id #=> String
+    #   resp.retrieval_instruction_summaries[0].retrieval_instruction_arn #=> String
+    #   resp.retrieval_instruction_summaries[0].name #=> String
+    #   resp.retrieval_instruction_summaries[0].status #=> String, one of "ACTIVE", "INACTIVE"
+    #   resp.retrieval_instruction_summaries[0].last_transition_status #=> String, one of "CREATING", "UPDATING", "CREATE_SUCCESSFUL", "CREATE_FAILED", "UPDATE_SUCCESSFUL", "UPDATE_FAILED"
+    #   resp.retrieval_instruction_summaries[0].created_at #=> Time
+    #   resp.retrieval_instruction_summaries[0].updated_at #=> Time
+    #   resp.retrieval_instruction_summaries[0].description #=> String
+    #   resp.next_token #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/bedrock-agent-2023-06-05/ListRetrievalInstructions AWS API Documentation
+    #
+    # @overload list_retrieval_instructions(params = {})
+    # @param [Hash] params ({})
+    def list_retrieval_instructions(params = {}, options = {})
+      req = build_request(:list_retrieval_instructions, params)
       req.send_request(options)
     end
 
@@ -8462,6 +8811,66 @@ module Aws::BedrockAgent
       req.send_request(options)
     end
 
+    # Updates the content of a retrieval instruction. The update is
+    # processed asynchronously; the stored content is a candidate until
+    # content review passes, and the served content does not change while
+    # the update is in flight. The service rejects the request with
+    # ConflictException while lastTransitionStatus is CREATING or UPDATING.
+    #
+    # @option params [required, String] :retrieval_instruction_id
+    #   The identifier of the retrieval instruction to update.
+    #
+    # @option params [required, Types::RetrievalInstructionContent] :instruction
+    #   The replacement instruction content. This is a full replacement of all
+    #   four fields, not a patch. During UPDATING, Get continues to return the
+    #   previously-served content until the update review passes.
+    #
+    # @option params [String] :description
+    #   A replacement description; applied together with the content when the
+    #   review passes. Omit to clear.
+    #
+    # @return [Types::UpdateRetrievalInstructionResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::UpdateRetrievalInstructionResponse#retrieval_instruction_id #retrieval_instruction_id} => String
+    #   * {Types::UpdateRetrievalInstructionResponse#retrieval_instruction_arn #retrieval_instruction_arn} => String
+    #   * {Types::UpdateRetrievalInstructionResponse#name #name} => String
+    #   * {Types::UpdateRetrievalInstructionResponse#status #status} => String
+    #   * {Types::UpdateRetrievalInstructionResponse#last_transition_status #last_transition_status} => String
+    #   * {Types::UpdateRetrievalInstructionResponse#created_at #created_at} => Time
+    #   * {Types::UpdateRetrievalInstructionResponse#updated_at #updated_at} => Time
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.update_retrieval_instruction({
+    #     retrieval_instruction_id: "RetrievalInstructionId", # required
+    #     instruction: { # required
+    #       retrieval_guidance: "RetrievalInstructionFieldText",
+    #       persona: "RetrievalInstructionFieldText",
+    #       answer_format: "RetrievalInstructionFieldText",
+    #       answer_policy: "RetrievalInstructionFieldText",
+    #     },
+    #     description: "RetrievalInstructionDescription",
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.retrieval_instruction_id #=> String
+    #   resp.retrieval_instruction_arn #=> String
+    #   resp.name #=> String
+    #   resp.status #=> String, one of "ACTIVE", "INACTIVE"
+    #   resp.last_transition_status #=> String, one of "CREATING", "UPDATING", "CREATE_SUCCESSFUL", "CREATE_FAILED", "UPDATE_SUCCESSFUL", "UPDATE_FAILED"
+    #   resp.created_at #=> Time
+    #   resp.updated_at #=> Time
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/bedrock-agent-2023-06-05/UpdateRetrievalInstruction AWS API Documentation
+    #
+    # @overload update_retrieval_instruction(params = {})
+    # @param [Hash] params ({})
+    def update_retrieval_instruction(params = {}, options = {})
+      req = build_request(:update_retrieval_instruction, params)
+      req.send_request(options)
+    end
+
     # Validates the definition of a flow.
     #
     # @option params [required, Types::FlowDefinition] :definition
@@ -8820,7 +9229,7 @@ module Aws::BedrockAgent
         tracer: tracer
       )
       context[:gem_name] = 'aws-sdk-bedrockagent'
-      context[:gem_version] = '1.86.0'
+      context[:gem_version] = '1.89.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

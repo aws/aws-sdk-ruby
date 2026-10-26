@@ -23,7 +23,8 @@ module Aws
         {
           cross_account_role: ::String?,
           external_id: ::String?,
-          arn: ::String?
+          arn: ::String?,
+          payload: ::String?
         }
       ],
       retry_interval_minutes: ::Float,

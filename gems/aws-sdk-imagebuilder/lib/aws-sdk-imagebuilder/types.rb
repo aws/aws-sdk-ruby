@@ -216,6 +216,32 @@ module Aws::Imagebuilder
       include Aws::Structure
     end
 
+    # Identifies the Amazon EC2 Auto Scaling group that Image Builder takes
+    # the build instance from, and how long Image Builder waits when the
+    # group has no instance available.
+    #
+    # @!attribute [rw] name
+    #   The name of the Auto Scaling group, in the same account and Amazon
+    #   Web Services Region as the infrastructure configuration. To specify
+    #   a group, you must have permissions to describe it.
+    #   @return [String]
+    #
+    # @!attribute [rw] capacity_wait_timeout_seconds
+    #   The number of seconds that Image Builder waits for an instance to
+    #   become available in the group before the build fails. If you set
+    #   this value to 0 or omit it, the build fails as soon as the group has
+    #   no instance available.
+    #   @return [Integer]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/imagebuilder-2019-12-02/AutoScalingGroupConfiguration AWS API Documentation
+    #
+    class AutoScalingGroupConfiguration < Struct.new(
+      :name,
+      :capacity_wait_timeout_seconds)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # You have exceeded the permitted request rate for the Amazon EC2 APIs
     # that Image Builder calls on your behalf. Retry with an increasing or
     # variable delay between requests.
@@ -2030,6 +2056,12 @@ module Aws::Imagebuilder
     #   to `true`.
     #   @return [Boolean]
     #
+    # @!attribute [rw] terminate_instance_on_completion
+    #   Specifies whether Image Builder terminates build and test instances
+    #   when image creation ends without a failure (success, cancellation,
+    #   or expiration). Defaults to `true`.
+    #   @return [Boolean]
+    #
     # @!attribute [rw] sns_topic_arn
     #   The Amazon Resource Name (ARN) of the SNS topic to which Image
     #   Builder sends image build event notifications. Specify a standard
@@ -2085,6 +2117,22 @@ module Aws::Imagebuilder
     #   output image.
     #   @return [Types::Placement]
     #
+    # @!attribute [rw] parent_instance
+    #   The Amazon EC2 Auto Scaling group that Image Builder takes the build
+    #   instance from, instead of launching a new instance. This applies
+    #   only to the build phase.
+    #
+    #   To use this feature, the execution role for the build must have
+    #   permissions to describe the Auto Scaling group, tag the instance
+    #   while it's still in the group, and detach it from the group. For
+    #   more information, see [Build on an instance from an Auto Scaling
+    #   group][1] in the *EC2 Image Builder User Guide*.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/imagebuilder/latest/userguide/infra-config-parent-instance.html
+    #   @return [Types::ParentInstanceConfiguration]
+    #
     # @!attribute [rw] client_token
     #   A unique, case-sensitive identifier you provide to ensure that the
     #   operation runs no more than one time. If you retry a request with
@@ -2118,11 +2166,13 @@ module Aws::Imagebuilder
       :logging,
       :key_pair,
       :terminate_instance_on_failure,
+      :terminate_instance_on_completion,
       :sns_topic_arn,
       :resource_tags,
       :instance_metadata_options,
       :tags,
       :placement,
+      :parent_instance,
       :client_token,
       :dry_run)
       SENSITIVE = []
@@ -5713,6 +5763,17 @@ module Aws::Imagebuilder
     #   output image.
     #   @return [Types::Placement]
     #
+    # @!attribute [rw] terminate_instance_on_completion
+    #   Specifies whether Image Builder terminates build and test instances
+    #   when image creation ends without a failure.
+    #   @return [Boolean]
+    #
+    # @!attribute [rw] parent_instance
+    #   The Amazon EC2 Auto Scaling group that Image Builder takes the build
+    #   instance from, instead of launching a new instance. This applies
+    #   only to the build phase.
+    #   @return [Types::ParentInstanceConfiguration]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/imagebuilder-2019-12-02/InfrastructureConfiguration AWS API Documentation
     #
     class InfrastructureConfiguration < Struct.new(
@@ -5732,7 +5793,9 @@ module Aws::Imagebuilder
       :resource_tags,
       :instance_metadata_options,
       :tags,
-      :placement)
+      :placement,
+      :terminate_instance_on_completion,
+      :parent_instance)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -8135,6 +8198,22 @@ module Aws::Imagebuilder
       include Aws::Structure
     end
 
+    # Settings for building on an instance that is already running, instead
+    # of an instance that Image Builder launches for the build.
+    #
+    # @!attribute [rw] auto_scaling_group
+    #   The Amazon EC2 Auto Scaling group that Image Builder takes the build
+    #   instance from. This is required when you specify `parentInstance`.
+    #   @return [Types::AutoScalingGroupConfiguration]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/imagebuilder-2019-12-02/ParentInstanceConfiguration AWS API Documentation
+    #
+    class ParentInstanceConfiguration < Struct.new(
+      :auto_scaling_group)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # The logging configuration that's defined for pipeline execution.
     #
     # @!attribute [rw] image_log_group_name
@@ -9516,6 +9595,12 @@ module Aws::Imagebuilder
     #   to `true`.
     #   @return [Boolean]
     #
+    # @!attribute [rw] terminate_instance_on_completion
+    #   Specifies whether Image Builder terminates build and test instances
+    #   when image creation ends without a failure (success, cancellation,
+    #   or expiration). Defaults to `true`.
+    #   @return [Boolean]
+    #
     # @!attribute [rw] sns_topic_arn
     #   The Amazon Resource Name (ARN) of the SNS topic to which Image
     #   Builder sends image build event notifications. Specify a standard
@@ -9565,6 +9650,22 @@ module Aws::Imagebuilder
     #   output image.
     #   @return [Types::Placement]
     #
+    # @!attribute [rw] parent_instance
+    #   The Amazon EC2 Auto Scaling group that Image Builder takes the build
+    #   instance from, instead of launching a new instance. This applies
+    #   only to the build phase.
+    #
+    #   To use this feature, the execution role for the build must have
+    #   permissions to describe the Auto Scaling group, tag the instance
+    #   while it's still in the group, and detach it from the group. For
+    #   more information, see [Build on an instance from an Auto Scaling
+    #   group][1] in the *EC2 Image Builder User Guide*.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/imagebuilder/latest/userguide/infra-config-parent-instance.html
+    #   @return [Types::ParentInstanceConfiguration]
+    #
     # @!attribute [rw] client_token
     #   A unique, case-sensitive identifier you provide to ensure that the
     #   operation runs no more than one time. If you retry a request with
@@ -9592,10 +9693,12 @@ module Aws::Imagebuilder
       :logging,
       :key_pair,
       :terminate_instance_on_failure,
+      :terminate_instance_on_completion,
       :sns_topic_arn,
       :resource_tags,
       :instance_metadata_options,
       :placement,
+      :parent_instance,
       :client_token)
       SENSITIVE = []
       include Aws::Structure

@@ -24,12 +24,15 @@ module Aws::ECS
     AcceleratorTypeSet = Shapes::ListShape.new(name: 'AcceleratorTypeSet')
     AccessDeniedException = Shapes::StructureShape.new(name: 'AccessDeniedException')
     AccessType = Shapes::StringShape.new(name: 'AccessType')
+    AccessTypeList = Shapes::ListShape.new(name: 'AccessTypeList')
     AdvancedConfiguration = Shapes::StructureShape.new(name: 'AdvancedConfiguration')
     AgentUpdateStatus = Shapes::StringShape.new(name: 'AgentUpdateStatus')
     AllowedInstanceType = Shapes::StringShape.new(name: 'AllowedInstanceType')
     AllowedInstanceTypeSet = Shapes::ListShape.new(name: 'AllowedInstanceTypeSet')
     ApplicationProtocol = Shapes::StringShape.new(name: 'ApplicationProtocol')
     AssignPublicIp = Shapes::StringShape.new(name: 'AssignPublicIp')
+    AssociateGatewayWithClusterRequest = Shapes::StructureShape.new(name: 'AssociateGatewayWithClusterRequest')
+    AssociateGatewayWithClusterResponse = Shapes::StructureShape.new(name: 'AssociateGatewayWithClusterResponse')
     Attachment = Shapes::StructureShape.new(name: 'Attachment')
     AttachmentDetails = Shapes::ListShape.new(name: 'AttachmentDetails')
     AttachmentStateChange = Shapes::StructureShape.new(name: 'AttachmentStateChange')
@@ -120,6 +123,8 @@ module Aws::ECS
     CreateDaemonResponse = Shapes::StructureShape.new(name: 'CreateDaemonResponse')
     CreateExpressGatewayServiceRequest = Shapes::StructureShape.new(name: 'CreateExpressGatewayServiceRequest')
     CreateExpressGatewayServiceResponse = Shapes::StructureShape.new(name: 'CreateExpressGatewayServiceResponse')
+    CreateGatewayRequest = Shapes::StructureShape.new(name: 'CreateGatewayRequest')
+    CreateGatewayResponse = Shapes::StructureShape.new(name: 'CreateGatewayResponse')
     CreateManagedInstancesProviderConfiguration = Shapes::StructureShape.new(name: 'CreateManagedInstancesProviderConfiguration')
     CreateServiceRequest = Shapes::StructureShape.new(name: 'CreateServiceRequest')
     CreateServiceResponse = Shapes::StructureShape.new(name: 'CreateServiceResponse')
@@ -185,6 +190,8 @@ module Aws::ECS
     DeleteDaemonTaskDefinitionResponse = Shapes::StructureShape.new(name: 'DeleteDaemonTaskDefinitionResponse')
     DeleteExpressGatewayServiceRequest = Shapes::StructureShape.new(name: 'DeleteExpressGatewayServiceRequest')
     DeleteExpressGatewayServiceResponse = Shapes::StructureShape.new(name: 'DeleteExpressGatewayServiceResponse')
+    DeleteGatewayRequest = Shapes::StructureShape.new(name: 'DeleteGatewayRequest')
+    DeleteGatewayResponse = Shapes::StructureShape.new(name: 'DeleteGatewayResponse')
     DeleteServiceRequest = Shapes::StructureShape.new(name: 'DeleteServiceRequest')
     DeleteServiceResponse = Shapes::StructureShape.new(name: 'DeleteServiceResponse')
     DeleteTaskDefinitionsRequest = Shapes::StructureShape.new(name: 'DeleteTaskDefinitionsRequest')
@@ -233,6 +240,14 @@ module Aws::ECS
     DescribeDaemonTaskDefinitionResponse = Shapes::StructureShape.new(name: 'DescribeDaemonTaskDefinitionResponse')
     DescribeExpressGatewayServiceRequest = Shapes::StructureShape.new(name: 'DescribeExpressGatewayServiceRequest')
     DescribeExpressGatewayServiceResponse = Shapes::StructureShape.new(name: 'DescribeExpressGatewayServiceResponse')
+    DescribeGatewayAlbConfiguration = Shapes::StructureShape.new(name: 'DescribeGatewayAlbConfiguration')
+    DescribeGatewayConfiguration = Shapes::UnionShape.new(name: 'DescribeGatewayConfiguration')
+    DescribeGatewayRequest = Shapes::StructureShape.new(name: 'DescribeGatewayRequest')
+    DescribeGatewayResourcesRequest = Shapes::StructureShape.new(name: 'DescribeGatewayResourcesRequest')
+    DescribeGatewayResourcesResponse = Shapes::StructureShape.new(name: 'DescribeGatewayResourcesResponse')
+    DescribeGatewayResponse = Shapes::StructureShape.new(name: 'DescribeGatewayResponse')
+    DescribeGatewayRouteRequest = Shapes::StructureShape.new(name: 'DescribeGatewayRouteRequest')
+    DescribeGatewayRouteResponse = Shapes::StructureShape.new(name: 'DescribeGatewayRouteResponse')
     DescribeServiceDeploymentsRequest = Shapes::StructureShape.new(name: 'DescribeServiceDeploymentsRequest')
     DescribeServiceDeploymentsResponse = Shapes::StructureShape.new(name: 'DescribeServiceDeploymentsResponse')
     DescribeServiceRevisionsRequest = Shapes::StructureShape.new(name: 'DescribeServiceRevisionsRequest')
@@ -250,6 +265,8 @@ module Aws::ECS
     DeviceCgroupPermission = Shapes::StringShape.new(name: 'DeviceCgroupPermission')
     DeviceCgroupPermissions = Shapes::ListShape.new(name: 'DeviceCgroupPermissions')
     DevicesList = Shapes::ListShape.new(name: 'DevicesList')
+    DisassociateGatewayFromClusterRequest = Shapes::StructureShape.new(name: 'DisassociateGatewayFromClusterRequest')
+    DisassociateGatewayFromClusterResponse = Shapes::StructureShape.new(name: 'DisassociateGatewayFromClusterResponse')
     DiscoverPollEndpointRequest = Shapes::StructureShape.new(name: 'DiscoverPollEndpointRequest')
     DiscoverPollEndpointResponse = Shapes::StructureShape.new(name: 'DiscoverPollEndpointResponse')
     DockerLabelsMap = Shapes::MapShape.new(name: 'DockerLabelsMap')
@@ -269,6 +286,8 @@ module Aws::ECS
     EFSAuthorizationConfigIAM = Shapes::StringShape.new(name: 'EFSAuthorizationConfigIAM')
     EFSTransitEncryption = Shapes::StringShape.new(name: 'EFSTransitEncryption')
     EFSVolumeConfiguration = Shapes::StructureShape.new(name: 'EFSVolumeConfiguration')
+    ElbGatewayResources = Shapes::StructureShape.new(name: 'ElbGatewayResources')
+    ElbGatewayResourcesList = Shapes::ListShape.new(name: 'ElbGatewayResourcesList')
     EnvironmentFile = Shapes::StructureShape.new(name: 'EnvironmentFile')
     EnvironmentFileType = Shapes::StringShape.new(name: 'EnvironmentFileType')
     EnvironmentFiles = Shapes::ListShape.new(name: 'EnvironmentFiles')
@@ -301,6 +320,54 @@ module Aws::ECS
     FirelensConfiguration = Shapes::StructureShape.new(name: 'FirelensConfiguration')
     FirelensConfigurationOptionsMap = Shapes::MapShape.new(name: 'FirelensConfigurationOptionsMap')
     FirelensConfigurationType = Shapes::StringShape.new(name: 'FirelensConfigurationType')
+    Gateway = Shapes::StructureShape.new(name: 'Gateway')
+    GatewayAlbDesyncMitigationMode = Shapes::StringShape.new(name: 'GatewayAlbDesyncMitigationMode')
+    GatewayAlbProtocol = Shapes::StringShape.new(name: 'GatewayAlbProtocol')
+    GatewayAlbTestTrafficRules = Shapes::StructureShape.new(name: 'GatewayAlbTestTrafficRules')
+    GatewayClusterAssociationStatus = Shapes::StringShape.new(name: 'GatewayClusterAssociationStatus')
+    GatewayClusterAssociationStatusList = Shapes::ListShape.new(name: 'GatewayClusterAssociationStatusList')
+    GatewayClusterAssociationSummary = Shapes::StructureShape.new(name: 'GatewayClusterAssociationSummary')
+    GatewayClusterAssociationSummaryList = Shapes::ListShape.new(name: 'GatewayClusterAssociationSummaryList')
+    GatewayConfiguration = Shapes::UnionShape.new(name: 'GatewayConfiguration')
+    GatewayConnection = Shapes::StructureShape.new(name: 'GatewayConnection')
+    GatewayConnectionAlbResources = Shapes::StructureShape.new(name: 'GatewayConnectionAlbResources')
+    GatewayConnectionAlbResourcesList = Shapes::ListShape.new(name: 'GatewayConnectionAlbResourcesList')
+    GatewayConnectionList = Shapes::ListShape.new(name: 'GatewayConnectionList')
+    GatewayConnectionResources = Shapes::UnionShape.new(name: 'GatewayConnectionResources')
+    GatewayConnector = Shapes::StructureShape.new(name: 'GatewayConnector')
+    GatewayConnectorFilters = Shapes::StructureShape.new(name: 'GatewayConnectorFilters')
+    GatewayConnectorHealthCheck = Shapes::StructureShape.new(name: 'GatewayConnectorHealthCheck')
+    GatewayConnectorHealthCheckMatcher = Shapes::StructureShape.new(name: 'GatewayConnectorHealthCheckMatcher')
+    GatewayConnectorHealthCheckProtocol = Shapes::StringShape.new(name: 'GatewayConnectorHealthCheckProtocol')
+    GatewayConnectorList = Shapes::ListShape.new(name: 'GatewayConnectorList')
+    GatewayElbAccessLogConfiguration = Shapes::StructureShape.new(name: 'GatewayElbAccessLogConfiguration')
+    GatewayElbAccessLogDestination = Shapes::UnionShape.new(name: 'GatewayElbAccessLogDestination')
+    GatewayElbAccessLogS3Destination = Shapes::StructureShape.new(name: 'GatewayElbAccessLogS3Destination')
+    GatewayElbIpAddressType = Shapes::StringShape.new(name: 'GatewayElbIpAddressType')
+    GatewayElbNetworkConfiguration = Shapes::StructureShape.new(name: 'GatewayElbNetworkConfiguration')
+    GatewayElbScheme = Shapes::StringShape.new(name: 'GatewayElbScheme')
+    GatewayInfrastructureResources = Shapes::UnionShape.new(name: 'GatewayInfrastructureResources')
+    GatewayNotFoundException = Shapes::StructureShape.new(name: 'GatewayNotFoundException')
+    GatewayOperationError = Shapes::StructureShape.new(name: 'GatewayOperationError')
+    GatewayOperationErrorList = Shapes::ListShape.new(name: 'GatewayOperationErrorList')
+    GatewayResourceFailure = Shapes::StructureShape.new(name: 'GatewayResourceFailure')
+    GatewayResourceFailureList = Shapes::ListShape.new(name: 'GatewayResourceFailureList')
+    GatewayResources = Shapes::StructureShape.new(name: 'GatewayResources')
+    GatewayRoute = Shapes::StructureShape.new(name: 'GatewayRoute')
+    GatewayRouteAlbResources = Shapes::StructureShape.new(name: 'GatewayRouteAlbResources')
+    GatewayRouteAlbResourcesList = Shapes::ListShape.new(name: 'GatewayRouteAlbResourcesList')
+    GatewayRouteLoadBalancerSecurityGroup = Shapes::StructureShape.new(name: 'GatewayRouteLoadBalancerSecurityGroup')
+    GatewayRouteLoadBalancerSecurityGroupList = Shapes::ListShape.new(name: 'GatewayRouteLoadBalancerSecurityGroupList')
+    GatewayRouteResources = Shapes::UnionShape.new(name: 'GatewayRouteResources')
+    GatewayRouteStatus = Shapes::StringShape.new(name: 'GatewayRouteStatus')
+    GatewayRouteStatusList = Shapes::ListShape.new(name: 'GatewayRouteStatusList')
+    GatewayRouteSummary = Shapes::StructureShape.new(name: 'GatewayRouteSummary')
+    GatewayRouteSummaryList = Shapes::ListShape.new(name: 'GatewayRouteSummaryList')
+    GatewayStatus = Shapes::StringShape.new(name: 'GatewayStatus')
+    GatewayStatusList = Shapes::ListShape.new(name: 'GatewayStatusList')
+    GatewaySummary = Shapes::StructureShape.new(name: 'GatewaySummary')
+    GatewaySummaryList = Shapes::ListShape.new(name: 'GatewaySummaryList')
+    GatewayTestTrafficHeader = Shapes::StructureShape.new(name: 'GatewayTestTrafficHeader')
     GetTaskProtectionRequest = Shapes::StructureShape.new(name: 'GetTaskProtectionRequest')
     GetTaskProtectionResponse = Shapes::StructureShape.new(name: 'GetTaskProtectionResponse')
     GpuIds = Shapes::ListShape.new(name: 'GpuIds')
@@ -310,6 +377,7 @@ module Aws::ECS
     HookDetails = Shapes::DocumentShape.new(name: 'HookDetails', document: true)
     HostEntry = Shapes::StructureShape.new(name: 'HostEntry')
     HostEntryList = Shapes::ListShape.new(name: 'HostEntryList')
+    HostSharedAlbConfiguration = Shapes::StructureShape.new(name: 'HostSharedAlbConfiguration')
     HostVolumeProperties = Shapes::StructureShape.new(name: 'HostVolumeProperties')
     IAMRoleArn = Shapes::StringShape.new(name: 'IAMRoleArn')
     InferenceAccelerator = Shapes::StructureShape.new(name: 'InferenceAccelerator')
@@ -352,6 +420,12 @@ module Aws::ECS
     ListDaemonTaskDefinitionsResponse = Shapes::StructureShape.new(name: 'ListDaemonTaskDefinitionsResponse')
     ListDaemonsRequest = Shapes::StructureShape.new(name: 'ListDaemonsRequest')
     ListDaemonsResponse = Shapes::StructureShape.new(name: 'ListDaemonsResponse')
+    ListGatewayClusterAssociationsRequest = Shapes::StructureShape.new(name: 'ListGatewayClusterAssociationsRequest')
+    ListGatewayClusterAssociationsResponse = Shapes::StructureShape.new(name: 'ListGatewayClusterAssociationsResponse')
+    ListGatewayRoutesRequest = Shapes::StructureShape.new(name: 'ListGatewayRoutesRequest')
+    ListGatewayRoutesResponse = Shapes::StructureShape.new(name: 'ListGatewayRoutesResponse')
+    ListGatewaysRequest = Shapes::StructureShape.new(name: 'ListGatewaysRequest')
+    ListGatewaysResponse = Shapes::StructureShape.new(name: 'ListGatewaysResponse')
     ListServiceDeploymentsRequest = Shapes::StructureShape.new(name: 'ListServiceDeploymentsRequest')
     ListServiceDeploymentsResponse = Shapes::StructureShape.new(name: 'ListServiceDeploymentsResponse')
     ListServicesByNamespaceRequest = Shapes::StructureShape.new(name: 'ListServicesByNamespaceRequest')
@@ -450,6 +524,7 @@ module Aws::ECS
     PortMapping = Shapes::StructureShape.new(name: 'PortMapping')
     PortMappingList = Shapes::ListShape.new(name: 'PortMappingList')
     PortNumber = Shapes::IntegerShape.new(name: 'PortNumber')
+    PropagateGatewayTags = Shapes::StringShape.new(name: 'PropagateGatewayTags')
     PropagateMITags = Shapes::StringShape.new(name: 'PropagateMITags')
     PropagateTags = Shapes::StringShape.new(name: 'PropagateTags')
     ProtectedTask = Shapes::StructureShape.new(name: 'ProtectedTask')
@@ -503,6 +578,9 @@ module Aws::ECS
     ServiceConnectClientAlias = Shapes::StructureShape.new(name: 'ServiceConnectClientAlias')
     ServiceConnectClientAliasList = Shapes::ListShape.new(name: 'ServiceConnectClientAliasList')
     ServiceConnectConfiguration = Shapes::StructureShape.new(name: 'ServiceConnectConfiguration')
+    ServiceConnectContainerConfiguration = Shapes::UnionShape.new(name: 'ServiceConnectContainerConfiguration')
+    ServiceConnectContainerConfigurations = Shapes::ListShape.new(name: 'ServiceConnectContainerConfigurations')
+    ServiceConnectContainerLogLevel = Shapes::StringShape.new(name: 'ServiceConnectContainerLogLevel')
     ServiceConnectIncludeQueryParameters = Shapes::StringShape.new(name: 'ServiceConnectIncludeQueryParameters')
     ServiceConnectService = Shapes::StructureShape.new(name: 'ServiceConnectService')
     ServiceConnectServiceList = Shapes::ListShape.new(name: 'ServiceConnectServiceList')
@@ -639,6 +717,11 @@ module Aws::ECS
     UpdateDaemonResponse = Shapes::StructureShape.new(name: 'UpdateDaemonResponse')
     UpdateExpressGatewayServiceRequest = Shapes::StructureShape.new(name: 'UpdateExpressGatewayServiceRequest')
     UpdateExpressGatewayServiceResponse = Shapes::StructureShape.new(name: 'UpdateExpressGatewayServiceResponse')
+    UpdateGatewayAlbConfiguration = Shapes::StructureShape.new(name: 'UpdateGatewayAlbConfiguration')
+    UpdateGatewayConfiguration = Shapes::UnionShape.new(name: 'UpdateGatewayConfiguration')
+    UpdateGatewayNetworkConfiguration = Shapes::StructureShape.new(name: 'UpdateGatewayNetworkConfiguration')
+    UpdateGatewayRequest = Shapes::StructureShape.new(name: 'UpdateGatewayRequest')
+    UpdateGatewayResponse = Shapes::StructureShape.new(name: 'UpdateGatewayResponse')
     UpdateInProgressException = Shapes::StructureShape.new(name: 'UpdateInProgressException')
     UpdateManagedInstancesProviderConfiguration = Shapes::StructureShape.new(name: 'UpdateManagedInstancesProviderConfiguration')
     UpdateServicePrimaryTaskSetRequest = Shapes::StructureShape.new(name: 'UpdateServicePrimaryTaskSetRequest')
@@ -678,6 +761,8 @@ module Aws::ECS
     AccessDeniedException.add_member(:message, Shapes::ShapeRef.new(shape: String, location_name: "message"))
     AccessDeniedException.struct_class = Types::AccessDeniedException
 
+    AccessTypeList.member = Shapes::ShapeRef.new(shape: AccessType)
+
     AdvancedConfiguration.add_member(:alternate_target_group_arn, Shapes::ShapeRef.new(shape: String, location_name: "alternateTargetGroupArn"))
     AdvancedConfiguration.add_member(:production_listener_rule, Shapes::ShapeRef.new(shape: String, location_name: "productionListenerRule"))
     AdvancedConfiguration.add_member(:test_listener_rule, Shapes::ShapeRef.new(shape: String, location_name: "testListenerRule"))
@@ -685,6 +770,15 @@ module Aws::ECS
     AdvancedConfiguration.struct_class = Types::AdvancedConfiguration
 
     AllowedInstanceTypeSet.member = Shapes::ShapeRef.new(shape: AllowedInstanceType)
+
+    AssociateGatewayWithClusterRequest.add_member(:gateway, Shapes::ShapeRef.new(shape: String, required: true, location_name: "gateway"))
+    AssociateGatewayWithClusterRequest.add_member(:cluster, Shapes::ShapeRef.new(shape: String, required: true, location_name: "cluster"))
+    AssociateGatewayWithClusterRequest.struct_class = Types::AssociateGatewayWithClusterRequest
+
+    AssociateGatewayWithClusterResponse.add_member(:gateway_arn, Shapes::ShapeRef.new(shape: String, location_name: "gatewayArn"))
+    AssociateGatewayWithClusterResponse.add_member(:cluster_arn, Shapes::ShapeRef.new(shape: String, location_name: "clusterArn"))
+    AssociateGatewayWithClusterResponse.add_member(:status, Shapes::ShapeRef.new(shape: GatewayClusterAssociationStatus, location_name: "status"))
+    AssociateGatewayWithClusterResponse.struct_class = Types::AssociateGatewayWithClusterResponse
 
     Attachment.add_member(:id, Shapes::ShapeRef.new(shape: String, location_name: "id"))
     Attachment.add_member(:type, Shapes::ShapeRef.new(shape: String, location_name: "type"))
@@ -1039,6 +1133,20 @@ module Aws::ECS
     CreateExpressGatewayServiceResponse.add_member(:service, Shapes::ShapeRef.new(shape: ECSExpressGatewayService, location_name: "service"))
     CreateExpressGatewayServiceResponse.struct_class = Types::CreateExpressGatewayServiceResponse
 
+    CreateGatewayRequest.add_member(:name, Shapes::ShapeRef.new(shape: String, required: true, location_name: "name"))
+    CreateGatewayRequest.add_member(:infrastructure_role_arn, Shapes::ShapeRef.new(shape: String, required: true, location_name: "infrastructureRoleArn"))
+    CreateGatewayRequest.add_member(:client_token, Shapes::ShapeRef.new(shape: String, location_name: "clientToken", metadata: {"idempotencyToken" => true}))
+    CreateGatewayRequest.add_member(:deletion_protection, Shapes::ShapeRef.new(shape: BoxedBoolean, location_name: "deletionProtection"))
+    CreateGatewayRequest.add_member(:configuration, Shapes::ShapeRef.new(shape: GatewayConfiguration, required: true, location_name: "configuration"))
+    CreateGatewayRequest.add_member(:tags, Shapes::ShapeRef.new(shape: Tags, location_name: "tags"))
+    CreateGatewayRequest.add_member(:propagate_tags, Shapes::ShapeRef.new(shape: PropagateGatewayTags, location_name: "propagateTags"))
+    CreateGatewayRequest.struct_class = Types::CreateGatewayRequest
+
+    CreateGatewayResponse.add_member(:gateway_arn, Shapes::ShapeRef.new(shape: String, location_name: "gatewayArn"))
+    CreateGatewayResponse.add_member(:name, Shapes::ShapeRef.new(shape: String, location_name: "name"))
+    CreateGatewayResponse.add_member(:status, Shapes::ShapeRef.new(shape: GatewayStatus, location_name: "status"))
+    CreateGatewayResponse.struct_class = Types::CreateGatewayResponse
+
     CreateManagedInstancesProviderConfiguration.add_member(:infrastructure_role_arn, Shapes::ShapeRef.new(shape: String, required: true, location_name: "infrastructureRoleArn"))
     CreateManagedInstancesProviderConfiguration.add_member(:instance_launch_template, Shapes::ShapeRef.new(shape: InstanceLaunchTemplate, required: true, location_name: "instanceLaunchTemplate"))
     CreateManagedInstancesProviderConfiguration.add_member(:propagate_tags, Shapes::ShapeRef.new(shape: PropagateMITags, location_name: "propagateTags"))
@@ -1072,6 +1180,7 @@ module Aws::ECS
     CreateServiceRequest.add_member(:service_connect_configuration, Shapes::ShapeRef.new(shape: ServiceConnectConfiguration, location_name: "serviceConnectConfiguration"))
     CreateServiceRequest.add_member(:volume_configurations, Shapes::ShapeRef.new(shape: ServiceVolumeConfigurations, location_name: "volumeConfigurations"))
     CreateServiceRequest.add_member(:vpc_lattice_configurations, Shapes::ShapeRef.new(shape: VpcLatticeConfigurations, location_name: "vpcLatticeConfigurations"))
+    CreateServiceRequest.add_member(:gateway_connectors, Shapes::ShapeRef.new(shape: GatewayConnectorList, location_name: "gatewayConnectors"))
     CreateServiceRequest.add_member(:monitoring, Shapes::ShapeRef.new(shape: MonitoringConfiguration, location_name: "monitoring"))
     CreateServiceRequest.struct_class = Types::CreateServiceRequest
 
@@ -1355,6 +1464,14 @@ module Aws::ECS
     DeleteExpressGatewayServiceResponse.add_member(:service, Shapes::ShapeRef.new(shape: ECSExpressGatewayService, location_name: "service"))
     DeleteExpressGatewayServiceResponse.struct_class = Types::DeleteExpressGatewayServiceResponse
 
+    DeleteGatewayRequest.add_member(:gateway, Shapes::ShapeRef.new(shape: String, required: true, location_name: "gateway"))
+    DeleteGatewayRequest.struct_class = Types::DeleteGatewayRequest
+
+    DeleteGatewayResponse.add_member(:gateway_arn, Shapes::ShapeRef.new(shape: String, location_name: "gatewayArn"))
+    DeleteGatewayResponse.add_member(:name, Shapes::ShapeRef.new(shape: String, location_name: "name"))
+    DeleteGatewayResponse.add_member(:status, Shapes::ShapeRef.new(shape: GatewayStatus, location_name: "status"))
+    DeleteGatewayResponse.struct_class = Types::DeleteGatewayResponse
+
     DeleteServiceRequest.add_member(:cluster, Shapes::ShapeRef.new(shape: String, location_name: "cluster"))
     DeleteServiceRequest.add_member(:service, Shapes::ShapeRef.new(shape: String, required: true, location_name: "service"))
     DeleteServiceRequest.add_member(:force, Shapes::ShapeRef.new(shape: BoxedBoolean, location_name: "force"))
@@ -1540,6 +1657,45 @@ module Aws::ECS
     DescribeExpressGatewayServiceResponse.add_member(:service, Shapes::ShapeRef.new(shape: ECSExpressGatewayService, location_name: "service"))
     DescribeExpressGatewayServiceResponse.struct_class = Types::DescribeExpressGatewayServiceResponse
 
+    DescribeGatewayAlbConfiguration.add_member(:network_configuration, Shapes::ShapeRef.new(shape: GatewayElbNetworkConfiguration, location_name: "networkConfiguration"))
+    DescribeGatewayAlbConfiguration.add_member(:scheme, Shapes::ShapeRef.new(shape: GatewayElbScheme, location_name: "scheme"))
+    DescribeGatewayAlbConfiguration.add_member(:access_logs, Shapes::ShapeRef.new(shape: GatewayElbAccessLogConfiguration, location_name: "accessLogs"))
+    DescribeGatewayAlbConfiguration.add_member(:web_acl_arn, Shapes::ShapeRef.new(shape: String, location_name: "webACLArn"))
+    DescribeGatewayAlbConfiguration.add_member(:port, Shapes::ShapeRef.new(shape: BoxedInteger, location_name: "port"))
+    DescribeGatewayAlbConfiguration.add_member(:protocol, Shapes::ShapeRef.new(shape: GatewayAlbProtocol, location_name: "protocol"))
+    DescribeGatewayAlbConfiguration.add_member(:max_alb_count, Shapes::ShapeRef.new(shape: BoxedInteger, location_name: "maxAlbCount"))
+    DescribeGatewayAlbConfiguration.add_member(:current_alb_count, Shapes::ShapeRef.new(shape: BoxedInteger, location_name: "currentAlbCount"))
+    DescribeGatewayAlbConfiguration.add_member(:http_desync, Shapes::ShapeRef.new(shape: GatewayAlbDesyncMitigationMode, location_name: "httpDesync"))
+    DescribeGatewayAlbConfiguration.add_member(:test_traffic_rules, Shapes::ShapeRef.new(shape: GatewayAlbTestTrafficRules, location_name: "testTrafficRules"))
+    DescribeGatewayAlbConfiguration.struct_class = Types::DescribeGatewayAlbConfiguration
+
+    DescribeGatewayConfiguration.add_member(:host_shared_alb, Shapes::ShapeRef.new(shape: DescribeGatewayAlbConfiguration, location_name: "hostSharedAlb"))
+    DescribeGatewayConfiguration.add_member(:unknown, Shapes::ShapeRef.new(shape: nil, location_name: 'unknown'))
+    DescribeGatewayConfiguration.add_member_subclass(:host_shared_alb, Types::DescribeGatewayConfiguration::HostSharedAlb)
+    DescribeGatewayConfiguration.add_member_subclass(:unknown, Types::DescribeGatewayConfiguration::Unknown)
+    DescribeGatewayConfiguration.struct_class = Types::DescribeGatewayConfiguration
+
+    DescribeGatewayRequest.add_member(:gateway, Shapes::ShapeRef.new(shape: String, required: true, location_name: "gateway"))
+    DescribeGatewayRequest.struct_class = Types::DescribeGatewayRequest
+
+    DescribeGatewayResourcesRequest.add_member(:gateway, Shapes::ShapeRef.new(shape: String, required: true, location_name: "gateway"))
+    DescribeGatewayResourcesRequest.add_member(:max_results, Shapes::ShapeRef.new(shape: BoxedInteger, location_name: "maxResults"))
+    DescribeGatewayResourcesRequest.add_member(:next_token, Shapes::ShapeRef.new(shape: String, location_name: "nextToken"))
+    DescribeGatewayResourcesRequest.struct_class = Types::DescribeGatewayResourcesRequest
+
+    DescribeGatewayResourcesResponse.add_member(:gateway_resources, Shapes::ShapeRef.new(shape: GatewayResources, location_name: "gatewayResources"))
+    DescribeGatewayResourcesResponse.add_member(:next_token, Shapes::ShapeRef.new(shape: String, location_name: "nextToken"))
+    DescribeGatewayResourcesResponse.struct_class = Types::DescribeGatewayResourcesResponse
+
+    DescribeGatewayResponse.add_member(:gateway, Shapes::ShapeRef.new(shape: Gateway, location_name: "gateway"))
+    DescribeGatewayResponse.struct_class = Types::DescribeGatewayResponse
+
+    DescribeGatewayRouteRequest.add_member(:gateway_route_arn, Shapes::ShapeRef.new(shape: String, required: true, location_name: "gatewayRouteArn"))
+    DescribeGatewayRouteRequest.struct_class = Types::DescribeGatewayRouteRequest
+
+    DescribeGatewayRouteResponse.add_member(:gateway_route, Shapes::ShapeRef.new(shape: GatewayRoute, location_name: "gatewayRoute"))
+    DescribeGatewayRouteResponse.struct_class = Types::DescribeGatewayRouteResponse
+
     DescribeServiceDeploymentsRequest.add_member(:service_deployment_arns, Shapes::ShapeRef.new(shape: StringList, required: true, location_name: "serviceDeploymentArns"))
     DescribeServiceDeploymentsRequest.struct_class = Types::DescribeServiceDeploymentsRequest
 
@@ -1599,6 +1755,15 @@ module Aws::ECS
 
     DevicesList.member = Shapes::ShapeRef.new(shape: Device)
 
+    DisassociateGatewayFromClusterRequest.add_member(:gateway, Shapes::ShapeRef.new(shape: String, required: true, location_name: "gateway"))
+    DisassociateGatewayFromClusterRequest.add_member(:cluster, Shapes::ShapeRef.new(shape: String, required: true, location_name: "cluster"))
+    DisassociateGatewayFromClusterRequest.struct_class = Types::DisassociateGatewayFromClusterRequest
+
+    DisassociateGatewayFromClusterResponse.add_member(:gateway_arn, Shapes::ShapeRef.new(shape: String, location_name: "gatewayArn"))
+    DisassociateGatewayFromClusterResponse.add_member(:cluster_arn, Shapes::ShapeRef.new(shape: String, location_name: "clusterArn"))
+    DisassociateGatewayFromClusterResponse.add_member(:status, Shapes::ShapeRef.new(shape: GatewayClusterAssociationStatus, location_name: "status"))
+    DisassociateGatewayFromClusterResponse.struct_class = Types::DisassociateGatewayFromClusterResponse
+
     DiscoverPollEndpointRequest.add_member(:container_instance, Shapes::ShapeRef.new(shape: String, location_name: "containerInstance"))
     DiscoverPollEndpointRequest.add_member(:cluster, Shapes::ShapeRef.new(shape: String, location_name: "cluster"))
     DiscoverPollEndpointRequest.struct_class = Types::DiscoverPollEndpointRequest
@@ -1642,6 +1807,7 @@ module Aws::ECS
     ECSManagedResources.add_member(:metric_alarms, Shapes::ShapeRef.new(shape: ManagedMetricAlarms, location_name: "metricAlarms"))
     ECSManagedResources.add_member(:service_security_groups, Shapes::ShapeRef.new(shape: ManagedSecurityGroups, location_name: "serviceSecurityGroups"))
     ECSManagedResources.add_member(:log_groups, Shapes::ShapeRef.new(shape: ManagedLogGroups, location_name: "logGroups"))
+    ECSManagedResources.add_member(:gateway_connections, Shapes::ShapeRef.new(shape: GatewayConnectionList, location_name: "gatewayConnections"))
     ECSManagedResources.struct_class = Types::ECSManagedResources
 
     EFSAuthorizationConfig.add_member(:access_point_id, Shapes::ShapeRef.new(shape: String, location_name: "accessPointId"))
@@ -1654,6 +1820,14 @@ module Aws::ECS
     EFSVolumeConfiguration.add_member(:transit_encryption_port, Shapes::ShapeRef.new(shape: BoxedInteger, location_name: "transitEncryptionPort"))
     EFSVolumeConfiguration.add_member(:authorization_config, Shapes::ShapeRef.new(shape: EFSAuthorizationConfig, location_name: "authorizationConfig"))
     EFSVolumeConfiguration.struct_class = Types::EFSVolumeConfiguration
+
+    ElbGatewayResources.add_member(:load_balancer_arn, Shapes::ShapeRef.new(shape: String, location_name: "loadBalancerArn"))
+    ElbGatewayResources.add_member(:listener_arn, Shapes::ShapeRef.new(shape: String, location_name: "listenerArn"))
+    ElbGatewayResources.add_member(:security_group, Shapes::ShapeRef.new(shape: String, location_name: "securityGroup"))
+    ElbGatewayResources.add_member(:gateway_route_arns, Shapes::ShapeRef.new(shape: StringList, location_name: "gatewayRouteArns"))
+    ElbGatewayResources.struct_class = Types::ElbGatewayResources
+
+    ElbGatewayResourcesList.member = Shapes::ShapeRef.new(shape: ElbGatewayResources)
 
     EnvironmentFile.add_member(:value, Shapes::ShapeRef.new(shape: String, required: true, location_name: "value"))
     EnvironmentFile.add_member(:type, Shapes::ShapeRef.new(shape: EnvironmentFileType, required: true, location_name: "type"))
@@ -1767,6 +1941,193 @@ module Aws::ECS
     FirelensConfigurationOptionsMap.key = Shapes::ShapeRef.new(shape: String)
     FirelensConfigurationOptionsMap.value = Shapes::ShapeRef.new(shape: String)
 
+    Gateway.add_member(:gateway_arn, Shapes::ShapeRef.new(shape: String, location_name: "gatewayArn"))
+    Gateway.add_member(:name, Shapes::ShapeRef.new(shape: String, location_name: "name"))
+    Gateway.add_member(:status, Shapes::ShapeRef.new(shape: GatewayStatus, location_name: "status"))
+    Gateway.add_member(:status_reason, Shapes::ShapeRef.new(shape: String, location_name: "statusReason"))
+    Gateway.add_member(:failures, Shapes::ShapeRef.new(shape: GatewayResourceFailureList, location_name: "failures"))
+    Gateway.add_member(:infrastructure_role_arn, Shapes::ShapeRef.new(shape: String, location_name: "infrastructureRoleArn"))
+    Gateway.add_member(:deletion_protection, Shapes::ShapeRef.new(shape: BoxedBoolean, location_name: "deletionProtection"))
+    Gateway.add_member(:configuration, Shapes::ShapeRef.new(shape: DescribeGatewayConfiguration, location_name: "configuration"))
+    Gateway.add_member(:access_type, Shapes::ShapeRef.new(shape: AccessType, location_name: "accessType"))
+    Gateway.add_member(:propagate_tags, Shapes::ShapeRef.new(shape: PropagateGatewayTags, location_name: "propagateTags"))
+    Gateway.add_member(:tags, Shapes::ShapeRef.new(shape: Tags, location_name: "tags"))
+    Gateway.add_member(:created_at, Shapes::ShapeRef.new(shape: Timestamp, location_name: "createdAt"))
+    Gateway.add_member(:updated_at, Shapes::ShapeRef.new(shape: Timestamp, location_name: "updatedAt"))
+    Gateway.struct_class = Types::Gateway
+
+    GatewayAlbTestTrafficRules.add_member(:header, Shapes::ShapeRef.new(shape: GatewayTestTrafficHeader, location_name: "header"))
+    GatewayAlbTestTrafficRules.struct_class = Types::GatewayAlbTestTrafficRules
+
+    GatewayClusterAssociationStatusList.member = Shapes::ShapeRef.new(shape: GatewayClusterAssociationStatus)
+
+    GatewayClusterAssociationSummary.add_member(:gateway_arn, Shapes::ShapeRef.new(shape: String, location_name: "gatewayArn"))
+    GatewayClusterAssociationSummary.add_member(:cluster_arn, Shapes::ShapeRef.new(shape: String, location_name: "clusterArn"))
+    GatewayClusterAssociationSummary.add_member(:status, Shapes::ShapeRef.new(shape: GatewayClusterAssociationStatus, location_name: "status"))
+    GatewayClusterAssociationSummary.struct_class = Types::GatewayClusterAssociationSummary
+
+    GatewayClusterAssociationSummaryList.member = Shapes::ShapeRef.new(shape: GatewayClusterAssociationSummary)
+
+    GatewayConfiguration.add_member(:host_shared_alb, Shapes::ShapeRef.new(shape: HostSharedAlbConfiguration, location_name: "hostSharedAlb"))
+    GatewayConfiguration.add_member(:unknown, Shapes::ShapeRef.new(shape: nil, location_name: 'unknown'))
+    GatewayConfiguration.add_member_subclass(:host_shared_alb, Types::GatewayConfiguration::HostSharedAlb)
+    GatewayConfiguration.add_member_subclass(:unknown, Types::GatewayConfiguration::Unknown)
+    GatewayConfiguration.struct_class = Types::GatewayConfiguration
+
+    GatewayConnection.add_member(:gateway_arn, Shapes::ShapeRef.new(shape: String, location_name: "gatewayArn"))
+    GatewayConnection.add_member(:gateway_route_arn, Shapes::ShapeRef.new(shape: String, location_name: "gatewayRouteArn"))
+    GatewayConnection.add_member(:port_name, Shapes::ShapeRef.new(shape: String, location_name: "portName"))
+    GatewayConnection.add_member(:service_url, Shapes::ShapeRef.new(shape: String, location_name: "serviceUrl"))
+    GatewayConnection.add_member(:access_type, Shapes::ShapeRef.new(shape: AccessType, location_name: "accessType"))
+    GatewayConnection.add_member(:status, Shapes::ShapeRef.new(shape: GatewayRouteStatus, location_name: "status"))
+    GatewayConnection.add_member(:resources, Shapes::ShapeRef.new(shape: GatewayConnectionResources, location_name: "resources"))
+    GatewayConnection.struct_class = Types::GatewayConnection
+
+    GatewayConnectionAlbResources.add_member(:acm_certificate_arn, Shapes::ShapeRef.new(shape: String, location_name: "acmCertificateArn"))
+    GatewayConnectionAlbResources.add_member(:load_balancer_arn, Shapes::ShapeRef.new(shape: String, location_name: "loadBalancerArn"))
+    GatewayConnectionAlbResources.add_member(:load_balancer_security_group_arns, Shapes::ShapeRef.new(shape: StringList, location_name: "loadBalancerSecurityGroupArns"))
+    GatewayConnectionAlbResources.add_member(:listener_arn, Shapes::ShapeRef.new(shape: String, location_name: "listenerArn"))
+    GatewayConnectionAlbResources.add_member(:listener_rule_arn, Shapes::ShapeRef.new(shape: String, location_name: "listenerRuleArn"))
+    GatewayConnectionAlbResources.add_member(:test_listener_rule_arn, Shapes::ShapeRef.new(shape: String, location_name: "testListenerRuleArn"))
+    GatewayConnectionAlbResources.add_member(:target_group_arn, Shapes::ShapeRef.new(shape: String, location_name: "targetGroupArn"))
+    GatewayConnectionAlbResources.add_member(:alternate_target_group_arn, Shapes::ShapeRef.new(shape: String, location_name: "alternateTargetGroupArn"))
+    GatewayConnectionAlbResources.struct_class = Types::GatewayConnectionAlbResources
+
+    GatewayConnectionAlbResourcesList.member = Shapes::ShapeRef.new(shape: GatewayConnectionAlbResources)
+
+    GatewayConnectionList.member = Shapes::ShapeRef.new(shape: GatewayConnection)
+
+    GatewayConnectionResources.add_member(:host_shared_alb, Shapes::ShapeRef.new(shape: GatewayConnectionAlbResourcesList, location_name: "hostSharedAlb"))
+    GatewayConnectionResources.add_member(:unknown, Shapes::ShapeRef.new(shape: nil, location_name: 'unknown'))
+    GatewayConnectionResources.add_member_subclass(:host_shared_alb, Types::GatewayConnectionResources::HostSharedAlb)
+    GatewayConnectionResources.add_member_subclass(:unknown, Types::GatewayConnectionResources::Unknown)
+    GatewayConnectionResources.struct_class = Types::GatewayConnectionResources
+
+    GatewayConnector.add_member(:port_name, Shapes::ShapeRef.new(shape: String, required: true, location_name: "portName"))
+    GatewayConnector.add_member(:health_check, Shapes::ShapeRef.new(shape: GatewayConnectorHealthCheck, location_name: "healthCheck"))
+    GatewayConnector.add_member(:filters, Shapes::ShapeRef.new(shape: GatewayConnectorFilters, location_name: "filters"))
+    GatewayConnector.struct_class = Types::GatewayConnector
+
+    GatewayConnectorFilters.add_member(:access_types, Shapes::ShapeRef.new(shape: AccessTypeList, location_name: "accessTypes"))
+    GatewayConnectorFilters.struct_class = Types::GatewayConnectorFilters
+
+    GatewayConnectorHealthCheck.add_member(:health_check_protocol, Shapes::ShapeRef.new(shape: GatewayConnectorHealthCheckProtocol, location_name: "healthCheckProtocol"))
+    GatewayConnectorHealthCheck.add_member(:health_check_port, Shapes::ShapeRef.new(shape: BoxedInteger, location_name: "healthCheckPort"))
+    GatewayConnectorHealthCheck.add_member(:health_check_path, Shapes::ShapeRef.new(shape: String, location_name: "healthCheckPath"))
+    GatewayConnectorHealthCheck.add_member(:health_check_timeout_seconds, Shapes::ShapeRef.new(shape: BoxedInteger, location_name: "healthCheckTimeoutSeconds"))
+    GatewayConnectorHealthCheck.add_member(:health_check_interval_seconds, Shapes::ShapeRef.new(shape: BoxedInteger, location_name: "healthCheckIntervalSeconds"))
+    GatewayConnectorHealthCheck.add_member(:healthy_threshold_count, Shapes::ShapeRef.new(shape: BoxedInteger, location_name: "healthyThresholdCount"))
+    GatewayConnectorHealthCheck.add_member(:unhealthy_threshold_count, Shapes::ShapeRef.new(shape: BoxedInteger, location_name: "unhealthyThresholdCount"))
+    GatewayConnectorHealthCheck.add_member(:matcher, Shapes::ShapeRef.new(shape: GatewayConnectorHealthCheckMatcher, location_name: "matcher"))
+    GatewayConnectorHealthCheck.struct_class = Types::GatewayConnectorHealthCheck
+
+    GatewayConnectorHealthCheckMatcher.add_member(:http_code, Shapes::ShapeRef.new(shape: String, location_name: "httpCode"))
+    GatewayConnectorHealthCheckMatcher.add_member(:grpc_code, Shapes::ShapeRef.new(shape: String, location_name: "grpcCode"))
+    GatewayConnectorHealthCheckMatcher.struct_class = Types::GatewayConnectorHealthCheckMatcher
+
+    GatewayConnectorList.member = Shapes::ShapeRef.new(shape: GatewayConnector)
+
+    GatewayElbAccessLogConfiguration.add_member(:destination, Shapes::ShapeRef.new(shape: GatewayElbAccessLogDestination, location_name: "destination"))
+    GatewayElbAccessLogConfiguration.struct_class = Types::GatewayElbAccessLogConfiguration
+
+    GatewayElbAccessLogDestination.add_member(:s3, Shapes::ShapeRef.new(shape: GatewayElbAccessLogS3Destination, location_name: "s3"))
+    GatewayElbAccessLogDestination.add_member(:unknown, Shapes::ShapeRef.new(shape: nil, location_name: 'unknown'))
+    GatewayElbAccessLogDestination.add_member_subclass(:s3, Types::GatewayElbAccessLogDestination::S3)
+    GatewayElbAccessLogDestination.add_member_subclass(:unknown, Types::GatewayElbAccessLogDestination::Unknown)
+    GatewayElbAccessLogDestination.struct_class = Types::GatewayElbAccessLogDestination
+
+    GatewayElbAccessLogS3Destination.add_member(:bucket, Shapes::ShapeRef.new(shape: String, required: true, location_name: "bucket"))
+    GatewayElbAccessLogS3Destination.add_member(:prefix, Shapes::ShapeRef.new(shape: String, location_name: "prefix"))
+    GatewayElbAccessLogS3Destination.struct_class = Types::GatewayElbAccessLogS3Destination
+
+    GatewayElbNetworkConfiguration.add_member(:inbound_security_group, Shapes::ShapeRef.new(shape: String, location_name: "inboundSecurityGroup"))
+    GatewayElbNetworkConfiguration.add_member(:subnets, Shapes::ShapeRef.new(shape: StringList, location_name: "subnets"))
+    GatewayElbNetworkConfiguration.add_member(:ip_address_type, Shapes::ShapeRef.new(shape: GatewayElbIpAddressType, location_name: "ipAddressType"))
+    GatewayElbNetworkConfiguration.struct_class = Types::GatewayElbNetworkConfiguration
+
+    GatewayInfrastructureResources.add_member(:host_shared_alb, Shapes::ShapeRef.new(shape: ElbGatewayResourcesList, location_name: "hostSharedAlb"))
+    GatewayInfrastructureResources.add_member(:unknown, Shapes::ShapeRef.new(shape: nil, location_name: 'unknown'))
+    GatewayInfrastructureResources.add_member_subclass(:host_shared_alb, Types::GatewayInfrastructureResources::HostSharedAlb)
+    GatewayInfrastructureResources.add_member_subclass(:unknown, Types::GatewayInfrastructureResources::Unknown)
+    GatewayInfrastructureResources.struct_class = Types::GatewayInfrastructureResources
+
+    GatewayNotFoundException.add_member(:message, Shapes::ShapeRef.new(shape: String, location_name: "message"))
+    GatewayNotFoundException.struct_class = Types::GatewayNotFoundException
+
+    GatewayOperationError.add_member(:operation, Shapes::ShapeRef.new(shape: String, location_name: "operation"))
+    GatewayOperationError.add_member(:code, Shapes::ShapeRef.new(shape: String, location_name: "code"))
+    GatewayOperationError.add_member(:message, Shapes::ShapeRef.new(shape: String, location_name: "message"))
+    GatewayOperationError.struct_class = Types::GatewayOperationError
+
+    GatewayOperationErrorList.member = Shapes::ShapeRef.new(shape: GatewayOperationError)
+
+    GatewayResourceFailure.add_member(:arn, Shapes::ShapeRef.new(shape: String, location_name: "arn"))
+    GatewayResourceFailure.add_member(:errors, Shapes::ShapeRef.new(shape: GatewayOperationErrorList, location_name: "errors"))
+    GatewayResourceFailure.struct_class = Types::GatewayResourceFailure
+
+    GatewayResourceFailureList.member = Shapes::ShapeRef.new(shape: GatewayResourceFailure)
+
+    GatewayResources.add_member(:gateway_arn, Shapes::ShapeRef.new(shape: String, location_name: "gatewayArn"))
+    GatewayResources.add_member(:resources, Shapes::ShapeRef.new(shape: GatewayInfrastructureResources, location_name: "resources"))
+    GatewayResources.struct_class = Types::GatewayResources
+
+    GatewayRoute.add_member(:gateway_route_arn, Shapes::ShapeRef.new(shape: String, location_name: "gatewayRouteArn"))
+    GatewayRoute.add_member(:service_arn, Shapes::ShapeRef.new(shape: String, location_name: "serviceArn"))
+    GatewayRoute.add_member(:service_container_port_name, Shapes::ShapeRef.new(shape: String, location_name: "serviceContainerPortName"))
+    GatewayRoute.add_member(:status, Shapes::ShapeRef.new(shape: GatewayRouteStatus, location_name: "status"))
+    GatewayRoute.add_member(:service_url, Shapes::ShapeRef.new(shape: String, location_name: "serviceUrl"))
+    GatewayRoute.add_member(:resources, Shapes::ShapeRef.new(shape: GatewayRouteResources, location_name: "resources"))
+    GatewayRoute.struct_class = Types::GatewayRoute
+
+    GatewayRouteAlbResources.add_member(:acm_certificate_arn, Shapes::ShapeRef.new(shape: String, location_name: "acmCertificateArn"))
+    GatewayRouteAlbResources.add_member(:load_balancer_arn, Shapes::ShapeRef.new(shape: String, location_name: "loadBalancerArn"))
+    GatewayRouteAlbResources.add_member(:listener_arn, Shapes::ShapeRef.new(shape: String, location_name: "listenerArn"))
+    GatewayRouteAlbResources.add_member(:listener_rule_arn, Shapes::ShapeRef.new(shape: String, location_name: "listenerRuleArn"))
+    GatewayRouteAlbResources.add_member(:test_listener_rule_arns, Shapes::ShapeRef.new(shape: StringList, location_name: "testListenerRuleArns"))
+    GatewayRouteAlbResources.add_member(:load_balancer_security_groups, Shapes::ShapeRef.new(shape: GatewayRouteLoadBalancerSecurityGroupList, location_name: "loadBalancerSecurityGroups"))
+    GatewayRouteAlbResources.add_member(:service_security_group_arn, Shapes::ShapeRef.new(shape: String, location_name: "serviceSecurityGroupArn"))
+    GatewayRouteAlbResources.struct_class = Types::GatewayRouteAlbResources
+
+    GatewayRouteAlbResourcesList.member = Shapes::ShapeRef.new(shape: GatewayRouteAlbResources)
+
+    GatewayRouteLoadBalancerSecurityGroup.add_member(:arn, Shapes::ShapeRef.new(shape: String, location_name: "arn"))
+    GatewayRouteLoadBalancerSecurityGroup.add_member(:rule_arns, Shapes::ShapeRef.new(shape: StringList, location_name: "ruleArns"))
+    GatewayRouteLoadBalancerSecurityGroup.struct_class = Types::GatewayRouteLoadBalancerSecurityGroup
+
+    GatewayRouteLoadBalancerSecurityGroupList.member = Shapes::ShapeRef.new(shape: GatewayRouteLoadBalancerSecurityGroup)
+
+    GatewayRouteResources.add_member(:host_shared_alb, Shapes::ShapeRef.new(shape: GatewayRouteAlbResourcesList, location_name: "hostSharedAlb"))
+    GatewayRouteResources.add_member(:unknown, Shapes::ShapeRef.new(shape: nil, location_name: 'unknown'))
+    GatewayRouteResources.add_member_subclass(:host_shared_alb, Types::GatewayRouteResources::HostSharedAlb)
+    GatewayRouteResources.add_member_subclass(:unknown, Types::GatewayRouteResources::Unknown)
+    GatewayRouteResources.struct_class = Types::GatewayRouteResources
+
+    GatewayRouteStatusList.member = Shapes::ShapeRef.new(shape: GatewayRouteStatus)
+
+    GatewayRouteSummary.add_member(:gateway_route_arn, Shapes::ShapeRef.new(shape: String, location_name: "gatewayRouteArn"))
+    GatewayRouteSummary.add_member(:gateway_arn, Shapes::ShapeRef.new(shape: String, location_name: "gatewayArn"))
+    GatewayRouteSummary.add_member(:cluster_arn, Shapes::ShapeRef.new(shape: String, location_name: "clusterArn"))
+    GatewayRouteSummary.add_member(:service_arn, Shapes::ShapeRef.new(shape: String, location_name: "serviceArn"))
+    GatewayRouteSummary.add_member(:service_container_port_name, Shapes::ShapeRef.new(shape: String, location_name: "serviceContainerPortName"))
+    GatewayRouteSummary.add_member(:status, Shapes::ShapeRef.new(shape: GatewayRouteStatus, location_name: "status"))
+    GatewayRouteSummary.struct_class = Types::GatewayRouteSummary
+
+    GatewayRouteSummaryList.member = Shapes::ShapeRef.new(shape: GatewayRouteSummary)
+
+    GatewayStatusList.member = Shapes::ShapeRef.new(shape: GatewayStatus)
+
+    GatewaySummary.add_member(:gateway_arn, Shapes::ShapeRef.new(shape: String, location_name: "gatewayArn"))
+    GatewaySummary.add_member(:name, Shapes::ShapeRef.new(shape: String, location_name: "name"))
+    GatewaySummary.add_member(:status, Shapes::ShapeRef.new(shape: GatewayStatus, location_name: "status"))
+    GatewaySummary.add_member(:created_at, Shapes::ShapeRef.new(shape: Timestamp, location_name: "createdAt"))
+    GatewaySummary.struct_class = Types::GatewaySummary
+
+    GatewaySummaryList.member = Shapes::ShapeRef.new(shape: GatewaySummary)
+
+    GatewayTestTrafficHeader.add_member(:name, Shapes::ShapeRef.new(shape: String, required: true, location_name: "name"))
+    GatewayTestTrafficHeader.add_member(:values, Shapes::ShapeRef.new(shape: StringList, required: true, location_name: "values"))
+    GatewayTestTrafficHeader.struct_class = Types::GatewayTestTrafficHeader
+
     GetTaskProtectionRequest.add_member(:cluster, Shapes::ShapeRef.new(shape: String, required: true, location_name: "cluster"))
     GetTaskProtectionRequest.add_member(:tasks, Shapes::ShapeRef.new(shape: StringList, location_name: "tasks"))
     GetTaskProtectionRequest.struct_class = Types::GetTaskProtectionRequest
@@ -1789,6 +2150,17 @@ module Aws::ECS
     HostEntry.struct_class = Types::HostEntry
 
     HostEntryList.member = Shapes::ShapeRef.new(shape: HostEntry)
+
+    HostSharedAlbConfiguration.add_member(:network_configuration, Shapes::ShapeRef.new(shape: GatewayElbNetworkConfiguration, location_name: "networkConfiguration"))
+    HostSharedAlbConfiguration.add_member(:scheme, Shapes::ShapeRef.new(shape: GatewayElbScheme, location_name: "scheme"))
+    HostSharedAlbConfiguration.add_member(:web_acl_arn, Shapes::ShapeRef.new(shape: String, location_name: "webACLArn"))
+    HostSharedAlbConfiguration.add_member(:access_logs, Shapes::ShapeRef.new(shape: GatewayElbAccessLogConfiguration, location_name: "accessLogs"))
+    HostSharedAlbConfiguration.add_member(:port, Shapes::ShapeRef.new(shape: BoxedInteger, location_name: "port"))
+    HostSharedAlbConfiguration.add_member(:protocol, Shapes::ShapeRef.new(shape: GatewayAlbProtocol, location_name: "protocol"))
+    HostSharedAlbConfiguration.add_member(:max_alb_count, Shapes::ShapeRef.new(shape: BoxedInteger, location_name: "maxAlbCount"))
+    HostSharedAlbConfiguration.add_member(:http_desync, Shapes::ShapeRef.new(shape: GatewayAlbDesyncMitigationMode, location_name: "httpDesync"))
+    HostSharedAlbConfiguration.add_member(:test_traffic_rules, Shapes::ShapeRef.new(shape: GatewayAlbTestTrafficRules, location_name: "testTrafficRules"))
+    HostSharedAlbConfiguration.struct_class = Types::HostSharedAlbConfiguration
 
     HostVolumeProperties.add_member(:source_path, Shapes::ShapeRef.new(shape: String, location_name: "sourcePath"))
     HostVolumeProperties.struct_class = Types::HostVolumeProperties
@@ -1978,6 +2350,40 @@ module Aws::ECS
     ListDaemonsResponse.add_member(:daemon_summaries_list, Shapes::ShapeRef.new(shape: DaemonSummariesList, location_name: "daemonSummariesList"))
     ListDaemonsResponse.add_member(:next_token, Shapes::ShapeRef.new(shape: String, location_name: "nextToken"))
     ListDaemonsResponse.struct_class = Types::ListDaemonsResponse
+
+    ListGatewayClusterAssociationsRequest.add_member(:gateway, Shapes::ShapeRef.new(shape: String, location_name: "gateway"))
+    ListGatewayClusterAssociationsRequest.add_member(:cluster, Shapes::ShapeRef.new(shape: String, location_name: "cluster"))
+    ListGatewayClusterAssociationsRequest.add_member(:status, Shapes::ShapeRef.new(shape: GatewayClusterAssociationStatusList, location_name: "status"))
+    ListGatewayClusterAssociationsRequest.add_member(:max_results, Shapes::ShapeRef.new(shape: BoxedInteger, location_name: "maxResults"))
+    ListGatewayClusterAssociationsRequest.add_member(:next_token, Shapes::ShapeRef.new(shape: String, location_name: "nextToken"))
+    ListGatewayClusterAssociationsRequest.struct_class = Types::ListGatewayClusterAssociationsRequest
+
+    ListGatewayClusterAssociationsResponse.add_member(:gateway_cluster_associations, Shapes::ShapeRef.new(shape: GatewayClusterAssociationSummaryList, location_name: "gatewayClusterAssociations"))
+    ListGatewayClusterAssociationsResponse.add_member(:next_token, Shapes::ShapeRef.new(shape: String, location_name: "nextToken"))
+    ListGatewayClusterAssociationsResponse.struct_class = Types::ListGatewayClusterAssociationsResponse
+
+    ListGatewayRoutesRequest.add_member(:gateway, Shapes::ShapeRef.new(shape: String, location_name: "gateway"))
+    ListGatewayRoutesRequest.add_member(:cluster, Shapes::ShapeRef.new(shape: String, location_name: "cluster"))
+    ListGatewayRoutesRequest.add_member(:service, Shapes::ShapeRef.new(shape: String, location_name: "service"))
+    ListGatewayRoutesRequest.add_member(:service_container_port_name, Shapes::ShapeRef.new(shape: String, location_name: "serviceContainerPortName"))
+    ListGatewayRoutesRequest.add_member(:status, Shapes::ShapeRef.new(shape: GatewayRouteStatusList, location_name: "status"))
+    ListGatewayRoutesRequest.add_member(:max_results, Shapes::ShapeRef.new(shape: BoxedInteger, location_name: "maxResults"))
+    ListGatewayRoutesRequest.add_member(:next_token, Shapes::ShapeRef.new(shape: String, location_name: "nextToken"))
+    ListGatewayRoutesRequest.struct_class = Types::ListGatewayRoutesRequest
+
+    ListGatewayRoutesResponse.add_member(:gateway_routes, Shapes::ShapeRef.new(shape: GatewayRouteSummaryList, location_name: "gatewayRoutes"))
+    ListGatewayRoutesResponse.add_member(:next_token, Shapes::ShapeRef.new(shape: String, location_name: "nextToken"))
+    ListGatewayRoutesResponse.struct_class = Types::ListGatewayRoutesResponse
+
+    ListGatewaysRequest.add_member(:names, Shapes::ShapeRef.new(shape: StringList, location_name: "names"))
+    ListGatewaysRequest.add_member(:status, Shapes::ShapeRef.new(shape: GatewayStatusList, location_name: "status"))
+    ListGatewaysRequest.add_member(:max_results, Shapes::ShapeRef.new(shape: BoxedInteger, location_name: "maxResults"))
+    ListGatewaysRequest.add_member(:next_token, Shapes::ShapeRef.new(shape: String, location_name: "nextToken"))
+    ListGatewaysRequest.struct_class = Types::ListGatewaysRequest
+
+    ListGatewaysResponse.add_member(:gateways, Shapes::ShapeRef.new(shape: GatewaySummaryList, location_name: "gateways"))
+    ListGatewaysResponse.add_member(:next_token, Shapes::ShapeRef.new(shape: String, location_name: "nextToken"))
+    ListGatewaysResponse.struct_class = Types::ListGatewaysResponse
 
     ListServiceDeploymentsRequest.add_member(:service, Shapes::ShapeRef.new(shape: String, required: true, location_name: "service"))
     ListServiceDeploymentsRequest.add_member(:cluster, Shapes::ShapeRef.new(shape: String, location_name: "cluster"))
@@ -2555,7 +2961,16 @@ module Aws::ECS
     ServiceConnectConfiguration.add_member(:services, Shapes::ShapeRef.new(shape: ServiceConnectServiceList, location_name: "services"))
     ServiceConnectConfiguration.add_member(:log_configuration, Shapes::ShapeRef.new(shape: LogConfiguration, location_name: "logConfiguration"))
     ServiceConnectConfiguration.add_member(:access_log_configuration, Shapes::ShapeRef.new(shape: ServiceConnectAccessLogConfiguration, location_name: "accessLogConfiguration"))
+    ServiceConnectConfiguration.add_member(:container_configurations, Shapes::ShapeRef.new(shape: ServiceConnectContainerConfigurations, location_name: "containerConfigurations"))
     ServiceConnectConfiguration.struct_class = Types::ServiceConnectConfiguration
+
+    ServiceConnectContainerConfiguration.add_member(:log_level, Shapes::ShapeRef.new(shape: ServiceConnectContainerLogLevel, location_name: "logLevel"))
+    ServiceConnectContainerConfiguration.add_member(:unknown, Shapes::ShapeRef.new(shape: nil, location_name: 'unknown'))
+    ServiceConnectContainerConfiguration.add_member_subclass(:log_level, Types::ServiceConnectContainerConfiguration::LogLevel)
+    ServiceConnectContainerConfiguration.add_member_subclass(:unknown, Types::ServiceConnectContainerConfiguration::Unknown)
+    ServiceConnectContainerConfiguration.struct_class = Types::ServiceConnectContainerConfiguration
+
+    ServiceConnectContainerConfigurations.member = Shapes::ShapeRef.new(shape: ServiceConnectContainerConfiguration)
 
     ServiceConnectService.add_member(:port_name, Shapes::ShapeRef.new(shape: String, required: true, location_name: "portName"))
     ServiceConnectService.add_member(:discovery_name, Shapes::ShapeRef.new(shape: String, location_name: "discoveryName"))
@@ -2706,6 +3121,7 @@ module Aws::ECS
     ServiceRevision.add_member(:resolved_configuration, Shapes::ShapeRef.new(shape: ResolvedConfiguration, location_name: "resolvedConfiguration"))
     ServiceRevision.add_member(:ecs_managed_resources, Shapes::ShapeRef.new(shape: ECSManagedResources, location_name: "ecsManagedResources"))
     ServiceRevision.add_member(:overrides, Shapes::ShapeRef.new(shape: ServiceRevisionOverrides, location_name: "overrides"))
+    ServiceRevision.add_member(:gateway_connectors, Shapes::ShapeRef.new(shape: GatewayConnectorList, location_name: "gatewayConnectors"))
     ServiceRevision.add_member(:monitoring, Shapes::ShapeRef.new(shape: MonitoringConfiguration, location_name: "monitoring"))
     ServiceRevision.struct_class = Types::ServiceRevision
 
@@ -3119,6 +3535,35 @@ module Aws::ECS
     UpdateExpressGatewayServiceResponse.add_member(:service, Shapes::ShapeRef.new(shape: UpdatedExpressGatewayService, location_name: "service"))
     UpdateExpressGatewayServiceResponse.struct_class = Types::UpdateExpressGatewayServiceResponse
 
+    UpdateGatewayAlbConfiguration.add_member(:network_configuration, Shapes::ShapeRef.new(shape: UpdateGatewayNetworkConfiguration, location_name: "networkConfiguration"))
+    UpdateGatewayAlbConfiguration.add_member(:max_alb_count, Shapes::ShapeRef.new(shape: BoxedInteger, location_name: "maxAlbCount"))
+    UpdateGatewayAlbConfiguration.add_member(:web_acl_arn, Shapes::ShapeRef.new(shape: String, location_name: "webACLArn"))
+    UpdateGatewayAlbConfiguration.add_member(:access_logs, Shapes::ShapeRef.new(shape: GatewayElbAccessLogConfiguration, location_name: "accessLogs"))
+    UpdateGatewayAlbConfiguration.add_member(:http_desync, Shapes::ShapeRef.new(shape: GatewayAlbDesyncMitigationMode, location_name: "httpDesync"))
+    UpdateGatewayAlbConfiguration.add_member(:test_traffic_rules, Shapes::ShapeRef.new(shape: GatewayAlbTestTrafficRules, location_name: "testTrafficRules"))
+    UpdateGatewayAlbConfiguration.struct_class = Types::UpdateGatewayAlbConfiguration
+
+    UpdateGatewayConfiguration.add_member(:host_shared_alb, Shapes::ShapeRef.new(shape: UpdateGatewayAlbConfiguration, location_name: "hostSharedAlb"))
+    UpdateGatewayConfiguration.add_member(:unknown, Shapes::ShapeRef.new(shape: nil, location_name: 'unknown'))
+    UpdateGatewayConfiguration.add_member_subclass(:host_shared_alb, Types::UpdateGatewayConfiguration::HostSharedAlb)
+    UpdateGatewayConfiguration.add_member_subclass(:unknown, Types::UpdateGatewayConfiguration::Unknown)
+    UpdateGatewayConfiguration.struct_class = Types::UpdateGatewayConfiguration
+
+    UpdateGatewayNetworkConfiguration.add_member(:inbound_security_group, Shapes::ShapeRef.new(shape: String, location_name: "inboundSecurityGroup"))
+    UpdateGatewayNetworkConfiguration.struct_class = Types::UpdateGatewayNetworkConfiguration
+
+    UpdateGatewayRequest.add_member(:gateway, Shapes::ShapeRef.new(shape: String, required: true, location_name: "gateway"))
+    UpdateGatewayRequest.add_member(:infrastructure_role_arn, Shapes::ShapeRef.new(shape: String, location_name: "infrastructureRoleArn"))
+    UpdateGatewayRequest.add_member(:deletion_protection, Shapes::ShapeRef.new(shape: BoxedBoolean, location_name: "deletionProtection"))
+    UpdateGatewayRequest.add_member(:configuration, Shapes::ShapeRef.new(shape: UpdateGatewayConfiguration, location_name: "configuration"))
+    UpdateGatewayRequest.add_member(:propagate_tags, Shapes::ShapeRef.new(shape: PropagateGatewayTags, location_name: "propagateTags"))
+    UpdateGatewayRequest.struct_class = Types::UpdateGatewayRequest
+
+    UpdateGatewayResponse.add_member(:gateway_arn, Shapes::ShapeRef.new(shape: String, location_name: "gatewayArn"))
+    UpdateGatewayResponse.add_member(:name, Shapes::ShapeRef.new(shape: String, location_name: "name"))
+    UpdateGatewayResponse.add_member(:status, Shapes::ShapeRef.new(shape: GatewayStatus, location_name: "status"))
+    UpdateGatewayResponse.struct_class = Types::UpdateGatewayResponse
+
     UpdateInProgressException.add_member(:message, Shapes::ShapeRef.new(shape: String, location_name: "message"))
     UpdateInProgressException.struct_class = Types::UpdateInProgressException
 
@@ -3159,6 +3604,7 @@ module Aws::ECS
     UpdateServiceRequest.add_member(:service_connect_configuration, Shapes::ShapeRef.new(shape: ServiceConnectConfiguration, location_name: "serviceConnectConfiguration"))
     UpdateServiceRequest.add_member(:volume_configurations, Shapes::ShapeRef.new(shape: ServiceVolumeConfigurations, location_name: "volumeConfigurations"))
     UpdateServiceRequest.add_member(:vpc_lattice_configurations, Shapes::ShapeRef.new(shape: VpcLatticeConfigurations, location_name: "vpcLatticeConfigurations"))
+    UpdateServiceRequest.add_member(:gateway_connectors, Shapes::ShapeRef.new(shape: GatewayConnectorList, location_name: "gatewayConnectors"))
     UpdateServiceRequest.add_member(:monitoring, Shapes::ShapeRef.new(shape: MonitoringConfiguration, location_name: "monitoring"))
     UpdateServiceRequest.struct_class = Types::UpdateServiceRequest
 
@@ -3254,6 +3700,21 @@ module Aws::ECS
         "uid" => "ecs-2014-11-13",
       }
 
+      api.add_operation(:associate_gateway_with_cluster, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "AssociateGatewayWithCluster"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: AssociateGatewayWithClusterRequest)
+        o.output = Shapes::ShapeRef.new(shape: AssociateGatewayWithClusterResponse)
+        o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
+        o.errors << Shapes::ShapeRef.new(shape: ServerException)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidParameterException)
+        o.errors << Shapes::ShapeRef.new(shape: ClientException)
+        o.errors << Shapes::ShapeRef.new(shape: GatewayNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: ClusterNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: UnsupportedFeatureException)
+      end)
+
       api.add_operation(:continue_service_deployment, Seahorse::Model::Operation.new.tap do |o|
         o.name = "ContinueServiceDeployment"
         o.http_method = "POST"
@@ -3325,6 +3786,19 @@ module Aws::ECS
         o.errors << Shapes::ShapeRef.new(shape: ClientException)
         o.errors << Shapes::ShapeRef.new(shape: ClusterNotFoundException)
         o.errors << Shapes::ShapeRef.new(shape: PlatformTaskDefinitionIncompatibilityException)
+        o.errors << Shapes::ShapeRef.new(shape: UnsupportedFeatureException)
+      end)
+
+      api.add_operation(:create_gateway, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "CreateGateway"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: CreateGatewayRequest)
+        o.output = Shapes::ShapeRef.new(shape: CreateGatewayResponse)
+        o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
+        o.errors << Shapes::ShapeRef.new(shape: ServerException)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidParameterException)
+        o.errors << Shapes::ShapeRef.new(shape: ClientException)
         o.errors << Shapes::ShapeRef.new(shape: UnsupportedFeatureException)
       end)
 
@@ -3465,6 +3939,20 @@ module Aws::ECS
         o.errors << Shapes::ShapeRef.new(shape: ClientException)
         o.errors << Shapes::ShapeRef.new(shape: ServiceNotFoundException)
         o.errors << Shapes::ShapeRef.new(shape: ClusterNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: UnsupportedFeatureException)
+      end)
+
+      api.add_operation(:delete_gateway, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "DeleteGateway"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: DeleteGatewayRequest)
+        o.output = Shapes::ShapeRef.new(shape: DeleteGatewayResponse)
+        o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
+        o.errors << Shapes::ShapeRef.new(shape: ServerException)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidParameterException)
+        o.errors << Shapes::ShapeRef.new(shape: ClientException)
+        o.errors << Shapes::ShapeRef.new(shape: GatewayNotFoundException)
         o.errors << Shapes::ShapeRef.new(shape: UnsupportedFeatureException)
       end)
 
@@ -3646,6 +4134,48 @@ module Aws::ECS
         o.errors << Shapes::ShapeRef.new(shape: UnsupportedFeatureException)
       end)
 
+      api.add_operation(:describe_gateway, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "DescribeGateway"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: DescribeGatewayRequest)
+        o.output = Shapes::ShapeRef.new(shape: DescribeGatewayResponse)
+        o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
+        o.errors << Shapes::ShapeRef.new(shape: ServerException)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidParameterException)
+        o.errors << Shapes::ShapeRef.new(shape: ClientException)
+        o.errors << Shapes::ShapeRef.new(shape: GatewayNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: UnsupportedFeatureException)
+      end)
+
+      api.add_operation(:describe_gateway_resources, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "DescribeGatewayResources"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: DescribeGatewayResourcesRequest)
+        o.output = Shapes::ShapeRef.new(shape: DescribeGatewayResourcesResponse)
+        o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
+        o.errors << Shapes::ShapeRef.new(shape: ServerException)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidParameterException)
+        o.errors << Shapes::ShapeRef.new(shape: ClientException)
+        o.errors << Shapes::ShapeRef.new(shape: GatewayNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: UnsupportedFeatureException)
+      end)
+
+      api.add_operation(:describe_gateway_route, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "DescribeGatewayRoute"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: DescribeGatewayRouteRequest)
+        o.output = Shapes::ShapeRef.new(shape: DescribeGatewayRouteResponse)
+        o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: ServerException)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidParameterException)
+        o.errors << Shapes::ShapeRef.new(shape: ClientException)
+        o.errors << Shapes::ShapeRef.new(shape: UnsupportedFeatureException)
+      end)
+
       api.add_operation(:describe_service_deployments, Seahorse::Model::Operation.new.tap do |o|
         o.name = "DescribeServiceDeployments"
         o.http_method = "POST"
@@ -3728,6 +4258,22 @@ module Aws::ECS
         o.errors << Shapes::ShapeRef.new(shape: InvalidParameterException)
         o.errors << Shapes::ShapeRef.new(shape: ClientException)
         o.errors << Shapes::ShapeRef.new(shape: ClusterNotFoundException)
+      end)
+
+      api.add_operation(:disassociate_gateway_from_cluster, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "DisassociateGatewayFromCluster"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: DisassociateGatewayFromClusterRequest)
+        o.output = Shapes::ShapeRef.new(shape: DisassociateGatewayFromClusterResponse)
+        o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: ServerException)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidParameterException)
+        o.errors << Shapes::ShapeRef.new(shape: ClientException)
+        o.errors << Shapes::ShapeRef.new(shape: GatewayNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: ClusterNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: UnsupportedFeatureException)
       end)
 
       api.add_operation(:discover_poll_endpoint, Seahorse::Model::Operation.new.tap do |o|
@@ -3883,6 +4429,64 @@ module Aws::ECS
         o.errors << Shapes::ShapeRef.new(shape: ClientException)
         o.errors << Shapes::ShapeRef.new(shape: ClusterNotFoundException)
         o.errors << Shapes::ShapeRef.new(shape: UnsupportedFeatureException)
+      end)
+
+      api.add_operation(:list_gateway_cluster_associations, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "ListGatewayClusterAssociations"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: ListGatewayClusterAssociationsRequest)
+        o.output = Shapes::ShapeRef.new(shape: ListGatewayClusterAssociationsResponse)
+        o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
+        o.errors << Shapes::ShapeRef.new(shape: ServerException)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidParameterException)
+        o.errors << Shapes::ShapeRef.new(shape: ClientException)
+        o.errors << Shapes::ShapeRef.new(shape: UnsupportedFeatureException)
+        o[:pager] = Aws::Pager.new(
+          limit_key: "max_results",
+          tokens: {
+            "next_token" => "next_token"
+          }
+        )
+      end)
+
+      api.add_operation(:list_gateway_routes, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "ListGatewayRoutes"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: ListGatewayRoutesRequest)
+        o.output = Shapes::ShapeRef.new(shape: ListGatewayRoutesResponse)
+        o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
+        o.errors << Shapes::ShapeRef.new(shape: ServerException)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidParameterException)
+        o.errors << Shapes::ShapeRef.new(shape: ClientException)
+        o.errors << Shapes::ShapeRef.new(shape: GatewayNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: UnsupportedFeatureException)
+        o[:pager] = Aws::Pager.new(
+          limit_key: "max_results",
+          tokens: {
+            "next_token" => "next_token"
+          }
+        )
+      end)
+
+      api.add_operation(:list_gateways, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "ListGateways"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: ListGatewaysRequest)
+        o.output = Shapes::ShapeRef.new(shape: ListGatewaysResponse)
+        o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
+        o.errors << Shapes::ShapeRef.new(shape: ServerException)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidParameterException)
+        o.errors << Shapes::ShapeRef.new(shape: ClientException)
+        o.errors << Shapes::ShapeRef.new(shape: UnsupportedFeatureException)
+        o[:pager] = Aws::Pager.new(
+          limit_key: "max_results",
+          tokens: {
+            "next_token" => "next_token"
+          }
+        )
       end)
 
       api.add_operation(:list_service_deployments, Seahorse::Model::Operation.new.tap do |o|
@@ -4330,6 +4934,20 @@ module Aws::ECS
         o.errors << Shapes::ShapeRef.new(shape: ClientException)
         o.errors << Shapes::ShapeRef.new(shape: ServiceNotFoundException)
         o.errors << Shapes::ShapeRef.new(shape: ClusterNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: UnsupportedFeatureException)
+      end)
+
+      api.add_operation(:update_gateway, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "UpdateGateway"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: UpdateGatewayRequest)
+        o.output = Shapes::ShapeRef.new(shape: UpdateGatewayResponse)
+        o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
+        o.errors << Shapes::ShapeRef.new(shape: ServerException)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidParameterException)
+        o.errors << Shapes::ShapeRef.new(shape: ClientException)
+        o.errors << Shapes::ShapeRef.new(shape: GatewayNotFoundException)
         o.errors << Shapes::ShapeRef.new(shape: UnsupportedFeatureException)
       end)
 
